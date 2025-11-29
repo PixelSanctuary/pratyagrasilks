@@ -27,10 +27,10 @@ export default function Footer() {
                         <ul className="space-y-2">
                             <li>
                                 <Link
-                                    href="/catalog"
+                                    href="/collection"
                                     className="text-white/80 hover:text-secondary transition-colors"
                                 >
-                                    Catalog
+                                    Collection
                                 </Link>
                             </li>
                             <li>
@@ -54,7 +54,7 @@ export default function Footer() {
                                     href="/shipping"
                                     className="text-white/80 hover:text-secondary transition-colors"
                                 >
-                                    Shipping & Returns
+                                    Shipping & Delivery
                                 </Link>
                             </li>
                         </ul>
@@ -126,6 +126,14 @@ export default function Footer() {
                                     className="text-white/80 hover:text-secondary transition-colors"
                                 >
                                     Terms of Service
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/returns"
+                                    className="text-white/80 hover:text-secondary transition-colors"
+                                >
+                                    Returns & Exchanges
                                 </Link>
                             </li>
                         </ul>

@@ -5,6 +5,7 @@ import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
 import { CartProvider } from "@/lib/context/CartContext";
 import CartSidebar from "@/components/Cart/CartSidebar";
+import { Analytics } from "@vercel/analytics/react";
 
 // Font configurations
 const playfair = Playfair_Display({
@@ -67,6 +68,7 @@ export default function RootLayout({
                     <Footer />
                     <CartSidebar />
                 </CartProvider>
+                <Analytics />
             </body>
         </html>
     );

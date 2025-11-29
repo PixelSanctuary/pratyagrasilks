@@ -1,0 +1,233 @@
+import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "About PratyagraSilks | Authentic Indian Handloom Silk Sarees",
+    description: "Learn about PratyagraSilks' mission to preserve Indian handloom craftsmanship. Discover our commitment to authentic silk sarees, artisan partnerships, and sustainable practices.",
+    keywords: ["about pratyagrasilks", "handloom sarees", "silk saree heritage", "artisan support", "Indian craftsmanship"],
+};
+
+export default function AboutPage() {
+    const values = [
+        {
+            title: "Authenticity",
+            description: "We guarantee 100% authentic handwoven silk sarees from traditional weavers across India.",
+        },
+        {
+            title: "Quality",
+            description: "Premium materials and meticulous craftsmanship ensure exceptional durability and elegance.",
+        },
+        {
+            title: "Sustainability",
+            description: "Ethical sourcing, fair compensation for artisans, and environmentally responsible practices.",
+        },
+        {
+            title: "Tradition",
+            description: "Preserving centuries-old weaving techniques and cultural heritage for future generations.",
+        },
+    ];
+
+    const origins = [
+        {
+            name: "Kanjivaram, Tamil Nadu",
+            description: "Home to the legendary Kanjivaram silk sarees, known for their pure mulberry silk and intricate temple designs.",
+            silks: ["Kanjivaram Silk", "South Indian Traditions"],
+        },
+        {
+            name: "Varanasi, Uttar Pradesh",
+            description: "The weaving capital of India, famous for Banarasi sarees with their luxurious zari work and brocade patterns.",
+            silks: ["Banarasi Silk", "Zari Work"],
+        },
+        {
+            name: "Bhagalpur, Bihar",
+            description: "The oldest silk weaving center in India, specializing in Tussar silk sarees with their distinctive natural texture.",
+            silks: ["Tussar Silk", "Natural Fibers"],
+        },
+        {
+            name: "Mysore, Karnataka",
+            description: "Famous for pure Mysore silk sarees, produced from the finest mulberry silk with elegant designs.",
+            silks: ["Mysore Silk", "Pure Mulberry"],
+        },
+        {
+            name: "Kochi, Kerala",
+            description: "The cultural hub of Kerala, renowned for its exquisite Kasavu sarees featuring traditional gold weaving on white silk.",
+            silks: ["Kerala Kasavu", "Gold Borders"],
+        },
+        {
+            name: "Assam",
+            description: "Known for the luxurious Muga silk, a golden-hued natural silk unique to Assam with exceptional lustrous qualities.",
+            silks: ["Muga Silk", "Natural Gold"],
+        },
+        {
+            name: "Kashmir",
+            description: "The land of Kani silks, featuring intricate Kani weaving with detailed patterns and pashmina blend sarees.",
+            silks: ["Kani Silk", "Pashmina Blend"],
+        },
+        {
+            name: "Aurangabad, Maharashtra",
+            description: "Home to the prestigious Paithani silk sarees, known for their fine silk, brilliant colors, and peacock motifs.",
+            silks: ["Paithani Silk", "Peacock Designs"],
+        },
+        {
+            name: "Andhra Pradesh",
+            description: "Birthplace of Pochampally silk sarees, famous for their traditional ikat technique and vibrant color combinations.",
+            silks: ["Pochampalli Silk", "Ikat Patterns"],
+        },
+        {
+            name: "West Bengal",
+            description: "Renowned for Baluchari silk sarees, featuring narrative motifs and the famous Baluchari pallu with mythological scenes.",
+            silks: ["Baluchari Silk", "Narrative Designs"],
+        },
+        {
+            name: "Rajasthan",
+            description: "Known for elegant Georgette silk sarees with traditional Rajasthani patterns and vibrant cultural designs.",
+            silks: ["Georgette Silk", "Rajasthani Art"],
+        },
+    ];
+
+    return (
+        <div className="flex flex-col">
+            {/* Hero Section */}
+            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-16 md:py-24 px-4">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
+                        Our Story
+                    </h1>
+                    <p className="text-lg md:text-xl opacity-95 max-w-2xl mx-auto">
+                        Connecting the world with the timeless art of Indian handloom silk sarees
+                    </p>
+                </div>
+            </section>
+
+            {/* Mission & Vision */}
+            <section className="py-16 md:py-24 px-4 bg-white">
+                <div className="max-w-4xl mx-auto">
+                    <div className="grid md:grid-cols-2 gap-12 mb-12">
+                        <div>
+                            <h2 className="font-playfair text-3xl font-bold text-primary mb-4">
+                                Our Mission
+                            </h2>
+                            <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                                At PratyagraSilks, our mission is to preserve and celebrate the rich heritage of Indian handloom craftsmanship. We believe that every silk saree is a masterpiece that tells a story of generations of artistry, dedication, and cultural pride.
+                            </p>
+                            <p className="text-gray-700 text-lg leading-relaxed">
+                                We are committed to bringing authentic, premium handwoven silk sarees directly to saree enthusiasts around the world, while ensuring fair compensation and support for the skilled artisans who create these treasures.
+                            </p>
+                        </div>
+                        <div>
+                            <h2 className="font-playfair text-3xl font-bold text-primary mb-4">
+                                Our Vision
+                            </h2>
+                            <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                                We envision a world where traditional Indian handloom sarees are celebrated as timeless works of art and are accessible to everyone who appreciates true craftsmanship and cultural elegance.
+                            </p>
+                            <p className="text-gray-700 text-lg leading-relaxed">
+                                We aim to be the trusted bridge between master weavers and discerning customers, creating sustainable livelihoods for artisan communities and ensuring that these remarkable traditions thrive for generations to come.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Core Values */}
+            <section className="py-16 md:py-24 px-4 bg-gray-50">
+                <div className="max-w-7xl mx-auto">
+                    <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-12">
+                        Our Core Values
+                    </h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {values.map((value, index) => (
+                            <div key={index} className="bg-white rounded-lg shadow-md p-6">
+                                <h3 className="font-playfair text-xl font-bold text-primary mb-3">
+                                    {value.title}
+                                </h3>
+                                <p className="text-gray-700 text-sm leading-relaxed">
+                                    {value.description}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Silk Origins */}
+            <section className="py-16 md:py-24 px-4 bg-white">
+                <div className="max-w-7xl mx-auto">
+                    <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
+                        Exploring Silk Weaving Regions
+                    </h2>
+                    <p className="text-center text-gray-700 mb-12 max-w-2xl mx-auto text-lg">
+                        We source directly from India's most renowned silk weaving centers, each with unique traditions and expertise
+                    </p>
+                    
+                    <div className="space-y-12">
+                        {origins.map((origin, index) => (
+                            <div key={index} className="flex flex-col md:flex-row gap-8 items-start">
+                                <div className="md:w-1/2">
+                                    <h3 className="font-playfair text-2xl font-bold text-primary mb-3">
+                                        {origin.name}
+                                    </h3>
+                                    <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                                        {origin.description}
+                                    </p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {origin.silks.map((silk, idx) => (
+                                            <span key={idx} className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
+                                                {silk}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="md:w-1/2 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg p-8 h-64 flex items-center justify-center">
+                                    <div className="text-center">
+                                        <p className="text-primary/50 font-playfair text-3xl font-bold">
+                                            {origin.name.split(",")[0]}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Artisan Partnership */}
+            <section className="py-16 md:py-24 px-4 bg-gray-50">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6">
+                        Supporting Artisan Communities
+                    </h2>
+                    <p className="text-gray-700 text-lg leading-relaxed mb-8">
+                        Every purchase of a PratyagraSilks saree directly supports the livelihoods of skilled artisans and their families. We believe in fair trade practices, ensuring that weavers receive equitable compensation for their exceptional work.
+                    </p>
+                    <p className="text-gray-700 text-lg leading-relaxed mb-8">
+                        By choosing PratyagraSilks, you're not just acquiring a beautiful saree—you're investing in preserving traditional crafts, supporting artisan dignity, and ensuring these remarkable skills are passed down to future generations.
+                    </p>
+                    <div className="bg-primary/5 border-l-4 border-primary p-6 text-left">
+                        <p className="text-primary font-semibold text-lg">
+                            "Craft. Community. Culture. That's the PratyagraSilks promise."
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary/80 text-white">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-6">
+                        Explore Our Collections
+                    </h2>
+                    <p className="text-lg mb-8 opacity-95 max-w-2xl mx-auto">
+                        Discover authentic handwoven silk sarees from India's finest artisans.
+                    </p>
+                    <Link
+                        href="/collection"
+                        className="inline-block bg-secondary text-primary font-semibold px-8 py-4 rounded-full text-lg hover:bg-secondary/90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                    >
+                        Browse Collection
+                    </Link>
+                </div>
+            </section>
+        </div>
+    );
+}
