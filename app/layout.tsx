@@ -3,6 +3,8 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
+import { CartProvider } from "@/lib/context/CartContext";
+import CartSidebar from "@/components/Cart/CartSidebar";
 
 // Font configurations
 const playfair = Playfair_Display({
@@ -59,9 +61,12 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
             <body className="antialiased">
-                <Header />
-                <main className="min-h-screen">{children}</main>
-                <Footer />
+                <CartProvider>
+                    <Header />
+                    <main className="min-h-screen">{children}</main>
+                    <Footer />
+                    <CartSidebar />
+                </CartProvider>
             </body>
         </html>
     );

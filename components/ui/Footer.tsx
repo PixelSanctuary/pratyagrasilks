@@ -80,7 +80,7 @@ export default function Footer() {
                                 </svg>
                             </a>
                             <a
-                                href="https://instagram.com/pratyagrasilks"
+                                href="https://instagram.com/pratyagra.in"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-white/80 hover:text-secondary transition-colors"
