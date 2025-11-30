@@ -9,12 +9,11 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Brand Section */}
                     <div className="col-span-1 md:col-span-2">
-                        <h3 className="font-playfair text-2xl font-bold mb-4">
-                            PratyagraSilks
+                        <h3 className="font-playfair text-2xl font-bold">
+                            Pratyagra Silks
                         </h3>
                         <p className="text-white/80 mb-4 max-w-md">
-                            Preserving the art of traditional Indian handloom sarees with
-                            authentic craftsmanship and timeless elegance.
+                            Reviving Tradition with a New Touch
                         </p>
                         <p className="text-white/80">
                             <strong>Contact:</strong> info@pratyagrasilks.com

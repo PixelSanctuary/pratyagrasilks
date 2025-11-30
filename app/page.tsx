@@ -23,10 +23,10 @@ export default function Home() {
             <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-20 md:py-32 px-4">
                 <div className="max-w-7xl mx-auto text-center">
                     <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance leading-tight">
-                        Luxury Silk Sarees | Authentic Indian Handloom Craftsmanship
+                        Reviving Tradition with a New Touch
                     </h1>
                     <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance opacity-95">
-                        Discover PratyagraSilks' curated collection of handcrafted silk sarees. Each piece represents centuries of Indian artistry, tradition meets luxury, and timeless elegance for every occasion.
+                        Your one-stop destination for luxury silk sarees curated from the finest weavers across India. Experience the perfect blend of timeless tradition and modern elegance in every piece.
                     </p>
                     <Link
                         href="/collection"
@@ -44,10 +44,10 @@ export default function Home() {
             <section className="py-16 md:py-24 px-4 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
-                        Why Choose PratyagraSilks
+                        Why Choose Pratyagra Silks
                     </h2>
                     <p className="text-center text-gray-700 mb-12 max-w-2xl mx-auto text-lg">
-                        Premium handwoven silk sarees from India, crafted with tradition and excellence
+                        Experience the perfect blend of luxury and tradition. Our carefully curated collection features premium handwoven silk sarees from India's finest weavers, combining centuries-old craftsmanship with contemporary style.
                     </p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -69,17 +69,17 @@ export default function Home() {
             <section className="py-16 md:py-24 px-4 bg-white">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6 text-center">
-                        Our Heritage & Ethos
+                        Reviving Tradition with a New Touch
                     </h2>
                     <div className="space-y-6 text-gray-700 leading-relaxed text-lg">
                         <p>
-                            <strong>PratyagraSilks</strong> is dedicated to preserving the rich heritage of Indian handloom craftsmanship. Each silk saree in our collection is a masterpiece, meticulously woven by skilled artisans who have inherited their craft through generations. We celebrate the artistry, tradition, and cultural significance of authentic Indian textiles.
+                            <strong>Pratyagra Silks</strong> is devoted to reviving India's timeless silk heritage by curating luxury sarees from the finest weavers across the country. Each piece in our collection is a masterpiece of luxury—meticulously handwoven by master artisans who have inherited centuries of expertise. We celebrate the artistry, tradition, and cultural pride embedded in every authentic Indian textile.
                         </p>
                         <p>
-                            Our commitment to <strong>authenticity, quality, and sustainability</strong> sets us apart. We partner directly with master weavers and artisan communities across India—from the silk looms of South India producing premium Kanjivaram and Mysore silk, to the traditional weavers of Varanasi crafting exquisite Banarasi sarees. Every thread tells a story of dedication, every pattern reflects centuries of artistic excellence, and every saree embodies the timeless elegance that defines Indian culture.
+                            Our commitment to <strong>curated excellence, uncompromised quality, and ethical partnerships</strong> defines us. We work directly with master weavers and artisan communities across India's renowned silk regions—from Kanjivaram and Mysore in the South to Varanasi in the North. Every thread is a testament to tradition, every pattern reflects generations of artistic mastery, and every saree embodies the luxury that comes from blending timeless heritage with contemporary elegance.
                         </p>
                         <p>
-                            We believe that luxury should honor tradition. When you choose a PratyagraSilks saree, you're investing in a piece of Indian heritage, supporting artisan livelihoods, and acquiring a timeless treasure that will grace generations to come.
+                            We believe luxury is most meaningful when it honors tradition. When you choose a Pratyagra Silks saree, you invest in authentic heritage, support artisan dignity, and acquire a timeless treasure that will be cherished for generations.
                         </p>
                         <div className="bg-primary/5 border-l-4 border-primary p-6 mt-8">
                             <p className="font-semibold text-primary text-xl">

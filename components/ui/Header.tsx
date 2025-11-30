@@ -18,7 +18,7 @@ export default function Header() {
                     {/* Logo/Brand */}
                     <Link href="/" className="flex items-center">
                         <span className="font-playfair text-2xl md:text-3xl font-bold text-primary">
-                            PratyagraSilks
+                            Pratyagra Silks
                         </span>
                     </Link>
 

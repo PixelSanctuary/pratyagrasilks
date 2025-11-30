@@ -94,7 +94,7 @@ export default function AboutPage() {
                         Our Story
                     </h1>
                     <p className="text-lg md:text-xl opacity-95 max-w-2xl mx-auto">
-                        Connecting the world with the timeless art of Indian handloom silk sarees
+                        At Pratyagra Silks, we are dedicated to breathing new life into India’s silk heritage. Our luxury silk sarees are curated from the finest weavers across the country, blending centuries-old craftsmanship with contemporary elegance. By partnering with master artisans from renowned silk regions, we ensure every saree is a testament to tradition, quality, and modern style.
                     </p>
                 </div>
             </section>
@@ -108,10 +108,10 @@ export default function AboutPage() {
                                 Our Mission
                             </h2>
                             <p className="text-gray-700 text-lg leading-relaxed mb-4">
-                                At PratyagraSilks, our mission is to preserve and celebrate the rich heritage of Indian handloom craftsmanship. We believe that every silk saree is a masterpiece that tells a story of generations of artistry, dedication, and cultural pride.
+                                At Pratyagra Silks, our mission is to revive India's silk heritage by curating luxury sarees from the finest weavers across the country. We believe in blending timeless tradition with contemporary elegance, creating pieces that celebrate centuries of artistry while resonating with modern sensibilities.
                             </p>
                             <p className="text-gray-700 text-lg leading-relaxed">
-                                We are committed to bringing authentic, premium handwoven silk sarees directly to saree enthusiasts around the world, while ensuring fair compensation and support for the skilled artisans who create these treasures.
+                                We are committed to bringing authentic, premium handwoven silk sarees directly to discerning customers worldwide, while ensuring fair compensation and unwavering support for the master artisans who bring these treasures to life through their exceptional craftsmanship.
                             </p>
                         </div>
                         <div>
@@ -119,10 +119,10 @@ export default function AboutPage() {
                                 Our Vision
                             </h2>
                             <p className="text-gray-700 text-lg leading-relaxed mb-4">
-                                We envision a world where traditional Indian handloom sarees are celebrated as timeless works of art and are accessible to everyone who appreciates true craftsmanship and cultural elegance.
+                                We envision Pratyagra Silks as the premier destination for luxury silk sarees—where tradition is revived, quality is uncompromised, and every piece tells the story of dedicated weavers from India's finest silk regions.
                             </p>
                             <p className="text-gray-700 text-lg leading-relaxed">
-                                We aim to be the trusted bridge between master weavers and discerning customers, creating sustainable livelihoods for artisan communities and ensuring that these remarkable traditions thrive for generations to come.
+                                We are building a sustainable ecosystem where master weavers thrive, artisan communities flourish, and customers worldwide discover the perfect blend of heritage craftsmanship and modern elegance in every saree they wear.
                             </p>
                         </div>
                     </div>

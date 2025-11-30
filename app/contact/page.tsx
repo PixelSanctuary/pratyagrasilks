@@ -79,7 +79,7 @@ export default function ContactPage() {
                                         href="tel:+919876543210"
                                         className="text-primary hover:text-primary/80 text-lg transition-colors"
                                     >
-                                        +91 9876 543 210
+                                        +91 73588 66646
                                     </a>
                                     <p className="text-gray-600 mt-2">Mon-Fri: 9:00 AM - 6:00 PM IST</p>
                                 </div>
