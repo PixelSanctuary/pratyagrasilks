@@ -225,7 +225,7 @@ export default function OrderDetailsPage() {
                                 <Home className="w-5 h-5" />
                                 Shipping Address
                             </h2>
-                            <div className="text-gray-700">
+                            <div className="">
                                 <p className="font-medium">{order.customer_name}</p>
                                 <p>{order.shipping_address.line1}</p>
                                 {order.shipping_address.line2 && <p>{order.shipping_address.line2}</p>}

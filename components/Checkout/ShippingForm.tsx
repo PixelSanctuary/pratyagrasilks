@@ -27,7 +27,7 @@ export default function ShippingForm({ onSubmit, defaultValues }: ShippingFormPr
                 <div className="space-y-4">
                     {/* Full Name */}
                     <div>
-                        <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="fullName" className="block text-sm font-medium  mb-1">
                             Full Name *
                         </label>
                         <input
@@ -45,7 +45,7 @@ export default function ShippingForm({ onSubmit, defaultValues }: ShippingFormPr
                     {/* Email & Phone */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="email" className="block text-sm font-medium  mb-1">
                                 Email *
                             </label>
                             <input
@@ -61,7 +61,7 @@ export default function ShippingForm({ onSubmit, defaultValues }: ShippingFormPr
                         </div>
 
                         <div>
-                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="phone" className="block text-sm font-medium  mb-1">
                                 Phone Number *
                             </label>
                             <input
@@ -79,7 +79,7 @@ export default function ShippingForm({ onSubmit, defaultValues }: ShippingFormPr
 
                     {/* Address Line 1 */}
                     <div>
-                        <label htmlFor="addressLine1" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="addressLine1" className="block text-sm font-medium  mb-1">
                             Address Line 1 *
                         </label>
                         <input
@@ -96,7 +96,7 @@ export default function ShippingForm({ onSubmit, defaultValues }: ShippingFormPr
 
                     {/* Address Line 2 */}
                     <div>
-                        <label htmlFor="addressLine2" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="addressLine2" className="block text-sm font-medium  mb-1">
                             Address Line 2 (Optional)
                         </label>
                         <input
@@ -111,7 +111,7 @@ export default function ShippingForm({ onSubmit, defaultValues }: ShippingFormPr
                     {/* City, State, Pincode */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="city" className="block text-sm font-medium  mb-1">
                                 City *
                             </label>
                             <input
@@ -127,7 +127,7 @@ export default function ShippingForm({ onSubmit, defaultValues }: ShippingFormPr
                         </div>
 
                         <div>
-                            <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="state" className="block text-sm font-medium  mb-1">
                                 State *
                             </label>
                             <select
@@ -148,7 +148,7 @@ export default function ShippingForm({ onSubmit, defaultValues }: ShippingFormPr
                         </div>
 
                         <div>
-                            <label htmlFor="pincode" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="pincode" className="block text-sm font-medium  mb-1">
                                 Pincode *
                             </label>
                             <input

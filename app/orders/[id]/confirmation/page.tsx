@@ -174,7 +174,7 @@ export default function OrderConfirmationPage() {
                         <Home className="w-5 h-5" />
                         Shipping Address
                     </h2>
-                    <div className="text-gray-700">
+                    <div className="">
                         <p className="font-medium">{order.customer_name}</p>
                         <p>{order.shipping_address.line1}</p>
                         {order.shipping_address.line2 && <p>{order.shipping_address.line2}</p>}
@@ -202,7 +202,7 @@ export default function OrderConfirmationPage() {
                     </Link>
                     <Link
                         href={`/orders/${order.id}`}
-                        className="flex-1 border-2 border-gray-300 text-gray-700 text-center py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                        className="flex-1 border-2 border-gray-300  text-center py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                     >
                         View Order Details
                     </Link>

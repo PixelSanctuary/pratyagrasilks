@@ -92,7 +92,7 @@ export default function OrdersPage() {
             {/* Search */}
             <div className="container mx-auto px-4 py-6">
                 <form onSubmit={handleSearch} className="max-w-md">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium  mb-2">
                         Search by Email
                     </label>
                     <div className="flex gap-2">

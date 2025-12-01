@@ -26,19 +26,19 @@ export default function Header() {
                     <div className="hidden md:flex items-center space-x-8">
                         <Link
                             href="/collection"
-                            className="text-gray-700 hover:text-primary transition-colors font-medium"
+                            className=" hover:text-primary transition-colors font-medium"
                         >
                             Collection
                         </Link>
                         <Link
                             href="/about"
-                            className="text-gray-700 hover:text-primary transition-colors font-medium"
+                            className=" hover:text-primary transition-colors font-medium"
                         >
                             About
                         </Link>
                         <Link
                             href="/contact"
-                            className="text-gray-700 hover:text-primary transition-colors font-medium"
+                            className=" hover:text-primary transition-colors font-medium"
                         >
                             Contact
                         </Link>
@@ -55,7 +55,7 @@ export default function Header() {
                         {/* Hamburger Menu Button */}
                         <button
                             onClick={toggleMobileMenu}
-                            className="text-gray-700 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-2"
+                            className=" hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-2"
                             aria-label="Toggle mobile menu"
                         >
                             {mobileMenuOpen ? (
@@ -99,21 +99,21 @@ export default function Header() {
                         <div className="flex flex-col space-y-4">
                             <Link
                                 href="/collection"
-                                className="text-gray-700 hover:text-primary transition-colors font-medium px-2 py-2"
+                                className=" hover:text-primary transition-colors font-medium px-2 py-2"
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 Collection
                             </Link>
                             <Link
                                 href="/about"
-                                className="text-gray-700 hover:text-primary transition-colors font-medium px-2 py-2"
+                                className=" hover:text-primary transition-colors font-medium px-2 py-2"
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 About
                             </Link>
                             <Link
                                 href="/contact"
-                                className="text-gray-700 hover:text-primary transition-colors font-medium px-2 py-2"
+                                className=" hover:text-primary transition-colors font-medium px-2 py-2"
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 Contact

@@ -165,7 +165,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                         {/* Description */}
                         <div>
                             <h2 className="text-lg font-semibold text-gray-900 mb-2">Description</h2>
-                            <p className="text-gray-700 leading-relaxed">{product.description}</p>
+                            <p className=" leading-relaxed">{product.description}</p>
                         </div>
 
                         {/* Material & Details */}
@@ -204,7 +204,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                         {/* Quantity Selector */}
                         {product.inStock && (
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium  mb-2">
                                     Quantity
                                 </label>
                                 <div className="flex items-center gap-3">

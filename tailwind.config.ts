@@ -9,10 +9,13 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                primary: "#9C3A65", // Deep Maroon/Silk tone
-                secondary: "#FFD700", // Gold Accent
+                //https://www.canva.com/colors/color-palettes/afternoon-craft-project/
+                primary: "#550c72",//indigo //"#9C3A65", // Deep Maroon/Silk tone
+                secondary: "#FDE3C9",//peach //"#FFD700", // Gold Accent
                 background: "var(--background)",
                 foreground: "var(--foreground)",
+                textPrimary: "#221D10",
+                primary2: "#8430AB"
             },
             fontFamily: {
                 playfair: ['"Playfair Display"', 'serif'],

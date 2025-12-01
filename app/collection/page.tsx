@@ -54,9 +54,9 @@ export default function CollectionPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen">
             {/* Header */}
-            <div className="bg-gradient-to-r from-amber-700 to-amber-900 text-white py-12">
+            <div className="bg-gradient-to-r from-primary to-primary2 text-white py-12">
                 <div className="container mx-auto px-4">
                     <h1 className="text-4xl font-bold mb-2">Our Collection</h1>
                     <p className="text-amber-100">Discover our exquisite range of handcrafted silk products</p>

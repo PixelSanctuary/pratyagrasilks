@@ -10,7 +10,7 @@ export default function PrivacyPage() {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-16 md:py-24 px-4">
+            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Privacy Policy
@@ -24,7 +24,7 @@ export default function PrivacyPage() {
             {/* Content Section */}
             <section className="py-16 md:py-24 px-4 bg-white">
                 <div className="max-w-4xl mx-auto prose prose-lg max-w-none">
-                    <div className="text-gray-700 space-y-8">
+                    <div className=" space-y-8">
                         <div>
                             <h2 className="font-playfair text-3xl font-bold text-primary mb-4">
                                 1. Introduction
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
                                 We may collect information about you in a variety of ways:
                             </p>
                             <h3 className="font-semibold text-lg text-gray-900 mt-4 mb-2">Personal Information:</h3>
-                            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                            <ul className="list-disc list-inside space-y-2  ml-4">
                                 <li>Name and surname</li>
                                 <li>Email address</li>
                                 <li>Phone number</li>
@@ -52,7 +52,7 @@ export default function PrivacyPage() {
                             </ul>
                             
                             <h3 className="font-semibold text-lg text-gray-900 mt-4 mb-2">Automatically Collected Information:</h3>
-                            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                            <ul className="list-disc list-inside space-y-2  ml-4">
                                 <li>IP address</li>
                                 <li>Browser type and version</li>
                                 <li>Pages visited and time spent</li>
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
                             <p className="leading-relaxed mb-4">
                                 We use the information we collect in the following ways:
                             </p>
-                            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                            <ul className="list-disc list-inside space-y-2  ml-4">
                                 <li>Process transactions and send related information</li>
                                 <li>Email marketing communications (with your consent)</li>
                                 <li>Improve our website and services</li>
@@ -86,7 +86,7 @@ export default function PrivacyPage() {
                             <p className="leading-relaxed mb-4">
                                 We may share your information in the following circumstances:
                             </p>
-                            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                            <ul className="list-disc list-inside space-y-2  ml-4">
                                 <li>With service providers who assist us in operating our website and conducting our business</li>
                                 <li>To comply with legal obligations, court orders, or government requests</li>
                                 <li>To protect our rights, privacy, safety, or property</li>
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
                             <p className="leading-relaxed mb-4">
                                 We use cookies and similar tracking technologies to enhance your experience on our website. These may include:
                             </p>
-                            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                            <ul className="list-disc list-inside space-y-2  ml-4">
                                 <li>Session cookies (temporary, deleted when you close your browser)</li>
                                 <li>Persistent cookies (remain on your device for a set period)</li>
                                 <li>Analytics cookies (to understand how you use our website)</li>
@@ -137,7 +137,7 @@ export default function PrivacyPage() {
                             <p className="leading-relaxed mb-4">
                                 Depending on your location, you may have certain rights regarding your personal information:
                             </p>
-                            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                            <ul className="list-disc list-inside space-y-2  ml-4">
                                 <li>Right to access your personal data</li>
                                 <li>Right to correct inaccurate data</li>
                                 <li>Right to request deletion of your data</li>
@@ -192,7 +192,7 @@ export default function PrivacyPage() {
                             <p className="leading-relaxed">
                                 If you have questions about this Privacy Policy or our privacy practices, please contact us at:
                             </p>
-                            <p className="mt-4 text-gray-700">
+                            <p className="mt-4 ">
                                 <strong>Email:</strong> info@pratyagrasilks.com<br />
                                 <strong>Phone:</strong> +91 73588 66646<br />
                                 <strong>Address:</strong> PratyagraSilks, 123 Silk Lane, Bangalore, Karnataka 560001, India
@@ -200,7 +200,7 @@ export default function PrivacyPage() {
                         </div>
 
                         <div className="bg-primary/5 border-l-4 border-primary p-6 mt-8">
-                            <p className="text-sm text-gray-700">
+                            <p className="text-sm ">
                                 <strong>Last Updated:</strong> November 2025
                             </p>
                         </div>

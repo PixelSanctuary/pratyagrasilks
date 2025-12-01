@@ -97,7 +97,7 @@ export default function ShippingPage() {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-16 md:py-24 px-4">
+            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Shipping & Delivery
@@ -122,7 +122,7 @@ export default function ShippingPage() {
                                 <h3 className="font-semibold text-lg text-primary mb-2">
                                     {feature.title}
                                 </h3>
-                                <p className="text-gray-700 text-sm leading-relaxed">
+                                <p className=" text-sm leading-relaxed">
                                     {feature.description}
                                 </p>
                             </div>
@@ -146,7 +146,7 @@ export default function ShippingPage() {
                                         <h3 className="font-semibold text-lg text-primary mb-2">
                                             {option.detail}
                                         </h3>
-                                        <p className="text-gray-700 mb-2">{option.timeline}</p>
+                                        <p className=" mb-2">{option.timeline}</p>
                                         <p className="text-gray-600 text-sm">{option.description}</p>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@ export default function ShippingPage() {
 
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
                         <h3 className="font-semibold text-primary mb-3">📝 Important Notes:</h3>
-                        <ul className="space-y-2 text-gray-700 text-sm">
+                        <ul className="space-y-2  text-sm">
                             <li>• Timelines are working days, excluding weekends and public holidays</li>
                             <li>• Delivery times vary based on location and festival seasons</li>
                             <li>• Tracking details will be shared via email/SMS after dispatch</li>
@@ -181,7 +181,7 @@ export default function ShippingPage() {
                                         <h3 className="font-semibold text-lg text-primary mb-2">
                                             {option.detail}
                                         </h3>
-                                        <p className="text-gray-700 font-semibold mb-2">{option.timeline}</p>
+                                        <p className=" font-semibold mb-2">{option.timeline}</p>
                                         <p className="text-gray-600 text-sm">{option.description}</p>
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@ export default function ShippingPage() {
 
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
                         <h3 className="font-semibold text-primary mb-3">📝 International Shipping Notes:</h3>
-                        <ul className="space-y-2 text-gray-700 text-sm">
+                        <ul className="space-y-2  text-sm">
                             <li>• Timelines depend on destination country and customs processing time</li>
                             <li>• Tracking details will be provided via email/SMS</li>
                             <li>• We handle all export documentation</li>
@@ -241,7 +241,7 @@ export default function ShippingPage() {
                             </div>
                             <div className="flex-grow">
                                 <h3 className="font-semibold text-lg text-gray-900 mb-2">Order Placed</h3>
-                                <p className="text-gray-700">You complete your purchase and receive an order confirmation email.</p>
+                                <p className="">You complete your purchase and receive an order confirmation email.</p>
                             </div>
                         </div>
 
@@ -253,7 +253,7 @@ export default function ShippingPage() {
                             </div>
                             <div className="flex-grow">
                                 <h3 className="font-semibold text-lg text-gray-900 mb-2">Quality Check & Processing (3-4 Days)</h3>
-                                <p className="text-gray-700">Your saree is thoroughly quality checked and prepared for shipment from our facility.</p>
+                                <p className="">Your saree is thoroughly quality checked and prepared for shipment from our facility.</p>
                             </div>
                         </div>
 
@@ -265,7 +265,7 @@ export default function ShippingPage() {
                             </div>
                             <div className="flex-grow">
                                 <h3 className="font-semibold text-lg text-gray-900 mb-2">Careful Packing</h3>
-                                <p className="text-gray-700">Your saree is securely packed with protective materials to ensure safe arrival.</p>
+                                <p className="">Your saree is securely packed with protective materials to ensure safe arrival.</p>
                             </div>
                         </div>
 
@@ -277,7 +277,7 @@ export default function ShippingPage() {
                             </div>
                             <div className="flex-grow">
                                 <h3 className="font-semibold text-lg text-gray-900 mb-2">Shipment Dispatch</h3>
-                                <p className="text-gray-700">Your package is handed over to the courier. You receive tracking details via email/SMS.</p>
+                                <p className="">Your package is handed over to the courier. You receive tracking details via email/SMS.</p>
                             </div>
                         </div>
 
@@ -289,7 +289,7 @@ export default function ShippingPage() {
                             </div>
                             <div className="flex-grow">
                                 <h3 className="font-semibold text-lg text-gray-900 mb-2">In Transit</h3>
-                                <p className="text-gray-700">Track your shipment in real-time. Delivery time: 2-7 days (India) or 10-14 days (International).</p>
+                                <p className="">Track your shipment in real-time. Delivery time: 2-7 days (India) or 10-14 days (International).</p>
                             </div>
                         </div>
 
@@ -301,7 +301,7 @@ export default function ShippingPage() {
                             </div>
                             <div className="flex-grow">
                                 <h3 className="font-semibold text-lg text-gray-900 mb-2">Delivery & Enjoyment</h3>
-                                <p className="text-gray-700">Your saree arrives at your doorstep! Unwrap and enjoy your beautiful handmade saree.</p>
+                                <p className="">Your saree arrives at your doorstep! Unwrap and enjoy your beautiful handmade saree.</p>
                             </div>
                         </div>
                     </div>
@@ -320,7 +320,7 @@ export default function ShippingPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 Why is accurate address information important?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 Please ensure your shipping address, ZIP/postal code, and contact number are complete and accurate at checkout. Errors in these details may result in shipment delays or delivery failures, for which we cannot be held liable.
                             </p>
                         </details>
@@ -329,7 +329,7 @@ export default function ShippingPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 When will I receive my tracking information?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 Tracking details will be shared via email/SMS once your order has been dispatched from our facility. You can then monitor your shipment in real-time.
                             </p>
                         </details>
@@ -338,7 +338,7 @@ export default function ShippingPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 What if my shipment is delayed by the courier?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 While we partner with reliable logistics providers, we are not responsible for unforeseen delays caused by the courier or logistics partners. However, we'll help you track and investigate any significant delays.
                             </p>
                         </details>
@@ -347,7 +347,7 @@ export default function ShippingPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 How are shipping charges calculated?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 Shipping charges are calculated at checkout and may vary based on the delivery location (domestic vs. international) and order weight. You'll see the final shipping cost before confirming your order.
                             </p>
                         </details>
@@ -356,7 +356,7 @@ export default function ShippingPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 Who pays for customs duties on international orders?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 All international orders are shipped under DDU (Delivery Duty Unpaid) terms. This means YOU are responsible for paying any customs duties, import taxes, or charges levied by the destination country. These are NOT included in your order price.
                             </p>
                         </details>
@@ -365,7 +365,7 @@ export default function ShippingPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 What happens if I refuse to pay customs charges?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 If you refuse to pay customs duties and the shipment is returned to PratyagraSilks, any eligible refund will be processed ONLY after deducting return handling charges and any duties, taxes, or penalties imposed by customs authorities.
                             </p>
                         </details>
@@ -374,7 +374,7 @@ export default function ShippingPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 Can I change my delivery address after ordering?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 Please contact us immediately if you need to change your address. We can help if the saree hasn't been dispatched yet. Once shipped, the courier may not be able to redirect the package.
                             </p>
                         </details>
@@ -396,15 +396,15 @@ export default function ShippingPage() {
                         <div className="space-y-4">
                             <div>
                                 <p className="font-semibold text-primary mb-2">1. Report Immediately</p>
-                                <p className="text-gray-700 text-sm">Contact us within 24 hours if your saree is damaged or the package is lost. Provide photos of the damage.</p>
+                                <p className=" text-sm">Contact us within 24 hours if your saree is damaged or the package is lost. Provide photos of the damage.</p>
                             </div>
                             <div>
                                 <p className="font-semibold text-primary mb-2">2. Our Team Takes Over</p>
-                                <p className="text-gray-700 text-sm">We'll file a claim with the courier and handle the investigation with our logistics partners.</p>
+                                <p className=" text-sm">We'll file a claim with the courier and handle the investigation with our logistics partners.</p>
                             </div>
                             <div>
                                 <p className="font-semibold text-primary mb-2">3. Resolution</p>
-                                <p className="text-gray-700 text-sm">Once the claim is settled, we'll replace your saree or issue a full refund. We want to make sure you get what you ordered!</p>
+                                <p className=" text-sm">Once the claim is settled, we'll replace your saree or issue a full refund. We want to make sure you get what you ordered!</p>
                             </div>
                         </div>
                         <p className="text-gray-800 mt-4 font-semibold italic">
@@ -415,7 +415,7 @@ export default function ShippingPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary/80 text-white">
+            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary2 text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-6">
                         Ready to Order?

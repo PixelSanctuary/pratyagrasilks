@@ -10,7 +10,7 @@ export default function TermsPage() {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-16 md:py-24 px-4">
+            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Terms of Service
@@ -24,7 +24,7 @@ export default function TermsPage() {
             {/* Content Section */}
             <section className="py-16 md:py-24 px-4 bg-white">
                 <div className="max-w-4xl mx-auto prose prose-lg max-w-none">
-                    <div className="text-gray-700 space-y-8">
+                    <div className=" space-y-8">
                         <div>
                             <h2 className="font-playfair text-3xl font-bold text-primary mb-4">
                                 1. Acceptance of Terms
@@ -41,7 +41,7 @@ export default function TermsPage() {
                             <p className="leading-relaxed mb-4">
                                 Permission is granted to temporarily download one copy of the materials (information or software) on PratyagraSilks website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
                             </p>
-                            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                            <ul className="list-disc list-inside space-y-2  ml-4">
                                 <li>Modifying or copying the materials</li>
                                 <li>Using the materials for any commercial purpose or for any public display</li>
                                 <li>Attempting to decompile or reverse engineer any software contained on the website</li>
@@ -112,7 +112,7 @@ export default function TermsPage() {
                             <p className="leading-relaxed mb-4">
                                 We strive to provide accurate product descriptions and pricing. However:
                             </p>
-                            <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                            <ul className="list-disc list-inside space-y-2  ml-4">
                                 <li>Product colors may vary due to monitor settings and photography</li>
                                 <li>Prices are subject to change without notice</li>
                                 <li>We reserve the right to limit quantities or cancel orders</li>
@@ -145,7 +145,7 @@ export default function TermsPage() {
                             <p className="leading-relaxed">
                                 If you have any questions about these Terms of Service, please contact us at:
                             </p>
-                            <p className="mt-4 text-gray-700">
+                            <p className="mt-4 ">
                                 <strong>Email:</strong> info@pratyagrasilks.com<br />
                                 <strong>Phone:</strong> +91 73588 66646<br />
                                 <strong>Address:</strong> PratyagraSilks, 123 Silk Lane, Bangalore, Karnataka 560001, India
@@ -153,7 +153,7 @@ export default function TermsPage() {
                         </div>
 
                         <div className="bg-primary/5 border-l-4 border-primary p-6 mt-8">
-                            <p className="text-sm text-gray-700">
+                            <p className="text-sm ">
                                 <strong>Last Updated:</strong> November 2025
                             </p>
                         </div>

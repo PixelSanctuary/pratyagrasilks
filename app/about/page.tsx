@@ -88,7 +88,7 @@ export default function AboutPage() {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-16 md:py-24 px-4">
+            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Our Story
@@ -107,10 +107,10 @@ export default function AboutPage() {
                             <h2 className="font-playfair text-3xl font-bold text-primary mb-4">
                                 Our Mission
                             </h2>
-                            <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                            <p className=" text-lg leading-relaxed mb-4">
                                 At Pratyagra Silks, our mission is to revive India's silk heritage by curating luxury sarees from the finest weavers across the country. We believe in blending timeless tradition with contemporary elegance, creating pieces that celebrate centuries of artistry while resonating with modern sensibilities.
                             </p>
-                            <p className="text-gray-700 text-lg leading-relaxed">
+                            <p className=" text-lg leading-relaxed">
                                 We are committed to bringing authentic, premium handwoven silk sarees directly to discerning customers worldwide, while ensuring fair compensation and unwavering support for the master artisans who bring these treasures to life through their exceptional craftsmanship.
                             </p>
                         </div>
@@ -118,10 +118,10 @@ export default function AboutPage() {
                             <h2 className="font-playfair text-3xl font-bold text-primary mb-4">
                                 Our Vision
                             </h2>
-                            <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                            <p className=" text-lg leading-relaxed mb-4">
                                 We envision Pratyagra Silks as the premier destination for luxury silk sarees—where tradition is revived, quality is uncompromised, and every piece tells the story of dedicated weavers from India's finest silk regions.
                             </p>
-                            <p className="text-gray-700 text-lg leading-relaxed">
+                            <p className=" text-lg leading-relaxed">
                                 We are building a sustainable ecosystem where master weavers thrive, artisan communities flourish, and customers worldwide discover the perfect blend of heritage craftsmanship and modern elegance in every saree they wear.
                             </p>
                         </div>
@@ -141,7 +141,7 @@ export default function AboutPage() {
                                 <h3 className="font-playfair text-xl font-bold text-primary mb-3">
                                     {value.title}
                                 </h3>
-                                <p className="text-gray-700 text-sm leading-relaxed">
+                                <p className=" text-sm leading-relaxed">
                                     {value.description}
                                 </p>
                             </div>
@@ -156,7 +156,7 @@ export default function AboutPage() {
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
                         Exploring Silk Weaving Regions
                     </h2>
-                    <p className="text-center text-gray-700 mb-12 max-w-2xl mx-auto text-lg">
+                    <p className="text-center  mb-12 max-w-2xl mx-auto text-lg">
                         We source directly from India's most renowned silk weaving centers, each with unique traditions and expertise
                     </p>
                     
@@ -167,7 +167,7 @@ export default function AboutPage() {
                                     <h3 className="font-playfair text-2xl font-bold text-primary mb-3">
                                         {origin.name}
                                     </h3>
-                                    <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                                    <p className=" text-lg leading-relaxed mb-4">
                                         {origin.description}
                                     </p>
                                     <div className="flex flex-wrap gap-2">
@@ -197,10 +197,10 @@ export default function AboutPage() {
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6">
                         Supporting Artisan Communities
                     </h2>
-                    <p className="text-gray-700 text-lg leading-relaxed mb-8">
+                    <p className=" text-lg leading-relaxed mb-8">
                         Every purchase of a PratyagraSilks saree directly supports the livelihoods of skilled artisans and their families. We believe in fair trade practices, ensuring that weavers receive equitable compensation for their exceptional work.
                     </p>
-                    <p className="text-gray-700 text-lg leading-relaxed mb-8">
+                    <p className=" text-lg leading-relaxed mb-8">
                         By choosing PratyagraSilks, you're not just acquiring a beautiful saree—you're investing in preserving traditional crafts, supporting artisan dignity, and ensuring these remarkable skills are passed down to future generations.
                     </p>
                     <div className="bg-primary/5 border-l-4 border-primary p-6 text-left">
@@ -212,7 +212,7 @@ export default function AboutPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary/80 text-white">
+            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary2 text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-6">
                         Explore Our Collections

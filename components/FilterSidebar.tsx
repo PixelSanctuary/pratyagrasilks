@@ -82,7 +82,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
 
             {/* Search */}
             <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium  mb-2">
                     Search Products
                 </label>
                 <input
@@ -96,7 +96,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
 
             {/* Category Filter */}
             <div className="mb-6">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Category</h3>
+                <h3 className="text-sm font-medium  mb-3">Category</h3>
                 <div className="space-y-2">
                     {categories.map((cat) => (
                         <label key={cat.value} className="flex items-center cursor-pointer group">
@@ -108,7 +108,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
                                 onChange={(e) => handleCategoryChange(e.target.value)}
                                 className="w-4 h-4 text-amber-600 focus:ring-amber-500"
                             />
-                            <span className="ml-3 text-sm text-gray-700 group-hover:text-amber-700">
+                            <span className="ml-3 text-sm  group-hover:text-amber-700">
                                 {cat.label}
                             </span>
                         </label>
@@ -118,7 +118,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
 
             {/* Price Range Filter */}
             <div className="mb-6">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Price Range</h3>
+                <h3 className="text-sm font-medium  mb-3">Price Range</h3>
                 <div className="space-y-2">
                     {priceRanges.map((range, index) => (
                         <label key={index} className="flex items-center cursor-pointer group">
@@ -129,7 +129,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
                                 onChange={() => handlePriceRangeChange(range.min, range.max)}
                                 className="w-4 h-4 text-amber-600 focus:ring-amber-500"
                             />
-                            <span className="ml-3 text-sm text-gray-700 group-hover:text-amber-700">
+                            <span className="ml-3 text-sm  group-hover:text-amber-700">
                                 {range.label}
                             </span>
                         </label>
@@ -140,7 +140,7 @@ export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
             {/* Active Filters Summary */}
             {(filters.category || filters.minPrice > 0 || filters.maxPrice > 0 || filters.search) && (
                 <div className="pt-4 border-t border-gray-200">
-                    <h3 className="text-sm font-medium text-gray-700 mb-2">Active Filters</h3>
+                    <h3 className="text-sm font-medium  mb-2">Active Filters</h3>
                     <div className="space-y-1">
                         {filters.category && (
                             <div className="text-xs text-gray-600">

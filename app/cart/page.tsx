@@ -116,7 +116,7 @@ export default function CartPage() {
 
                                 <Link
                                     href="/collection"
-                                    className="block w-full border-2 border-gray-300 text-gray-700 text-center py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                                    className="block w-full border-2 border-gray-300  text-center py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
                                 >
                                     Continue Shopping
                                 </Link>

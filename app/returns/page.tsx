@@ -60,7 +60,7 @@ export default function ReturnsPage() {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-16 md:py-24 px-4">
+            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Returns & Exchanges
@@ -97,7 +97,7 @@ export default function ReturnsPage() {
                                 {defects.map((item, index) => (
                                     <li key={index} className="flex items-start space-x-3">
                                         <span className="text-red-600 font-bold mt-1">✗</span>
-                                        <span className="text-gray-700">{item.text}</span>
+                                        <span className="">{item.text}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -110,14 +110,14 @@ export default function ReturnsPage() {
                             Handloom Characteristics (Not Defects)
                         </h3>
                         <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-                            <p className="text-gray-700 text-sm mb-4 italic">
+                            <p className=" text-sm mb-4 italic">
                                 These natural features of handwoven sarees are not considered defects:
                             </p>
                             <ul className="space-y-3">
                                 {notDefects.map((item, index) => (
                                     <li key={index} className="flex items-start space-x-3">
                                         <span className="text-green-600 font-bold mt-1">✓</span>
-                                        <span className="text-gray-700">{item.text}</span>
+                                        <span className="">{item.text}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -145,7 +145,7 @@ export default function ReturnsPage() {
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">
                                         {step.title}
                                     </h3>
-                                    <p className="text-gray-700">
+                                    <p className="">
                                         {step.description}
                                     </p>
                                 </div>
@@ -167,7 +167,7 @@ export default function ReturnsPage() {
                             <h3 className="font-semibold text-lg text-primary mb-4">
                                 Report Window
                             </h3>
-                            <ul className="space-y-2 text-gray-700">
+                            <ul className="space-y-2 ">
                                 <li><strong>24 hours:</strong> Report defects after delivery</li>
                                 <li><strong>Email:</strong> info@pratyagrasilks.com</li>
                                 <li><strong>Include:</strong> Order ID, photos of defect</li>
@@ -178,7 +178,7 @@ export default function ReturnsPage() {
                             <h3 className="font-semibold text-lg text-primary mb-4">
                                 Refund Timeline
                             </h3>
-                            <ul className="space-y-2 text-gray-700">
+                            <ul className="space-y-2 ">
                                 <li><strong>After Approval:</strong> We'll guide return process</li>
                                 <li><strong>5-7 days:</strong> Processing time after we receive it</li>
                                 <li><strong>Full Refund:</strong> To original payment method</li>
@@ -190,7 +190,7 @@ export default function ReturnsPage() {
                         <h3 className="font-semibold text-lg text-primary mb-4">
                             📝 Important Return Conditions
                         </h3>
-                        <ul className="space-y-3 text-gray-700 ml-4">
+                        <ul className="space-y-3  ml-4">
                             <li>• Saree must be returned in original condition and packaging</li>
                             <li>• Report defects within 24 hours of delivery</li>
                             <li>• Photos must clearly show the defect</li>
@@ -207,22 +207,22 @@ export default function ReturnsPage() {
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6">
                         Exchange Option
                     </h2>
-                    <p className="text-gray-700 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+                    <p className=" text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
                         If your saree has a defect, you can choose to exchange it for another saree instead of getting a refund. We offer one exchange per order.
                     </p>
 
                     <div className="grid md:grid-cols-3 gap-6">
                         <div className="bg-white rounded-lg shadow-md p-6">
                             <p className="text-2xl font-bold text-primary mb-2">Once Per Order</p>
-                            <p className="text-gray-700">You can exchange a defective saree one time</p>
+                            <p className="">You can exchange a defective saree one time</p>
                         </div>
                         <div className="bg-white rounded-lg shadow-md p-6">
                             <p className="text-2xl font-bold text-primary mb-2">Approval Required</p>
-                            <p className="text-gray-700">Exchange must be approved by our team</p>
+                            <p className="">Exchange must be approved by our team</p>
                         </div>
                         <div className="bg-white rounded-lg shadow-md p-6">
                             <p className="text-2xl font-bold text-primary mb-2">Same Process</p>
-                            <p className="text-gray-700">Report within 24 hours with photos</p>
+                            <p className="">Report within 24 hours with photos</p>
                         </div>
                     </div>
                 </div>
@@ -240,7 +240,7 @@ export default function ReturnsPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 What exactly counts as a defect?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 A tear larger than 20mm with no visible interwoven silk thread, incorrect length that significantly deviates from what was stated, or a missing blouse piece (if mentioned in the description). Small knots, uneven threads, dye bleeding, and slubs are natural handloom characteristics—not defects.
                             </p>
                         </details>
@@ -249,7 +249,7 @@ export default function ReturnsPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 Why do I have to report within 24 hours?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 This helps us verify that the defect occurred during manufacturing or shipping, not from use. Reporting quickly with photos allows us to assess the issue properly and help you faster.
                             </p>
                         </details>
@@ -258,7 +258,7 @@ export default function ReturnsPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 What if I just don't like the saree?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 Unfortunately, we don't accept returns for mind change or disliking the product. Our policy covers defects only. This is because handloom sarees are handmade products with unique characteristics. Before ordering, we recommend checking the photos, measurements, and color details carefully.
                             </p>
                         </details>
@@ -267,7 +267,7 @@ export default function ReturnsPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 Are color deviations covered?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 No. Our photos are taken under neutral lighting, but colors can appear different on your monitor or device. This is not a defect and doesn't qualify for return. We recommend checking your device settings and taking the product photo in good lighting to compare.
                             </p>
                         </details>
@@ -276,7 +276,7 @@ export default function ReturnsPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 Can I exchange more than once?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 No. You can exchange a defective saree only once per order. After that, we process a refund if there are additional issues. This ensures fairness for all customers.
                             </p>
                         </details>
@@ -285,7 +285,7 @@ export default function ReturnsPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 What happens if you reject my return request?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 Our team reviews each case carefully. If we determine it's not a defect (like handloom characteristics or color differences), we won't process the return. We'll explain our decision and answer any questions you have.
                             </p>
                         </details>
@@ -294,7 +294,7 @@ export default function ReturnsPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary/80 text-white">
+            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary2 text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-6">
                         Need More Help?

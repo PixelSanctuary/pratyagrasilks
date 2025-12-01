@@ -20,7 +20,7 @@ export default function Home() {
     return (
         <div className="flex flex-col">
             {/* Hero Section - Mobile-first, high-impact, SEO optimized */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-20 md:py-32 px-4">
+            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-20 md:py-32 px-4">
                 <div className="max-w-7xl mx-auto text-center">
                     <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance leading-tight">
                         Reviving Tradition with a New Touch
@@ -46,7 +46,7 @@ export default function Home() {
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
                         Why Choose Pratyagra Silks
                     </h2>
-                    <p className="text-center text-gray-700 mb-12 max-w-2xl mx-auto text-lg">
+                    <p className="text-center  mb-12 max-w-2xl mx-auto text-lg">
                         Experience the perfect blend of luxury and tradition. Our carefully curated collection features premium handwoven silk sarees from India's finest weavers, combining centuries-old craftsmanship with contemporary style.
                     </p>
                     
@@ -56,7 +56,7 @@ export default function Home() {
                                 <h3 className="font-playfair text-xl font-bold text-primary mb-3">
                                     {benefit.title}
                                 </h3>
-                                <p className="text-gray-700 text-sm leading-relaxed">
+                                <p className=" text-sm leading-relaxed">
                                     {benefit.description}
                                 </p>
                             </div>
@@ -71,7 +71,7 @@ export default function Home() {
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6 text-center">
                         Reviving Tradition with a New Touch
                     </h2>
-                    <div className="space-y-6 text-gray-700 leading-relaxed text-lg">
+                    <div className="space-y-6  leading-relaxed text-lg">
                         <p>
                             <strong>Pratyagra Silks</strong> is devoted to reviving India's timeless silk heritage by curating luxury sarees from the finest weavers across the country. Each piece in our collection is a masterpiece of luxury—meticulously handwoven by master artisans who have inherited centuries of expertise. We celebrate the artistry, tradition, and cultural pride embedded in every authentic Indian textile.
                         </p>
@@ -96,7 +96,7 @@ export default function Home() {
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
                         Explore Our Silk Saree Collections
                     </h2>
-                    <p className="text-center text-gray-700 mb-12 max-w-2xl mx-auto text-lg">
+                    <p className="text-center  mb-12 max-w-2xl mx-auto text-lg">
                         Discover our handpicked range of premium silk sarees from across India
                     </p>
 
@@ -139,26 +139,26 @@ export default function Home() {
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-8">
                         <div className="text-center">
                             <p className="text-4xl font-bold text-primary">1000+</p>
-                            <p className="text-gray-700 text-sm mt-2">Satisfied Customers</p>
+                            <p className=" text-sm mt-2">Satisfied Customers</p>
                         </div>
                         <div className="text-center">
                             <p className="text-4xl font-bold text-primary">500+</p>
-                            <p className="text-gray-700 text-sm mt-2">Premium Sarees</p>
+                            <p className=" text-sm mt-2">Premium Sarees</p>
                         </div>
                         <div className="text-center">
                             <p className="text-4xl font-bold text-primary">50+</p>
-                            <p className="text-gray-700 text-sm mt-2">Artisan Partners</p>
+                            <p className=" text-sm mt-2">Artisan Partners</p>
                         </div>
                     </div>
 
-                    <p className="text-gray-700 text-lg mb-6 max-w-2xl mx-auto">
+                    <p className=" text-lg mb-6 max-w-2xl mx-auto">
                         Every saree is selected with meticulous care to ensure exceptional quality, authentic craftsmanship, and timeless beauty. We're committed to bringing you genuine Indian handloom excellence.
                     </p>
                 </div>
             </section>
 
             {/* CTA Section */}
-            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary/80 text-white">
+            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary2 text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-6">
                         Begin Your Journey Into Timeless Elegance

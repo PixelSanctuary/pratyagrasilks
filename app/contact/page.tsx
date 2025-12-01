@@ -40,7 +40,7 @@ export default function ContactPage() {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-16 md:py-24 px-4">
+            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Get in Touch
@@ -66,7 +66,7 @@ export default function ContactPage() {
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Email</h3>
                                     <a
                                         href="mailto:info@pratyagrasilks.com"
-                                        className="text-primary hover:text-primary/80 text-lg transition-colors"
+                                        className="text-primary hover:text-primary2 text-lg transition-colors"
                                     >
                                         info@pratyagrasilks.com
                                     </a>
@@ -77,7 +77,7 @@ export default function ContactPage() {
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Phone</h3>
                                     <a
                                         href="tel:+919876543210"
-                                        className="text-primary hover:text-primary/80 text-lg transition-colors"
+                                        className="text-primary hover:text-primary2 text-lg transition-colors"
                                     >
                                         +91 73588 66646
                                     </a>
@@ -86,7 +86,7 @@ export default function ContactPage() {
 
                                 <div>
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Office Address</h3>
-                                    <p className="text-gray-700 text-lg leading-relaxed">
+                                    <p className=" text-lg leading-relaxed">
                                         PratyagraSilks<br />
                                         123 Silk Lane<br />
                                         Bangalore, Karnataka 560001<br />
@@ -96,7 +96,7 @@ export default function ContactPage() {
 
                                 <div className="bg-primary/5 rounded-lg p-6">
                                     <h3 className="font-semibold text-lg text-primary mb-2">Business Hours</h3>
-                                    <ul className="text-gray-700 space-y-1">
+                                    <ul className=" space-y-1">
                                         <li><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM IST</li>
                                         <li><strong>Saturday:</strong> 10:00 AM - 4:00 PM IST</li>
                                         <li><strong>Sunday:</strong> Closed</li>
@@ -120,7 +120,7 @@ export default function ContactPage() {
 
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div>
-                                    <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
+                                    <label htmlFor="name" className="block  font-semibold mb-2">
                                         Full Name *
                                     </label>
                                     <input
@@ -136,7 +136,7 @@ export default function ContactPage() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
+                                    <label htmlFor="email" className="block  font-semibold mb-2">
                                         Email Address *
                                     </label>
                                     <input
@@ -152,7 +152,7 @@ export default function ContactPage() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="subject" className="block text-gray-700 font-semibold mb-2">
+                                    <label htmlFor="subject" className="block  font-semibold mb-2">
                                         Subject *
                                     </label>
                                     <select
@@ -173,7 +173,7 @@ export default function ContactPage() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">
+                                    <label htmlFor="message" className="block  font-semibold mb-2">
                                         Message *
                                     </label>
                                     <textarea
@@ -213,7 +213,7 @@ export default function ContactPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 How long does delivery take?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 We typically deliver within 5-7 business days for orders within India. International orders may take 10-15 business days depending on customs clearance.
                             </p>
                         </details>
@@ -222,7 +222,7 @@ export default function ContactPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 What's your return policy?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 We offer a 30-day return policy for unused sarees in original condition. Check our <a href="/returns" className="text-primary hover:underline">Returns & Exchanges</a> page for more details.
                             </p>
                         </details>
@@ -231,7 +231,7 @@ export default function ContactPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 Do you offer wholesale/bulk orders?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 Yes! We work with boutiques, shops, and organizations. Please contact us at info@pratyagrasilks.com with your bulk requirements.
                             </p>
                         </details>
@@ -240,7 +240,7 @@ export default function ContactPage() {
                             <summary className="font-semibold text-lg text-primary">
                                 Are your sarees authentic?
                             </summary>
-                            <p className="text-gray-700 mt-4 leading-relaxed">
+                            <p className=" mt-4 leading-relaxed">
                                 Absolutely! Every saree is handwoven by master artisans. We source directly from traditional weaving communities across India and guarantee authenticity.
                             </p>
                         </details>

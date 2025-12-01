@@ -69,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                     {/* Category Badge */}
                     <div className="mt-3">
-                        <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">
+                        <span className="inline-block px-3 py-1 bg-gray-100  text-xs font-medium rounded-full">
                             {product.category}
                         </span>
                     </div>
