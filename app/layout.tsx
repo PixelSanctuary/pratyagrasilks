@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
 import { CartProvider } from "@/lib/context/CartContext";
+import { AuthProvider } from "@/lib/context/AuthContext";
 import CartSidebar from "@/components/Cart/CartSidebar";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -62,12 +63,14 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
             <body className="antialiased">
-                <CartProvider>
-                    <Header />
-                    <main className="min-h-screen">{children}</main>
-                    <Footer />
-                    <CartSidebar />
-                </CartProvider>
+                <AuthProvider>
+                    <CartProvider>
+                        <Header />
+                        <main className="min-h-screen">{children}</main>
+                        <Footer />
+                        <CartSidebar />
+                    </CartProvider>
+                </AuthProvider>
                 <Analytics />
             </body>
         </html>
