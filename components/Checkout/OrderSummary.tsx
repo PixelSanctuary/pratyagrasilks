@@ -44,9 +44,8 @@ export default function OrderSummary({ shippingCost = 0, estimatedDays }: OrderS
                                 <h3 className="text-sm font-medium text-gray-900 truncate">
                                     {item.product.name}
                                 </h3>
-                                <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
                                 <p className="text-sm font-semibold text-gray-900">
-                                    {formatPrice(item.product.price * item.quantity)}
+                                    {formatPrice(item.product.price)}
                                 </p>
                             </div>
                         </div>

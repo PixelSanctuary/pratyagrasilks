@@ -7,7 +7,7 @@ import { X, ShoppingBag } from 'lucide-react';
 import { useEffect } from 'react';
 
 export default function CartSidebar() {
-    const { items, itemCount, totalPrice, updateQuantity, removeItem, isOpen, closeCart } = useCart();
+    const { items, itemCount, totalPrice, removeItem, isOpen, closeCart } = useCart();
 
     // Prevent body scroll when cart is open
     useEffect(() => {
@@ -75,7 +75,6 @@ export default function CartSidebar() {
                                 <CartItemComponent
                                     key={item.id}
                                     item={item}
-                                    onUpdateQuantity={updateQuantity}
                                     onRemove={removeItem}
                                 />
                             ))}

@@ -6,7 +6,7 @@ import ImageGallery from '@/components/Product/ImageGallery';
 import ProductCard from '@/components/ProductCard';
 import { useCart } from '@/lib/context/CartContext';
 import { useState, useEffect } from 'react';
-import { ShoppingCart, Plus, Minus } from 'lucide-react';
+import { ShoppingCart, Check } from 'lucide-react';
 
 interface ProductDetailPageProps {
     params: { id: string };
@@ -33,11 +33,10 @@ async function getRelatedProducts(id: string) {
 }
 
 export default function ProductDetailPage({ params }: ProductDetailPageProps) {
-    const { addItem } = useCart();
+    const { addItem, isInCart } = useCart();
     const [product, setProduct] = useState<Product | null>(null);
     const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
-    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         async function loadData() {
@@ -54,7 +53,11 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
 
     const handleAddToCart = () => {
         if (product) {
-            addItem(product, quantity);
+            const added = addItem(product);
+            if (!added) {
+                // Item already in cart
+                alert('This item is already in your cart!');
+            }
         }
     };
 
@@ -145,19 +148,12 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                             {product.inStock ? (
                                 <div className="flex items-center space-x-2">
                                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                    <span className="text-green-700 font-medium">
-                                        In Stock
-                                        {product.trackInventory && product.stockQuantity && (
-                                            <span className="text-gray-600 ml-2">
-                                                ({product.stockQuantity} available)
-                                            </span>
-                                        )}
-                                    </span>
+                                    <span className="text-green-700 font-medium">Available</span>
                                 </div>
                             ) : (
                                 <div className="flex items-center space-x-2">
                                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                                    <span className="text-red-700 font-medium">Out of Stock</span>
+                                    <span className="text-red-700 font-medium">Sold Out</span>
                                 </div>
                             )}
                         </div>
@@ -201,45 +197,26 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                             </div>
                         </div>
 
-                        {/* Quantity Selector */}
-                        {product.inStock && (
-                            <div>
-                                <label className="block text-sm font-medium  mb-2">
-                                    Quantity
-                                </label>
-                                <div className="flex items-center gap-3">
-                                    <button
-                                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                        className="p-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-                                        aria-label="Decrease quantity"
-                                    >
-                                        <Minus className="w-4 h-4" />
-                                    </button>
 
-                                    <span className="w-16 text-center text-lg font-medium">
-                                        {quantity}
-                                    </span>
-
-                                    <button
-                                        onClick={() => setQuantity(quantity + 1)}
-                                        className="p-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-                                        aria-label="Increase quantity"
-                                    >
-                                        <Plus className="w-4 h-4" />
-                                    </button>
-                                </div>
-                            </div>
-                        )}
 
                         {/* Add to Cart Buttons */}
                         <div className="space-y-3">
                             <button
                                 onClick={handleAddToCart}
-                                disabled={!product.inStock}
+                                disabled={!product.inStock || isInCart(product.id)}
                                 className="w-full bg-amber-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-amber-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
-                                <ShoppingCart className="w-5 h-5" />
-                                {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                                {isInCart(product.id) ? (
+                                    <>
+                                        <Check className="w-5 h-5" />
+                                        Already in Cart
+                                    </>
+                                ) : (
+                                    <>
+                                        <ShoppingCart className="w-5 h-5" />
+                                        {product.inStock ? 'Add to Cart' : 'Sold Out'}
+                                    </>
+                                )}
                             </button>
 
                             <button className="w-full border-2 border-amber-600 text-amber-600 py-4 rounded-lg font-semibold text-lg hover:bg-amber-50 transition-colors">

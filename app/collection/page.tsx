@@ -1,16 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import FilterSidebar, { FilterState } from '@/components/FilterSidebar';
 import { Product } from '@/lib/types';
 
 export default function CollectionPage() {
+    const searchParams = useSearchParams();
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [filters, setFilters] = useState<FilterState>({
-        category: '',
+        category: searchParams.get('category') || '',
         minPrice: 0,
         maxPrice: 0,
         search: '',
@@ -68,7 +70,7 @@ export default function CollectionPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     {/* Sidebar */}
                     <aside className="lg:col-span-1">
-                        <FilterSidebar onFilterChange={handleFilterChange} />
+                        <FilterSidebar onFilterChange={handleFilterChange} currentFilters={filters} />
                     </aside>
 
                     {/* Product Grid */}

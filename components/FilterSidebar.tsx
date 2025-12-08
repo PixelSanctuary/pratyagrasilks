@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface FilterSidebarProps {
     onFilterChange: (filters: FilterState) => void;
+    currentFilters?: FilterState;
 }
 
 export interface FilterState {
@@ -14,12 +15,18 @@ export interface FilterState {
 }
 
 const categories = [
-    { value: '', label: 'All Categories' },
-    { value: 'sarees', label: 'Sarees' },
-    { value: 'dress-materials', label: 'Dress Materials' },
-    { value: 'dupattas', label: 'Dupattas' },
-    { value: 'stoles', label: 'Stoles' },
-    { value: 'fabric', label: 'Fabric' },
+    { value: '', label: 'All Silk Types' },
+    { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
+    { value: 'banarasi-silk', label: 'Banarasi Silk' },
+    { value: 'tussar-silk', label: 'Tussar Silk' },
+    { value: 'mysore-silk', label: 'Mysore Silk' },
+    { value: 'kerala-kasavu', label: 'Kerala Kasavu' },
+    { value: 'muga-silk', label: 'Muga Silk' },
+    { value: 'kani-silk', label: 'Kani Silk' },
+    { value: 'paithani-silk', label: 'Paithani Silk' },
+    { value: 'pochampalli-silk', label: 'Pochampalli Silk' },
+    { value: 'baluchari-silk', label: 'Baluchari Silk' },
+    { value: 'georgette-silk', label: 'Georgette Silk' },
 ];
 
 const priceRanges = [
@@ -31,13 +38,20 @@ const priceRanges = [
     { min: 50000, max: 0, label: 'Above ₹50,000' },
 ];
 
-export default function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
+export default function FilterSidebar({ onFilterChange, currentFilters }: FilterSidebarProps) {
     const [filters, setFilters] = useState<FilterState>({
         category: '',
         minPrice: 0,
         maxPrice: 0,
         search: '',
     });
+
+    // Sync internal state with parent's filter state (e.g., from URL parameters)
+    useEffect(() => {
+        if (currentFilters) {
+            setFilters(currentFilters);
+        }
+    }, [currentFilters]);
 
     const handleCategoryChange = (category: string) => {
         const newFilters = { ...filters, category };

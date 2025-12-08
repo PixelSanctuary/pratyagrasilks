@@ -2,17 +2,15 @@
 
 import { CartItem } from '@/lib/context/CartContext';
 import Image from 'next/image';
-import { Trash2, Plus, Minus } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
 interface CartItemComponentProps {
     item: CartItem;
-    onUpdateQuantity: (productId: string, quantity: number) => void;
     onRemove: (productId: string) => void;
 }
 
 export default function CartItemComponent({
     item,
-    onUpdateQuantity,
     onRemove,
 }: CartItemComponentProps) {
     const formatPrice = (price: number) => {
@@ -48,29 +46,6 @@ export default function CartItemComponent({
                 <p className="text-sm text-gray-500 mt-1">
                     {formatPrice(item.product.price)}
                 </p>
-
-                {/* Quantity Controls */}
-                <div className="flex items-center gap-2 mt-2">
-                    <button
-                        onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)}
-                        className="p-1 rounded-md hover:bg-gray-100 transition-colors"
-                        aria-label="Decrease quantity"
-                    >
-                        <Minus className="w-4 h-4 text-gray-600" />
-                    </button>
-
-                    <span className="w-8 text-center text-sm font-medium">
-                        {item.quantity}
-                    </span>
-
-                    <button
-                        onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
-                        className="p-1 rounded-md hover:bg-gray-100 transition-colors"
-                        aria-label="Increase quantity"
-                    >
-                        <Plus className="w-4 h-4 text-gray-600" />
-                    </button>
-                </div>
             </div>
 
             {/* Price & Remove */}
@@ -84,7 +59,7 @@ export default function CartItemComponent({
                 </button>
 
                 <p className="text-sm font-semibold text-gray-900">
-                    {formatPrice(item.product.price * item.quantity)}
+                    {formatPrice(item.product.price)}
                 </p>
             </div>
         </div>

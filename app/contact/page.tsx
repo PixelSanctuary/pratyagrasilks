@@ -25,13 +25,26 @@ export default function ContactPage() {
         setLoading(true);
 
         try {
-            // Simulate form submission
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Failed to submit contact form');
+            }
+
             setSubmitted(true);
             setFormData({ name: "", email: "", subject: "", message: "" });
             setTimeout(() => setSubmitted(false), 5000);
         } catch (error) {
             console.error("Form submission error:", error);
+            alert(error instanceof Error ? error.message : 'Failed to submit contact form. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -87,10 +100,10 @@ export default function ContactPage() {
                                 <div>
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Office Address</h3>
                                     <p className=" text-lg leading-relaxed">
-                                        PratyagraSilks<br />
-                                        123 Silk Lane<br />
-                                        Bangalore, Karnataka 560001<br />
-                                        India
+                                        PRATYAGRA  SILKS<br />
+                                        143, KARUPPA GOUNDER STREET<br />
+                                        COIMBATORE, TamilNadu 641001<br />
+                                        INDIA
                                     </p>
                                 </div>
 

@@ -79,7 +79,6 @@ export default function CheckoutPage() {
                         productId: item.product.id,
                         name: item.product.name,
                         sku: item.product.sku,
-                        quantity: item.quantity,
                         price: item.product.price,
                     })),
                     shippingCost: shippingInfo.base_charge,

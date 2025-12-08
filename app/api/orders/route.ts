@@ -26,8 +26,8 @@ export async function POST(request: NextRequest) {
             }
         });
 
-        // Calculate totals
-        const subtotal = items.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
+        // Calculate totals (each item has quantity of 1)
+        const subtotal = items.reduce((sum: number, item: any) => sum + item.price, 0);
         const total = subtotal + (shippingCost || 0);
 
         // Step 1: Create or find customer
@@ -116,15 +116,15 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Step 5: Create order items
+        // Step 5: Create order items (each item has quantity of 1)
         const orderItems = items.map((item: any) => ({
             order_id: order.id,
             product_id: item.productId,
             product_name: item.name || 'Product',
             product_sku: item.sku || 'SKU',
-            quantity: item.quantity,
+            quantity: 1, // Always 1 for unique sarees
             unit_price: item.price,
-            total_price: item.price * item.quantity,
+            total_price: item.price, // Same as unit_price since quantity is 1
         }));
 
         const { error: itemsError } = await supabase

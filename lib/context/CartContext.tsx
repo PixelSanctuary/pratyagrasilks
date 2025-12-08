@@ -6,20 +6,19 @@ import { Product } from '@/lib/types';
 export interface CartItem {
     id: string;
     product: Product;
-    quantity: number;
 }
 
 interface CartContextType {
     items: CartItem[];
     itemCount: number;
     totalPrice: number;
-    addItem: (product: Product, quantity?: number) => void;
+    addItem: (product: Product) => boolean;
     removeItem: (productId: string) => void;
-    updateQuantity: (productId: string, quantity: number) => void;
     clearCart: () => void;
     isOpen: boolean;
     openCart: () => void;
     closeCart: () => void;
+    isInCart: (productId: string) => boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -45,51 +44,38 @@ export function CartProvider({ children }: { children: ReactNode }) {
         localStorage.setItem('cart', JSON.stringify(items));
     }, [items]);
 
-    const addItem = (product: Product, quantity: number = 1) => {
-        setItems((currentItems) => {
-            const existingItem = currentItems.find((item) => item.product.id === product.id);
+    const addItem = (product: Product): boolean => {
+        const existingItem = items.find((item) => item.product.id === product.id);
 
-            if (existingItem) {
-                // Update quantity if item already exists
-                return currentItems.map((item) =>
-                    item.product.id === product.id
-                        ? { ...item, quantity: item.quantity + quantity }
-                        : item
-                );
-            } else {
-                // Add new item
-                return [...currentItems, { id: product.id, product, quantity }];
-            }
-        });
+        if (existingItem) {
+            // Item already in cart, don't add again
+            return false;
+        }
+
+        // Add new item
+        setItems((currentItems) => [...currentItems, { id: product.id, product }]);
         setIsOpen(true); // Open cart sidebar when item is added
+        return true;
     };
 
     const removeItem = (productId: string) => {
         setItems((currentItems) => currentItems.filter((item) => item.product.id !== productId));
     };
 
-    const updateQuantity = (productId: string, quantity: number) => {
-        if (quantity <= 0) {
-            removeItem(productId);
-            return;
-        }
-
-        setItems((currentItems) =>
-            currentItems.map((item) =>
-                item.product.id === productId ? { ...item, quantity } : item
-            )
-        );
-    };
-
     const clearCart = () => {
         setItems([]);
+    };
+
+    const isInCart = (productId: string): boolean => {
+        return items.some((item) => item.product.id === productId);
     };
 
     const openCart = () => setIsOpen(true);
     const closeCart = () => setIsOpen(false);
 
-    const itemCount = items.reduce((total, item) => total + item.quantity, 0);
-    const totalPrice = items.reduce((total, item) => total + item.product.price * item.quantity, 0);
+    // Simple calculations - just count items and sum prices
+    const itemCount = items.length;
+    const totalPrice = items.reduce((total, item) => total + item.product.price, 0);
 
     return (
         <CartContext.Provider
@@ -99,11 +85,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
                 totalPrice,
                 addItem,
                 removeItem,
-                updateQuantity,
                 clearCart,
                 isOpen,
                 openCart,
                 closeCart,
+                isInCart,
             }}
         >
             {children}

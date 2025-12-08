@@ -8,10 +8,6 @@ export interface Product {
     category: string;
     images: string[];
     inStock: boolean;
-    // Inventory fields (optional)
-    trackInventory?: boolean;
-    stockQuantity?: number;
-    lowStockThreshold?: number;
     sku: string;
     material: string;
     dimensions?: {
@@ -26,7 +22,6 @@ export interface Product {
 export interface CartItem {
     productId: string;
     product: Product;
-    quantity: number;
     addedAt: Date;
 }
 
