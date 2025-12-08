@@ -99,11 +99,11 @@ export default function ContactPage() {
 
                                 <div>
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Office Address</h3>
-                                    <p className=" text-lg leading-relaxed">
-                                        PRATYAGRA  SILKS<br />
-                                        143, KARUPPA GOUNDER STREET<br />
-                                        COIMBATORE, TamilNadu 641001<br />
-                                        INDIA
+                                    <p className="text-lg leading-relaxed">
+                                        Pratyagra Silks<br />
+                                        143, Karuppa Gounder Street<br />
+                                        Coimbatore, Tamil Nadu 641001<br />
+                                        India
                                     </p>
                                 </div>
 

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ShoppingBag, ArrowLeft } from 'lucide-react';
 
 export default function CartPage() {
-    const { items, itemCount, totalPrice, updateQuantity, removeItem, clearCart } = useCart();
+    const { items, itemCount, totalPrice, removeItem, clearCart } = useCart();
 
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat('en-IN', {
@@ -75,7 +75,6 @@ export default function CartPage() {
                                         <CartItemComponent
                                             key={item.id}
                                             item={item}
-                                            onUpdateQuantity={updateQuantity}
                                             onRemove={removeItem}
                                         />
                                     ))}

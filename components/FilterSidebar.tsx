@@ -31,10 +31,10 @@ const categories = [
 
 const priceRanges = [
     { min: 0, max: 0, label: 'All Prices' },
-    { min: 0, max: 5000, label: 'Under ₹5,000' },
-    { min: 5000, max: 10000, label: '₹5,000 - ₹10,000' },
+    { min: 0, max: 10000, label: 'Under ₹10,000' },
     { min: 10000, max: 20000, label: '₹10,000 - ₹20,000' },
-    { min: 20000, max: 50000, label: '₹20,000 - ₹50,000' },
+    { min: 20000, max: 30000, label: '₹20,000 - ₹30,000' },
+    { min: 30000, max: 50000, label: '₹30,000 - ₹50,000' },
     { min: 50000, max: 0, label: 'Above ₹50,000' },
 ];
 

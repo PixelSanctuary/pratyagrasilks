@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import FilterSidebar, { FilterState } from '@/components/FilterSidebar';
 import { Product } from '@/lib/types';
 
-export default function CollectionPage() {
+function CollectionContent() {
     const searchParams = useSearchParams();
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -157,5 +157,13 @@ export default function CollectionPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function CollectionPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <CollectionContent />
+        </Suspense>
     );
 }
