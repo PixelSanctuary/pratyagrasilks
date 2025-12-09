@@ -15,7 +15,7 @@ interface Product {
     category: string;
     material: string;
     images: string[];
-    is_active: boolean;
+    in_stock: boolean;
 }
 
 export default function AdminProductsPage() {
@@ -71,11 +71,13 @@ export default function AdminProductsPage() {
         }
     };
 
-    const handleToggleActive = async (id: string, currentStatus: boolean) => {
+    const handleToggleStock = async (id: string, currentStock: number) => {
         const supabase = createClient();
+        // Toggle between 0 and 1
+        const newStock = currentStock > 0 ? 0 : 1;
         const { error } = await supabase
             .from('products')
-            .update({ is_active: !currentStatus })
+            .update({ stock_quantity: newStock })
             .eq('id', id);
 
         if (error) {
@@ -103,7 +105,19 @@ export default function AdminProductsPage() {
         );
     });
 
-    const categories = ['Kanjivaram', 'Banarasi', 'Tussar', 'Chanderi', 'Mysore'];
+    const categories = [
+        { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
+        { value: 'banarasi-silk', label: 'Banarasi Silk' },
+        { value: 'tussar-silk', label: 'Tussar Silk' },
+        { value: 'mysore-silk', label: 'Mysore Silk' },
+        { value: 'kerala-kasavu', label: 'Kerala Kasavu' },
+        { value: 'muga-silk', label: 'Muga Silk' },
+        { value: 'kani-silk', label: 'Kani Silk' },
+        { value: 'paithani-silk', label: 'Paithani Silk' },
+        { value: 'pochampalli-silk', label: 'Pochampalli Silk' },
+        { value: 'baluchari-silk', label: 'Baluchari Silk' },
+        { value: 'georgette-silk', label: 'Georgette Silk' },
+    ];
 
     return (
         <div>
@@ -142,8 +156,8 @@ export default function AdminProductsPage() {
                         >
                             <option value="all">All Categories</option>
                             {categories.map((cat) => (
-                                <option key={cat} value={cat}>
-                                    {cat}
+                                <option key={cat.value} value={cat.value}>
+                                    {cat.label}
                                 </option>
                             ))}
                         </select>
@@ -236,10 +250,10 @@ export default function AdminProductsPage() {
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <span
                                                 className={`px-3 py-1 rounded-full text-xs font-medium ${product.stock_quantity > 10
-                                                        ? 'bg-green-100 text-green-800'
-                                                        : product.stock_quantity > 0
-                                                            ? 'bg-yellow-100 text-yellow-800'
-                                                            : 'bg-red-100 text-red-800'
+                                                    ? 'bg-green-100 text-green-800'
+                                                    : product.stock_quantity > 0
+                                                        ? 'bg-yellow-100 text-yellow-800'
+                                                        : 'bg-red-100 text-red-800'
                                                     }`}
                                             >
                                                 {product.stock_quantity} units
@@ -247,13 +261,13 @@ export default function AdminProductsPage() {
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <button
-                                                onClick={() => handleToggleActive(product.id, product.is_active)}
-                                                className={`px-3 py-1 rounded-full text-xs font-medium ${product.is_active
+                                                onClick={() => handleToggleStock(product.id, product.stock_quantity)}
+                                                className={`px-3 py-1 rounded-full text-xs font-medium ${product.stock_quantity > 0
                                                         ? 'bg-green-100 text-green-800'
                                                         : 'bg-gray-100 text-gray-800'
                                                     }`}
                                             >
-                                                {product.is_active ? 'Active' : 'Inactive'}
+                                                {product.stock_quantity > 0 ? 'Available' : 'Sold Out'}
                                             </button>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
@@ -287,15 +301,15 @@ export default function AdminProductsPage() {
                     <p className="text-2xl font-bold text-gray-900">{products.length}</p>
                 </div>
                 <div className="bg-white rounded-lg shadow p-4">
-                    <p className="text-sm text-gray-600">Active Products</p>
+                    <p className="text-sm text-gray-600">Available Products</p>
                     <p className="text-2xl font-bold text-green-600">
-                        {products.filter((p) => p.is_active).length}
+                        {products.filter((p) => p.stock_quantity > 0).length}
                     </p>
                 </div>
                 <div className="bg-white rounded-lg shadow p-4">
-                    <p className="text-sm text-gray-600">Low Stock</p>
+                    <p className="text-sm text-gray-600">Sold Stock</p>
                     <p className="text-2xl font-bold text-red-600">
-                        {products.filter((p) => p.stock_quantity < 10).length}
+                        {products.filter((p) => p.stock_quantity < 1).length}
                     </p>
                 </div>
             </div>

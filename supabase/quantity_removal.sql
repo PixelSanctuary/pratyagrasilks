@@ -92,8 +92,19 @@ CREATE TRIGGER trigger_simple_stock_management
     FOR EACH ROW
     EXECUTE FUNCTION simple_deduct_stock_on_order();
 
--- 11. Add comment
+-- 11. Remove is_active column from products (redundant with in_stock)
+ALTER TABLE products DROP COLUMN IF EXISTS is_active;
+
+-- 12. Drop the old RLS policy that might use is_active
+DROP POLICY IF EXISTS "Public can view in-stock products" ON products;
+
+-- 13. Create new RLS policy using only in_stock
+CREATE POLICY "Public can view available products" ON products
+    FOR SELECT USING (in_stock = true);
+
+-- 14. Add comment
 COMMENT ON COLUMN products.stock_quantity IS 'Stock quantity: 1 = available, 0 = sold out (each saree is unique)';
+COMMENT ON COLUMN products.in_stock IS 'Automatically set based on stock_quantity via trigger';
 
 -- ============================================================================
 -- Migration Complete
@@ -102,7 +113,9 @@ COMMENT ON COLUMN products.stock_quantity IS 'Stock quantity: 1 = available, 0 =
 -- ✅ Set all products to stock_quantity 1 or 0
 -- ✅ Removed low_stock_threshold column
 -- ✅ Removed track_inventory column
+-- ✅ Removed is_active column (redundant with in_stock)
 -- ✅ Removed inventory_reservations table
 -- ✅ Removed quantity column from cart_items
 -- ✅ Simplified stock management triggers
+-- ✅ Updated RLS policy to use only in_stock
 -- ============================================================================

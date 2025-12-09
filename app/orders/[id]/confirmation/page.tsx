@@ -137,13 +137,10 @@ export default function OrderConfirmationPage() {
                                     <div className="flex-1">
                                         <h3 className="font-medium text-gray-900">{item.products.name}</h3>
                                         <p className="text-sm text-gray-500">SKU: {item.products.sku}</p>
-                                        <p className="text-sm text-gray-600 mt-1">
-                                            Quantity: {item.quantity} × {formatPrice(item.price)}
-                                        </p>
                                     </div>
                                     <div className="text-right">
                                         <p className="font-semibold text-gray-900">
-                                            {formatPrice(item.price * item.quantity)}
+                                            {formatPrice(item.price)}
                                         </p>
                                     </div>
                                 </div>

@@ -112,7 +112,7 @@ export default function Header() {
                                 </Link>
                                 <Link
                                     href="/auth/signup"
-                                    className="px-4 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors"
+                                    className="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary2 transition-colors"
                                 >
                                     Sign Up
                                 </Link>
@@ -233,7 +233,7 @@ export default function Header() {
                                     </Link>
                                     <Link
                                         href="/auth/signup"
-                                        className="bg-amber-600 text-white text-center py-2 rounded-lg font-medium hover:bg-amber-700 transition-colors"
+                                        className="bg-primary text-white text-center py-2 rounded-lg font-medium hover:bg-primary2 transition-colors"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         Sign Up

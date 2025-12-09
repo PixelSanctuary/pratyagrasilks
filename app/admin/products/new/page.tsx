@@ -6,7 +6,19 @@ import { createClient } from '@/lib/supabase/client';
 import { ArrowLeft, Save } from 'lucide-react';
 import Link from 'next/link';
 
-const categories = ['Kanjivaram', 'Banarasi', 'Tussar', 'Chanderi', 'Mysore'];
+const categories = [
+    { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
+    { value: 'banarasi-silk', label: 'Banarasi Silk' },
+    { value: 'tussar-silk', label: 'Tussar Silk' },
+    { value: 'mysore-silk', label: 'Mysore Silk' },
+    { value: 'kerala-kasavu', label: 'Kerala Kasavu' },
+    { value: 'muga-silk', label: 'Muga Silk' },
+    { value: 'kani-silk', label: 'Kani Silk' },
+    { value: 'paithani-silk', label: 'Paithani Silk' },
+    { value: 'pochampalli-silk', label: 'Pochampalli Silk' },
+    { value: 'baluchari-silk', label: 'Baluchari Silk' },
+    { value: 'georgette-silk', label: 'Georgette Silk' },
+];
 
 export default function NewProductPage() {
     const router = useRouter();
@@ -15,14 +27,13 @@ export default function NewProductPage() {
         name: '',
         sku: '',
         price: '',
-        stock_quantity: '',
-        category: 'Kanjivaram',
+        stock_quantity: 1,
+        category: 'kanjivaram-silk',
         material: '',
         description: '',
         dimensions: '',
         weight: '',
         images: '',
-        is_active: true,
     });
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -44,14 +55,13 @@ export default function NewProductPage() {
                     name: formData.name,
                     sku: formData.sku,
                     price: parseFloat(formData.price),
-                    stock_quantity: parseInt(formData.stock_quantity),
+                    stock_quantity: parseInt(formData.stock_quantity.toString()),
                     category: formData.category,
                     material: formData.material,
                     description: formData.description,
                     dimensions: formData.dimensions || null,
                     weight: formData.weight || null,
                     images: imagesArray,
-                    is_active: formData.is_active,
                 })
                 .select()
                 .single();
@@ -173,8 +183,8 @@ export default function NewProductPage() {
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                         >
                             {categories.map((cat) => (
-                                <option key={cat} value={cat}>
-                                    {cat}
+                                <option key={cat.value} value={cat.value}>
+                                    {cat.label}
                                 </option>
                             ))}
                         </select>
@@ -260,21 +270,7 @@ export default function NewProductPage() {
                         </p>
                     </div>
 
-                    {/* Active Status */}
-                    <div className="md:col-span-2">
-                        <label className="flex items-center gap-2">
-                            <input
-                                type="checkbox"
-                                name="is_active"
-                                checked={formData.is_active}
-                                onChange={handleChange}
-                                className="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500"
-                            />
-                            <span className="text-sm font-medium text-gray-700">
-                                Active (visible to customers)
-                            </span>
-                        </label>
-                    </div>
+
                 </div>
 
                 {/* Actions */}

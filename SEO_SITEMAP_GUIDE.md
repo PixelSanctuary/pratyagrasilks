@@ -112,7 +112,7 @@ return [...staticPages, ...productPages];
   "description": "Handmade silk sarees",
   "sameAs": [
     "https://www.facebook.com/pratyagrasilks",
-    "https://www.instagram.com/pratyagrasilks"
+    "https://www.instagram.com/pratyagra_silks"
   ]
 }
 ```

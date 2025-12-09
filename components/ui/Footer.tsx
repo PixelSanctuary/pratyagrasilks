@@ -79,7 +79,7 @@ export default function Footer() {
                                 </svg>
                             </a>
                             <a
-                                href="https://instagram.com/pratyagra.in"
+                                href="https://instagram.com/pratyagra_silks"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-white/80 hover:text-secondary transition-colors"

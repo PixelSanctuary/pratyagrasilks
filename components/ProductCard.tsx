@@ -61,7 +61,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                         </div>
 
                         {product.inStock && (
-                            <div className="px-4 py-2 bg-amber-600 text-white rounded-md text-sm font-medium group-hover:bg-amber-700 transition-colors">
+                            <div className="px-4 py-2 bg-amber-600 text-white rounded-md text-sm font-medium group-hover:bg-amber-700 transition-colors min-w-fit">
                                 View Details
                             </div>
                         )}

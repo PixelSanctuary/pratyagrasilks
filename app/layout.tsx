@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/ui/Header";
-import Footer from "@/components/ui/Footer";
+import ConditionalFooter from "@/components/ui/ConditionalFooter";
 import { CartProvider } from "@/lib/context/CartContext";
 import { AuthProvider } from "@/lib/context/AuthContext";
 import CartSidebar from "@/components/Cart/CartSidebar";
@@ -60,6 +60,7 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+
     return (
         <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
             <body className="antialiased hide-scrollbar">
@@ -67,7 +68,7 @@ export default function RootLayout({
                     <CartProvider>
                         <Header />
                         <main className="min-h-screen">{children}</main>
-                        <Footer />
+                        <ConditionalFooter />
                         <CartSidebar />
                     </CartProvider>
                 </AuthProvider>
