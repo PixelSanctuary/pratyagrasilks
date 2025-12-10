@@ -42,9 +42,9 @@ export default function ProfilePage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen max-w-7xl mx-auto">
             {/* Header */}
-            <div className="bg-white border-b">
+            <div className="bg-white border-b shadow-md">
                 <div className="container mx-auto px-4 py-6">
                     <h1 className="text-3xl font-bold text-gray-900">My Account</h1>
                     <p className="text-gray-600 mt-1">Manage your profile and orders</p>

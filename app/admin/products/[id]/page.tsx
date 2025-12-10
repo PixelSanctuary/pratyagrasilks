@@ -253,7 +253,7 @@ export default function EditProductPage() {
                     {/* Dimensions */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Dimensions
+                            Length (Saree + Blouse)
                         </label>
                         <input
                             type="text"
@@ -261,7 +261,7 @@ export default function EditProductPage() {
                             value={formData.dimensions}
                             onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                            placeholder="e.g., 6.5m x 1.2m"
+                            placeholder="e.g., 6.25 (5.5 Mts of saree and 70 cm Blouse)"
                         />
                     </div>
 

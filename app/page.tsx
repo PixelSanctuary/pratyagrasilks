@@ -24,24 +24,26 @@ export default function Home() {
     return (
         <div className="flex flex-col">
             {/* Hero Section - Mobile-first, high-impact, SEO optimized */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-20 md:py-32 px-4">
-                <div className="max-w-7xl mx-auto text-center">
-                    <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance leading-tight">
+            <section className="relative py-20 md:py-32 px-4 text-white overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary2 opacity-90"></div>
+                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/68312a81672d0400f56bcdd21f4cdb7f-large.png')] bg-no-repeat bg-cover opacity-15"></div>
+                <div className="max-w-7xl mx-auto text-center relative z-10">
+                    <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance leading-tight drop-shadow-lg">
                         Reviving Tradition with a New Touch
                     </h1>
-                    <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance opacity-95">
+                    <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance opacity-95 drop-shadow">
                         Your one-stop destination for luxury silk sarees curated from the finest weavers across India. Experience the perfect blend of timeless tradition and modern elegance in every piece.
                     </p>
                     <Link
                         href="/collection"
-                        className="inline-block bg-secondary text-primary font-semibold px-8 py-4 rounded-full text-lg hover:bg-secondary/90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                        className="inline-block bg-secondary text-primary font-semibold px-8 py-4 rounded-full text-lg hover:bg-secondary/90 transition-all duration-300 transform hover:scale-105 shadow-xl"
                     >
                         Explore Our Collection
                     </Link>
                 </div>
 
-                {/* Decorative element */}
-                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
+                {/* Decorative element - now above the pattern to blend */}
+                <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent z-10"></div>
             </section>
 
             {/* Why Choose PratyagraSilks - Trust & Credibility Section */}

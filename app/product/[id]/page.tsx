@@ -177,9 +177,9 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
 
                             {product.dimensions && (
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600">Dimensions:</span>
+                                    <span className="text-gray-600">Length:</span>
                                     <span className="font-medium text-gray-900">
-                                        {product.dimensions.length} x {product.dimensions.width} cm
+                                        {product.dimensions}
                                     </span>
                                 </div>
                             )}

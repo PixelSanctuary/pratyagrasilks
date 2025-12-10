@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description: "Discover exquisite handcrafted silk sarees from PratyagraSilks. Premium quality, traditional craftsmanship, and timeless elegance for every occasion.",
     keywords: ["silk sarees", "handloom sarees", "luxury sarees", "Indian sarees", "traditional sarees", "PratyagraSilks"],
     authors: [{ name: "PratyagraSilks" }],
+    icons: {
+        icon: "/Fav_icon.png",
+    },
     openGraph: {
         title: "PratyagraSilks - Luxury Silk Sarees",
         description: "Exquisite handcrafted silk sarees with traditional craftsmanship",

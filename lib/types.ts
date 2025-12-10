@@ -10,10 +10,7 @@ export interface Product {
     inStock: boolean;
     sku: string;
     material: string;
-    dimensions?: {
-        length: number;
-        width: number;
-    };
+    dimensions?: string;
     weight?: number;
     createdAt: Date;
     updatedAt: Date;
