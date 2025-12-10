@@ -58,8 +58,9 @@ function CollectionContent() {
     return (
         <div className="min-h-screen">
             {/* Header */}
-            <div className="bg-gradient-to-r from-primary to-primary2 text-white py-12">
-                <div className="container mx-auto px-4">
+            <div className="relative bg-gradient-to-r from-primary to-primary2 text-white py-12">
+                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d90fe74298f43e046b9ba2a45f38afbe-large.png')] bg-no-repeat bg-cover opacity-30"></div>
+                <div className="container mx-auto px-4 relative z-10">
                     <h1 className="text-4xl font-bold mb-2">Our Collection</h1>
                     <p className="text-amber-100">Discover our exquisite range of handcrafted silk products</p>
                 </div>

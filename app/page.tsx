@@ -86,8 +86,9 @@ export default function Home() {
                             <Link
                                 key={category.id}
                                 href={`/collection?category=${category.name.toLowerCase().replace(" ", "-")}`}
-                                className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                                className="relative group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                             >
+                                {/* <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d90fe74298f43e046b9ba2a45f38afbe-large.png')] bg-no-repeat bg-cover"></div> */}
                                 {/* Placeholder background with gradient */}
                                 <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
                                     <span className="text-primary/30 font-playfair text-2xl font-bold text-center px-4">
