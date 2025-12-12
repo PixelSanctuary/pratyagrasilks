@@ -111,7 +111,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
             {/* Category Filter */}
             <div className="mb-6">
                 <h3 className="text-sm font-medium  mb-3">Category</h3>
-                <div className="space-y-2">
+                <div className="space-y-2 grid grid-cols-2 lg:grid-cols-1">
                     {categories.map((cat) => (
                         <label key={cat.value} className="flex items-center cursor-pointer group">
                             <input
@@ -133,7 +133,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
             {/* Price Range Filter */}
             <div className="mb-6">
                 <h3 className="text-sm font-medium  mb-3">Price Range</h3>
-                <div className="space-y-2">
+                <div className="space-y-2 grid grid-cols-2 lg:grid-cols-1">
                     {priceRanges.map((range, index) => (
                         <label key={index} className="flex items-center cursor-pointer group">
                             <input
@@ -153,7 +153,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
 
             {/* Active Filters Summary */}
             {(filters.category || filters.minPrice > 0 || filters.maxPrice > 0 || filters.search) && (
-                <div className="pt-4 border-t border-gray-200">
+                <div className="pt-4 border-t border-gray-200 hidden lg:block">
                     <h3 className="text-sm font-medium  mb-2">Active Filters</h3>
                     <div className="space-y-1">
                         {filters.category && (
