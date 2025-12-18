@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Search, Filter, Eye, Package } from 'lucide-react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 interface Order {
     id: string;
@@ -82,7 +83,7 @@ export default function AdminOrdersPage() {
 
         if (error) {
             console.error('Error updating status:', error);
-            alert('Failed to update order status');
+            toast.error('Failed to update order status');
         } else {
             // Refresh orders
             fetchOrders();

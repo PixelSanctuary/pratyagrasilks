@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { ArrowLeft, Save } from 'lucide-react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 const categories = [
     { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
@@ -54,7 +55,7 @@ export default function EditProductPage() {
 
         if (error) {
             console.error('Error fetching product:', error);
-            alert('Failed to load product');
+            toast.error('Failed to load product');
             router.push('/admin/products');
         } else if (data) {
             setFormData({
@@ -104,14 +105,14 @@ export default function EditProductPage() {
 
             if (error) {
                 console.error('Error updating product:', error);
-                alert('Failed to update product: ' + error.message);
+                toast.error('Failed to update product: ' + error.message);
             } else {
-                alert('Product updated successfully!');
+                toast.success('Product updated successfully!');
                 router.push('/admin/products');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Failed to update product');
+            toast.error('Failed to update product');
         } finally {
             setLoading(false);
         }
@@ -191,7 +192,7 @@ export default function EditProductPage() {
                             onChange={handleChange}
                             required
                             min="0"
-                            step="0.01"
+                            step="1"
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                             placeholder="e.g., 15000"
                         />

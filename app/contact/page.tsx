@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from 'react-hot-toast';
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -44,7 +45,7 @@ export default function ContactPage() {
             setTimeout(() => setSubmitted(false), 5000);
         } catch (error) {
             console.error("Form submission error:", error);
-            alert(error instanceof Error ? error.message : 'Failed to submit contact form. Please try again.');
+            toast.error(error instanceof Error ? error.message : 'Failed to submit contact form. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -54,7 +55,7 @@ export default function ContactPage() {
         <div className="flex flex-col">
             {/* Hero Section */}
             <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
-            <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/50d3acf1b3fd875f1d5f238288aacc29-large.png')] bg-no-repeat bg-cover opacity-15"></div>
+                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d535e954ec6c8338563e7b0fca472dad-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Get in Touch

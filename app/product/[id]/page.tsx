@@ -7,6 +7,7 @@ import ProductCard from '@/components/ProductCard';
 import { useCart } from '@/lib/context/CartContext';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, Check } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface ProductDetailPageProps {
     params: { id: string };
@@ -56,7 +57,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
             const added = addItem(product);
             if (!added) {
                 // Item already in cart
-                alert('This item is already in your cart!');
+                toast('This item is already in your cart!');
             }
         }
     };

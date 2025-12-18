@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { ArrowLeft, Save } from 'lucide-react';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 const categories = [
     { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
@@ -68,14 +69,14 @@ export default function NewProductPage() {
 
             if (error) {
                 console.error('Error creating product:', error);
-                alert('Failed to create product: ' + error.message);
+                toast.error('Failed to create product: ' + error.message);
             } else {
-                alert('Product created successfully!');
+                toast.success('Product created successfully!');
                 router.push('/admin/products');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Failed to create product');
+            toast.error('Failed to create product');
         } finally {
             setLoading(false);
         }
@@ -147,7 +148,7 @@ export default function NewProductPage() {
                             onChange={handleChange}
                             required
                             min="0"
-                            step="0.01"
+                            step="1"
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                             placeholder="e.g., 15000"
                         />

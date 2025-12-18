@@ -8,6 +8,7 @@ import OrderSummary from '@/components/Checkout/OrderSummary';
 import { ShippingAddress } from '@/lib/validations/checkout';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface ShippingZone {
     id: string;
@@ -101,7 +102,7 @@ export default function CheckoutPage() {
             router.push(`/orders/${orderId}/confirmation`);
         } catch (error) {
             console.error('Checkout error:', error);
-            alert(error instanceof Error ? error.message : 'Failed to process order. Please try again.');
+            toast.error(error instanceof Error ? error.message : 'Failed to process order. Please try again.');
         } finally {
             setIsProcessing(false);
         }

@@ -4,14 +4,14 @@ import Link from "next/link";
 export default function Home() {
     // Featured silk type collections
     const categories = [
-        { id: 1, name: "Kanjivaram Silk", image: "/images/kanjivaram.jpg", description: "Pure mulberry silk with intricate temple designs" },
-        { id: 2, name: "Banarasi Silk", image: "/images/banarasi.jpg", description: "Luxurious zari work and brocade patterns" },
-        { id: 3, name: "Tussar Silk", image: "/images/tussar.jpg", description: "Natural texture with distinctive golden hue" },
-        { id: 4, name: "Mysore Silk", image: "/images/mysore.jpg", description: "Finest mulberry silk with elegant designs" },
-        { id: 5, name: "Kerala Kasavu", image: "/images/kasavu.jpg", description: "Traditional gold weaving on white silk" },
-        { id: 6, name: "Muga Silk", image: "/images/muga.jpg", description: "Golden-hued natural silk unique to Assam" },
-        { id: 7, name: "Paithani Silk", image: "/images/paithani.jpg", description: "Fine silk with brilliant colors and peacock motifs" },
-        { id: 8, name: "Pochampalli Silk", image: "/images/pochampalli.jpg", description: "Traditional ikat technique with vibrant colors" },
+        { id: 1, name: "Kanjivaram Silk", image: "https://images.pixieset.com/859010601/7b1e59d63405f7bdfba76daf263edb93-large.jpg", description: "Pure mulberry silk with intricate temple designs" },
+        { id: 2, name: "Banarasi Silk", image: "https://images.pixieset.com/859010601/1a663bfb428a51355009c3acd0acc62d-large.jpg", description: "Luxurious zari work and brocade patterns" },
+        { id: 3, name: "Tussar Silk", image: "https://images.pixieset.com/859010601/773f623b48e8e20d8d62a27d595cb416-large.jpg", description: "Natural texture with distinctive golden hue" },
+        { id: 4, name: "Mysore Silk", image: "https://images.pixieset.com/859010601/d7fcbdab064f93c3d3074cfc13270e59-large.jpg", description: "Finest mulberry silk with elegant designs" },
+        { id: 5, name: "Kerala Kasavu", image: "https://images.pixieset.com/859010601/b805e0233dd215e7db5b0f3ba1e9f76a-large.jpg", description: "Traditional gold zari weaving on white silk" },
+        { id: 6, name: "Muga Silk", image: "https://images.pixieset.com/859010601/d51cba3d3ccddfe2ba6241dff558f51a-large.jpg", description: "Golden-hued natural silk unique to Assam" },
+        { id: 7, name: "Paithani Silk", image: "https://images.pixieset.com/859010601/1a663bfb428a51355009c3acd0acc62d-large.jpg", description: "Fine silk with brilliant colors and peacock motifs" },
+        { id: 8, name: "Pochampalli Silk", image: "https://images.pixieset.com/859010601/2cf5516460b97992b50f516854ff51b2-large.jpg", description: "Traditional ikat technique with vibrant colors" },
     ];
 
     const benefits = [
@@ -26,7 +26,7 @@ export default function Home() {
             {/* Hero Section - Mobile-first, high-impact, SEO optimized */}
             <section className="relative py-20 md:py-32 px-4 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary2 opacity-90"></div>
-                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/68312a81672d0400f56bcdd21f4cdb7f-large.png')] bg-no-repeat bg-cover opacity-15"></div>
+                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/ab207e7a5cbdc26b65405f930546fb35-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-7xl mx-auto text-center relative z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance leading-tight drop-shadow-lg">
                         Reviving Tradition with a New Touch
@@ -86,9 +86,8 @@ export default function Home() {
                             <Link
                                 key={category.id}
                                 href={`/collection?category=${category.name.toLowerCase().replace(" ", "-")}`}
-                                className="relative group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-                            >
-                                {/* <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d90fe74298f43e046b9ba2a45f38afbe-large.png')] bg-no-repeat bg-cover"></div> */}
+                                className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                                <div className="absolute inset-0 bg-no-repeat bg-cover" style={{ backgroundImage: `url('${category.image}')` }}></div>
                                 {/* Placeholder background with gradient */}
                                 <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
                                     <span className="text-primary/30 font-playfair text-2xl font-bold text-center px-4">

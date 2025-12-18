@@ -8,6 +8,7 @@ import { AuthProvider } from "@/lib/context/AuthContext";
 import CartSidebar from "@/components/Cart/CartSidebar";
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { Toaster } from "react-hot-toast";
 
 // Font configurations
 const playfair = Playfair_Display({
@@ -78,6 +79,7 @@ export default function RootLayout({
                 </AuthProvider>
                 <GoogleAnalytics />
                 <Analytics />
+                <Toaster position="top-right" />
             </body>
         </html>
     );

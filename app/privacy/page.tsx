@@ -195,7 +195,7 @@ export default function PrivacyPage() {
                             <p className="mt-4 ">
                                 <strong>Email:</strong> info@pratyagrasilks.com<br />
                                 <strong>Phone:</strong> +91 73588 66646<br />
-                                <strong>Address:</strong> PratyagraSilks, 123 Silk Lane, Bangalore, Karnataka 560001, India
+                                <strong>Address:</strong> Pratyagra Silks 143, Karuppa Gounder Street, Coimbatore, Tamil Nadu 641001, India
                             </p>
                         </div>
 

@@ -5,6 +5,8 @@ import { createClient } from '@/lib/supabase/client';
 import { Search, Plus, Edit, Trash2, Package } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 interface Product {
     id: string;
@@ -25,6 +27,8 @@ export default function AdminProductsPage() {
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [showModal, setShowModal] = useState(false);
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+    const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+    const [productToDelete, setProductToDelete] = useState<string | null>(null);
 
     useEffect(() => {
         fetchProducts();
@@ -55,20 +59,28 @@ export default function AdminProductsPage() {
     }
 
     const handleDelete = async (id: string) => {
-        if (!confirm('Are you sure you want to delete this product?')) return;
+        setProductToDelete(id);
+        setDeleteConfirmOpen(true);
+    };
+
+    const confirmDelete = async () => {
+        if (!productToDelete) return;
 
         const supabase = createClient();
         const { error } = await supabase
             .from('products')
             .delete()
-            .eq('id', id);
+            .eq('id', productToDelete);
 
         if (error) {
             console.error('Error deleting product:', error);
-            alert('Failed to delete product');
+            toast.error('Failed to delete product');
         } else {
+            toast.success('Product deleted successfully');
             fetchProducts();
         }
+
+        setProductToDelete(null);
     };
 
     const handleToggleStock = async (id: string, currentStock: number) => {
@@ -82,7 +94,7 @@ export default function AdminProductsPage() {
 
         if (error) {
             console.error('Error updating product:', error);
-            alert('Failed to update product status');
+            toast.error('Failed to update product status');
         } else {
             fetchProducts();
         }
@@ -263,8 +275,8 @@ export default function AdminProductsPage() {
                                             <button
                                                 onClick={() => handleToggleStock(product.id, product.stock_quantity)}
                                                 className={`px-3 py-1 rounded-full text-xs font-medium ${product.stock_quantity > 0
-                                                        ? 'bg-green-100 text-green-800'
-                                                        : 'bg-gray-100 text-gray-800'
+                                                    ? 'bg-green-100 text-green-800'
+                                                    : 'bg-gray-100 text-gray-800'
                                                     }`}
                                             >
                                                 {product.stock_quantity > 0 ? 'Available' : 'Sold Out'}
@@ -313,6 +325,18 @@ export default function AdminProductsPage() {
                     </p>
                 </div>
             </div>
+
+            {/* Delete Confirmation Dialog */}
+            <ConfirmDialog
+                isOpen={deleteConfirmOpen}
+                onClose={() => setDeleteConfirmOpen(false)}
+                onConfirm={confirmDelete}
+                title="Delete Product"
+                message="Are you sure you want to delete this product? This action cannot be undone."
+                confirmText="Delete"
+                cancelText="Cancel"
+                variant="danger"
+            />
         </div>
     );
 }
