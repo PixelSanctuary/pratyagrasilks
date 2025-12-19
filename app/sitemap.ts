@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { silkCategories } from '@/lib/seo-config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://pratyagrasilks.com'
@@ -21,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/collection`,
       lastModified: now,
-      changeFrequency: 'weekly',
+      changeFrequency: 'daily',
       priority: 0.95,
     },
     {
@@ -34,19 +35,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/cart`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/checkout`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.8,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/orders`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.7,
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/returns`,
@@ -74,16 +75,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // TODO: Add dynamic product pages
-  // Fetch products from your database and add them to the sitemap
-  // Example:
-  // const products = await fetchProducts()
-  // const productPages: MetadataRoute.Sitemap = products.map(product => ({
-  //   url: `${baseUrl}/product/${product.id}`,
-  //   lastModified: product.updatedAt || now,
-  //   changeFrequency: 'weekly',
-  //   priority: 0.85,
-  // }))
+  // Category pages - permanent SEO-optimized pages for each silk type
+  // These are the primary SEO drivers instead of temporary product pages
+  const categoryPages: MetadataRoute.Sitemap = silkCategories.map(category => ({
+    url: `${baseUrl}/silk/${category.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.9, // High priority for category pages
+  }))
 
-  return [...staticPages]
+  // NOTE: Individual product pages are NOT included in the sitemap
+  // because they are temporary (removed when sold). This prevents:
+  // - High 404/410 rates that could harm SEO
+  // - Wasted crawl budget on pages that will be removed
+  // - Poor user experience from search results to sold items
+  // 
+  // Products remain crawlable via internal links and category pages,
+  // but search engines won't prioritize them. When sold, they return
+  // HTTP 410 Gone status to properly signal permanent removal.
+
+  return [...staticPages, ...categoryPages]
 }

@@ -76,7 +76,8 @@ export default function SignupForm() {
                             onChange={(e) => setFullName(e.target.value)}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                            placeholder="John Doe"
+                            placeholder="Your Name"
+                            maxLength={34}
                         />
                     </div>
 

@@ -70,7 +70,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     {/* Category Badge */}
                     <div className="mt-3">
                         <span className="inline-block px-3 py-1 bg-gray-100  text-xs font-medium rounded-full capitalize">
-                            {product.category.replace(/-/g, ' ')}
+                            {product.category?.replace(/-/g, ' ')}
                         </span>
                     </div>
                 </div>

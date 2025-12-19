@@ -32,56 +32,67 @@ export default function AboutPage() {
             name: "Kanjivaram, Tamil Nadu",
             description: "Home to the legendary Kanjivaram silk sarees, known for their pure mulberry silk and intricate temple designs.",
             silks: ["Kanjivaram Silk", "South Indian Traditions"],
+            slug: "kanjivaram-silk"
         },
         {
             name: "Varanasi, Uttar Pradesh",
             description: "The weaving capital of India, famous for Banarasi sarees with their luxurious zari work and brocade patterns.",
             silks: ["Banarasi Silk", "Zari Work"],
+            slug: "banarasi-silk"
         },
         {
             name: "Bhagalpur, Bihar",
             description: "The oldest silk weaving center in India, specializing in Tussar silk sarees with their distinctive natural texture.",
             silks: ["Tussar Silk", "Natural Fibers"],
+            slug: "tussar-silk"
         },
         {
             name: "Mysore, Karnataka",
             description: "Famous for pure Mysore silk sarees, produced from the finest mulberry silk with elegant designs.",
             silks: ["Mysore Silk", "Pure Mulberry"],
+            slug: "mysore-silk"
         },
         {
             name: "Kochi, Kerala",
             description: "The cultural hub of Kerala, renowned for its exquisite Kasavu sarees featuring traditional gold weaving on white silk.",
             silks: ["Kerala Kasavu", "Gold Borders"],
+            slug: "kerala-kasavu"
         },
         {
             name: "Assam",
             description: "Known for the luxurious Muga silk, a golden-hued natural silk unique to Assam with exceptional lustrous qualities.",
             silks: ["Muga Silk", "Natural Gold"],
+            slug: "muga-silk"
         },
         {
             name: "Kashmir",
             description: "The land of Kani silks, featuring intricate Kani weaving with detailed patterns and pashmina blend sarees.",
             silks: ["Kani Silk", "Pashmina Blend"],
+            slug: "kani-silk"
         },
         {
             name: "Aurangabad, Maharashtra",
             description: "Home to the prestigious Paithani silk sarees, known for their fine silk, brilliant colors, and peacock motifs.",
             silks: ["Paithani Silk", "Peacock Designs"],
+            slug: "paithani-silk"
         },
         {
             name: "Andhra Pradesh",
             description: "Birthplace of Pochampally silk sarees, famous for their traditional ikat technique and vibrant color combinations.",
             silks: ["Pochampalli Silk", "Ikat Patterns"],
+            slug: "pochampalli-silk"
         },
         {
             name: "West Bengal",
             description: "Renowned for Baluchari silk sarees, featuring narrative motifs and the famous Baluchari pallu with mythological scenes.",
             silks: ["Baluchari Silk", "Narrative Designs"],
+            slug: "baluchari-silk"
         },
         {
             name: "Rajasthan",
             description: "Known for elegant Georgette silk sarees with traditional Rajasthani patterns and vibrant cultural designs.",
             silks: ["Georgette Silk", "Rajasthani Art"],
+            slug: "georgette-silk"
         },
     ];
 
@@ -89,7 +100,7 @@ export default function AboutPage() {
         <div className="flex flex-col">
             {/* Hero Section */}
             <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
-            <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d7c3222457a03fa54d40c17b0f874229-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
+                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d7c3222457a03fa54d40c17b0f874229-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Our Story
@@ -160,7 +171,7 @@ export default function AboutPage() {
                     <p className="text-center  mb-12 max-w-2xl mx-auto text-lg">
                         We source directly from India's most renowned silk weaving centers, each with unique traditions and expertise
                     </p>
-                    
+
                     <div className="space-y-12">
                         {origins.map((origin, index) => (
                             <div key={index} className="flex flex-col md:flex-row gap-8 items-start">
@@ -179,13 +190,19 @@ export default function AboutPage() {
                                         ))}
                                     </div>
                                 </div>
-                                <div className="md:w-1/2 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg p-8 h-64 flex items-center justify-center">
+                                <Link
+                                    href={`/collection?category=${origin.slug}`}
+                                    className="w-full md:w-1/2 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg p-8 h-64 flex flex-col items-center justify-center group hover:from-primary/30 hover:to-primary/20 transition-all duration-300 hover:shadow-xl cursor-pointer border-2 border-transparent hover:border-primary/30"
+                                >
                                     <div className="text-center">
-                                        <p className="text-primary/50 font-playfair text-3xl font-bold">
+                                        <div className="inline-flex items-center text-primary/50 group-hover:text-primary/80 font-semibold transition-all">
+                                            <span>Explore Collection from</span>
+                                        </div>
+                                        <p className="text-primary/50 font-playfair text-3xl font-bold mt-1 group-hover:text-primary/80 transition-colors">
                                             {origin.name.split(",")[0]}
                                         </p>
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         ))}
                     </div>

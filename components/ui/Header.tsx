@@ -5,13 +5,15 @@ import { useState } from "react";
 import { useAuth } from "@/lib/context/AuthContext";
 import { useRouter } from "next/navigation";
 import CartBadge from "@/components/Cart/CartBadge";
-import { User, LogOut, Package, Heart } from "lucide-react";
+import { User, LogOut, Package, Heart, ChevronDown } from "lucide-react";
+import { silkCategories } from "@/lib/seo-config";
 
 export default function Header() {
     const { user, signOut } = useAuth();
     const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+    const [isSilkTypesMenuOpen, setIsSilkTypesMenuOpen] = useState(false);
 
     const handleSignOut = async () => {
         await signOut();
@@ -38,6 +40,40 @@ export default function Header() {
                         >
                             Collection
                         </Link>
+
+                        {/* Silk Types Dropdown */}
+                        <div className="relative">
+                            <button
+                                onClick={() => setIsSilkTypesMenuOpen(!isSilkTypesMenuOpen)}
+                                onMouseEnter={() => setIsSilkTypesMenuOpen(true)}
+                                className="flex items-center gap-1 hover:text-primary transition-colors font-medium"
+                            >
+                                Shop by Silk Type
+                                <ChevronDown className="w-4 h-4" />
+                            </button>
+
+                            {isSilkTypesMenuOpen && (
+                                <div
+                                    className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl py-2 border border-gray-200 z-50"
+                                    onMouseLeave={() => setIsSilkTypesMenuOpen(false)}
+                                >
+                                    <div className="grid grid-cols-1 max-h-96 overflow-y-auto">
+                                        {silkCategories.map((category) => (
+                                            <Link
+                                                key={category.slug}
+                                                href={`/silk/${category.slug}`}
+                                                className="px-4 py-2 hover:bg-amber-50 transition-colors text-sm"
+                                                onClick={() => setIsSilkTypesMenuOpen(false)}
+                                            >
+                                                <div className="font-medium text-gray-900">{category.name}</div>
+                                                <div className="text-xs text-gray-500 truncate">{category.origin}</div>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
                         <Link
                             href="/about"
                             className="hover:text-primary transition-colors font-medium"
@@ -177,6 +213,31 @@ export default function Header() {
                             >
                                 Collection
                             </Link>
+
+                            {/* Mobile Silk Types */}
+                            <div className="px-2 py-2">
+                                <div className="font-medium text-gray-900 mb-2">Shop by Silk Type</div>
+                                <div className="pl-4 space-y-2 grid grid-cols-2">
+                                    {silkCategories.slice(0, 6).map((category) => (
+                                        <Link
+                                            key={category.slug}
+                                            href={`/silk/${category.slug}`}
+                                            className="block text-sm text-gray-600 hover:text-primary transition-colors py-1 !m-0"
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                        >
+                                            {category.name}
+                                        </Link>
+                                    ))}
+                                    <Link
+                                        href="/collection"
+                                        className="block text-sm text-amber-600 hover:text-amber-700 transition-colors py-1 font-medium"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        View All →
+                                    </Link>
+                                </div>
+                            </div>
+
                             <Link
                                 href="/about"
                                 className="hover:text-primary transition-colors font-medium px-2 py-2"

@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import FilterSidebar, { FilterState } from '@/components/FilterSidebar';
 import { Product } from '@/lib/types';
+import { getCategoryBySlug } from '@/lib/seo-config';
+
 
 function CollectionContent() {
     const searchParams = useSearchParams();

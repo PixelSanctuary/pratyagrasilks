@@ -85,7 +85,7 @@ export default function Home() {
                         {categories.map((category) => (
                             <Link
                                 key={category.id}
-                                href={`/collection?category=${category.name.toLowerCase().replace(" ", "-")}`}
+                                href={`/silk/${category.name.toLowerCase().replace(/ /g, "-")}`}
                                 className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                                 <div className="absolute inset-0 bg-no-repeat bg-cover" style={{ backgroundImage: `url('${category.image}')` }}></div>
                                 {/* Placeholder background with gradient */}

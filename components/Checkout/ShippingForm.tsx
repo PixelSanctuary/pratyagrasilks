@@ -35,7 +35,8 @@ export default function ShippingForm({ onSubmit, defaultValues }: ShippingFormPr
                             type="text"
                             id="fullName"
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                            placeholder="John Doe"
+                            placeholder="Your Name"
+                            maxLength={34}
                         />
                         {errors.fullName && (
                             <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>

@@ -55,7 +55,7 @@ export default function ContactPage() {
         <div className="flex flex-col">
             {/* Hero Section */}
             <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
-                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d535e954ec6c8338563e7b0fca472dad-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
+                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/81a0497a2dc07dd574c5b5ed8423ae49-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Get in Touch
@@ -147,6 +147,7 @@ export default function ContactPage() {
                                         required
                                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                         placeholder="Your name"
+                                        maxLength={34}
                                     />
                                 </div>
 
