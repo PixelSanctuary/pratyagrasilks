@@ -194,7 +194,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
 
                             <div className="flex justify-between">
                                 <span className="text-gray-600">Category:</span>
-                                <span className="font-medium text-gray-900 capitalize">{product.category}</span>
+                                <span className="font-medium text-gray-900 capitalize">{product.category?.replace(/-/g, ' ')}</span>
                             </div>
                         </div>
 

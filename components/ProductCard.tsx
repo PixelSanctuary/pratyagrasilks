@@ -54,7 +54,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                                 {formatPrice(product.price)}
                             </p>
                             {product.material && (
-                                <p className="text-xs text-gray-500 mt-1">
+                                <p className="text-xs text-gray-500 mt-1 line-clamp-1">
                                     {product.material}
                                 </p>
                             )}
@@ -69,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                     {/* Category Badge */}
                     <div className="mt-3">
-                        <span className="inline-block px-3 py-1 bg-gray-100  text-xs font-medium rounded-full capitalize">
+                        <span className="inline-block px-3 py-1 bg-secondary text-primary2 text-xs font-medium rounded-full capitalize">
                             {product.category?.replace(/-/g, ' ')}
                         </span>
                     </div>

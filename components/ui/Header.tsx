@@ -42,7 +42,7 @@ export default function Header() {
                         </Link>
 
                         {/* Silk Types Dropdown */}
-                        <div className="relative">
+                        <div className="relative hidden lg:block">
                             <button
                                 onClick={() => setIsSilkTypesMenuOpen(!isSilkTypesMenuOpen)}
                                 onMouseEnter={() => setIsSilkTypesMenuOpen(true)}

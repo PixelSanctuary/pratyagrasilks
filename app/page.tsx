@@ -10,7 +10,7 @@ export default function Home() {
         { id: 4, name: "Mysore Silk", image: "https://images.pixieset.com/859010601/d7fcbdab064f93c3d3074cfc13270e59-large.jpg", description: "Finest mulberry silk with elegant designs" },
         { id: 5, name: "Kerala Kasavu", image: "https://images.pixieset.com/859010601/b805e0233dd215e7db5b0f3ba1e9f76a-large.jpg", description: "Traditional gold zari weaving on white silk" },
         { id: 6, name: "Muga Silk", image: "https://images.pixieset.com/859010601/d51cba3d3ccddfe2ba6241dff558f51a-large.jpg", description: "Golden-hued natural silk unique to Assam" },
-        { id: 7, name: "Paithani Silk", image: "https://images.pixieset.com/859010601/1a663bfb428a51355009c3acd0acc62d-large.jpg", description: "Fine silk with brilliant colors and peacock motifs" },
+        { id: 7, name: "Paithani Silk", image: "https://images.pixieset.com/859010601/7a9c4e53f1e1990ccf6fd1d9a73ce49a-large.jpg", description: "Fine silk with brilliant colors and peacock motifs" },
         { id: 8, name: "Pochampalli Silk", image: "https://images.pixieset.com/859010601/2cf5516460b97992b50f516854ff51b2-large.jpg", description: "Traditional ikat technique with vibrant colors" },
     ];
 
@@ -47,7 +47,7 @@ export default function Home() {
             </section>
 
             {/* Why Choose PratyagraSilks - Trust & Credibility Section */}
-            <section className="py-16 md:py-24 px-4 bg-gray-50">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
                         Why Choose Pratyagra Silks
@@ -72,7 +72,7 @@ export default function Home() {
             </section>
 
             {/* Featured Collections */}
-            <section className="py-16 md:py-24 px-4 bg-gray-50">
+            <section className="p-4">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
                         Explore Our Silk Saree Collections
@@ -85,7 +85,7 @@ export default function Home() {
                         {categories.map((category) => (
                             <Link
                                 key={category.id}
-                                href={`/silk/${category.name.toLowerCase().replace(/ /g, "-")}`}
+                                href={`/collection?category=${category.name.toLowerCase().replace(/ /g, "-")}`}
                                 className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                                 <div className="absolute inset-0 bg-no-repeat bg-cover" style={{ backgroundImage: `url('${category.image}')` }}></div>
                                 {/* Placeholder background with gradient */}
@@ -111,7 +111,7 @@ export default function Home() {
             </section>
 
             {/* Our Heritage & Ethos - SEO Content Block */}
-            <section className="py-16 md:py-24 px-4 bg-white">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6 text-center">
                         Reviving Tradition with a New Touch

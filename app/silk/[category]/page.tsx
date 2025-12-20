@@ -56,7 +56,7 @@ async function getCategoryProducts(categorySlug: string): Promise<Product[]> {
     try {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/products?category=${categorySlug}`,
-            { next: { revalidate: 3600 } }
+            { next: { revalidate: 86400 } } // Revalidate once per day (86400 seconds)
         );
 
         if (!res.ok) return [];

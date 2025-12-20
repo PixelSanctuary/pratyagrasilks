@@ -31,7 +31,7 @@ export async function GET(
             name: product.name,
             description: product.description,
             price: product.price,
-            category: product.category?.replace(/-/g, ' '),
+            category: product.category,
             images: product.images || [],
             inStock: product.in_stock,
             stockQuantity: product.stock_quantity || 0,
