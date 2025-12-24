@@ -1,3 +1,4 @@
+import { text } from "stream/consumers";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -15,7 +16,12 @@ const config: Config = {
                 background: "var(--background)",
                 foreground: "var(--foreground)",
                 textPrimary: "#221D10",
-                primary2: "#8430AB"
+                textSecondary: "#101522",
+                primary2: "#8430AB",
+                primaryAnalogue: "#720C5C", 
+                //https://www.canva.com/colors/color-palettes/ice-cream-delight/
+                slate: "#E1EDE7",
+                blueGrotto: "#0081AC",
             },
             fontFamily: {
                 playfair: ['"Playfair Display"', 'serif'],

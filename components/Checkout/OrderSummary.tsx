@@ -55,12 +55,12 @@ export default function OrderSummary({ shippingCost = 0, estimatedDays }: OrderS
 
             {/* Pricing */}
             <div className="border-t pt-4 space-y-2">
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-textSecondary">
                     <span>Subtotal</span>
                     <span>{formatPrice(totalPrice)}</span>
                 </div>
 
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-textSecondary">
                     <span>Shipping</span>
                     <span>
                         {shippingCost > 0 ? (

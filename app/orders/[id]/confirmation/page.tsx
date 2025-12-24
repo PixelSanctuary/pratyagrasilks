@@ -102,12 +102,12 @@ export default function OrderConfirmationPage() {
                 <div className="bg-white rounded-lg shadow-md p-8 mb-6 text-center">
                     <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">Order Confirmed!</h1>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-textSecondary mb-4">
                         Thank you for your order. We've sent a confirmation email to{' '}
                         <span className="font-medium">{order.customer_email}</span>
                     </p>
                     <div className="bg-gray-50 rounded-lg p-4 inline-block">
-                        <p className="text-sm text-gray-600">Order Number</p>
+                        <p className="text-sm text-textSecondary">Order Number</p>
                         <p className="text-2xl font-bold text-gray-900">{orderNumber}</p>
                     </div>
                 </div>
@@ -150,11 +150,11 @@ export default function OrderConfirmationPage() {
 
                     {/* Pricing Summary */}
                     <div className="border-t pt-4 space-y-2">
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between text-textSecondary">
                             <span>Subtotal</span>
                             <span>{formatPrice(order.subtotal)}</span>
                         </div>
-                        <div className="flex justify-between text-gray-600">
+                        <div className="flex justify-between text-textSecondary">
                             <span>Shipping</span>
                             <span>{formatPrice(order.shipping_charge)}</span>
                         </div>

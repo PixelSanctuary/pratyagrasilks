@@ -91,7 +91,7 @@ export default function ConfirmDialog({
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-gray-400 hover:text-gray-600 transition-colors"
+                        className="text-gray-400 hover:text-textSecondary transition-colors"
                     >
                         <X className="w-5 h-5" />
                     </button>
@@ -99,7 +99,7 @@ export default function ConfirmDialog({
 
                 {/* Content */}
                 <div className="px-6 pb-6">
-                    <p className="text-gray-600 leading-relaxed">{message}</p>
+                    <p className="text-textSecondary leading-relaxed">{message}</p>
                 </div>
 
                 {/* Actions */}

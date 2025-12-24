@@ -132,7 +132,7 @@ export default function AdminDashboard() {
                 <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">Total Orders</p>
+                            <p className="text-sm text-textSecondary">Total Orders</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">{stats.totalOrders}</p>
                         </div>
                         <div className="p-3 bg-blue-100 rounded-lg">
@@ -144,7 +144,7 @@ export default function AdminDashboard() {
                 <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">Total Revenue</p>
+                            <p className="text-sm text-textSecondary">Total Revenue</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">{formatPrice(stats.totalRevenue)}</p>
                         </div>
                         <div className="p-3 bg-green-100 rounded-lg">
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
                 <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">Total Customers</p>
+                            <p className="text-sm text-textSecondary">Total Customers</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">{stats.totalCustomers}</p>
                         </div>
                         <div className="p-3 bg-purple-100 rounded-lg">
@@ -168,7 +168,7 @@ export default function AdminDashboard() {
                 <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">Total Products</p>
+                            <p className="text-sm text-textSecondary">Total Products</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">{stats.totalProducts}</p>
                         </div>
                         <div className="p-3 bg-amber-100 rounded-lg">

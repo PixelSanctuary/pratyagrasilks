@@ -122,6 +122,58 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
                 {/* Main Content */}
                 <div className="container mx-auto px-4 py-12">
+
+                    {/* Products Section */}
+                    <section>
+                        <div className="flex items-center justify-between mb-8">
+                            <h2 className="text-3xl font-bold font-playfair text-gray-900">
+                                Available {category.name} Sarees
+                            </h2>
+                            <Link
+                                href={`/collection?category=${params.category}`}
+                                className="text-amber-600 hover:text-amber-700 font-medium flex items-center"
+                            >
+                                View All
+                                <svg
+                                    className="w-5 h-5 ml-1"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M9 5l7 7-7 7"
+                                    />
+                                </svg>
+                            </Link>
+                        </div>
+
+                        {products.length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                {products.slice(0, 8).map((product) => (
+                                    <ProductCard key={product.id} product={product} />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="bg-white rounded-lg shadow-md p-12 text-center">
+                                <p className="text-textSecondary text-lg mb-4">
+                                    No {category.name} sarees are currently available.
+                                </p>
+                                <p className="text-gray-500">
+                                    Check back soon or explore our other collections.
+                                </p>
+                                <Link
+                                    href="/collection"
+                                    className="inline-block mt-6 px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+                                >
+                                    Browse All Collections
+                                </Link>
+                            </div>
+                        )}
+                    </section>
+
                     {/* About This Silk */}
                     <section className="bg-white rounded-lg shadow-md p-8 mb-12">
                         <h2 className="text-3xl font-bold font-playfair text-primary mb-6">
@@ -169,57 +221,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                                 ))}
                             </ul>
                         </div>
-                    </section>
-
-                    {/* Products Section */}
-                    <section>
-                        <div className="flex items-center justify-between mb-8">
-                            <h2 className="text-3xl font-bold font-playfair text-gray-900">
-                                Available {category.name} Sarees
-                            </h2>
-                            <Link
-                                href={`/collection?category=${params.category}`}
-                                className="text-amber-600 hover:text-amber-700 font-medium flex items-center"
-                            >
-                                View All
-                                <svg
-                                    className="w-5 h-5 ml-1"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M9 5l7 7-7 7"
-                                    />
-                                </svg>
-                            </Link>
-                        </div>
-
-                        {products.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                {products.slice(0, 8).map((product) => (
-                                    <ProductCard key={product.id} product={product} />
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="bg-white rounded-lg shadow-md p-12 text-center">
-                                <p className="text-gray-600 text-lg mb-4">
-                                    No {category.name} sarees are currently available.
-                                </p>
-                                <p className="text-gray-500">
-                                    Check back soon or explore our other collections.
-                                </p>
-                                <Link
-                                    href="/collection"
-                                    className="inline-block mt-6 px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
-                                >
-                                    Browse All Collections
-                                </Link>
-                            </div>
-                        )}
                     </section>
 
                     {/* FAQ Section */}

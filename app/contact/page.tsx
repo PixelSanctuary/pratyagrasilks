@@ -85,7 +85,7 @@ export default function ContactPage() {
                                     >
                                         info@pratyagrasilks.com
                                     </a>
-                                    <p className="text-gray-600 mt-2">We'll respond within 24 hours</p>
+                                    <p className="text-textSecondary mt-2">We'll respond within 24 hours</p>
                                 </div>
 
                                 <div>
@@ -96,7 +96,7 @@ export default function ContactPage() {
                                     >
                                         +91 73588 66646
                                     </a>
-                                    <p className="text-gray-600 mt-2">Mon-Fri: 9:00 AM - 6:00 PM IST</p>
+                                    <p className="text-textSecondary mt-2">Mon-Fri: 9:00 AM - 6:00 PM IST</p>
                                 </div>
 
                                 <div>

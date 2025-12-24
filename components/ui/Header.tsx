@@ -222,7 +222,7 @@ export default function Header() {
                                         <Link
                                             key={category.slug}
                                             href={`/silk/${category.slug}`}
-                                            className="block text-sm text-gray-600 hover:text-primary transition-colors py-1 !m-0"
+                                            className="block text-sm text-textSecondary hover:text-primary transition-colors py-1 !m-0"
                                             onClick={() => setIsMobileMenuOpen(false)}
                                         >
                                             {category.name}

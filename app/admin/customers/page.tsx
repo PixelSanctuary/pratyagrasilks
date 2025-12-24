@@ -160,7 +160,7 @@ export default function AdminCustomersPage() {
         <div>
             <div className="flex items-center justify-between mb-8">
                 <h1 className="text-3xl font-bold text-gray-900">Customers</h1>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
+                <div className="flex items-center gap-2 text-sm text-textSecondary">
                     <Users className="w-4 h-4" />
                     <span>{filteredCustomers.length} customers</span>
                 </div>
@@ -171,7 +171,7 @@ export default function AdminCustomersPage() {
                 <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">Total Customers</p>
+                            <p className="text-sm text-textSecondary">Total Customers</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">{stats.totalCustomers}</p>
                         </div>
                         <div className="p-3 bg-purple-100 rounded-lg">
@@ -183,7 +183,7 @@ export default function AdminCustomersPage() {
                 <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">New This Month</p>
+                            <p className="text-sm text-textSecondary">New This Month</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">{stats.newThisMonth}</p>
                         </div>
                         <div className="p-3 bg-blue-100 rounded-lg">
@@ -195,7 +195,7 @@ export default function AdminCustomersPage() {
                 <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">Active Customers</p>
+                            <p className="text-sm text-textSecondary">Active Customers</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">{stats.activeCustomers}</p>
                         </div>
                         <div className="p-3 bg-green-100 rounded-lg">
@@ -207,7 +207,7 @@ export default function AdminCustomersPage() {
                 <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-sm text-gray-600">Avg Order Value</p>
+                            <p className="text-sm text-textSecondary">Avg Order Value</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">
                                 {formatPrice(stats.averageOrderValue)}
                             </p>

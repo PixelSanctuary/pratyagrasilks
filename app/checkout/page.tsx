@@ -30,7 +30,7 @@ export default function CheckoutPage() {
             <div className="min-h-screen flex items-center justify-center bg-gray-50">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h1>
-                    <p className="text-gray-600 mb-4">Add some items before checking out.</p>
+                    <p className="text-textSecondary mb-4">Add some items before checking out.</p>
                     <Link
                         href="/collection"
                         className="inline-block px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors"
@@ -116,7 +116,7 @@ export default function CheckoutPage() {
                     <div className="flex items-center justify-between">
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900">Checkout</h1>
-                            <p className="text-gray-600 mt-1">Complete your order</p>
+                            <p className="text-textSecondary mt-1">Complete your order</p>
                         </div>
                         <Link
                             href="/cart"

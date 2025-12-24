@@ -85,7 +85,7 @@ export default function OrdersPage() {
             <div className="bg-white border-b">
                 <div className="container mx-auto px-4 py-6">
                     <h1 className="text-3xl font-bold text-gray-900">Order History</h1>
-                    <p className="text-gray-600 mt-1">View and track your orders</p>
+                    <p className="text-textSecondary mt-1">View and track your orders</p>
                 </div>
             </div>
 
@@ -124,7 +124,7 @@ export default function OrdersPage() {
                     <div className="bg-white rounded-lg shadow-md p-12 text-center">
                         <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                         <h2 className="text-xl font-semibold text-gray-900 mb-2">No orders found</h2>
-                        <p className="text-gray-600 mb-6">
+                        <p className="text-textSecondary mb-6">
                             {email ? 'No orders found for this email.' : 'You haven\'t placed any orders yet.'}
                         </p>
                         <Link
@@ -155,7 +155,7 @@ export default function OrdersPage() {
                                             </span>
                                         </div>
 
-                                        <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                                        <div className="flex flex-wrap gap-4 text-sm text-textSecondary">
                                             <div className="flex items-center gap-1">
                                                 <Calendar className="w-4 h-4" />
                                                 {formatDate(order.created_at)}
@@ -169,7 +169,7 @@ export default function OrdersPage() {
 
                                     {/* Price */}
                                     <div className="text-right">
-                                        <p className="text-sm text-gray-600">Total</p>
+                                        <p className="text-sm text-textSecondary">Total</p>
                                         <p className="text-2xl font-bold text-amber-700">
                                             {formatPrice(order.total_amount)}
                                         </p>

@@ -21,7 +21,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
     return (
         <Link href={`/product/${product.id}`} className="group">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                 {/* Product Image */}
                 <div className="relative aspect-square overflow-hidden bg-gray-100">
                     <Image
@@ -36,42 +36,41 @@ export default function ProductCard({ product }: ProductCardProps) {
                             <span className="text-white font-semibold text-lg">Out of Stock</span>
                         </div>
                     )}
+                    {/* Category Badge */}
+                    <div className="absolute top-2 left-2">
+                        <span className="inline-block px-3 py-1 border border-slate text-slate bg-black/50 text-xs font-medium rounded-lg capitalize">
+                            {product.category?.replace(/-/g, ' ')}
+                        </span>
+                    </div>
                 </div>
 
                 {/* Product Info */}
                 <div className="p-4">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-amber-700 transition-colors">
+                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary2 transition-colors">
                         {product.name}
                     </h3>
 
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                    <p className="text-sm text-textSecondary mb-3 line-clamp-2">
                         {product.description}
                     </p>
 
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-2xl font-bold text-amber-700">
+                            <p className="text-2xl font-bold text-primaryAnalogue">
                                 {formatPrice(product.price)}
                             </p>
-                            {product.material && (
+                            {/* {product.material && (
                                 <p className="text-xs text-gray-500 mt-1 line-clamp-1">
                                     {product.material}
                                 </p>
-                            )}
+                            )} */}
                         </div>
 
                         {product.inStock && (
-                            <div className="px-4 py-2 bg-amber-600 text-white rounded-md text-sm font-medium group-hover:bg-amber-700 transition-colors min-w-fit">
+                            <div className="px-4 py-2 bg-primary text-secondary rounded-md text-sm font-medium group-hover:bg-primary2 transition-colors min-w-fit">
                                 View Details
                             </div>
                         )}
-                    </div>
-
-                    {/* Category Badge */}
-                    <div className="mt-3">
-                        <span className="inline-block px-3 py-1 bg-secondary text-primary2 text-xs font-medium rounded-full capitalize">
-                            {product.category?.replace(/-/g, ' ')}
-                        </span>
                     </div>
                 </div>
             </div>

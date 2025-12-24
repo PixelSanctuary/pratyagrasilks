@@ -151,7 +151,7 @@ export default function AdminOrdersPage() {
         <div>
             <div className="flex items-center justify-between mb-8">
                 <h1 className="text-3xl font-bold text-gray-900">Orders</h1>
-                <div className="flex items-center gap-2 text-sm text-gray-600">
+                <div className="flex items-center gap-2 text-sm text-textSecondary">
                     <Package className="w-4 h-4" />
                     <span>{filteredOrders.length} orders</span>
                 </div>

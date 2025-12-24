@@ -24,7 +24,7 @@ export default function CartPage() {
                     <div className="flex items-center justify-between">
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
-                            <p className="text-gray-600 mt-1">{itemCount} {itemCount === 1 ? 'item' : 'items'}</p>
+                            <p className="text-textSecondary mt-1">{itemCount} {itemCount === 1 ? 'item' : 'items'}</p>
                         </div>
                         <Link
                             href="/collection"
@@ -44,7 +44,7 @@ export default function CartPage() {
                     <div className="bg-white rounded-lg shadow-md p-12 text-center">
                         <ShoppingBag className="w-24 h-24 text-gray-300 mx-auto mb-6" />
                         <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
-                        <p className="text-gray-600 mb-6">
+                        <p className="text-textSecondary mb-6">
                             Looks like you haven't added any items to your cart yet.
                         </p>
                         <Link
@@ -88,12 +88,12 @@ export default function CartPage() {
                                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Order Summary</h2>
 
                                 <div className="space-y-3 mb-6">
-                                    <div className="flex justify-between text-gray-600">
+                                    <div className="flex justify-between text-textSecondary">
                                         <span>Subtotal ({itemCount} items)</span>
                                         <span>{formatPrice(totalPrice)}</span>
                                     </div>
 
-                                    <div className="flex justify-between text-gray-600">
+                                    <div className="flex justify-between text-textSecondary">
                                         <span>Shipping</span>
                                         <span className="text-sm text-amber-600">Calculated at checkout</span>
                                     </div>

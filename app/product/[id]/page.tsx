@@ -75,7 +75,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
-                    <p className="mt-4 text-gray-600">Loading...</p>
+                    <p className="mt-4 text-textSecondary">Loading...</p>
                 </div>
             </div>
         );
@@ -86,7 +86,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-2">Product Not Found</h1>
-                    <p className="text-gray-600 mb-4">The product you're looking for doesn't exist.</p>
+                    <p className="text-textSecondary mb-4">The product you're looking for doesn't exist.</p>
                     <Link href="/collection" className="text-amber-600 hover:text-amber-700 font-medium">
                         ← Back to Collection
                     </Link>
@@ -131,7 +131,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                     {/* Product Info */}
                     <div className="space-y-6">
                         <div>
-                            <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                            <h1 className="text-3xl lg:text-4xl font-bold mb-2">
                                 {product.name}
                             </h1>
                             <p className="text-sm text-gray-500">SKU: {product.sku}</p>
@@ -139,7 +139,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
 
                         {/* Price */}
                         <div className="border-t border-b py-4">
-                            <p className="text-4xl font-bold text-amber-700">
+                            <p className="text-4xl font-bold text-primaryAnalogue">
                                 {formatPrice(product.price)}
                             </p>
                         </div>
@@ -161,8 +161,8 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
 
                         {/* Description */}
                         <div>
-                            <h2 className="text-lg font-semibold text-gray-900 mb-2">Description</h2>
-                            <p className=" leading-relaxed">{product.description}</p>
+                            <h2 className="text-lg font-semibold mb-2">Description</h2>
+                            <p className="text-textSecondary leading-relaxed">{product.description}</p>
                         </div>
 
                         {/* Material & Details */}
@@ -171,14 +171,14 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
 
                             {product.material && (
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600">Material:</span>
+                                    <span className="text-textSecondary">Material:</span>
                                     <span className="font-medium text-gray-900">{product.material}</span>
                                 </div>
                             )}
 
                             {product.dimensions && (
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600">Length:</span>
+                                    <span className="text-textSecondary">Length:</span>
                                     <span className="font-medium text-gray-900">
                                         {product.dimensions}
                                     </span>
@@ -187,13 +187,13 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
 
                             {product.weight && (
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600">Weight:</span>
+                                    <span className="text-textSecondary">Weight:</span>
                                     <span className="font-medium text-gray-900">{product.weight} kg</span>
                                 </div>
                             )}
 
                             <div className="flex justify-between">
-                                <span className="text-gray-600">Category:</span>
+                                <span className="text-textSecondary">Category:</span>
                                 <span className="font-medium text-gray-900 capitalize">{product.category?.replace(/-/g, ' ')}</span>
                             </div>
                         </div>
@@ -205,7 +205,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                             <button
                                 onClick={handleAddToCart}
                                 disabled={!product.inStock || isInCart(product.id)}
-                                className="w-full bg-amber-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-amber-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                className="w-full bg-primary text-secondary py-4 rounded-lg font-semibold text-lg hover:bg-primary2 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
                                 {isInCart(product.id) ? (
                                     <>
@@ -220,9 +220,10 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                                 )}
                             </button>
 
-                            <button className="w-full border-2 border-amber-600 text-amber-600 py-4 rounded-lg font-semibold text-lg hover:bg-amber-50 transition-colors">
+                             {/* Need to implement wishlist functionality */}
+                            {/* <button className="w-full border-2 border-primary text-primary py-4 rounded-lg font-semibold text-lg hover:border-primary2 hover:text-primary2 transition-colors">
                                 Add to Wishlist
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>

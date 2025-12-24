@@ -88,7 +88,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                 <h2 className="text-xl font-bold text-gray-900">Filters</h2>
                 <button
                     onClick={clearFilters}
-                    className="text-sm text-amber-600 hover:text-amber-700 font-medium"
+                    className="text-sm text-blueGrotto hover:text-primary2 font-medium"
                 >
                     Clear All
                 </button>
@@ -104,7 +104,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                     value={filters.search}
                     onChange={(e) => handleSearchChange(e.target.value)}
                     placeholder="Search by name..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blueGrotto focus:border-transparent"
                 />
             </div>
 
@@ -120,9 +120,9 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                                 value={cat.value}
                                 checked={filters.category === cat.value}
                                 onChange={(e) => handleCategoryChange(e.target.value)}
-                                className="w-4 h-4 text-amber-600 focus:ring-amber-500"
+                                className="w-4 h-4 text-primary focus:ring-primary2"
                             />
-                            <span className="ml-3 text-sm  group-hover:text-amber-700">
+                            <span className="ml-3 text-sm  group-hover:text-primary2">
                                 {cat.label}
                             </span>
                         </label>
@@ -157,12 +157,12 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                     <h3 className="text-sm font-medium  mb-2">Active Filters</h3>
                     <div className="space-y-1">
                         {filters.category && (
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-textSecondary">
                                 Category: <span className="font-medium">{filters.category}</span>
                             </div>
                         )}
                         {(filters.minPrice > 0 || filters.maxPrice > 0) && (
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-textSecondary">
                                 Price: <span className="font-medium">
                                     {filters.minPrice > 0 ? `₹${filters.minPrice.toLocaleString()}` : '₹0'} -
                                     {filters.maxPrice > 0 ? ` ₹${filters.maxPrice.toLocaleString()}` : ' ∞'}
@@ -170,7 +170,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                             </div>
                         )}
                         {filters.search && (
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-textSecondary">
                                 Search: <span className="font-medium">{filters.search}</span>
                             </div>
                         )}

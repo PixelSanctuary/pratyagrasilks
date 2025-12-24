@@ -80,7 +80,7 @@ function CollectionContent() {
                     <main className="lg:col-span-3">
                         {/* Results Header */}
                         <div className="mb-6 flex items-center justify-between">
-                            <p className="text-gray-600">
+                            <p className="text-textSecondary">
                                 {loading ? (
                                     'Loading products...'
                                 ) : (
@@ -145,7 +145,7 @@ function CollectionContent() {
                                     />
                                 </svg>
                                 <h3 className="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
-                                <p className="text-gray-600 mb-4">
+                                <p className="text-textSecondary mb-4">
                                     Try adjusting your filters or search terms
                                 </p>
                                 <button

@@ -148,7 +148,7 @@ export default function ShippingPage() {
                                             {option.detail}
                                         </h3>
                                         <p className=" mb-2">{option.timeline}</p>
-                                        <p className="text-gray-600 text-sm">{option.description}</p>
+                                        <p className="text-textSecondary text-sm">{option.description}</p>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@ export default function ShippingPage() {
                                             {option.detail}
                                         </h3>
                                         <p className=" font-semibold mb-2">{option.timeline}</p>
-                                        <p className="text-gray-600 text-sm">{option.description}</p>
+                                        <p className="text-textSecondary text-sm">{option.description}</p>
                                     </div>
                                 </div>
                             </div>

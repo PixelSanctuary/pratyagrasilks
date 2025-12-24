@@ -47,7 +47,7 @@ export default function ProfilePage() {
             <div className="bg-white border-b shadow-md">
                 <div className="container mx-auto px-4 py-6">
                     <h1 className="text-3xl font-bold text-gray-900">My Account</h1>
-                    <p className="text-gray-600 mt-1">Manage your profile and orders</p>
+                    <p className="text-textSecondary mt-1">Manage your profile and orders</p>
                 </div>
             </div>
 
@@ -168,7 +168,7 @@ export default function ProfilePage() {
                                 >
                                     <Package className="w-6 h-6 text-amber-600 mb-2" />
                                     <h3 className="font-semibold text-gray-900">View Orders</h3>
-                                    <p className="text-sm text-gray-600">Track your orders</p>
+                                    <p className="text-sm text-textSecondary">Track your orders</p>
                                 </Link>
 
                                 <Link
@@ -179,7 +179,7 @@ export default function ProfilePage() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                     </svg>
                                     <h3 className="font-semibold text-gray-900">Wishlist</h3>
-                                    <p className="text-sm text-gray-600">View saved items</p>
+                                    <p className="text-sm text-textSecondary">View saved items</p>
                                 </Link>
 
                                 <Link
@@ -190,7 +190,7 @@ export default function ProfilePage() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                     </svg>
                                     <h3 className="font-semibold text-gray-900">Continue Shopping</h3>
-                                    <p className="text-sm text-gray-600">Browse our collection</p>
+                                    <p className="text-sm text-textSecondary">Browse our collection</p>
                                 </Link>
 
                                 <Link
@@ -202,7 +202,7 @@ export default function ProfilePage() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                     <h3 className="font-semibold text-gray-900">Addresses</h3>
-                                    <p className="text-sm text-gray-600">Manage addresses</p>
+                                    <p className="text-sm text-textSecondary">Manage addresses</p>
                                 </Link>
                             </div>
                         </div>

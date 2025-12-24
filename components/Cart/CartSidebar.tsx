@@ -51,7 +51,7 @@ export default function CartSidebar() {
                         className="p-2 hover:bg-gray-100 rounded-md transition-colors"
                         aria-label="Close cart"
                     >
-                        <X className="w-5 h-5 text-gray-600" />
+                        <X className="w-5 h-5 text-textSecondary" />
                     </button>
                 </div>
 

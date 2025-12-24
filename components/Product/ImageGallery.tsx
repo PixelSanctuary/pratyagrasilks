@@ -41,8 +41,8 @@ export default function ImageGallery({ images, productName }: ImageGalleryProps)
                             key={index}
                             onClick={() => setSelectedImage(index)}
                             className={`relative aspect-square overflow-hidden rounded-lg border-2 transition-all ${selectedImage === index
-                                    ? 'border-amber-600 ring-2 ring-amber-200'
-                                    : 'border-gray-200 hover:border-amber-400'
+                                    ? 'border-primary ring-2 ring-primary'
+                                    : 'border-slate hover:border-primary2'
                                 }`}
                         >
                             <Image

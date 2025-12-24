@@ -309,17 +309,17 @@ export default function AdminProductsPage() {
             {/* Stats */}
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white rounded-lg shadow p-4">
-                    <p className="text-sm text-gray-600">Total Products</p>
+                    <p className="text-sm text-textSecondary">Total Products</p>
                     <p className="text-2xl font-bold text-gray-900">{products.length}</p>
                 </div>
                 <div className="bg-white rounded-lg shadow p-4">
-                    <p className="text-sm text-gray-600">Available Products</p>
+                    <p className="text-sm text-textSecondary">Available Products</p>
                     <p className="text-2xl font-bold text-green-600">
                         {products.filter((p) => p.stock_quantity > 0).length}
                     </p>
                 </div>
                 <div className="bg-white rounded-lg shadow p-4">
-                    <p className="text-sm text-gray-600">Sold Stock</p>
+                    <p className="text-sm text-textSecondary">Sold Stock</p>
                     <p className="text-2xl font-bold text-red-600">
                         {products.filter((p) => p.stock_quantity < 1).length}
                     </p>

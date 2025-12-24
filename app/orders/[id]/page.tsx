@@ -138,7 +138,7 @@ export default function OrderDetailsPage() {
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900">Order #{order.order_number}</h1>
-                            <p className="text-gray-600 mt-1">{formatDate(order.created_at)}</p>
+                            <p className="text-textSecondary mt-1">{formatDate(order.created_at)}</p>
                         </div>
                         <div className="flex gap-2">
                             <span className={`px-4 py-2 rounded-lg text-sm font-medium ${getStatusColor(order.status)}`}>
@@ -199,11 +199,11 @@ export default function OrderDetailsPage() {
                         <div className="bg-white rounded-lg shadow-md p-6">
                             <h2 className="text-xl font-semibold text-gray-900 mb-4">Order Summary</h2>
                             <div className="space-y-2">
-                                <div className="flex justify-between text-gray-600">
+                                <div className="flex justify-between text-textSecondary">
                                     <span>Subtotal</span>
                                     <span>{formatPrice(order.subtotal)}</span>
                                 </div>
-                                <div className="flex justify-between text-gray-600">
+                                <div className="flex justify-between text-textSecondary">
                                     <span>Shipping</span>
                                     <span>{formatPrice(order.shipping_charge || 0)}</span>
                                 </div>
