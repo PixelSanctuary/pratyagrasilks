@@ -21,14 +21,14 @@ export default function CartPage() {
             {/* Header */}
             <div className="bg-white border-b">
                 <div className="container mx-auto px-4 py-6">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-wrap items-center justify-between">
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
                             <p className="text-textSecondary mt-1">{itemCount} {itemCount === 1 ? 'item' : 'items'}</p>
                         </div>
                         <Link
                             href="/collection"
-                            className="flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium"
+                            className="flex items-center gap-2 text-primary hover:text-primary2 font-medium ml-auto"
                         >
                             <ArrowLeft className="w-5 h-5" />
                             Continue Shopping

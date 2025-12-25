@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAuth } from "@/lib/context/AuthContext";
 import { useRouter } from "next/navigation";
 import CartBadge from "@/components/Cart/CartBadge";
+import WishlistBadge from "@/components/Wishlist/WishlistBadge";
 import { User, LogOut, Package, Heart, ChevronDown } from "lucide-react";
 import { silkCategories } from "@/lib/seo-config";
 
@@ -33,7 +34,7 @@ export default function Header() {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
+                    <div className="hidden lg:flex items-center space-x-8">
                         <Link
                             href="/collection"
                             className="hover:text-primary transition-colors font-medium"
@@ -87,7 +88,8 @@ export default function Header() {
                             Contact
                         </Link>
 
-                        {/* Cart Icon */}
+                        {/* Wishlist & Cart Icons */}
+                        <WishlistBadge />
                         <CartBadge />
 
                         {/* Auth Buttons / User Menu */}
@@ -157,8 +159,9 @@ export default function Header() {
                     </div>
 
                     {/* Mobile Menu Button & Cart */}
-                    <div className="flex md:hidden items-center space-x-4">
-                        {/* Mobile Cart Icon */}
+                    <div className="flex lg:hidden items-center space-x-4">
+                        {/* Mobile Wishlist & Cart Icons */}
+                        <WishlistBadge />
                         <CartBadge />
 
                         {/* Hamburger Menu Button */}
@@ -204,7 +207,7 @@ export default function Header() {
 
                 {/* Mobile Menu Drawer */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden py-4 border-t border-gray-200">
+                    <div className="lg:hidden py-4 border-t border-gray-200">
                         <div className="flex flex-col space-y-4">
                             <Link
                                 href="/collection"
@@ -216,7 +219,7 @@ export default function Header() {
 
                             {/* Mobile Silk Types */}
                             <div className="px-2 py-2">
-                                <div className="font-medium text-gray-900 mb-2">Shop by Silk Type</div>
+                                <div className="font-medium mb-2">Shop by Silk Type</div>
                                 <div className="pl-4 space-y-2 grid grid-cols-2">
                                     {silkCategories.slice(0, 6).map((category) => (
                                         <Link

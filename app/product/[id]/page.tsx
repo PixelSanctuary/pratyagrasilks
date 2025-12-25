@@ -4,6 +4,7 @@ import { Product } from '@/lib/types';
 import Link from 'next/link';
 import ImageGallery from '@/components/Product/ImageGallery';
 import ProductCard from '@/components/ProductCard';
+import WishlistButton from '@/components/Wishlist/WishlistButton';
 import { useCart } from '@/lib/context/CartContext';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, Check } from 'lucide-react';
@@ -220,10 +221,8 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                                 )}
                             </button>
 
-                             {/* Need to implement wishlist functionality */}
-                            {/* <button className="w-full border-2 border-primary text-primary py-4 rounded-lg font-semibold text-lg hover:border-primary2 hover:text-primary2 transition-colors">
-                                Add to Wishlist
-                            </button> */}
+                            {/* Wishlist Button */}
+                            <WishlistButton product={product} className="w-full" />
                         </div>
                     </div>
                 </div>

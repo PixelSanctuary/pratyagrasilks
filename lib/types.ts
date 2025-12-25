@@ -44,3 +44,11 @@ export interface Order {
     updatedAt: Date;
     deliveredAt?: Date;
 }
+
+export interface WishlistItem {
+    id: string;
+    customerId: string;
+    productId: string;
+    product: Product;
+    createdAt: Date;
+}

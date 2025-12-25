@@ -124,14 +124,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 <div className="container mx-auto px-4 py-12">
 
                     {/* Products Section */}
-                    <section>
-                        <div className="flex items-center justify-between mb-8">
+                    <section className='mb-12'>
+                        <div className="flex flex-wrap items-center justify-between mb-8">
                             <h2 className="text-3xl font-bold font-playfair text-gray-900">
                                 Available {category.name} Sarees
                             </h2>
                             <Link
                                 href={`/collection?category=${params.category}`}
-                                className="text-amber-600 hover:text-amber-700 font-medium flex items-center"
+                                className="text-amber-600 hover:text-amber-700 font-medium flex items-center ml-auto"
                             >
                                 View All
                                 <svg

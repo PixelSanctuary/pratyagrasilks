@@ -5,6 +5,7 @@ import Header from "@/components/ui/Header";
 import ConditionalFooter from "@/components/ui/ConditionalFooter";
 import { CartProvider } from "@/lib/context/CartContext";
 import { AuthProvider } from "@/lib/context/AuthContext";
+import { WishlistProvider } from "@/lib/context/WishlistContext";
 import CartSidebar from "@/components/Cart/CartSidebar";
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
@@ -109,12 +110,14 @@ export default function RootLayout({
                 />
 
                 <AuthProvider>
-                    <CartProvider>
-                        <Header />
-                        <main className="min-h-screen">{children}</main>
-                        <ConditionalFooter />
-                        <CartSidebar />
-                    </CartProvider>
+                    <WishlistProvider>
+                        <CartProvider>
+                            <Header />
+                            <main className="min-h-screen">{children}</main>
+                            <ConditionalFooter />
+                            <CartSidebar />
+                        </CartProvider>
+                    </WishlistProvider>
                 </AuthProvider>
                 <GoogleAnalytics />
                 <Analytics />
@@ -123,3 +126,4 @@ export default function RootLayout({
         </html>
     );
 }
+

@@ -1,6 +1,7 @@
 import { Product } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import WishlistButton from '@/components/Wishlist/WishlistButton';
 
 interface ProductCardProps {
     product: Product;
@@ -41,6 +42,10 @@ export default function ProductCard({ product }: ProductCardProps) {
                         <span className="inline-block px-3 py-1 border border-slate text-slate bg-black/50 text-xs font-medium rounded-lg capitalize">
                             {product.category?.replace(/-/g, ' ')}
                         </span>
+                    </div>
+                    {/* Wishlist Button */}
+                    <div className="absolute top-2 right-2 z-10">
+                        <WishlistButton product={product} variant="icon-only" />
                     </div>
                 </div>
 
