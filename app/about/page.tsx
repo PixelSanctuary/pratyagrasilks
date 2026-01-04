@@ -142,7 +142,7 @@ export default function AboutPage() {
             </section>
 
             {/* Core Values */}
-            <section className="py-16 md:py-24 px-4 bg-gray-50">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-12">
                         Our Core Values
@@ -210,7 +210,7 @@ export default function AboutPage() {
             </section>
 
             {/* Artisan Partnership */}
-            <section className="py-16 md:py-24 px-4 bg-gray-50">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6">
                         Supporting Artisan Communities

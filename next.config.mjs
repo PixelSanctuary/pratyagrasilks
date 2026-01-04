@@ -15,6 +15,7 @@ const nextConfig = {
                 hostname: 'images.pixieset.com',
             }
         ],
+        minimumCacheTTL: 31536000, // 1 year cache for extreme performance
     },
     // Enable React strict mode for better development experience
     reactStrictMode: true,

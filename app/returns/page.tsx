@@ -73,7 +73,7 @@ export default function ReturnsPage() {
             </section>
 
             {/* Return Policy Overview */}
-            <section className="py-16 md:py-24 px-4 bg-white">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-12">
                         Our Quality Commitment
@@ -128,7 +128,7 @@ export default function ReturnsPage() {
             </section>
 
             {/* Return Process */}
-            <section className="py-16 md:py-24 px-4 bg-gray-50">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-12">
                         How to Report a Defect
@@ -203,7 +203,7 @@ export default function ReturnsPage() {
             </section>
 
             {/* Exchange Option */}
-            <section className="py-16 md:py-24 px-4 bg-gray-50">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6">
                         Exchange Option

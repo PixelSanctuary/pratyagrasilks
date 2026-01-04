@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client';
 import { ArrowLeft, Save } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import OptimizedUploader from '@/components/admin/OptimizedUploader';
 
 const categories = [
     { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
@@ -24,6 +25,7 @@ const categories = [
 export default function NewProductPage() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const [productImages, setProductImages] = useState<string[]>([]);
     const [formData, setFormData] = useState({
         name: '',
         sku: '',
@@ -34,21 +36,24 @@ export default function NewProductPage() {
         description: '',
         dimensions: '',
         weight: '',
-        images: '',
     });
+
+    const handleImagesChange = (urls: string[]) => {
+        setProductImages(urls);
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (productImages.length === 0) {
+            toast.error('Please upload at least one product image');
+            return;
+        }
+
         setLoading(true);
 
         try {
             const supabase = createClient();
-
-            // Parse images (comma-separated URLs)
-            const imagesArray = formData.images
-                .split(',')
-                .map((url) => url.trim())
-                .filter((url) => url);
 
             const { data, error } = await supabase
                 .from('products')
@@ -62,7 +67,7 @@ export default function NewProductPage() {
                     description: formData.description,
                     dimensions: formData.dimensions || null,
                     weight: formData.weight || null,
-                    images: imagesArray,
+                    images: productImages,
                 })
                 .select()
                 .single();
@@ -253,33 +258,25 @@ export default function NewProductPage() {
                         />
                     </div>
 
-                    {/* Images */}
+                    {/* Optimized Image Uploader */}
                     <div className="md:col-span-2">
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Image URLs (comma-separated)
+                            Product Images *
                         </label>
-                        <textarea
-                            name="images"
-                            value={formData.images}
-                            onChange={handleChange}
-                            rows={3}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                            placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
+                        <OptimizedUploader
+                            onImagesChange={handleImagesChange}
+                            existingImages={productImages}
+                            maxImages={5}
                         />
-                        <p className="mt-1 text-sm text-gray-500">
-                            Enter image URLs separated by commas
-                        </p>
                     </div>
-
-
                 </div>
 
                 {/* Actions */}
                 <div className="mt-6 flex items-center gap-4">
                     <button
                         type="submit"
-                        disabled={loading}
-                        className="flex items-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors disabled:bg-gray-400"
+                        disabled={loading || productImages.length === 0}
+                        className="flex items-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         <Save className="w-5 h-5" />
                         {loading ? 'Creating...' : 'Create Product'}

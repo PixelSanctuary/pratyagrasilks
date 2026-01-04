@@ -110,7 +110,7 @@ export default function ShippingPage() {
             </section>
 
             {/* Shipping Features */}
-            <section className="py-16 md:py-24 px-4 bg-gray-50">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-12">
                         Our Shipping Guidelines
@@ -168,7 +168,7 @@ export default function ShippingPage() {
             </section>
 
             {/* International Shipping */}
-            <section className="py-16 md:py-24 px-4 bg-gray-50">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-12">
                         International Shipping (Overseas)
@@ -310,7 +310,7 @@ export default function ShippingPage() {
             </section>
 
             {/* FAQ */}
-            <section className="py-16 md:py-24 px-4 bg-gray-50">
+            <section className="py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-12">
                         Shipping Questions

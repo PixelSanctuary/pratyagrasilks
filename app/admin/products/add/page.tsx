@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { ArrowLeft, Save } from 'lucide-react';
 import Link from 'next/link';
@@ -22,19 +22,15 @@ const categories = [
     { value: 'georgette-silk', label: 'Georgette Silk' },
 ];
 
-export default function EditProductPage() {
+export default function AddProductPage() {
     const router = useRouter();
-    const params = useParams();
-    const productId = params.id as string;
-
     const [loading, setLoading] = useState(false);
-    const [fetching, setFetching] = useState(true);
     const [productImages, setProductImages] = useState<string[]>([]);
     const [formData, setFormData] = useState({
         name: '',
         sku: '',
         price: '',
-        stock_quantity: '',
+        stock_quantity: 1,
         category: 'kanjivaram-silk',
         material: '',
         description: '',
@@ -42,54 +38,26 @@ export default function EditProductPage() {
         weight: '',
     });
 
-    useEffect(() => {
-        fetchProduct();
-    }, [productId]);
-
-    async function fetchProduct() {
-        const supabase = createClient();
-        const { data, error } = await supabase
-            .from('products')
-            .select('*')
-            .eq('id', productId)
-            .single();
-
-        if (error) {
-            console.error('Error fetching product:', error);
-            toast.error('Failed to load product');
-            router.push('/admin/products');
-        } else if (data) {
-            setFormData({
-                name: data.name || '',
-                sku: data.sku || '',
-                price: data.price?.toString() || '',
-                stock_quantity: data.stock_quantity?.toString() || '',
-                category: data.category || 'kanjivaram-silk',
-                material: data.material || '',
-                description: data.description || '',
-                dimensions: data.dimensions || '',
-                weight: data.weight || '',
-            });
-            // Set product images separately
-            setProductImages(Array.isArray(data.images) ? data.images : []);
-        }
-        setFetching(false);
-    }
-
     const handleImagesChange = (urls: string[]) => {
         setProductImages(urls);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (productImages.length === 0) {
+            toast.error('Please upload at least one product image');
+            return;
+        }
+
         setLoading(true);
 
         try {
             const supabase = createClient();
 
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('products')
-                .update({
+                .insert({
                     name: formData.name,
                     sku: formData.sku,
                     price: parseFloat(formData.price),
@@ -101,18 +69,19 @@ export default function EditProductPage() {
                     weight: formData.weight || null,
                     images: productImages,
                 })
-                .eq('id', productId);
+                .select()
+                .single();
 
             if (error) {
-                console.error('Error updating product:', error);
-                toast.error('Failed to update product: ' + error.message);
+                console.error('Error creating product:', error);
+                toast.error('Failed to create product: ' + error.message);
             } else {
-                toast.success('Product updated successfully!');
+                toast.success('Product created successfully!');
                 router.push('/admin/products');
             }
         } catch (error) {
             console.error('Error:', error);
-            toast.error('Failed to update product');
+            toast.error('Failed to create product');
         } finally {
             setLoading(false);
         }
@@ -126,14 +95,6 @@ export default function EditProductPage() {
         }));
     };
 
-    if (fetching) {
-        return (
-            <div className="flex items-center justify-center h-64">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600"></div>
-            </div>
-        );
-    }
-
     return (
         <div>
             <div className="flex items-center gap-4 mb-8">
@@ -143,7 +104,7 @@ export default function EditProductPage() {
                 >
                     <ArrowLeft className="w-5 h-5" />
                 </Link>
-                <h1 className="text-3xl font-bold text-gray-900">Edit Product</h1>
+                <h1 className="text-3xl font-bold text-gray-900">Add New Product</h1>
             </div>
 
             <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
@@ -297,7 +258,7 @@ export default function EditProductPage() {
                         />
                     </div>
 
-                    {/* Product Images */}
+                    {/* Optimized Image Uploader */}
                     <div className="md:col-span-2">
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                             Product Images *
@@ -308,19 +269,17 @@ export default function EditProductPage() {
                             maxImages={5}
                         />
                     </div>
-
-
                 </div>
 
                 {/* Actions */}
                 <div className="mt-6 flex items-center gap-4">
                     <button
                         type="submit"
-                        disabled={loading}
-                        className="flex items-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors disabled:bg-gray-400"
+                        disabled={loading || productImages.length === 0}
+                        className="flex items-center gap-2 px-6 py-3 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         <Save className="w-5 h-5" />
-                        {loading ? 'Saving...' : 'Save Changes'}
+                        {loading ? 'Creating...' : 'Create Product'}
                     </button>
                     <Link
                         href="/admin/products"
