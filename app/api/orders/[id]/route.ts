@@ -65,6 +65,13 @@ export async function GET(
             );
         }
 
+        // Calculate subtotal from items
+        const subtotal = items?.reduce((sum, item) => sum + (item.total_price || 0), 0) || 0;
+
+        // Get shipping cost from order or calculate
+        // Check if order has shipping_cost field, otherwise default to 0
+        const shippingCharge = order.shipping_cost || 0;
+
         // Combine all data
         return NextResponse.json({
             order: {
@@ -78,9 +85,10 @@ export async function GET(
                     city: address.city,
                     state: address.state,
                     pincode: address.postal_code,
+                    country: address.country,
                 } : null,
-                subtotal: order.total_amount, // You can calculate this from items if needed
-                shipping_charge: 0, // Add if you have this field
+                subtotal: subtotal,
+                shipping_charge: shippingCharge,
                 items: items || [],
             },
         });

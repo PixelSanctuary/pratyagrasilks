@@ -266,7 +266,7 @@ export default function NewProductPage() {
                         <OptimizedUploader
                             onImagesChange={handleImagesChange}
                             existingImages={productImages}
-                            maxImages={5}
+                            maxImages={10}
                         />
                     </div>
                 </div>

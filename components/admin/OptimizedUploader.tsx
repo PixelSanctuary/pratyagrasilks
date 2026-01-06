@@ -34,63 +34,74 @@ export default function OptimizedUploader({
     };
 
     const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
+        const files = Array.from(e.target.files || []);
+        if (files.length === 0) return;
 
-        if (images.length >= maxImages) {
-            toast.error(`Maximum ${maxImages} images allowed`);
+        // Check if adding these files would exceed the limit
+        if (images.length + files.length > maxImages) {
+            toast.error(`Maximum ${maxImages} images allowed. You can add ${maxImages - images.length} more.`);
             return;
         }
 
-        if (!file.type.startsWith('image/')) {
-            toast.error('Please select an image file');
+        // Validate all files are images
+        const invalidFiles = files.filter(file => !file.type.startsWith('image/'));
+        if (invalidFiles.length > 0) {
+            toast.error('Please select only image files (PNG, JPEG, WebP, GIF, SVG)');
             return;
         }
+
+        setCompressing(true);
+        setUploading(true);
+
+        const uploadedUrls: string[] = [];
+        const totalFiles = files.length;
 
         try {
-            // Show preview of original image
-            const originalPreview = URL.createObjectURL(file);
-            setPreviewUrl(originalPreview);
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileProgress = ((i / totalFiles) * 100);
 
-            // Start compression
-            setCompressing(true);
-            setProgress(10);
+                setProgress(Math.round(fileProgress));
 
-            const options = {
-                maxSizeMB: 1,
-                maxWidthOrHeight: 1920,
-                useWebWorker: true,
-                fileType: 'image/jpeg',
-                initialQuality: 0.8,
-                onProgress: (progressPercent: number) => {
-                    setProgress(Math.min(progressPercent * 0.5, 50));
-                },
-            };
+                // Show preview of current file
+                const originalPreview = URL.createObjectURL(file);
+                setPreviewUrl(originalPreview);
 
-            const compressedFile = await imageCompression(file, options);
+                // Compress image (skip for SVG and GIF)
+                let fileToUpload = file;
+                if (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/webp') {
+                    const options = {
+                        maxSizeMB: 1,
+                        maxWidthOrHeight: 1920,
+                        useWebWorker: true,
+                        fileType: file.type === 'image/png' ? 'image/png' : 'image/jpeg',
+                        initialQuality: 0.8,
+                    };
 
-            setCompressing(false);
-            setProgress(50);
+                    fileToUpload = await imageCompression(file, options);
+                }
 
-            // Show compressed preview
-            const compressedPreview = URL.createObjectURL(compressedFile);
-            setPreviewUrl(compressedPreview);
+                // Upload to Supabase
+                const publicUrl = await uploadProductImage(fileToUpload);
+                uploadedUrls.push(publicUrl);
 
-            // Start upload
-            setUploading(true);
-            setProgress(60);
+                // Cleanup preview
+                URL.revokeObjectURL(originalPreview);
+            }
 
-            const publicUrl = await uploadProductImage(compressedFile);
+            // Add all uploaded images to the array
+            const newImages = [...images, ...uploadedUrls];
+            updateImages(newImages);
 
             setProgress(100);
 
-            // Add to images array
-            const newImages = [...images, publicUrl];
-            updateImages(newImages);
+            // Show success message
+            toast.success(`Successfully uploaded ${uploadedUrls.length} image${uploadedUrls.length > 1 ? 's' : ''}!`);
 
             // Reset states
             setTimeout(() => {
                 setUploading(false);
+                setCompressing(false);
                 setPreviewUrl(null);
                 setProgress(0);
                 if (fileInputRef.current) {
@@ -98,16 +109,20 @@ export default function OptimizedUploader({
                 }
             }, 1000);
 
-            // Cleanup preview URLs
-            URL.revokeObjectURL(originalPreview);
-            URL.revokeObjectURL(compressedPreview);
         } catch (error) {
             console.error('Upload error:', error);
-            toast.error('Failed to upload image. Please try again.');
+            toast.error('Failed to upload some images. Please try again.');
             setCompressing(false);
             setUploading(false);
             setProgress(0);
             setPreviewUrl(null);
+
+            // If some images were uploaded successfully, still add them
+            if (uploadedUrls.length > 0) {
+                const newImages = [...images, ...uploadedUrls];
+                updateImages(newImages);
+                toast.success(`Uploaded ${uploadedUrls.length} of ${totalFiles} images`);
+            }
         }
     };
 
@@ -187,7 +202,7 @@ export default function OptimizedUploader({
         if (compressing) return 'Compressing...';
         if (uploading) return 'Uploading...';
         if (progress === 100) return 'Success!';
-        return 'Select Image';
+        return 'Select Images (Multiple)';
     };
 
     return (
@@ -197,7 +212,8 @@ export default function OptimizedUploader({
                 <input
                     ref={fileInputRef}
                     type="file"
-                    accept="image/*"
+                    accept="image/png,image/jpeg,image/jpg,image/webp,image/gif,image/svg+xml"
+                    multiple
                     onChange={handleFileSelect}
                     disabled={uploading || compressing || images.length >= maxImages}
                     className="hidden"
@@ -233,7 +249,7 @@ export default function OptimizedUploader({
 
                     {!compressing && !uploading && (
                         <p className="text-xs text-gray-500">
-                            PNG, JPG up to 50MB • Auto-compressed for optimal web performance
+                            PNG, JPEG, WebP, GIF, SVG • Auto-compressed for optimal web performance
                         </p>
                     )}
 

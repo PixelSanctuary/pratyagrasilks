@@ -9,6 +9,7 @@ import { useCart } from '@/lib/context/CartContext';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { trackViewItem, trackAddToCart } from '@/lib/analytics/gtag';
 
 interface ProductDetailPageProps {
     params: { id: string };
@@ -49,6 +50,11 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
             setProduct(productData);
             setRelatedProducts(relatedData);
             setLoading(false);
+
+            // Track product view in GA4
+            if (productData) {
+                trackViewItem(productData);
+            }
         }
         loadData();
     }, [params.id]);
@@ -59,6 +65,9 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
             if (!added) {
                 // Item already in cart
                 toast('This item is already in your cart!');
+            } else {
+                // Track add to cart in GA4
+                trackAddToCart(product);
             }
         }
     };

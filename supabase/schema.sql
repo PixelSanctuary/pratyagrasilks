@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS orders (
     order_number TEXT UNIQUE NOT NULL,
     status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'processing', 'shipped', 'delivered', 'cancelled')),
     total_amount NUMERIC(10, 2) NOT NULL CHECK (total_amount >= 0),
+    shipping_cost NUMERIC(10, 2) DEFAULT 0 CHECK (shipping_cost >= 0),
     shipping_address_id UUID REFERENCES addresses(id),
     payment_method TEXT,
     payment_status TEXT DEFAULT 'pending' CHECK (payment_status IN ('pending', 'completed', 'failed', 'refunded')),

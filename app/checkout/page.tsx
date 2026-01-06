@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/context/CartContext';
 import ShippingForm from '@/components/Checkout/ShippingForm';
@@ -9,6 +9,7 @@ import { ShippingAddress } from '@/lib/validations/checkout';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { trackBeginCheckout } from '@/lib/analytics/gtag';
 
 interface ShippingZone {
     id: string;
@@ -23,6 +24,14 @@ export default function CheckoutPage() {
     const [shippingCost, setShippingCost] = useState(0);
     const [estimatedDays, setEstimatedDays] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
+
+    // Track begin checkout in GA4
+    useEffect(() => {
+        if (items.length > 0) {
+            const subtotal = items.reduce((sum, item) => sum + item.product.price, 0);
+            trackBeginCheckout(items, subtotal);
+        }
+    }, []); // Only fire once on mount
 
     // Redirect if cart is empty
     if (items.length === 0) {
@@ -46,18 +55,33 @@ export default function CheckoutPage() {
         setIsProcessing(true);
 
         try {
-            // Calculate shipping based on state
-            const shippingResponse = await fetch(`/api/shipping/calculate`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ state: shippingData.state }),
-            });
+            let shippingInfo: ShippingZone;
 
-            if (!shippingResponse.ok) {
-                throw new Error('Failed to calculate shipping');
+            // Check if domestic (India) or international
+            if (shippingData.country === 'India') {
+                // Domestic shipping - use state-based calculation
+                const shippingResponse = await fetch(`/api/shipping/calculate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ state: shippingData.state || '' }),
+                });
+
+                if (!shippingResponse.ok) {
+                    throw new Error('Failed to calculate shipping');
+                }
+
+                shippingInfo = await shippingResponse.json();
+            } else {
+                // International shipping - flat rate placeholder
+                // TODO: Integrate with international shipping API
+                shippingInfo = {
+                    id: 'international',
+                    name: `International Shipping - ${shippingData.country}`,
+                    base_charge: 2500, // ₹2500 flat rate for international
+                    estimated_days: '10-15 business days',
+                };
             }
 
-            const shippingInfo: ShippingZone = await shippingResponse.json();
             setShippingCost(shippingInfo.base_charge);
             setEstimatedDays(shippingInfo.estimated_days);
 
@@ -73,8 +97,9 @@ export default function CheckoutPage() {
                         addressLine1: shippingData.addressLine1,
                         addressLine2: shippingData.addressLine2,
                         city: shippingData.city,
-                        state: shippingData.state,
-                        pincode: shippingData.pincode,
+                        state: shippingData.state || '',
+                        postalCode: shippingData.postalCode,
+                        country: shippingData.country,
                     },
                     items: items.map((item) => ({
                         productId: item.product.id,

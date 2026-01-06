@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, Package, Home } from 'lucide-react';
 import Image from 'next/image';
+import { trackPurchase } from '@/lib/analytics/gtag';
 
 interface OrderData {
     order: {
@@ -18,6 +19,7 @@ interface OrderData {
             city: string;
             state: string;
             pincode: string;
+            country?: string;
         };
         subtotal: number;
         shipping_charge: number;
@@ -28,7 +30,8 @@ interface OrderData {
         items: Array<{
             id: string;
             quantity: number;
-            price: number;
+            unit_price: number;
+            total_price: number;
             products: {
                 id: string;
                 name: string;
@@ -52,6 +55,16 @@ export default function OrderConfirmationPage() {
                 if (response.ok) {
                     const data = await response.json();
                     setOrderData(data);
+
+                    // Track purchase in GA4
+                    if (data?.order) {
+                        trackPurchase(
+                            data.order.id,
+                            data.order.total_amount,
+                            data.order.items,
+                            data.order.shipping_charge
+                        );
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching order:', error);
@@ -140,8 +153,9 @@ export default function OrderConfirmationPage() {
                                     </div>
                                     <div className="text-right">
                                         <p className="font-semibold text-gray-900">
-                                            {formatPrice(item.price)}
+                                            {formatPrice(item.unit_price || item.total_price || 0)}
                                         </p>
+                                        <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
                                     </div>
                                 </div>
                             );
@@ -155,13 +169,18 @@ export default function OrderConfirmationPage() {
                             <span>{formatPrice(order.subtotal)}</span>
                         </div>
                         <div className="flex justify-between text-textSecondary">
-                            <span>Shipping</span>
+                            <span>Shipping *</span>
                             <span>{formatPrice(order.shipping_charge)}</span>
                         </div>
                         <div className="flex justify-between text-lg font-semibold pt-2 border-t">
                             <span className="text-gray-900">Total</span>
                             <span className="text-amber-700">{formatPrice(order.total_amount)}</span>
                         </div>
+                        {order.shipping_charge > 0 && (
+                            <p className="text-xs text-amber-600 pt-2">
+                                * Shipping cost is an estimate and may vary
+                            </p>
+                        )}
                     </div>
                 </div>
 
@@ -178,6 +197,9 @@ export default function OrderConfirmationPage() {
                         <p>
                             {order.shipping_address.city}, {order.shipping_address.state} {order.shipping_address.pincode}
                         </p>
+                        {order.shipping_address.country && order.shipping_address.country !== 'India' && (
+                            <p>{order.shipping_address.country}</p>
+                        )}
                         <p className="mt-2">{order.customer_phone}</p>
                     </div>
                     {order.estimated_delivery_days && (
