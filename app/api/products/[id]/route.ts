@@ -41,6 +41,7 @@ export async function GET(
             material: product.material,
             dimensions: product.dimensions,
             weight: product.weight,
+            yt_link: product.yt_link,
             createdAt: product.created_at,
             updatedAt: product.updated_at,
         };

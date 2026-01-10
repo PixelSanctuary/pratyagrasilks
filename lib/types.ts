@@ -12,6 +12,7 @@ export interface Product {
     material: string;
     dimensions?: string;
     weight?: number;
+    yt_link?: string | null;
     createdAt: Date;
     updatedAt: Date;
 }

@@ -13,6 +13,10 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'images.pixieset.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'img.youtube.com',
             }
         ],
         minimumCacheTTL: 31536000, // 1 year cache for extreme performance

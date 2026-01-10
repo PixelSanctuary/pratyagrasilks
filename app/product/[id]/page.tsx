@@ -2,7 +2,7 @@
 
 import { Product } from '@/lib/types';
 import Link from 'next/link';
-import ImageGallery from '@/components/Product/ImageGallery';
+import ProductGallery from '@/components/products/ProductGallery';
 import ProductCard from '@/components/ProductCard';
 import WishlistButton from '@/components/Wishlist/WishlistButton';
 import { useCart } from '@/lib/context/CartContext';
@@ -135,7 +135,11 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                     {/* Image Gallery */}
                     <div>
-                        <ImageGallery images={product.images} productName={product.name} />
+                        <ProductGallery
+                            images={product.images}
+                            yt_link={product.yt_link}
+                            productName={product.name}
+                        />
                     </div>
 
                     {/* Product Info */}

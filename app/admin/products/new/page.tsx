@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import OptimizedUploader from '@/components/admin/OptimizedUploader';
+import { isValidYouTubeUrl, getYouTubeThumbnailUrl } from '@/lib/utils/youtube';
+import Image from 'next/image';
 
 const categories = [
     { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
@@ -36,7 +38,9 @@ export default function NewProductPage() {
         description: '',
         dimensions: '',
         weight: '',
+        yt_link: '',
     });
+    const [ytLinkError, setYtLinkError] = useState('');
 
     const handleImagesChange = (urls: string[]) => {
         setProductImages(urls);
@@ -47,6 +51,13 @@ export default function NewProductPage() {
 
         if (productImages.length === 0) {
             toast.error('Please upload at least one product image');
+            return;
+        }
+
+        // Validate YouTube link if provided
+        if (formData.yt_link && !isValidYouTubeUrl(formData.yt_link)) {
+            toast.error('Please enter a valid YouTube URL');
+            setYtLinkError('Invalid YouTube URL');
             return;
         }
 
@@ -68,6 +79,7 @@ export default function NewProductPage() {
                     dimensions: formData.dimensions || null,
                     weight: formData.weight || null,
                     images: productImages,
+                    yt_link: formData.yt_link || null,
                 })
                 .select()
                 .single();
@@ -93,6 +105,15 @@ export default function NewProductPage() {
             ...prev,
             [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
         }));
+
+        // Validate YouTube link on change
+        if (name === 'yt_link') {
+            if (value && !isValidYouTubeUrl(value)) {
+                setYtLinkError('Invalid YouTube URL');
+            } else {
+                setYtLinkError('');
+            }
+        }
     };
 
     return (
@@ -256,6 +277,42 @@ export default function NewProductPage() {
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                             placeholder="Detailed product description..."
                         />
+                    </div>
+
+                    {/* YouTube Video Link */}
+                    <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            <Youtube className="w-4 h-4 inline mr-1" />
+                            YouTube Video Link (Optional)
+                        </label>
+                        <input
+                            type="text"
+                            name="yt_link"
+                            value={formData.yt_link}
+                            onChange={handleChange}
+                            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 ${ytLinkError ? 'border-red-500' : 'border-gray-300'
+                                }`}
+                            placeholder="https://www.youtube.com/watch?v=... or https://youtu.be/..."
+                        />
+                        {ytLinkError && (
+                            <p className="mt-1 text-sm text-red-600">{ytLinkError}</p>
+                        )}
+                        {formData.yt_link && !ytLinkError && getYouTubeThumbnailUrl(formData.yt_link) && (
+                            <div className="mt-3">
+                                <p className="text-xs text-gray-600 mb-2">Video Preview:</p>
+                                <div className="relative w-48 h-36 rounded-lg overflow-hidden border-2 border-gray-200">
+                                    <Image
+                                        src={getYouTubeThumbnailUrl(formData.yt_link) || ''}
+                                        alt="YouTube thumbnail"
+                                        fill
+                                        className="object-cover"
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                                        <Youtube className="w-12 h-12 text-white opacity-80" />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Optimized Image Uploader */}
