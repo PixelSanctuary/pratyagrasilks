@@ -196,7 +196,7 @@ export default function PrivacyPage() {
                             <p className="mt-4 ">
                                 <strong>Email:</strong> info@pratyagrasilks.com<br />
                                 <strong>Phone:</strong> +91 73588 66646<br />
-                                <strong>Address:</strong> Pratyagra Silks 143, Karuppa Gounder Street, Coimbatore, Tamil Nadu 641001, India
+                                <strong>Address:</strong> Pratyagra Silks NO 178, 2<sup>nd</sup> Floor A Rammachnadra Road, RS Puram, Coimbatore, Tamil Nadu 641001, India
                             </p>
                         </div>
 

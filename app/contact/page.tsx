@@ -103,7 +103,8 @@ export default function ContactPage() {
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Office Address</h3>
                                     <p className="text-lg leading-relaxed">
                                         Pratyagra Silks<br />
-                                        143, Karuppa Gounder Street<br />
+                                        NO 178, 2<sup>nd</sup> Floor A Rammachnadra Road<br />
+                                        RS Puram,
                                         Coimbatore, Tamil Nadu 641001<br />
                                         India
                                     </p>
