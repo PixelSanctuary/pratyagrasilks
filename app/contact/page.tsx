@@ -105,7 +105,7 @@ export default function ContactPage() {
                                         Pratyagra Silks<br />
                                         NO 178, 2<sup>nd</sup> Floor A Rammachnadra Road<br />
                                         RS Puram,
-                                        Coimbatore, Tamil Nadu 641001<br />
+                                        Coimbatore, Tamil Nadu 641002<br />
                                         India
                                     </p>
                                 </div>

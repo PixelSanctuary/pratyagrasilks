@@ -243,8 +243,8 @@ export default function AdminProductsPage() {
                                                     )}
                                                 </div>
                                                 <div>
-                                                    <div className="font-medium text-gray-900">{product.name}</div>
-                                                    <div className="text-sm text-gray-500">{product.material}</div>
+                                                    <div className="font-medium text-gray-900 line-clamp-2">{product.name}</div>
+                                                    <div className="text-sm text-gray-500 truncate">{product.material}</div>
                                                 </div>
                                             </div>
                                         </td>
