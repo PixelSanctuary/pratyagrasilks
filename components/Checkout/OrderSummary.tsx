@@ -66,10 +66,10 @@ export default function OrderSummary({ shippingCost = 0, estimatedDays }: OrderS
                         {shippingCost > 0 ? (
                             <span className="flex items-center gap-1">
                                 {formatPrice(shippingCost)}
-                                <span className="text-xs text-amber-600">(estimated)</span>
+                                <span className="text-xs text-accent-700">(estimated)</span>
                             </span>
                         ) : (
-                            <span className="text-sm text-amber-600">Calculated at checkout</span>
+                            <span className="text-sm text-accent-700">Calculated at checkout</span>
                         )}
                     </span>
                 </div>
@@ -84,7 +84,7 @@ export default function OrderSummary({ shippingCost = 0, estimatedDays }: OrderS
                 <div className="border-t pt-2 mt-2">
                     <div className="flex justify-between text-lg font-semibold">
                         <span className="text-gray-900">Total</span>
-                        <span className="text-amber-700">{formatPrice(grandTotal)}</span>
+                        <span className="text-accent-700">{formatPrice(grandTotal)}</span>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@ export default function OrderSummary({ shippingCost = 0, estimatedDays }: OrderS
                     Taxes included where applicable
                 </p>
                 {shippingCost > 0 && (
-                    <p className="text-xs text-amber-600 text-center">
+                    <p className="text-xs text-accent-700 text-center">
                         * Shipping costs are estimates and may vary based on location and package weight
                     </p>
                 )}

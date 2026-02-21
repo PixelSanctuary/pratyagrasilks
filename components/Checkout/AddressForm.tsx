@@ -95,7 +95,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                             {...register('fullName')}
                             type="text"
                             id="fullName"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="John Doe"
                             maxLength={100}
                         />
@@ -114,7 +114,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                                 {...register('email')}
                                 type="email"
                                 id="email"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                                 placeholder="john@example.com"
                             />
                             {errors.email && (
@@ -130,7 +130,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                                 {...register('phone')}
                                 type="tel"
                                 id="phone"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                                 placeholder="+919876543210"
                             />
                             {errors.phone && (
@@ -148,7 +148,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                             {...register('addressLine1')}
                             type="text"
                             id="addressLine1"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="House No., Building Name, Street"
                             maxLength={200}
                         />
@@ -166,7 +166,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                             {...register('addressLine2')}
                             type="text"
                             id="addressLine2"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="Apartment, Suite, Landmark"
                             maxLength={200}
                         />
@@ -181,7 +181,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                             {...register('country')}
                             id="country"
                             onChange={handleCountryChange}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                         >
                             <option value="">Select Country</option>
                             {countriesList.map((country) => (
@@ -205,7 +205,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                                 {...register('city')}
                                 type="text"
                                 id="city"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                                 placeholder="Mumbai"
                                 maxLength={100}
                             />
@@ -223,7 +223,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                                     {...register('state')}
                                     id="state"
                                     onChange={handleStateChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                                 >
                                     <option value="">Select State</option>
                                     {stateList.map((state) => (
@@ -237,7 +237,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                                     {...register('state')}
                                     type="text"
                                     id="state"
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                                     placeholder="State / Province (if applicable)"
                                     maxLength={100}
                                 />
@@ -256,7 +256,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
                                 type="text"
                                 id="postalCode"
                                 maxLength={10}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                                 placeholder="400001"
                             />
                             {errors.postalCode && (
@@ -271,7 +271,7 @@ export default function AddressForm({ onSubmit, defaultValues }: AddressFormProp
             <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-amber-600 text-white py-3 rounded-lg font-semibold text-lg hover:bg-amber-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="w-full bg-primary text-white py-3 rounded-lg font-semibold text-lg hover:bg-primary-light transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
                 {isSubmitting ? 'Processing...' : 'Continue to Review'}
             </button>

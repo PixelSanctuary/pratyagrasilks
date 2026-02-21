@@ -84,7 +84,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
                     <p className="mt-4 text-textSecondary">Loading...</p>
                 </div>
             </div>
@@ -97,7 +97,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-2">Product Not Found</h1>
                     <p className="text-textSecondary mb-4">The product you're looking for doesn't exist.</p>
-                    <Link href="/collection" className="text-amber-600 hover:text-amber-700 font-medium">
+                    <Link href="/collection" className="text-primary hover:text-primary-light font-medium">
                         ← Back to Collection
                     </Link>
                 </div>
@@ -111,15 +111,15 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
             <div className="bg-white border-b">
                 <div className="container mx-auto px-4 py-4">
                     <nav className="flex items-center space-x-2 text-sm">
-                        <Link href="/" className="text-gray-500 hover:text-amber-600">
+                        <Link href="/" className="text-gray-500 hover:text-primary">
                             Home
                         </Link>
                         <span className="text-gray-400">/</span>
-                        <Link href="/collection" className="text-gray-500 hover:text-amber-600">
+                        <Link href="/collection" className="text-gray-500 hover:text-primary">
                             Collection
                         </Link>
                         <span className="text-gray-400">/</span>
-                        <Link href={`/collection?category=${product.category}`} className="text-gray-500 hover:text-amber-600 capitalize">
+                        <Link href={`/collection?category=${product.category}`} className="text-gray-500 hover:text-primary capitalize">
                             {product.category}
                         </Link>
                         <span className="text-gray-400">/</span>
@@ -153,7 +153,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
 
                         {/* Price */}
                         <div className="border-t border-b py-4">
-                            <p className="text-4xl font-bold text-primaryAnalogue">
+                            <p className="text-4xl font-bold text-accent-700">
                                 {formatPrice(product.price)}
                             </p>
                         </div>
@@ -219,7 +219,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                             <button
                                 onClick={handleAddToCart}
                                 disabled={!product.inStock || isInCart(product.id)}
-                                className="w-full bg-primary text-secondary py-4 rounded-lg font-semibold text-lg hover:bg-primary2 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                className="w-full bg-primary text-secondary py-4 rounded-lg font-semibold text-lg hover:bg-primary-light transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
                                 {isInCart(product.id) ? (
                                     <>

@@ -106,6 +106,12 @@ export default function RootLayout({
         url: 'https://pratyagrasilks.com',
         logo: 'https://pratyagrasilks.com/Fav_icon.png',
         description: 'Authentic handcrafted silk sarees from India\'s finest weavers. Premium quality Kanjivaram, Banarasi, Tussar, Mysore, and traditional silk sarees.',
+        color: '#153DB3',
+        brand: {
+            '@type': 'Brand',
+            name: 'PratyagraSilks',
+            color: '#153DB3',
+        },
         address: {
             '@type': 'PostalAddress',
             addressCountry: 'IN',

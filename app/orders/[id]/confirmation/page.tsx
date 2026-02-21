@@ -87,7 +87,7 @@ export default function OrderConfirmationPage() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             </div>
         );
     }
@@ -97,7 +97,7 @@ export default function OrderConfirmationPage() {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-2">Order Not Found</h1>
-                    <Link href="/" className="text-amber-600 hover:text-amber-700">
+                    <Link href="/" className="text-primary hover:text-primary-light">
                         Return to Home
                     </Link>
                 </div>
@@ -174,10 +174,10 @@ export default function OrderConfirmationPage() {
                         </div>
                         <div className="flex justify-between text-lg font-semibold pt-2 border-t">
                             <span className="text-gray-900">Total</span>
-                            <span className="text-amber-700">{formatPrice(order.total_amount)}</span>
+                            <span className="text-accent-700">{formatPrice(order.total_amount)}</span>
                         </div>
                         {order.shipping_charge > 0 && (
-                            <p className="text-xs text-amber-600 pt-2">
+                            <p className="text-xs text-accent-700 pt-2">
                                 * Shipping cost is an estimate and may vary
                             </p>
                         )}
@@ -203,8 +203,8 @@ export default function OrderConfirmationPage() {
                         <p className="mt-2">{order.customer_phone}</p>
                     </div>
                     {order.estimated_delivery_days && (
-                        <div className="mt-4 p-3 bg-amber-50 rounded-md">
-                            <p className="text-sm text-amber-800">
+                        <div className="mt-4 p-3 bg-accent-light rounded-md">
+                            <p className="text-sm text-accent-700">
                                 <span className="font-medium">Estimated Delivery:</span> {order.estimated_delivery_days}
                             </p>
                         </div>
@@ -215,7 +215,7 @@ export default function OrderConfirmationPage() {
                 <div className="flex gap-4">
                     <Link
                         href="/collection"
-                        className="flex-1 bg-amber-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors"
+                        className="flex-1 bg-primary text-white text-center py-3 rounded-lg font-semibold hover:bg-primary-light transition-colors"
                     >
                         Continue Shopping
                     </Link>

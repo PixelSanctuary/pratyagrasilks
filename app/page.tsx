@@ -25,7 +25,7 @@ export default function Home() {
         <div className="flex flex-col">
             {/* Hero Section - Mobile-first, high-impact, SEO optimized */}
             <section className="relative py-20 md:py-32 px-4 text-white overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary2 opacity-90"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary-light opacity-90"></div>
                 <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/ab207e7a5cbdc26b65405f930546fb35-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-7xl mx-auto text-center relative z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance leading-tight drop-shadow-lg">
@@ -164,7 +164,7 @@ export default function Home() {
             </section>}
 
             {/* CTA Section */}
-            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary2 text-white">
+            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary-light text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-6">
                         Begin Your Journey Into Timeless Elegance
@@ -183,3 +183,4 @@ export default function Home() {
         </div>
     );
 }
+

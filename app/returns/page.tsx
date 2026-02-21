@@ -60,7 +60,7 @@ export default function ReturnsPage() {
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary2 text-white py-16 md:py-24 px-4">
+            <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary-light text-white py-16 md:py-24 px-4">
             <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d535e954ec6c8338563e7b0fca472dad-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-4xl mx-auto text-center z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
@@ -295,7 +295,7 @@ export default function ReturnsPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary2 text-white">
+            <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary-light text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-6">
                         Need More Help?
@@ -314,3 +314,4 @@ export default function ReturnsPage() {
         </div>
     );
 }
+

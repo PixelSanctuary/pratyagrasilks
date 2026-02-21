@@ -56,8 +56,8 @@ export default function ConfirmDialog({
             button: 'bg-red-600 hover:bg-red-700 focus:ring-red-500',
         },
         warning: {
-            icon: 'text-amber-600',
-            button: 'bg-amber-600 hover:bg-amber-700 focus:ring-amber-500',
+            icon: 'text-accent',
+            button: 'bg-accent hover:bg-accent-hover focus:ring-accent',
         },
         info: {
             icon: 'text-blue-600',

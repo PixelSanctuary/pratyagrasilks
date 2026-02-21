@@ -89,12 +89,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
             <div className="min-h-screen">
                 {/* Hero Section */}
-                <div className="relative bg-gradient-to-r from-primary to-primary2 text-white py-16 md:py-24">
+                <div className="relative bg-gradient-to-r from-primary to-primary-dark text-white py-16 md:py-24">
                     <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/05e114529e649bfbaac0385e3b61afb5-large.jpg')] bg-no-repeat bg-cover opacity-20"></div>
                     <div className="container mx-auto px-4 relative z-10">
                         {/* Breadcrumb */}
                         <nav className="mb-6 text-sm">
-                            <ol className="flex items-center space-x-2 text-amber-100">
+                            <ol className="flex items-center space-x-2 text-white/80">
                                 <li>
                                     <Link href="/" className="hover:text-white transition-colors">
                                         Home
@@ -114,7 +114,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         <h1 className="text-4xl font-bold font-playfair mb-4">
                             {category.name}
                         </h1>
-                        <p className="text-xl md:text-2xl text-amber-100 max-w-3xl">
+                        <p className="text-xl md:text-2xl text-white/80 max-w-3xl">
                             {category.description}
                         </p>
                     </div>
@@ -131,7 +131,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                             </h2>
                             <Link
                                 href={`/collection?category=${params.category}`}
-                                className="text-amber-600 hover:text-amber-700 font-medium flex items-center ml-auto"
+                                className="text-accent hover:text-accent-hover font-medium flex items-center ml-auto"
                             >
                                 View All
                                 <svg
@@ -166,7 +166,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                                 </p>
                                 <Link
                                     href="/collection"
-                                    className="inline-block mt-6 px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors"
+                                    className="inline-block mt-6 px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent-hover transition-colors"
                                 >
                                     Browse All Collections
                                 </Link>
@@ -185,13 +185,13 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
                         <div className="grid md:grid-cols-2 gap-8 mt-8">
                             {/* Origin */}
-                            <div className="bg-amber-50 rounded-lg p-6">
+                            <div className="bg-accent-light rounded-lg p-6">
                                 <h3 className="text-xl font-semibold text-primary mb-3">Origin</h3>
                                 <p className="text-gray-700">{category.origin}</p>
                             </div>
 
                             {/* Price Range */}
-                            <div className="bg-amber-50 rounded-lg p-6">
+                            <div className="bg-accent-light rounded-lg p-6">
                                 <h3 className="text-xl font-semibold text-primary mb-3">Price Range</h3>
                                 <p className="text-gray-700 text-2xl font-bold">{category.priceRange}</p>
                             </div>
@@ -204,7 +204,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                                 {category.characteristics.map((char, index) => (
                                     <li key={index} className="flex items-start">
                                         <svg
-                                            className="w-6 h-6 text-amber-600 mr-3 flex-shrink-0 mt-0.5"
+                                            className="w-6 h-6 text-accent mr-3 flex-shrink-0 mt-0.5"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
@@ -272,11 +272,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                     </section>
 
                     {/* CTA Section */}
-                    <section className="mt-16 bg-gradient-to-r from-primary to-primary2 rounded-lg p-12 text-center text-white">
+                    <section className="mt-16 bg-gradient-to-r from-primary to-primary-dark rounded-lg p-12 text-center text-white">
                         <h2 className="text-3xl md:text-4xl font-bold font-playfair mb-4">
                             Explore More Silk Collections
                         </h2>
-                        <p className="text-xl text-amber-100 mb-8 max-w-2xl mx-auto">
+                        <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
                             Discover our curated collection of authentic handwoven silk sarees from across India
                         </p>
                         <Link

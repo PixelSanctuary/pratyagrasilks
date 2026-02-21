@@ -42,7 +42,7 @@ export default function CheckoutPage() {
                     <p className="text-textSecondary mb-4">Add some items before checking out.</p>
                     <Link
                         href="/collection"
-                        className="inline-block px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors"
+                        className="inline-block px-6 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent-hover transition-colors"
                     >
                         Continue Shopping
                     </Link>
@@ -145,7 +145,7 @@ export default function CheckoutPage() {
                         </div>
                         <Link
                             href="/cart"
-                            className="flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium"
+                            className="flex items-center gap-2 text-accent hover:text-accent-hover font-medium"
                         >
                             <ArrowLeft className="w-5 h-5" />
                             Back to Cart
@@ -173,7 +173,7 @@ export default function CheckoutPage() {
             {isProcessing && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white rounded-lg p-8 text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
                         <p className="text-gray-900 font-medium">Processing your order...</p>
                     </div>
                 </div>

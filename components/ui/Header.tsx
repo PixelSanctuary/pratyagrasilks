@@ -63,7 +63,7 @@ export default function Header() {
                                             <Link
                                                 key={category.slug}
                                                 href={`/silk/${category.slug}`}
-                                                className="px-4 py-2 hover:bg-amber-50 transition-colors text-sm"
+                                                className="px-4 py-2 hover:bg-accent-light transition-colors text-sm"
                                                 onClick={() => setIsSilkTypesMenuOpen(false)}
                                             >
                                                 <div className="font-medium text-gray-900">{category.name}</div>
@@ -150,7 +150,7 @@ export default function Header() {
                                 </Link>
                                 <Link
                                     href="/auth/signup"
-                                    className="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary2 transition-colors"
+                                    className="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary-light transition-colors"
                                 >
                                     Sign Up
                                 </Link>
@@ -233,7 +233,7 @@ export default function Header() {
                                     ))}
                                     <Link
                                         href="/collection"
-                                        className="block text-sm text-amber-600 hover:text-amber-700 transition-colors py-1 font-medium"
+                                        className="block text-sm text-accent hover:text-accent-hover transition-colors py-1 font-medium"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         View All →
@@ -297,7 +297,7 @@ export default function Header() {
                                     </Link>
                                     <Link
                                         href="/auth/signup"
-                                        className="bg-primary text-white text-center py-2 rounded-lg font-medium hover:bg-primary2 transition-colors"
+                                        className="bg-primary text-white text-center py-2 rounded-lg font-medium hover:bg-primary-light transition-colors"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         Sign Up

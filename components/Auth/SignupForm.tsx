@@ -75,7 +75,7 @@ export default function SignupForm() {
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="Your Name"
                             maxLength={34}
                         />
@@ -91,7 +91,7 @@ export default function SignupForm() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="you@example.com"
                         />
                     </div>
@@ -107,7 +107,7 @@ export default function SignupForm() {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             minLength={6}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="••••••••"
                         />
                         <p className="mt-1 text-xs text-gray-500">Must be at least 6 characters</p>
@@ -123,7 +123,7 @@ export default function SignupForm() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="••••••••"
                         />
                     </div>
@@ -131,7 +131,7 @@ export default function SignupForm() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-amber-600 text-white py-3 rounded-md font-semibold hover:bg-amber-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                        className="w-full bg-primary text-white py-3 rounded-md font-semibold hover:bg-primary-light transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         {loading ? 'Creating account...' : 'Sign Up'}
                     </button>
@@ -177,7 +177,7 @@ export default function SignupForm() {
 
                 <p className="mt-6 text-center text-sm text-textSecondary">
                     Already have an account?{' '}
-                    <Link href="/auth/login" className="text-amber-600 hover:text-amber-700 font-medium">
+                    <Link href="/auth/login" className="text-primary hover:text-primary-light font-medium">
                         Sign in
                     </Link>
                 </p>

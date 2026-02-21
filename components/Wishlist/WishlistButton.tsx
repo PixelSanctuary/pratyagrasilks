@@ -69,8 +69,8 @@ export default function WishlistButton({ product, variant = 'default', className
             onClick={handleToggleWishlist}
             disabled={isLoading}
             className={`flex items-center justify-center gap-2 px-6 py-3 border-2 rounded-lg font-semibold transition-all duration-200 disabled:opacity-50 ${inWishlist
-                    ? 'border-red-500 text-red-500 hover:bg-red-50'
-                    : 'border-primary text-primary hover:border-primary2 hover:text-primary2'
+                ? 'border-red-500 text-red-500 hover:bg-red-50'
+                : 'border-primary text-primary hover:border-primary-light hover:text-primary-light'
                 } ${className}`}
         >
             <Heart

@@ -49,7 +49,7 @@ export default function WishlistPage() {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
                     <p className="mt-4 text-textSecondary">Loading your wishlist...</p>
                 </div>
             </div>
@@ -70,7 +70,7 @@ export default function WishlistPage() {
                         </div>
                         <Link
                             href="/collection"
-                            className="flex items-center gap-2 text-primary hover:text-primary2 font-medium ml-auto"
+                            className="flex items-center gap-2 text-primary hover:text-primary-light font-medium ml-auto"
                         >
                             <ArrowLeft className="w-5 h-5" />
                             Continue Shopping
@@ -91,7 +91,7 @@ export default function WishlistPage() {
                         </p>
                         <Link
                             href="/collection"
-                            className="inline-block px-8 py-3 bg-primary text-secondary rounded-lg font-semibold hover:bg-primary2 transition-colors"
+                            className="inline-block px-8 py-3 bg-primary text-secondary rounded-lg font-semibold hover:bg-primary-light transition-colors"
                         >
                             Explore Our Collection
                         </Link>
@@ -129,12 +129,12 @@ export default function WishlistPage() {
                                     {/* Product Info */}
                                     <div className="p-4">
                                         <Link href={`/product/${product.id}`}>
-                                            <h3 className="text-lg font-semibold mb-2 line-clamp-2 hover:text-primary2 transition-colors">
+                                            <h3 className="text-lg font-semibold mb-2 line-clamp-2 hover:text-primary-light transition-colors">
                                                 {product.name}
                                             </h3>
                                         </Link>
 
-                                        <p className="text-2xl font-bold text-primaryAnalogue mb-4">
+                                        <p className="text-2xl font-bold text-accent-700 mb-4">
                                             {formatPrice(product.price)}
                                         </p>
 
@@ -143,7 +143,7 @@ export default function WishlistPage() {
                                             <button
                                                 onClick={() => handleAddToCart(product)}
                                                 disabled={!product.inStock || isInCart(product.id)}
-                                                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-primary text-secondary rounded-lg font-medium hover:bg-primary2 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                                                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-primary text-secondary rounded-lg font-medium hover:bg-primary-light transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
                                             >
                                                 <ShoppingCart className="w-4 h-4" />
                                                 {isInCart(product.id) ? 'In Cart' : product.inStock ? 'Add to Cart' : 'Out of Stock'}
@@ -167,3 +167,4 @@ export default function WishlistPage() {
         </div>
     );
 }
+

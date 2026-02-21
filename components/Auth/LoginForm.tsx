@@ -62,7 +62,7 @@ export default function LoginForm() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="you@example.com"
                         />
                     </div>
@@ -77,7 +77,7 @@ export default function LoginForm() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="••••••••"
                         />
                     </div>
@@ -85,7 +85,7 @@ export default function LoginForm() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-amber-600 text-white py-3 rounded-md font-semibold hover:bg-amber-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                        className="w-full bg-primary text-white py-3 rounded-md font-semibold hover:bg-primary-light transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         {loading ? 'Signing in...' : 'Sign In'}
                     </button>
@@ -131,7 +131,7 @@ export default function LoginForm() {
 
                 <p className="mt-6 text-center text-sm text-textSecondary">
                     Don't have an account?{' '}
-                    <Link href="/auth/signup" className="text-amber-600 hover:text-amber-700 font-medium">
+                    <Link href="/auth/signup" className="text-primary hover:text-primary-light font-medium">
                         Sign up
                     </Link>
                 </p>

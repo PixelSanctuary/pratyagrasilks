@@ -60,11 +60,11 @@ function CollectionContent() {
     return (
         <div className="min-h-screen">
             {/* Header */}
-            <div className="relative bg-gradient-to-r from-primary to-primary2 text-white py-12">
+            <div className="relative bg-gradient-to-r from-primary to-primary-light text-white py-12">
                 <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/05e114529e649bfbaac0385e3b61afb5-large.jpg')] bg-no-repeat bg-cover opacity-30"></div>
                 <div className="container mx-auto px-4 relative z-10">
                     <h1 className="text-4xl font-bold mb-2">Our Collection</h1>
-                    <p className="text-amber-100">Discover our exquisite range of handcrafted silk products</p>
+                    <p className="text-white/80">Discover our exquisite range of handcrafted silk products</p>
                 </div>
             </div>
 
@@ -150,7 +150,7 @@ function CollectionContent() {
                                 </p>
                                 <button
                                     onClick={() => setFilters({ category: '', minPrice: 0, maxPrice: 0, search: '' })}
-                                    className="px-6 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors"
+                                    className="px-6 py-2 bg-accent text-white rounded-md hover:bg-accent-hover transition-colors"
                                 >
                                     Clear Filters
                                 </button>
@@ -170,3 +170,4 @@ export default function CollectionPage() {
         </Suspense>
     );
 }
+

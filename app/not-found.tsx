@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function NotFound() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-primary via-primary/90 to-primary2 flex items-center justify-center px-4">
+        <div className="min-h-screen bg-gradient-to-br from-primary via-primary/90 to-primary-light flex items-center justify-center px-4">
             <div className="max-w-2xl mx-auto text-center">
                 {/* 404 Number with elegant styling */}
                 <div className="mb-8">
@@ -74,3 +74,4 @@ export default function NotFound() {
         </div>
     );
 }
+

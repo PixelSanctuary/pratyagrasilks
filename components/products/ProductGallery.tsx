@@ -128,8 +128,8 @@ export default function ProductGallery({ images, yt_link, productName = 'Product
                                 key={`thumb-${index}`}
                                 onClick={() => onThumbClick(index)}
                                 className={`flex-[0_0_20%] min-w-0 relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${index === selectedIndex
-                                        ? 'border-amber-600 ring-2 ring-amber-600 ring-offset-2'
-                                        : 'border-gray-200 hover:border-gray-400'
+                                    ? 'border-accent ring-2 ring-accent ring-offset-2'
+                                    : 'border-gray-200 hover:border-gray-400'
                                     }`}
                             >
                                 <Image
@@ -148,8 +148,8 @@ export default function ProductGallery({ images, yt_link, productName = 'Product
                                 key="thumb-video"
                                 onClick={() => onThumbClick(images.length)}
                                 className={`flex-[0_0_20%] min-w-0 relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${selectedIndex === images.length
-                                        ? 'border-amber-600 ring-2 ring-amber-600 ring-offset-2'
-                                        : 'border-gray-200 hover:border-gray-400'
+                                    ? 'border-accent ring-2 ring-accent ring-offset-2'
+                                    : 'border-gray-200 hover:border-gray-400'
                                     }`}
                             >
                                 {getYouTubeThumbnailUrl(yt_link) && (

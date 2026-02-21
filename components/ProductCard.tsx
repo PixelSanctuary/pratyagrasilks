@@ -24,7 +24,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <Link href={`/product/${product.id}`} className="group">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                 {/* Product Image */}
-                <div className="relative aspect-square overflow-hidden bg-gray-100">
+                <div className="relative aspect-square overflow-hidden bg-primary-50 silk-shimmer">
                     <Image
                         src={imageUrl}
                         alt={product.name}
@@ -51,7 +51,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                 {/* Product Info */}
                 <div className="p-4">
-                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary2 transition-colors">
+                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary-light transition-colors">
                         {product.name}
                     </h3>
 
@@ -61,7 +61,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                     <div className="flex items-center justify-between">
                         <div>
-                            <p className="text-2xl font-bold text-primaryAnalogue">
+                            <p className="text-2xl font-bold text-accent-700">
                                 {formatPrice(product.price)}
                             </p>
                             {/* {product.material && (
@@ -72,7 +72,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                         </div>
 
                         {product.inStock && (
-                            <div className="px-4 py-2 bg-primary text-secondary rounded-md text-sm font-medium group-hover:bg-primary2 transition-colors min-w-fit">
+                            <div className="px-4 py-2 bg-primary text-white rounded-md text-sm font-medium group-hover:bg-primary-light transition-colors min-w-fit">
                                 View Details
                             </div>
                         )}

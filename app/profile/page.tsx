@@ -19,7 +19,7 @@ export default function ProfilePage() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             </div>
         );
     }
@@ -58,8 +58,8 @@ export default function ProfilePage() {
                     <div className="lg:col-span-1">
                         <div className="bg-white rounded-lg shadow-md p-6">
                             <div className="flex items-center gap-4 mb-6 pb-6 border-b">
-                                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center">
-                                    <User className="w-8 h-8 text-amber-600" />
+                                <div className="w-16 h-16 bg-accent-light rounded-full flex items-center justify-center">
+                                    <User className="w-8 h-8 text-accent" />
                                 </div>
                                 <div>
                                     <h2 className="font-semibold text-gray-900">
@@ -72,7 +72,7 @@ export default function ProfilePage() {
                             <nav className="space-y-2">
                                 <Link
                                     href="/profile"
-                                    className="flex items-center gap-3 px-4 py-3 rounded-lg bg-amber-50 text-amber-700 font-medium"
+                                    className="flex items-center gap-3 px-4 py-3 rounded-lg bg-accent-light text-accent-700 font-medium"
                                 >
                                     <User className="w-5 h-5" />
                                     Profile
@@ -152,7 +152,7 @@ export default function ProfilePage() {
                                 </div>
                             </div>
 
-                            <button className="mt-6 px-6 py-2 border-2 border-amber-600 text-amber-600 rounded-lg font-semibold hover:bg-amber-50 transition-colors">
+                            <button className="mt-6 px-6 py-2 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent-light transition-colors">
                                 Edit Profile
                             </button>
                         </div>
@@ -164,18 +164,18 @@ export default function ProfilePage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <Link
                                     href="/orders"
-                                    className="p-4 border-2 border-gray-200 rounded-lg hover:border-amber-500 hover:bg-amber-50 transition-colors"
+                                    className="p-4 border-2 border-gray-200 rounded-lg hover:border-accent hover:bg-accent-light transition-colors"
                                 >
-                                    <Package className="w-6 h-6 text-amber-600 mb-2" />
+                                    <Package className="w-6 h-6 text-accent mb-2" />
                                     <h3 className="font-semibold text-gray-900">View Orders</h3>
                                     <p className="text-sm text-textSecondary">Track your orders</p>
                                 </Link>
 
                                 <Link
                                     href="/wishlist"
-                                    className="p-4 border-2 border-gray-200 rounded-lg hover:border-amber-500 hover:bg-amber-50 transition-colors"
+                                    className="p-4 border-2 border-gray-200 rounded-lg hover:border-accent hover:bg-accent-light transition-colors"
                                 >
-                                    <svg className="w-6 h-6 text-amber-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-6 h-6 text-accent mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                     </svg>
                                     <h3 className="font-semibold text-gray-900">Wishlist</h3>
@@ -184,9 +184,9 @@ export default function ProfilePage() {
 
                                 <Link
                                     href="/collection"
-                                    className="p-4 border-2 border-gray-200 rounded-lg hover:border-amber-500 hover:bg-amber-50 transition-colors"
+                                    className="p-4 border-2 border-gray-200 rounded-lg hover:border-accent hover:bg-accent-light transition-colors"
                                 >
-                                    <svg className="w-6 h-6 text-amber-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-6 h-6 text-accent mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                     </svg>
                                     <h3 className="font-semibold text-gray-900">Continue Shopping</h3>
@@ -195,9 +195,9 @@ export default function ProfilePage() {
 
                                 <Link
                                     href="/profile/addresses"
-                                    className="p-4 border-2 border-gray-200 rounded-lg hover:border-amber-500 hover:bg-amber-50 transition-colors"
+                                    className="p-4 border-2 border-gray-200 rounded-lg hover:border-accent hover:bg-accent-light transition-colors"
                                 >
-                                    <svg className="w-6 h-6 text-amber-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-6 h-6 text-accent mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>

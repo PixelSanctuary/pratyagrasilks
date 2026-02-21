@@ -2,11 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   PRATYAGRA SILKS — Design Token System
+   Brand: Purple (#550c72) + Amber accent
+   Context: Luxury Silk Sarees
+   ============================================================ */
+
 :root {
+  /* Page surface */
   --background: #fbf6f0;
+  /* Original warm silk parchment */
   --foreground: #221D10;
+  /* Deep walnut — primary text */
+
+  /* Purple — primary brand */
+  --color-primary: #550c72;
+  --color-primary-hover: #8430AB;
+  --color-primary-active: #720C5C;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-subtle: #F5EEF8;
+
+  /* Amber — accent / CTA */
+  --color-accent: #D97706;
+  --color-accent-hover: #B45309;
+  --color-accent-foreground: #FFFFFF;
+  --color-accent-subtle: #FFFBEB;
+  --color-accent-body: #92400E;
+  /* body-size text, meets 4.5:1 on white */
+
+  /* Silk backdrop */
+  --color-secondary: #FDE3C9;
+  /* original peach cream */
 }
 
+/* Dark mode intentionally mirrors light — brand requirement */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #fbf6f0;
@@ -28,4 +57,15 @@ body {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* ── Silk shimmer utility ── */
+/* Applied to product card image wrappers for a luxury iridescence feel */
+@layer utilities {
+  .silk-shimmer {
+    background: linear-gradient(135deg,
+        var(--color-primary-subtle) 0%,
+        #ffffff 40%,
+        var(--color-accent-subtle) 100%);
+  }
 }

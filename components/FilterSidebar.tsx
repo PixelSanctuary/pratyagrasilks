@@ -88,7 +88,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                 <h2 className="text-xl font-bold text-gray-900">Filters</h2>
                 <button
                     onClick={clearFilters}
-                    className="text-sm text-blueGrotto hover:text-primary2 font-medium"
+                    className="text-sm text-accent hover:text-accent-hover font-medium"
                 >
                     Clear All
                 </button>
@@ -104,7 +104,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                     value={filters.search}
                     onChange={(e) => handleSearchChange(e.target.value)}
                     placeholder="Search by name..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blueGrotto focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
             </div>
 
@@ -120,9 +120,9 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                                 value={cat.value}
                                 checked={filters.category === cat.value}
                                 onChange={(e) => handleCategoryChange(e.target.value)}
-                                className="w-4 h-4 text-primary focus:ring-primary2"
+                                className="w-4 h-4 text-primary focus:ring-primary-light"
                             />
-                            <span className="ml-3 text-sm  group-hover:text-primary2">
+                            <span className="ml-3 text-sm  group-hover:text-primary-light">
                                 {cat.label}
                             </span>
                         </label>
@@ -141,9 +141,9 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                                 name="priceRange"
                                 checked={filters.minPrice === range.min && filters.maxPrice === range.max}
                                 onChange={() => handlePriceRangeChange(range.min, range.max)}
-                                className="w-4 h-4 text-amber-600 focus:ring-amber-500"
+                                className="w-4 h-4 text-accent focus:ring-accent"
                             />
-                            <span className="ml-3 text-sm  group-hover:text-amber-700">
+                            <span className="ml-3 text-sm  group-hover:text-accent-hover">
                                 {range.label}
                             </span>
                         </label>

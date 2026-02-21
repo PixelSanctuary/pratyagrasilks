@@ -103,7 +103,7 @@ export default function OrderDetailsPage() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             </div>
         );
     }
@@ -113,7 +113,7 @@ export default function OrderDetailsPage() {
             <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-2">Order Not Found</h1>
-                    <Link href="/orders" className="text-amber-600 hover:text-amber-700">
+                    <Link href="/orders" className="text-primary hover:text-primary-light">
                         View All Orders
                     </Link>
                 </div>
@@ -130,7 +130,7 @@ export default function OrderDetailsPage() {
                 <div className="container mx-auto px-4 py-6">
                     <Link
                         href="/orders"
-                        className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium mb-4"
+                        className="inline-flex items-center gap-2 text-primary hover:text-primary-light font-medium mb-4"
                     >
                         <ArrowLeft className="w-5 h-5" />
                         Back to Orders
@@ -210,7 +210,7 @@ export default function OrderDetailsPage() {
                                 <div className="border-t pt-2 mt-2">
                                     <div className="flex justify-between text-lg font-semibold">
                                         <span className="text-gray-900">Total</span>
-                                        <span className="text-amber-700">{formatPrice(order.total_amount)}</span>
+                                        <span className="text-accent-700">{formatPrice(order.total_amount)}</span>
                                     </div>
                                 </div>
                             </div>

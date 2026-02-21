@@ -64,7 +64,7 @@ export default function CartSidebar() {
                             <p className="text-gray-500 mb-4">Add some products to get started!</p>
                             <button
                                 onClick={closeCart}
-                                className="px-6 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors"
+                                className="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary-light transition-colors"
                             >
                                 Continue Shopping
                             </button>
@@ -88,7 +88,7 @@ export default function CartSidebar() {
                         {/* Subtotal */}
                         <div className="flex items-center justify-between text-lg font-semibold">
                             <span className="text-gray-900">Subtotal:</span>
-                            <span className="text-amber-700">{formatPrice(totalPrice)}</span>
+                            <span className="text-accent-700">{formatPrice(totalPrice)}</span>
                         </div>
 
                         {/* Buttons */}
@@ -96,7 +96,7 @@ export default function CartSidebar() {
                             <Link
                                 href="/checkout"
                                 onClick={closeCart}
-                                className="block w-full bg-amber-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors"
+                                className="block w-full bg-primary text-white text-center py-3 rounded-lg font-semibold hover:bg-primary-light transition-colors"
                             >
                                 Proceed to Checkout
                             </Link>

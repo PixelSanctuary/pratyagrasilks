@@ -28,7 +28,7 @@ export default function CartPage() {
                         </div>
                         <Link
                             href="/collection"
-                            className="flex items-center gap-2 text-primary hover:text-primary2 font-medium ml-auto"
+                            className="flex items-center gap-2 text-primary hover:text-primary-light font-medium ml-auto"
                         >
                             <ArrowLeft className="w-5 h-5" />
                             Continue Shopping
@@ -49,7 +49,7 @@ export default function CartPage() {
                         </p>
                         <Link
                             href="/collection"
-                            className="inline-block px-8 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors"
+                            className="inline-block px-8 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent-hover transition-colors"
                         >
                             Start Shopping
                         </Link>
@@ -95,20 +95,20 @@ export default function CartPage() {
 
                                     <div className="flex justify-between text-textSecondary">
                                         <span>Shipping</span>
-                                        <span className="text-sm text-amber-600">Calculated at checkout</span>
+                                        <span className="text-sm text-accent">Calculated at checkout</span>
                                     </div>
 
                                     <div className="border-t pt-3">
                                         <div className="flex justify-between text-lg font-semibold">
                                             <span className="text-gray-900">Total</span>
-                                            <span className="text-amber-700">{formatPrice(totalPrice)}</span>
+                                            <span className="text-accent-700">{formatPrice(totalPrice)}</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <Link
                                     href="/checkout"
-                                    className="block w-full bg-amber-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors mb-3"
+                                    className="block w-full bg-accent text-white text-center py-3 rounded-lg font-semibold hover:bg-accent-hover transition-colors mb-3"
                                 >
                                     Proceed to Checkout
                                 </Link>
@@ -131,3 +131,4 @@ export default function CartPage() {
         </div>
     );
 }
+

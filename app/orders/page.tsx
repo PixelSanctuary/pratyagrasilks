@@ -102,11 +102,11 @@ export default function OrdersPage() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="your@email.com"
-                            className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-accent"
                         />
                         <button
                             type="submit"
-                            className="px-6 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors"
+                            className="px-6 py-2 bg-accent text-white rounded-md hover:bg-accent-hover transition-colors"
                         >
                             Search
                         </button>
@@ -118,7 +118,7 @@ export default function OrdersPage() {
             <div className="container mx-auto px-4 pb-12">
                 {loading ? (
                     <div className="flex items-center justify-center py-12">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600"></div>
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
                     </div>
                 ) : orders.length === 0 ? (
                     <div className="bg-white rounded-lg shadow-md p-12 text-center">
@@ -129,7 +129,7 @@ export default function OrdersPage() {
                         </p>
                         <Link
                             href="/collection"
-                            className="inline-block px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors"
+                            className="inline-block px-6 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent-hover transition-colors"
                         >
                             Start Shopping
                         </Link>
@@ -170,7 +170,7 @@ export default function OrdersPage() {
                                     {/* Price */}
                                     <div className="text-right">
                                         <p className="text-sm text-textSecondary">Total</p>
-                                        <p className="text-2xl font-bold text-amber-700">
+                                        <p className="text-2xl font-bold text-accent-700">
                                             {formatPrice(order.total_amount)}
                                         </p>
                                     </div>
