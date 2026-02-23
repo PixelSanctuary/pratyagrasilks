@@ -8,7 +8,7 @@ export default function WishlistBadge() {
     const { itemCount } = useWishlist();
 
     return (
-        <Link href="/wishlist" className="relative group">
+        <Link href="/wishlist" className="relative group" aria-label={`Wishlist with ${itemCount} items`}>
             <div className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                 <Heart className="w-6 h-6 text-gray-700 group-hover:text-primary transition-colors" />
                 {itemCount > 0 && (
