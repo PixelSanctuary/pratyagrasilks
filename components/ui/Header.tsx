@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { useAuth } from "@/lib/context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -28,9 +29,18 @@ export default function Header() {
                 <div className="flex justify-between items-center h-16 md:h-20">
                     {/* Logo/Brand */}
                     <Link href="/" className="flex items-center">
-                        <span className="font-playfair text-2xl md:text-3xl font-bold text-primary">
+                        {/* <span className="font-playfair text-2xl md:text-3xl font-bold text-primary">
                             Pratyagra Silks
-                        </span>
+                        </span> */}
+
+                        <Image
+                            src="/Pratyagra_Silks_Logo.svg"
+                            alt="Pratyagra Silks Logo"
+                            width={200}
+                            height={36}
+                            className="object-contain"
+                        />
+
                     </Link>
 
                     {/* Desktop Navigation */}
