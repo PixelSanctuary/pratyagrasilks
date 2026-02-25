@@ -5,9 +5,10 @@ import WishlistButton from '@/components/Wishlist/WishlistButton';
 
 interface ProductCardProps {
     product: Product;
+    showNewBadge?: boolean;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, showNewBadge = false }: ProductCardProps) {
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat('en-IN', {
             style: 'currency',
@@ -19,6 +20,16 @@ export default function ProductCard({ product }: ProductCardProps) {
     const imageUrl = product.images && product.images.length > 0
         ? product.images[0]
         : '/placeholder-product.jpg';
+
+    // Show "New In" badge if created within last 14 days
+    const isNewArrival = (() => {
+        if (!product.createdAt) return false;
+        const fourteenDaysAgo = new Date();
+        fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
+        return new Date(product.createdAt) > fourteenDaysAgo;
+    })();
+
+    const displayNewBadge = showNewBadge || isNewArrival;
 
     return (
         <Link href={`/product/${product.id}`} className="group">
@@ -43,6 +54,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                             {product.category?.replace(/-/g, ' ')}
                         </span>
                     </div>
+                    {/* New In Badge */}
+                    {displayNewBadge && (
+                        <div className="absolute bottom-2 left-2 mt-8">
+                            <span className="inline-block px-3 py-1 border border-primary bg-primary/50 text-white text-xs font-semibold rounded-lg tracking-wide shadow-md">
+                                ✦ New Arrival
+                            </span>
+                        </div>
+                    )}
                     {/* Wishlist Button */}
                     <div className="absolute top-2 right-2 z-10">
                         <WishlistButton product={product} variant="icon-only" />
@@ -51,7 +70,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                 {/* Product Info */}
                 <div className="p-4">
-                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary-light transition-colors">
+                    <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary-light transition-colors min-h-[56px]">
                         {product.name}
                     </h3>
 

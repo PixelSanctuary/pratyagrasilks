@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NewArrivals from "@/components/home/NewArrivals";
 
 // Server Component - Optimized for performance and SEO
 export default function Home() {
@@ -45,6 +46,9 @@ export default function Home() {
                 {/* Decorative element - now above the pattern to blend */}
                 <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent z-10"></div>
             </section>
+            
+            {/* New Arrivals — "The New Heritage" */}
+            <NewArrivals />
 
             {/* Why Choose PratyagraSilks - Trust & Credibility Section */}
             <section className="py-16 md:py-24 px-4">
