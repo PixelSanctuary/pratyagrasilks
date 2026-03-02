@@ -3,7 +3,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { shippingAddressSchema, ShippingAddress, INDIAN_STATES } from '@/lib/validations/checkout';
-import { CountryDropdown } from 'react-country-state-city';
 import { useState } from 'react';
 
 interface Props {
@@ -101,7 +100,9 @@ export default function ShippingForm({ onSubmit }: Props) {
 
                 {/* Address Line 2 */}
                 <div>
-                    <label htmlFor="addressLine2" className={labelClass}>Address Line 2 <span className="text-gray-400 font-normal">(optional)</span></label>
+                    <label htmlFor="addressLine2" className={labelClass}>
+                        Address Line 2 <span className="text-gray-400 font-normal">(optional)</span>
+                    </label>
                     <input
                         id="addressLine2"
                         type="text"
@@ -146,12 +147,11 @@ export default function ShippingForm({ onSubmit }: Props) {
                     <select
                         id="country"
                         className={inputClass}
-                        value={country}
                         {...register('country')}
                         onChange={(e) => {
                             setCountry(e.target.value);
                             setValue('country', e.target.value, { shouldValidate: true });
-                            setValue('state', ''); // reset state when country changes
+                            setValue('state', '');
                         }}
                     >
                         <option value="India">India</option>
@@ -170,11 +170,7 @@ export default function ShippingForm({ onSubmit }: Props) {
                 {country === 'India' && (
                     <div>
                         <label htmlFor="state" className={labelClass}>State *</label>
-                        <select
-                            id="state"
-                            className={inputClass}
-                            {...register('state')}
-                        >
+                        <select id="state" className={inputClass} {...register('state')}>
                             <option value="">Select state</option>
                             {INDIAN_STATES.map((s) => (
                                 <option key={s} value={s}>{s}</option>
@@ -195,7 +191,7 @@ export default function ShippingForm({ onSubmit }: Props) {
                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
                     "
                 >
-                    {isSubmitting ? 'Calculating shipping…' : 'Confirm Address & Proceed to Payment'}
+                    {isSubmitting ? 'Calculating shipping…' : 'Confirm Address & Continue to Payment'}
                 </button>
             </form>
         </div>

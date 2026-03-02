@@ -10,7 +10,6 @@ interface Props {
 
 export default function OrderSummary({ shippingCost, estimatedDays }: Props) {
     const { items } = useCart();
-
     const subtotal = items.reduce((sum, item) => sum + item.product.price, 0);
     const total = subtotal + shippingCost;
 
@@ -25,7 +24,6 @@ export default function OrderSummary({ shippingCost, estimatedDays }: Props) {
             <div className="space-y-3 mb-5">
                 {items.map((item) => (
                     <div key={item.id} className="flex items-center gap-3">
-                        {/* Thumbnail */}
                         {item.product.images?.[0] && (
                             <img
                                 src={item.product.images[0]}
@@ -34,9 +32,7 @@ export default function OrderSummary({ shippingCost, estimatedDays }: Props) {
                             />
                         )}
                         <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-900 truncate">
-                                {item.product.name}
-                            </p>
+                            <p className="text-sm font-medium text-gray-900 truncate">{item.product.name}</p>
                             {item.product.sku && (
                                 <p className="text-xs text-gray-400">{item.product.sku}</p>
                             )}
@@ -54,7 +50,6 @@ export default function OrderSummary({ shippingCost, estimatedDays }: Props) {
                     <span>Subtotal ({items.length} {items.length === 1 ? 'item' : 'items'})</span>
                     <span>₹{subtotal.toLocaleString('en-IN')}</span>
                 </div>
-
                 <div className="flex justify-between text-sm text-gray-600">
                     <span>Shipping</span>
                     <span>
@@ -63,24 +58,21 @@ export default function OrderSummary({ shippingCost, estimatedDays }: Props) {
                             : `₹${shippingCost.toLocaleString('en-IN')}`}
                     </span>
                 </div>
-
                 {estimatedDays && (
                     <div className="flex justify-between text-xs text-gray-400">
                         <span>Estimated delivery</span>
                         <span>{estimatedDays}</span>
                     </div>
                 )}
-
                 <div className="flex justify-between text-base font-bold text-gray-900 pt-2 border-t border-gray-100">
                     <span>Total</span>
                     <span className="text-primary-dark">₹{total.toLocaleString('en-IN')}</span>
                 </div>
             </div>
 
-            {/* Trust badges */}
             <div className="mt-5 pt-4 border-t border-gray-100">
                 <p className="text-xs text-gray-400 text-center">
-                    🔒 Secure checkout · All sarees are authentic & handcrafted
+                    🔒 Secure checkout · All sarees are authentic &amp; handcrafted
                 </p>
             </div>
         </div>
