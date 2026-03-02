@@ -41,6 +41,9 @@ export interface Order {
     };
     paymentMethod: string;
     paymentStatus: 'pending' | 'completed' | 'failed';
+    paymentId?: string; // Stripe session ID
+    orderNumber?: string; // Unique order identifier
+    shippingCost?: number;
     createdAt: Date;
     updatedAt: Date;
     deliveredAt?: Date;

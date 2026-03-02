@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { useCart } from '@/lib/context/CartContext';
 import ShippingForm from '@/components/Checkout/ShippingForm';
 import OrderSummary from '@/components/Checkout/OrderSummary';
+import RazorpayButton from '@/components/Checkout/RazorpayButton';
 import { ShippingAddress } from '@/lib/validations/checkout';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
@@ -19,11 +19,13 @@ interface ShippingZone {
 }
 
 export default function CheckoutPage() {
-    const router = useRouter();
     const { items, clearCart } = useCart();
     const [shippingCost, setShippingCost] = useState(0);
     const [estimatedDays, setEstimatedDays] = useState('');
+    const [shippingZoneId, setShippingZoneId] = useState<string | undefined>();
     const [isProcessing, setIsProcessing] = useState(false);
+    // Once the shipping form is submitted, show the payment button
+    const [confirmedShipping, setConfirmedShipping] = useState<ShippingAddress | null>(null);
 
     // Track begin checkout in GA4
     useEffect(() => {
@@ -57,77 +59,31 @@ export default function CheckoutPage() {
         try {
             let shippingInfo: ShippingZone;
 
-            // Check if domestic (India) or international
             if (shippingData.country === 'India') {
-                // Domestic shipping - use state-based calculation
-                const shippingResponse = await fetch(`/api/shipping/calculate`, {
+                const shippingResponse = await fetch('/api/shipping/calculate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ state: shippingData.state || '' }),
                 });
 
-                if (!shippingResponse.ok) {
-                    throw new Error('Failed to calculate shipping');
-                }
-
+                if (!shippingResponse.ok) throw new Error('Failed to calculate shipping');
                 shippingInfo = await shippingResponse.json();
             } else {
-                // International shipping - flat rate placeholder
-                // TODO: Integrate with international shipping API
                 shippingInfo = {
                     id: 'international',
-                    name: `International Shipping - ${shippingData.country}`,
-                    base_charge: 2500, // ₹2500 flat rate for international
-                    estimated_days: '10-15 business days',
+                    name: `International Shipping – ${shippingData.country}`,
+                    base_charge: 2500,
+                    estimated_days: '10–15 business days',
                 };
             }
 
             setShippingCost(shippingInfo.base_charge);
             setEstimatedDays(shippingInfo.estimated_days);
-
-            // Create order
-            const orderResponse = await fetch('/api/orders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    shippingAddress: {
-                        fullName: shippingData.fullName,
-                        email: shippingData.email,
-                        phone: shippingData.phone,
-                        addressLine1: shippingData.addressLine1,
-                        addressLine2: shippingData.addressLine2,
-                        city: shippingData.city,
-                        state: shippingData.state || '',
-                        postalCode: shippingData.postalCode,
-                        country: shippingData.country,
-                    },
-                    items: items.map((item) => ({
-                        productId: item.product.id,
-                        name: item.product.name,
-                        sku: item.product.sku,
-                        price: item.product.price,
-                    })),
-                    shippingCost: shippingInfo.base_charge,
-                    shippingZoneId: shippingInfo.id,
-                    estimatedDeliveryDays: shippingInfo.estimated_days,
-                }),
-            });
-
-            if (!orderResponse.ok) {
-                const error = await orderResponse.json();
-                throw new Error(error.error || 'Failed to create order');
-            }
-
-            const { orderId } = await orderResponse.json();
-
-            // Clear cart
-            clearCart();
-
-            // Redirect to confirmation
-            router.push(`/orders/${orderId}/confirmation`);
+            setShippingZoneId(shippingInfo.id !== 'international' ? shippingInfo.id : undefined);
+            setConfirmedShipping(shippingData);
         } catch (error) {
-            console.error('Checkout error:', error);
-            toast.error(error instanceof Error ? error.message : 'Failed to process order. Please try again.');
+            console.error('Shipping error:', error);
+            toast.error(error instanceof Error ? error.message : 'Failed to calculate shipping.');
         } finally {
             setIsProcessing(false);
         }
@@ -157,24 +113,51 @@ export default function CheckoutPage() {
             {/* Checkout Content */}
             <div className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Shipping Form */}
-                    <div className="lg:col-span-2">
+                    {/* Left — Shipping Form + Payment */}
+                    <div className="lg:col-span-2 space-y-6">
                         <ShippingForm onSubmit={handleShippingSubmit} />
+
+                        {/* Payment section — revealed after shipping is confirmed */}
+                        {confirmedShipping && (
+                            <div className="bg-white rounded-xl border border-primary-100 p-6 shadow-sm">
+                                <h2 className="text-lg font-semibold text-gray-900 mb-1">
+                                    Payment
+                                </h2>
+                                <p className="text-sm text-textSecondary mb-5">
+                                    Address confirmed. Complete your purchase securely via Razorpay.
+                                </p>
+                                <RazorpayButton
+                                    shippingAddress={confirmedShipping}
+                                    cartItems={items.map((i) => ({
+                                        productId: i.product.id,
+                                        product: {
+                                            name: i.product.name,
+                                            price: i.product.price,
+                                            sku: i.product.sku,
+                                        },
+                                    }))}
+                                    shippingCost={shippingCost}
+                                    shippingZoneId={shippingZoneId}
+                                    estimatedDeliveryDays={estimatedDays}
+                                    onSuccess={clearCart}
+                                />
+                            </div>
+                        )}
                     </div>
 
-                    {/* Order Summary */}
+                    {/* Right — Order Summary */}
                     <div className="lg:col-span-1">
                         <OrderSummary shippingCost={shippingCost} estimatedDays={estimatedDays} />
                     </div>
                 </div>
             </div>
 
-            {/* Processing Overlay */}
+            {/* Processing Overlay (shipping calculation) */}
             {isProcessing && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white rounded-lg p-8 text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                        <p className="text-gray-900 font-medium">Processing your order...</p>
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
+                        <p className="text-gray-900 font-medium">Calculating shipping…</p>
                     </div>
                 </div>
             )}
