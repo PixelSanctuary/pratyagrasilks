@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useCart } from '@/lib/context/CartContext';
 import ShippingForm from '@/components/Checkout/ShippingForm';
 import OrderSummary from '@/components/Checkout/OrderSummary';
@@ -26,6 +26,7 @@ export default function CheckoutPage() {
     const [isProcessing, setIsProcessing] = useState(false);
     // Once the shipping form is submitted, show the payment button
     const [confirmedShipping, setConfirmedShipping] = useState<ShippingAddress | null>(null);
+    const paymentRef = useRef<HTMLDivElement>(null);
 
     // Track begin checkout in GA4
     useEffect(() => {
@@ -81,6 +82,10 @@ export default function CheckoutPage() {
             setEstimatedDays(shippingInfo.estimated_days);
             setShippingZoneId(shippingInfo.id !== 'international' ? shippingInfo.id : undefined);
             setConfirmedShipping(shippingData);
+            // Scroll to payment section after a brief paint delay
+            setTimeout(() => {
+                paymentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
         } catch (error) {
             console.error('Shipping error:', error);
             toast.error(error instanceof Error ? error.message : 'Failed to calculate shipping.');
@@ -119,7 +124,7 @@ export default function CheckoutPage() {
 
                         {/* Payment section — revealed after shipping is confirmed */}
                         {confirmedShipping && (
-                            <div className="bg-white rounded-xl border border-primary-100 p-6 shadow-sm">
+                            <div ref={paymentRef} className="bg-white rounded-xl border border-primary-100 p-6 shadow-sm">
                                 <h2 className="text-lg font-semibold text-gray-900 mb-1">
                                     Payment
                                 </h2>
