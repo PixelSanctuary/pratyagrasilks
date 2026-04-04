@@ -17,11 +17,12 @@ export async function GET(request: NextRequest) {
         const limit = parseInt(searchParams.get('limit') || '50');
         const offset = parseInt(searchParams.get('offset') || '0');
 
-        // Build query
+        // Build query — public API only surfaces products marked for online listing
         let query = supabase
             .from('products')
             .select('*')
             .eq('in_stock', true)
+            .eq('is_online', true)
             .range(offset, offset + limit - 1);
 
         // Apply filters

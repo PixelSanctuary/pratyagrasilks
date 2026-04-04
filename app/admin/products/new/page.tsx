@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { ArrowLeft, Save, Youtube } from 'lucide-react';
 import Link from 'next/link';
@@ -9,6 +10,8 @@ import toast from 'react-hot-toast';
 import OptimizedUploader from '@/components/admin/OptimizedUploader';
 import { isValidYouTubeUrl, getYouTubeThumbnailUrl } from '@/lib/utils/youtube';
 import Image from 'next/image';
+import { getVendors } from '@/lib/actions/vendor.actions';
+import { Vendor } from '@/lib/types';
 
 const categories = [
     { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
@@ -24,10 +27,15 @@ const categories = [
     { value: 'georgette-silk', label: 'Georgette Silk' },
 ];
 
-export default function NewProductPage() {
+function NewProductForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const prefillVendorId = searchParams.get('vendorId') ?? '';
+
     const [loading, setLoading] = useState(false);
     const [productImages, setProductImages] = useState<string[]>([]);
+    const [vendors, setVendors] = useState<Vendor[]>([]);
+    const [vendorsLoading, setVendorsLoading] = useState(true);
     const [formData, setFormData] = useState({
         name: '',
         sku: '',
@@ -39,8 +47,23 @@ export default function NewProductPage() {
         dimensions: '',
         weight: '',
         yt_link: '',
+        is_online: true,
+        vendorId: prefillVendorId,
     });
     const [ytLinkError, setYtLinkError] = useState('');
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const data = await getVendors();
+                setVendors(data);
+            } catch (err) {
+                console.error('Failed to load vendors:', err);
+            } finally {
+                setVendorsLoading(false);
+            }
+        })();
+    }, []);
 
     const handleImagesChange = (urls: string[]) => {
         setProductImages(urls);
@@ -80,6 +103,8 @@ export default function NewProductPage() {
                     weight: formData.weight || null,
                     images: productImages,
                     yt_link: formData.yt_link || null,
+                    is_online: formData.is_online,
+                    vendor_id: formData.vendorId || null,
                 })
                 .select()
                 .single();
@@ -217,6 +242,32 @@ export default function NewProductPage() {
                         </select>
                     </div>
 
+                    {/* Vendor */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Vendor
+                            {prefillVendorId && (
+                                <span className="ml-2 text-xs font-normal text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">
+                                    Pre-filled from vendor
+                                </span>
+                            )}
+                        </label>
+                        <select
+                            name="vendorId"
+                            value={formData.vendorId}
+                            onChange={handleChange}
+                            disabled={vendorsLoading}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 disabled:bg-gray-50 disabled:text-gray-400"
+                        >
+                            <option value="">— No vendor / Walk-in —</option>
+                            {vendors.map((v) => (
+                                <option key={v.id} value={v.id}>
+                                    {v.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
                     {/* Material */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -326,6 +377,46 @@ export default function NewProductPage() {
                             maxImages={10}
                         />
                     </div>
+
+                    {/* ── List on Website Toggle ─────────────────────── */}
+                    <div className="md:col-span-2">
+                        <div className={`flex items-start gap-4 p-5 rounded-xl border-2 transition-all duration-200 ${
+                            formData.is_online
+                                ? 'border-primary bg-primary-50'
+                                : 'border-gray-200 bg-gray-50'
+                        }`}>
+                            <button
+                                type="button"
+                                id="toggle-is-online-new"
+                                role="switch"
+                                aria-checked={formData.is_online}
+                                onClick={() =>
+                                    setFormData((prev) => ({ ...prev, is_online: !prev.is_online }))
+                                }
+                                className={`relative inline-flex h-7 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                                    formData.is_online ? 'bg-primary' : 'bg-gray-300'
+                                }`}
+                            >
+                                <span
+                                    className={`pointer-events-none inline-block h-6 w-6 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${
+                                        formData.is_online ? 'translate-x-7' : 'translate-x-0'
+                                    }`}
+                                />
+                            </button>
+                            <div className="flex flex-col">
+                                <span className={`text-sm font-semibold ${
+                                    formData.is_online ? 'text-primary' : 'text-gray-600'
+                                }`}>
+                                    {formData.is_online ? '🌐 Listed on Website' : '🏪 Physical Store Only (POS)'}
+                                </span>
+                                <span className="text-xs text-gray-500 mt-0.5">
+                                    {formData.is_online
+                                        ? 'This saree will appear in the public online catalog.'
+                                        : 'This saree is hidden from the website. Use barcode label for in-store billing.'}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Actions */}
@@ -347,5 +438,17 @@ export default function NewProductPage() {
                 </div>
             </form>
         </div>
+    );
+}
+
+export default function NewProductPage() {
+    return (
+        <Suspense fallback={
+            <div className="flex items-center justify-center h-64">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600" />
+            </div>
+        }>
+            <NewProductForm />
+        </Suspense>
     );
 }

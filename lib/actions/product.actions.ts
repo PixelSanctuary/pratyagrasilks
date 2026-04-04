@@ -1,5 +1,9 @@
+'use server';
+
 import { createClient } from '@/lib/supabase/server';
 import { Product } from '@/lib/types';
+import { revalidatePath } from 'next/cache';
+import { getCallerRole, assertAdminOnly } from '@/lib/actions/role-guard';
 
 /**
  * Fetches the 8 most recently added products ordered by created_at DESC
@@ -10,6 +14,7 @@ export async function getNewArrivals(): Promise<Product[]> {
     const { data, error } = await supabase
         .from('products')
         .select('*')
+        .eq('is_online', true)
         .order('created_at', { ascending: false })
         .limit(8);
 
@@ -29,6 +34,7 @@ export async function getNewArrivals(): Promise<Product[]> {
         category: product.category,
         images: product.images || [],
         inStock: product.in_stock,
+        isOnline: product.is_online ?? true,
         sku: product.sku,
         material: product.material,
         dimensions: product.dimensions,
@@ -37,4 +43,99 @@ export async function getNewArrivals(): Promise<Product[]> {
         createdAt: product.created_at,
         updatedAt: product.updated_at,
     }));
+}
+
+export interface VendorProduct {
+    id: string;
+    name: string;
+    sku: string;
+    price: number;
+    category: string;
+    inStock: boolean;
+    thumbnail: string | null;
+}
+
+export async function getProductsByVendor(vendorId: string): Promise<VendorProduct[]> {
+    const supabase = createClient();
+
+    const { data, error } = await supabase
+        .from('products')
+        .select('id, name, sku, price, category, in_stock, images')
+        .eq('vendor_id', vendorId)
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        console.error('Error fetching products for vendor:', error);
+        return [];
+    }
+
+    return (data ?? []).map((row) => ({
+        id: row.id,
+        name: row.name,
+        sku: row.sku,
+        price: row.price,
+        category: row.category,
+        inStock: row.in_stock,
+        thumbnail: Array.isArray(row.images) && row.images.length > 0 ? row.images[0] : null,
+    }));
+}
+
+export interface ProductUpdateInput {
+    name: string;
+    sku: string;
+    price?: number;
+    stock_quantity: number;
+    category: string;
+    material?: string | null;
+    description?: string | null;
+    dimensions?: string | null;
+    weight?: string | null;
+    images?: string[];
+    yt_link?: string | null;
+    is_online?: boolean;
+    vendor_id?: string | null;
+}
+
+export async function deleteProduct(id: string): Promise<void> {
+    const role = await getCallerRole();
+    await assertAdminOnly(role, 'delete products');
+
+    const supabase = createClient();
+    const { error } = await supabase.from('products').delete().eq('id', id);
+    if (error) throw new Error(error.message);
+
+    revalidatePath('/admin/products');
+}
+
+export async function updateProduct(id: string, data: ProductUpdateInput): Promise<void> {
+    const role = await getCallerRole();
+
+    const supabase = createClient();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const patch: Record<string, any> = {
+        name: data.name,
+        sku: data.sku,
+        stock_quantity: data.stock_quantity,
+        category: data.category,
+        material: data.material ?? null,
+        description: data.description ?? null,
+        dimensions: data.dimensions ?? null,
+        weight: data.weight ?? null,
+        images: data.images ?? [],
+        yt_link: data.yt_link ?? null,
+        is_online: data.is_online ?? false,
+        vendor_id: data.vendor_id ?? null,
+    };
+
+    // CASHIER cannot modify price — silently strip it
+    if (role === 'ADMIN' && data.price !== undefined) {
+        patch.price = data.price;
+    }
+
+    const { error } = await supabase.from('products').update(patch).eq('id', id);
+    if (error) throw new Error(error.message);
+
+    revalidatePath('/admin/products');
+    revalidatePath(`/admin/products/${id}`);
 }

@@ -68,3 +68,47 @@ export async function uploadMultipleProductImages(files: File[]): Promise<string
     const uploadPromises = files.map((file) => uploadProductImage(file));
     return Promise.all(uploadPromises);
 }
+
+// ─── Vendor Documents (private 'vendor-docs' bucket) ─────────────────────────
+
+/**
+ * Upload a vendor document (already compressed to WebP) to the vendor-docs bucket.
+ * @returns Storage path within the bucket (store this in vendors.document_urls)
+ */
+export async function uploadVendorDoc(file: File): Promise<string> {
+    const supabase = createClient();
+    const timestamp = Date.now();
+    const baseName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_').replace(/\.[^.]+$/, '');
+    const path = `${timestamp}_${baseName}.webp`;
+
+    const { error } = await supabase.storage
+        .from('vendor-docs')
+        .upload(path, file, { cacheControl: '3600', upsert: false });
+
+    if (error) throw new Error(`Vendor doc upload failed: ${error.message}`);
+    return path;
+}
+
+/**
+ * Generate a short-lived signed URL for displaying a vendor document.
+ * @param path  - Storage path returned by uploadVendorDoc
+ * @param expiresIn - Seconds until URL expires (default 1 hour)
+ */
+export async function getVendorDocSignedUrl(path: string, expiresIn = 3600): Promise<string> {
+    const supabase = createClient();
+    const { data, error } = await supabase.storage
+        .from('vendor-docs')
+        .createSignedUrl(path, expiresIn);
+    if (error || !data) throw new Error(`Signed URL failed: ${error?.message}`);
+    return data.signedUrl;
+}
+
+/**
+ * Permanently delete a vendor document from storage.
+ * @param path - Storage path returned by uploadVendorDoc
+ */
+export async function deleteVendorDoc(path: string): Promise<void> {
+    const supabase = createClient();
+    const { error } = await supabase.storage.from('vendor-docs').remove([path]);
+    if (error) throw new Error(`Vendor doc delete failed: ${error.message}`);
+}

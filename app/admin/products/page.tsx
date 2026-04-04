@@ -7,6 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import { useAdmin } from '@/lib/hooks/useAdmin';
+import { deleteProduct } from '@/lib/actions/product.actions';
 
 interface Product {
     id: string;
@@ -21,6 +23,7 @@ interface Product {
 }
 
 export default function AdminProductsPage() {
+    const { isAdmin } = useAdmin();
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -66,18 +69,13 @@ export default function AdminProductsPage() {
     const confirmDelete = async () => {
         if (!productToDelete) return;
 
-        const supabase = createClient();
-        const { error } = await supabase
-            .from('products')
-            .delete()
-            .eq('id', productToDelete);
-
-        if (error) {
-            console.error('Error deleting product:', error);
-            toast.error('Failed to delete product');
-        } else {
+        try {
+            await deleteProduct(productToDelete);
             toast.success('Product deleted successfully');
             fetchProducts();
+        } catch (err) {
+            console.error('Error deleting product:', err);
+            toast.error(err instanceof Error ? err.message : 'Failed to delete product');
         }
 
         setProductToDelete(null);
@@ -290,12 +288,14 @@ export default function AdminProductsPage() {
                                                 >
                                                     <Edit className="w-4 h-4" />
                                                 </Link>
-                                                <button
-                                                    onClick={() => handleDelete(product.id)}
-                                                    className="text-red-600 hover:text-red-700"
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </button>
+                                                {isAdmin && (
+                                                    <button
+                                                        onClick={() => handleDelete(product.id)}
+                                                        className="text-red-600 hover:text-red-700"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>
