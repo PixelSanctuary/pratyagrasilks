@@ -15,6 +15,7 @@ export async function getNewArrivals(): Promise<Product[]> {
         .from('products')
         .select('*')
         .eq('is_online', true)
+        .order('in_stock', { ascending: false })
         .order('created_at', { ascending: false })
         .limit(8);
 

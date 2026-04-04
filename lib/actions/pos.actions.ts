@@ -175,11 +175,11 @@ export async function processOfflineSale(
             return { success: false, error: itemsError.message };
         }
 
-        // Mark products as sold — remove from online listing and mark out of stock
+        // Mark products as sold — keep online for social proof, only flag out of stock
         const productIds = cartItems.map(i => i.productId);
         await supabase
             .from('products')
-            .update({ in_stock: false, is_online: false })
+            .update({ in_stock: false })
             .in('id', productIds);
 
         return {

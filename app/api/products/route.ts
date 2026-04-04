@@ -17,11 +17,10 @@ export async function GET(request: NextRequest) {
         const limit = parseInt(searchParams.get('limit') || '50');
         const offset = parseInt(searchParams.get('offset') || '0');
 
-        // Build query — public API only surfaces products marked for online listing
+        // Build query — show all online products; sold items are sorted to bottom
         let query = supabase
             .from('products')
             .select('*')
-            .eq('in_stock', true)
             .eq('is_online', true)
             .range(offset, offset + limit - 1);
 
@@ -42,8 +41,10 @@ export async function GET(request: NextRequest) {
             query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
         }
 
-        // Execute query
-        const { data: products, error } = await query.order('created_at', { ascending: false });
+        // Execute query — available items first, sold items last; newest within each group
+        const { data: products, error } = await query
+            .order('in_stock', { ascending: false })
+            .order('created_at', { ascending: false });
 
         if (error) {
             console.error('Supabase error:', error);
@@ -62,10 +63,12 @@ export async function GET(request: NextRequest) {
             category: product.category,
             images: product.images || [],
             inStock: product.in_stock,
+            isOnline: product.is_online ?? true,
             sku: product.sku,
             material: product.material,
             dimensions: product.dimensions,
             weight: product.weight,
+            yt_link: product.yt_link,
             createdAt: product.created_at,
             updatedAt: product.updated_at,
         })) || [];
