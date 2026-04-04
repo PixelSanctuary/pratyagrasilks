@@ -17,42 +17,52 @@ export async function GET(request: NextRequest) {
         const limit = parseInt(searchParams.get('limit') || '50');
         const offset = parseInt(searchParams.get('offset') || '0');
 
-        // Build query — show all online products; sold items are sorted to bottom
-        let query = supabase
-            .from('products')
-            .select('*')
-            .eq('is_online', true)
-            .range(offset, offset + limit - 1);
-
-        // Apply filters
-        if (category) {
-            query = query.eq('category', category);
+        // Helper to apply shared filters to a query builder
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        function applyFilters(q: any) {
+            if (category)  q = q.eq('category', category);
+            if (minPrice)  q = q.gte('price', parseFloat(minPrice));
+            if (maxPrice)  q = q.lte('price', parseFloat(maxPrice));
+            if (search)    q = q.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
+            return q;
         }
 
-        if (minPrice) {
-            query = query.gte('price', parseFloat(minPrice));
-        }
+        // Query 1: all available products (paginated)
+        const availableQuery = applyFilters(
+            supabase
+                .from('products')
+                .select('*')
+                .eq('is_online', true)
+                .eq('in_stock', true)
+                .order('created_at', { ascending: false })
+                .range(offset, offset + limit - 1)
+        );
 
-        if (maxPrice) {
-            query = query.lte('price', parseFloat(maxPrice));
-        }
+        // Query 2: up to 9 most recently sold products (ordered by updated_at — when in_stock was set false)
+        const soldQuery = applyFilters(
+            supabase
+                .from('products')
+                .select('*')
+                .eq('is_online', true)
+                .eq('in_stock', false)
+                .order('updated_at', { ascending: false })
+                .limit(9)
+        );
 
-        if (search) {
-            query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
-        }
+        const [{ data: available, error: availError }, { data: sold, error: soldError }] =
+            await Promise.all([availableQuery, soldQuery]);
 
-        // Execute query — available items first, sold items last; newest within each group
-        const { data: products, error } = await query
-            .order('in_stock', { ascending: false })
-            .order('created_at', { ascending: false });
-
-        if (error) {
-            console.error('Supabase error:', error);
+        if (availError || soldError) {
+            const err = availError || soldError;
+            console.error('Supabase error:', err);
             return NextResponse.json(
-                { error: 'Failed to fetch products', details: error.message },
+                { error: 'Failed to fetch products', details: err!.message },
                 { status: 500 }
             );
         }
+
+        // Combine: available first, then recently sold (capped at 6)
+        const products = [...(available ?? []), ...(sold ?? [])];
 
         // Transform snake_case to camelCase for frontend
         const transformedProducts = products?.map(product => ({
