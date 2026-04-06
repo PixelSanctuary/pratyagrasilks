@@ -9,6 +9,7 @@ import { useBarcodeScanner } from '@/hooks/useBarcodeScanner';
 import { processOfflineSale, PosActionItem } from '@/lib/actions/pos.actions';
 import { lookupOrCreateCustomer, getCustomerByPhone, PosCustomer } from '@/lib/actions/crm.actions';
 import PosReceipt, { PosReceiptData } from '@/components/admin/PosReceipt';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 interface PosCartItem {
     product: Product;
@@ -43,8 +44,8 @@ export default function PosPage() {
     const [customerName, setCustomerName] = useState('');
     const [customer, setCustomer] = useState<PosCustomer | null>(null);
     const [isLookingUp, setIsLookingUp] = useState(false);
+    const [showOrderConfirm, setShowOrderConfirm] = useState(false);
     const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const phoneTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     // ── Cart Operations ──────────────────────────────────────────────────────
     const addToCart = useCallback((product: Product) => {
@@ -81,21 +82,14 @@ export default function PosPage() {
     }, [addToCart]);
 
     // ── Customer Lookup ──────────────────────────────────────────────────────
-    // Phase 1: phone blur — lookup only, never create
-    const handlePhoneBlur = async (phone: string) => {
-        if (!phone || phone.replace(/\D/g, '').length < 10) {
-            setCustomer(null);
-            return;
-        }
-
+    const triggerPhoneLookup = async (cleanPhone: string) => {
         setIsLookingUp(true);
         try {
-            const result = await getCustomerByPhone(phone);
+            const result = await getCustomerByPhone(cleanPhone);
             if (result.success && result.customer) {
                 setCustomer(result.customer);
                 setCustomerName(result.customer.full_name);
             } else {
-                // Not found — clear any stale customer so name phase can create
                 setCustomer(null);
             }
         } finally {
@@ -103,9 +97,21 @@ export default function PosPage() {
         }
     };
 
-    // Phase 2: name blur — create new customer if phone is valid and not yet found
+    // Auto-lookup when exactly 10 digits are entered; clear when edited back below 10
+    useEffect(() => {
+        const clean = customerPhone.replace(/\D/g, '');
+        if (clean.length !== 10) {
+            setCustomer(null);
+            setCustomerName('');
+            return;
+        }
+        triggerPhoneLookup(clean);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [customerPhone]);
+
+    // Name blur — create new customer if phone is valid and no customer found yet
     const handleNameBlur = async () => {
-        if (customer) return; // already resolved from phone lookup
+        if (customer) return;
         const cleanPhone = customerPhone.replace(/\D/g, '');
         if (cleanPhone.length < 10) return;
 
@@ -358,7 +364,7 @@ export default function PosPage() {
                                 <User className="w-5 h-5 text-[#550c72]" />
                                 <h3 className="text-base font-bold text-gray-900">Customer Details</h3>
                             </div>
-                            <div className="space-y-3">
+                            <div className="2xl:grid grid-cols-2 gap-3">
                                 <div>
                                     <label className="text-xs font-semibold text-gray-600 uppercase">Phone Number</label>
                                     <div className="relative mt-1.5 flex items-center">
@@ -367,7 +373,6 @@ export default function PosPage() {
                                             placeholder="10-digit phone"
                                             value={customerPhone}
                                             onChange={e => setCustomerPhone(e.target.value)}
-                                            onBlur={e => handlePhoneBlur(e.target.value)}
                                             className="flex-1 px-3 py-2 border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#550c72] transition-colors"
                                             maxLength={10}
                                         />
@@ -454,23 +459,29 @@ export default function PosPage() {
                         </div>
 
                         {/* Action Buttons */}
-                        <button
-                            onClick={clearCart}
-                            disabled={cartItems.length === 0}
-                            className="w-full py-3 border-2 border-red-300 text-red-500 rounded-xl font-semibold hover:bg-red-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                        >
-                            <Trash2 className="w-4 h-4" />
-                            Clear Cart
-                        </button>
+                        <div className="grid xl:grid-cols-3 gap-3 flex-wrap">
+                            <button
+                                onClick={() => setShowPaymentModal(true)}
+                                disabled={cartItems.length === 0 || customerPhone.replace(/\D/g, '').length < 10}
+                                className="xl:col-span-2 w-full py-4 bg-[#550c72] hover:bg-[#8430AB] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg shadow-purple-200"
+                            >
+                                <CreditCard className="w-5 h-5" />
+                                Proceed to Payment
+                            </button>
 
-                        <button
-                            onClick={() => setShowPaymentModal(true)}
-                            disabled={cartItems.length === 0}
-                            className="w-full py-4 bg-[#550c72] hover:bg-[#8430AB] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg shadow-purple-200"
-                        >
-                            <CreditCard className="w-5 h-5" />
-                            Proceed to Payment
-                        </button>
+                            <button
+                                onClick={clearCart}
+                                disabled={cartItems.length === 0}
+                                className="w-full py-3 border-2 border-red-300 text-red-500 rounded-xl font-semibold hover:bg-red-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            >
+                                <Trash2 className="w-4 h-4" />
+                                Clear Cart
+                            </button>
+                        </div>
+                        {cartItems.length > 0 && customerPhone.replace(/\D/g, '').length < 10 && (
+                            <p className="text-center text-xs text-amber-600 mt-1">Enter customer phone number to proceed</p>
+                        )}
+
                     </div>
                 </div>
             </div>
@@ -518,25 +529,27 @@ export default function PosPage() {
                         </div>
 
                         <button
-                            onClick={handleConfirmPayment}
+                            onClick={() => setShowOrderConfirm(true)}
                             disabled={isProcessing}
                             className="w-full py-4 bg-[#550c72] hover:bg-[#8430AB] disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-colors"
                         >
-                            {isProcessing ? (
-                                <>
-                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                    Processing…
-                                </>
-                            ) : (
-                                <>
-                                    <CheckCircle2 className="w-5 h-5" />
-                                    Confirm {selectedPayment} — {fmt(grandTotal)}
-                                </>
-                            )}
+                            <CheckCircle2 className="w-5 h-5" />
+                            Confirm {selectedPayment} — {fmt(grandTotal)}
                         </button>
                     </div>
                 </div>
             )}
+
+            <ConfirmDialog
+                isOpen={showOrderConfirm}
+                onClose={() => setShowOrderConfirm(false)}
+                onConfirm={() => { setShowOrderConfirm(false); handleConfirmPayment(); }}
+                title="Confirm Sale"
+                message={`Finalise ${selectedPayment} payment of ${fmt(grandTotal)} for ${customerName || 'this customer'}?`}
+                confirmText="Yes, Complete Sale"
+                cancelText="Go Back"
+                variant="warning"
+            />
         </>
     );
 }

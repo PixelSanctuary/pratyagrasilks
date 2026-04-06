@@ -140,6 +140,7 @@ export default function VendorsPage() {
                                         <tr key={vendor.id} className="hover:bg-gray-50">
                                             {/* Vendor name + address */}
                                             <td className="px-6 py-4">
+                                                <Link href={`/admin/vendors/${vendor.id}/edit`}>
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
                                                         <Building2 className="w-4 h-4 text-amber-700" />
@@ -153,6 +154,7 @@ export default function VendorsPage() {
                                                         )}
                                                     </div>
                                                 </div>
+                                                </Link>
                                             </td>
 
                                             {/* Type badge */}
@@ -201,7 +203,7 @@ export default function VendorsPage() {
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center gap-3">
                                                     <Link
-                                                        href={`/admin/vendors/${vendor.id}`}
+                                                        href={`/admin/vendors/${vendor.id}/edit`}
                                                         className="text-amber-600 hover:text-amber-700"
                                                         title="Edit vendor"
                                                     >

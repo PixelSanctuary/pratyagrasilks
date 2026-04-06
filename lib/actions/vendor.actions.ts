@@ -82,6 +82,9 @@ export async function createVendor(input: VendorInput): Promise<{ id: string }> 
 }
 
 export async function updateVendor(id: string, input: Partial<VendorInput>): Promise<void> {
+    const role = await getCallerRole();
+    await assertAdminOnly(role, 'update vendors');
+
     const supabase = createClient();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -114,6 +117,36 @@ export async function updateVendor(id: string, input: Partial<VendorInput>): Pro
 
     revalidatePath('/admin/vendors');
     revalidatePath(`/admin/vendors/${id}`);
+}
+
+export async function deleteVendorDocument(vendorId: string, docPath: string): Promise<void> {
+    const role = await getCallerRole();
+    await assertAdminOnly(role, 'delete vendor documents');
+
+    const supabase = createClient();
+
+    const { error: storageError } = await supabase.storage
+        .from('vendor-docs')
+        .remove([docPath]);
+    if (storageError) throw new Error(storageError.message);
+
+    const { data: vendor, error: fetchError } = await supabase
+        .from('vendors')
+        .select('document_urls')
+        .eq('id', vendorId)
+        .single();
+    if (fetchError) throw new Error(fetchError.message);
+
+    const updatedUrls = ((vendor?.document_urls ?? []) as string[]).filter((p) => p !== docPath);
+    const { error: updateError } = await supabase
+        .from('vendors')
+        .update({ document_urls: updatedUrls })
+        .eq('id', vendorId);
+    if (updateError) throw new Error(updateError.message);
+
+    revalidatePath('/admin/vendors');
+    revalidatePath(`/admin/vendors/${vendorId}`);
+    revalidatePath(`/admin/vendors/${vendorId}/edit`);
 }
 
 export async function deleteVendor(id: string): Promise<void> {

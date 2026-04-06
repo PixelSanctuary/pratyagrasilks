@@ -7,6 +7,7 @@ import {
     Building2,
     Package,
     PackagePlus,
+    Pencil,
     Phone,
     User,
     FileText,
@@ -19,6 +20,7 @@ import { getVendorById, VendorType } from '@/lib/actions/vendor.actions';
 import { getProductsByVendor, VendorProduct } from '@/lib/actions/product.actions';
 import { getVendorDocSignedUrl } from '@/lib/supabase/storage-utils';
 import { Vendor } from '@/lib/types';
+import { useAdmin } from '@/lib/hooks/useAdmin';
 
 const TYPE_STYLES: Record<VendorType, string> = {
     Artisan:    'bg-amber-100 text-amber-800',
@@ -36,6 +38,7 @@ const formatPrice = (price: number) =>
 export default function VendorDetailPage() {
     const { id: vendorId } = useParams<{ id: string }>();
     const router = useRouter();
+    const { isAdmin } = useAdmin();
 
     const [vendor, setVendor]               = useState<Vendor | null>(null);
     const [products, setProducts]           = useState<VendorProduct[]>([]);
@@ -118,13 +121,24 @@ export default function VendorDetailPage() {
                         )}
                     </div>
                 </div>
-                <Link
-                    href={`/admin/products/new?vendorId=${vendorId}`}
-                    className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors"
-                >
-                    <PackagePlus className="w-5 h-5" />
-                    Add New Saree for {vendor.name}
-                </Link>
+                <div className="flex items-center gap-3">
+                    {isAdmin && (
+                        <Link
+                            href={`/admin/vendors/${vendorId}/edit`}
+                            className="flex items-center gap-2 px-4 py-2 border-2 border-amber-600 text-amber-700 rounded-lg font-medium hover:bg-amber-50 transition-colors"
+                        >
+                            <Pencil className="w-4 h-4" />
+                            Edit Vendor
+                        </Link>
+                    )}
+                    <Link
+                        href={`/admin/products/new?vendorId=${vendorId}`}
+                        className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors"
+                    >
+                        <PackagePlus className="w-5 h-5" />
+                        Add New Saree
+                    </Link>
+                </div>
             </div>
 
             {/* ── Vendor Info Card ─────────────────────────────────────────── */}
