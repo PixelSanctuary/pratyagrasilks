@@ -47,7 +47,9 @@ export default function RazorpayButton({
     onSuccess,
 }: Props) {
     const router = useRouter();
-    const [scriptReady, setScriptReady] = useState(false);
+    const [scriptReady, setScriptReady] = useState(
+        () => typeof window !== 'undefined' && typeof window.Razorpay !== 'undefined'
+    );
     const [loading, setLoading] = useState(false);
 
     const totalAmount =
