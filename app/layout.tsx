@@ -48,17 +48,13 @@ export const metadata: Metadata = {
     authors: [{ name: "PratyagraSilks" }],
     icons: {
         icon: [
-            {
-                url: "/favicon.svg",
-                type: "image/svg+xml",
-            },
-            {
-                url: "/icon.png",
-                type: "image/png",
-                sizes: "192x192",
-            },
+            { url: "/logo.svg", type: "image/svg+xml" },
+            { url: "/logo.png", type: "image/png", sizes: "512x512" },
+            { url: "/favicon.svg", type: "image/svg+xml" },
         ],
-        apple: "/icon.png",
+        apple: [
+            { url: "/logo.png", sizes: "512x512", type: "image/png" },
+        ],
         shortcut: "/favicon.svg",
     },
     openGraph: {

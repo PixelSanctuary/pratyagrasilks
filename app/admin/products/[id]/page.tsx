@@ -7,8 +7,13 @@ import { ArrowLeft, Save, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import OptimizedUploader from '@/components/admin/OptimizedUploader';
+import BarcodeLabel from '@/components/admin/BarcodeLabel';
 import { isValidYouTubeUrl, getYouTubeThumbnailUrl } from '@/lib/utils/youtube';
 import Image from 'next/image';
+import { getVendors } from '@/lib/actions/vendor.actions';
+import { Vendor } from '@/lib/types';
+import { useAdmin } from '@/lib/hooks/useAdmin';
+import { updateProduct } from '@/lib/actions/product.actions';
 
 const categories = [
     { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
@@ -28,10 +33,13 @@ export default function EditProductPage() {
     const router = useRouter();
     const params = useParams();
     const productId = params.id as string;
+    const { role } = useAdmin();
 
     const [loading, setLoading] = useState(false);
     const [fetching, setFetching] = useState(true);
     const [productImages, setProductImages] = useState<string[]>([]);
+    const [vendors, setVendors] = useState<Vendor[]>([]);
+    const [vendorsLoading, setVendorsLoading] = useState(true);
     const [formData, setFormData] = useState({
         name: '',
         sku: '',
@@ -43,12 +51,27 @@ export default function EditProductPage() {
         dimensions: '',
         weight: '',
         yt_link: '',
+        is_online: true,
+        vendorId: '',
     });
     const [ytLinkError, setYtLinkError] = useState('');
 
     useEffect(() => {
         fetchProduct();
     }, [productId]);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const data = await getVendors();
+                setVendors(data);
+            } catch (err) {
+                console.error('Failed to load vendors:', err);
+            } finally {
+                setVendorsLoading(false);
+            }
+        })();
+    }, []);
 
     async function fetchProduct() {
         const supabase = createClient();
@@ -74,6 +97,8 @@ export default function EditProductPage() {
                 dimensions: data.dimensions || '',
                 weight: data.weight || '',
                 yt_link: data.yt_link || '',
+                is_online: data.is_online ?? true,
+                vendorId: data.vendor_id || '',
             });
             // Set product images separately
             setProductImages(Array.isArray(data.images) ? data.images : []);
@@ -98,35 +123,27 @@ export default function EditProductPage() {
         setLoading(true);
 
         try {
-            const supabase = createClient();
+            await updateProduct(productId, {
+                name: formData.name,
+                sku: formData.sku,
+                price: parseFloat(formData.price),
+                stock_quantity: parseInt(formData.stock_quantity.toString()),
+                category: formData.category,
+                material: formData.material,
+                description: formData.description,
+                dimensions: formData.dimensions || null,
+                weight: formData.weight || null,
+                images: productImages,
+                yt_link: formData.yt_link || null,
+                is_online: formData.is_online,
+                vendor_id: formData.vendorId || null,
+            });
 
-            const { error } = await supabase
-                .from('products')
-                .update({
-                    name: formData.name,
-                    sku: formData.sku,
-                    price: parseFloat(formData.price),
-                    stock_quantity: parseInt(formData.stock_quantity.toString()),
-                    category: formData.category,
-                    material: formData.material,
-                    description: formData.description,
-                    dimensions: formData.dimensions || null,
-                    weight: formData.weight || null,
-                    images: productImages,
-                    yt_link: formData.yt_link || null,
-                })
-                .eq('id', productId);
-
-            if (error) {
-                console.error('Error updating product:', error);
-                toast.error('Failed to update product: ' + error.message);
-            } else {
-                toast.success('Product updated successfully!');
-                router.push('/admin/products');
-            }
+            toast.success('Product updated successfully!');
+            router.push('/admin/products');
         } catch (error) {
             console.error('Error:', error);
-            toast.error('Failed to update product');
+            toast.error(error instanceof Error ? error.message : 'Failed to update product');
         } finally {
             setLoading(false);
         }
@@ -216,9 +233,13 @@ export default function EditProductPage() {
                             required
                             min="0"
                             step="1"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                            disabled={role === 'CASHIER'}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
                             placeholder="e.g., 15000"
                         />
+                        {role === 'CASHIER' && (
+                            <p className="mt-1 text-xs text-amber-600">Price modification requires Admin access.</p>
+                        )}
                     </div>
 
                     {/* Stock Quantity */}
@@ -254,6 +275,25 @@ export default function EditProductPage() {
                                 <option key={cat.value} value={cat.value}>
                                     {cat.label}
                                 </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Vendor */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Vendor
+                        </label>
+                        <select
+                            name="vendorId"
+                            value={formData.vendorId}
+                            onChange={handleChange}
+                            disabled={vendorsLoading}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 disabled:bg-gray-50 disabled:text-gray-400"
+                        >
+                            <option value="">— No vendor / Walk-in —</option>
+                            {vendors.map((v) => (
+                                <option key={v.id} value={v.id}>{v.name}</option>
                             ))}
                         </select>
                     </div>
@@ -368,6 +408,46 @@ export default function EditProductPage() {
                         />
                     </div>
 
+                    {/* ── List on Website Toggle ─────────────────────── */}
+                    <div className="md:col-span-2">
+                        <div className={`flex items-start gap-4 p-5 rounded-xl border-2 transition-all duration-200 ${
+                            formData.is_online
+                                ? 'border-primary bg-primary-50'
+                                : 'border-gray-200 bg-gray-50'
+                        }`}>
+                            <button
+                                type="button"
+                                id="toggle-is-online-edit"
+                                role="switch"
+                                aria-checked={formData.is_online}
+                                onClick={() =>
+                                    setFormData((prev) => ({ ...prev, is_online: !prev.is_online }))
+                                }
+                                className={`relative inline-flex h-7 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+                                    formData.is_online ? 'bg-primary' : 'bg-gray-300'
+                                }`}
+                            >
+                                <span
+                                    className={`pointer-events-none inline-block h-6 w-6 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${
+                                        formData.is_online ? 'translate-x-7' : 'translate-x-0'
+                                    }`}
+                                />
+                            </button>
+                            <div className="flex flex-col">
+                                <span className={`text-sm font-semibold ${
+                                    formData.is_online ? 'text-primary' : 'text-gray-600'
+                                }`}>
+                                    {formData.is_online ? '🌐 Listed on Website' : '🏪 Physical Store Only (POS)'}
+                                </span>
+                                <span className="text-xs text-gray-500 mt-0.5">
+                                    {formData.is_online
+                                        ? 'This saree will appear in the public online catalog.'
+                                        : 'This saree is hidden from the website. Use barcode label for in-store billing.'}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
 
@@ -389,6 +469,20 @@ export default function EditProductPage() {
                     </Link>
                 </div>
             </form>
+
+            {!formData.is_online && formData.sku && (
+                <div className="mt-8 bg-white rounded-lg shadow p-6 print:m-0 print:p-0 print:shadow-none bg-amber-50 border border-amber-200">
+                    <h2 className="text-xl font-bold font-playfair text-gray-900 mb-2 print:hidden">Print POS Label</h2>
+                    <p className="text-sm text-gray-600 mb-6 print:hidden">
+                        Since this saree is marked for <strong>Physical Store Only</strong>, you can print a thermal barcode label for it.
+                    </p>
+                    <BarcodeLabel
+                        productName={formData.name}
+                        sku={formData.sku}
+                        price={Number(formData.price) || 0}
+                    />
+                </div>
+            )}
         </div>
     );
 }

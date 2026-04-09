@@ -1,5 +1,20 @@
 // Core TypeScript interfaces for PratyagraSilks e-commerce
 
+// Vendor type ('Artisan' | 'City' | 'Wholesaler') is stored in metadata.type
+export interface Vendor {
+    id: string;
+    name: string;
+    address?: string | null;
+    contactPerson?: string | null;
+    phone?: string | null;
+    /** Paths/signed URLs pointing to files in the 'vendor-docs' storage bucket (max 5) */
+    documentUrls: string[];
+    /** Flexible bag: { type: 'Artisan'|'City'|'Wholesaler', gst?: string, notes?: string, ... } */
+    metadata: Record<string, unknown>;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 export interface Product {
     id: string;
     name: string;
@@ -8,11 +23,14 @@ export interface Product {
     category: string;
     images: string[];
     inStock: boolean;
+    isOnline: boolean; // true = listed on website; false = physical POS only
     sku: string;
     material: string;
     dimensions?: string;
     weight?: number;
     yt_link?: string | null;
+    vendorId?: string | null;
+    vendor?: Vendor; // populated when joined
     createdAt: Date;
     updatedAt: Date;
 }
@@ -41,6 +59,9 @@ export interface Order {
     };
     paymentMethod: string;
     paymentStatus: 'pending' | 'completed' | 'failed';
+    paymentId?: string; // Stripe session ID
+    orderNumber?: string; // Unique order identifier
+    shippingCost?: number;
     createdAt: Date;
     updatedAt: Date;
     deliveredAt?: Date;

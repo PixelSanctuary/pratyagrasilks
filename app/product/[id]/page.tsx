@@ -214,28 +214,46 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
 
 
 
-                        {/* Add to Cart Buttons */}
+                        {/* Add to Cart / Sold Out */}
                         <div className="space-y-3">
-                            <button
-                                onClick={handleAddToCart}
-                                disabled={!product.inStock || isInCart(product.id)}
-                                className="w-full bg-primary text-secondary py-4 rounded-lg font-semibold text-lg hover:bg-primary-light transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                            >
-                                {isInCart(product.id) ? (
-                                    <>
+                            {product.inStock ? (
+                                <>
+                                    <button
+                                        onClick={handleAddToCart}
+                                        disabled={isInCart(product.id)}
+                                        className="w-full bg-primary text-secondary py-4 rounded-lg font-semibold text-lg hover:bg-primary-light transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                    >
+                                        {isInCart(product.id) ? (
+                                            <>
+                                                <Check className="w-5 h-5" />
+                                                Already in Cart
+                                            </>
+                                        ) : (
+                                            <>
+                                                <ShoppingCart className="w-5 h-5" />
+                                                Add to Cart
+                                            </>
+                                        )}
+                                    </button>
+                                    <WishlistButton product={product} className="w-full" />
+                                </>
+                            ) : (
+                                <>
+                                    <button
+                                        disabled
+                                        className="w-full bg-stone-200 text-stone-500 py-4 rounded-lg font-semibold text-lg cursor-not-allowed flex items-center justify-center gap-2 border border-stone-300"
+                                    >
                                         <Check className="w-5 h-5" />
-                                        Already in Cart
-                                    </>
-                                ) : (
-                                    <>
-                                        <ShoppingCart className="w-5 h-5" />
-                                        {product.inStock ? 'Add to Cart' : 'Sold Out'}
-                                    </>
-                                )}
-                            </button>
-
-                            {/* Wishlist Button */}
-                            <WishlistButton product={product} className="w-full" />
+                                        Recently Sold
+                                    </button>
+                                    <Link
+                                        href="/collection"
+                                        className="w-full border-2 border-primary text-primary py-3 rounded-lg font-semibold text-base hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        Explore Similar Weaves →
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
