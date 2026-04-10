@@ -95,6 +95,12 @@ export interface ProductUpdateInput {
     yt_link?: string | null;
     is_online?: boolean;
     vendor_id?: string | null;
+    // Procurement / pricing
+    purchase_price?: number;
+    purchase_tax_percent?: number;
+    profit_margin_percent?: number;
+    selling_tax_percent?: number;
+    is_price_overridden?: boolean;
 }
 
 export async function deleteProduct(id: string): Promise<void> {
@@ -129,9 +135,14 @@ export async function updateProduct(id: string, data: ProductUpdateInput): Promi
         vendor_id: data.vendor_id ?? null,
     };
 
-    // CASHIER cannot modify price — silently strip it
-    if (role === 'ADMIN' && data.price !== undefined) {
-        patch.price = data.price;
+    // CASHIER cannot modify price or procurement data — silently strip them
+    if (role === 'ADMIN') {
+        if (data.price !== undefined)               patch.price = data.price;
+        if (data.purchase_price !== undefined)      patch.purchase_price = data.purchase_price;
+        if (data.purchase_tax_percent !== undefined) patch.purchase_tax_percent = data.purchase_tax_percent;
+        if (data.profit_margin_percent !== undefined) patch.profit_margin_percent = data.profit_margin_percent;
+        if (data.selling_tax_percent !== undefined)  patch.selling_tax_percent = data.selling_tax_percent;
+        if (data.is_price_overridden !== undefined)  patch.is_price_overridden = data.is_price_overridden;
     }
 
     const { error } = await supabase.from('products').update(patch).eq('id', id);

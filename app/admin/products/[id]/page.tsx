@@ -3,12 +3,13 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { ArrowLeft, Save, Youtube } from 'lucide-react';
+import { ArrowLeft, Save, Youtube, Calculator } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import OptimizedUploader from '@/components/admin/OptimizedUploader';
 import BarcodeLabel from '@/components/admin/BarcodeLabel';
 import { isValidYouTubeUrl, getYouTubeThumbnailUrl } from '@/lib/utils/youtube';
+import { calculateMrp } from '@/lib/utils/pricing';
 import Image from 'next/image';
 import { getVendors } from '@/lib/actions/vendor.actions';
 import { Vendor } from '@/lib/types';
@@ -27,6 +28,8 @@ const categories = [
     { value: 'pochampalli-silk', label: 'Pochampalli Silk' },
     { value: 'baluchari-silk', label: 'Baluchari Silk' },
     { value: 'georgette-silk', label: 'Georgette Silk' },
+    { value: 'cotton', label: 'Cotton' },
+    { value: 'silk-cotton', label: 'Silk Cotton' },
 ];
 
 export default function EditProductPage() {
@@ -53,6 +56,11 @@ export default function EditProductPage() {
         yt_link: '',
         is_online: true,
         vendorId: '',
+        purchase_price: '',
+        purchase_tax_percent: '5',
+        profit_margin_percent: '35',
+        selling_tax_percent: '5',
+        is_price_overridden: false,
     });
     const [ytLinkError, setYtLinkError] = useState('');
 
@@ -99,12 +107,31 @@ export default function EditProductPage() {
                 yt_link: data.yt_link || '',
                 is_online: data.is_online ?? true,
                 vendorId: data.vendor_id || '',
+                purchase_price: data.purchase_price?.toString() || '',
+                purchase_tax_percent: data.purchase_tax_percent?.toString() ?? '5',
+                profit_margin_percent: data.profit_margin_percent?.toString() ?? '35',
+                selling_tax_percent: data.selling_tax_percent?.toString() ?? '5',
+                is_price_overridden: data.is_price_overridden ?? false,
             });
             // Set product images separately
             setProductImages(Array.isArray(data.images) ? data.images : []);
         }
         setFetching(false);
     }
+
+    // Auto-calculate MRP when procurement fields change (unless admin manually overrode price)
+    useEffect(() => {
+        if (formData.is_price_overridden) return;
+        const pp = parseFloat(formData.purchase_price);
+        if (!pp || pp <= 0) return;
+        const mrp = calculateMrp(
+            pp,
+            parseFloat(formData.purchase_tax_percent) || 0,
+            parseFloat(formData.profit_margin_percent) || 0,
+            parseFloat(formData.selling_tax_percent) || 0,
+        );
+        setFormData(prev => ({ ...prev, price: mrp.toString() }));
+    }, [formData.purchase_price, formData.purchase_tax_percent, formData.profit_margin_percent, formData.selling_tax_percent, formData.is_price_overridden]);
 
     const handleImagesChange = (urls: string[]) => {
         setProductImages(urls);
@@ -137,6 +164,11 @@ export default function EditProductPage() {
                 yt_link: formData.yt_link || null,
                 is_online: formData.is_online,
                 vendor_id: formData.vendorId || null,
+                purchase_price: parseFloat(formData.purchase_price) || 0,
+                purchase_tax_percent: parseFloat(formData.purchase_tax_percent) || 0,
+                profit_margin_percent: parseFloat(formData.profit_margin_percent) || 0,
+                selling_tax_percent: parseFloat(formData.selling_tax_percent) || 0,
+                is_price_overridden: formData.is_price_overridden,
             });
 
             toast.success('Product updated successfully!');
@@ -155,6 +187,11 @@ export default function EditProductPage() {
             ...prev,
             [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
         }));
+
+        // If admin manually edits the price field, flag as overridden
+        if (name === 'price') {
+            setFormData(prev => ({ ...prev, is_price_overridden: true }));
+        }
 
         // Validate YouTube link on change
         if (name === 'yt_link') {
@@ -220,23 +257,88 @@ export default function EditProductPage() {
                         />
                     </div>
 
+                    {/* ── Procurement & Margin ───────────────────────── */}
+                    {role === 'ADMIN' && (
+                        <div className="md:col-span-2 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                            <h3 className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-4">
+                                <Calculator className="w-4 h-4 text-amber-600" />
+                                Procurement &amp; Margin
+                            </h3>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-600 mb-1">Purchase Price (₹)</label>
+                                    <input
+                                        type="number" name="purchase_price" min="0" step="1"
+                                        value={formData.purchase_price}
+                                        onChange={handleChange}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                        placeholder="0"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-600 mb-1">Purchase Tax %</label>
+                                    <input
+                                        type="number" name="purchase_tax_percent" min="0" max="100" step="0.5"
+                                        value={formData.purchase_tax_percent}
+                                        onChange={handleChange}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-600 mb-1">Margin %</label>
+                                    <input
+                                        type="number" name="profit_margin_percent" min="0" max="1000" step="0.5"
+                                        value={formData.profit_margin_percent}
+                                        onChange={handleChange}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-600 mb-1">Selling Tax %</label>
+                                    <input
+                                        type="number" name="selling_tax_percent" min="0" max="100" step="0.5"
+                                        value={formData.selling_tax_percent}
+                                        onChange={handleChange}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Price */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Price (₹) *
+                            MRP / Price (₹) *
+                            {formData.is_price_overridden && (
+                                <span className="ml-2 text-xs font-normal text-orange-600 bg-orange-50 px-1.5 py-0.5 rounded">
+                                    Manual override
+                                </span>
+                            )}
                         </label>
-                        <input
-                            type="number"
-                            name="price"
-                            value={formData.price}
-                            onChange={handleChange}
-                            required
-                            min="0"
-                            step="1"
-                            disabled={role === 'CASHIER'}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
-                            placeholder="e.g., 15000"
-                        />
+                        <div className="flex gap-2">
+                            <input
+                                type="number"
+                                name="price"
+                                value={formData.price}
+                                onChange={handleChange}
+                                required
+                                min="0"
+                                step="1"
+                                disabled={role === 'CASHIER'}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
+                                placeholder="e.g., 15000"
+                            />
+                            {formData.is_price_overridden && role === 'ADMIN' && (
+                                <button
+                                    type="button"
+                                    onClick={() => setFormData(prev => ({ ...prev, is_price_overridden: false }))}
+                                    className="flex-shrink-0 px-3 py-2 text-xs font-medium text-amber-700 bg-amber-50 border border-amber-300 rounded-lg hover:bg-amber-100 whitespace-nowrap"
+                                >
+                                    Reset to calculated
+                                </button>
+                            )}
+                        </div>
                         {role === 'CASHIER' && (
                             <p className="mt-1 text-xs text-amber-600">Price modification requires Admin access.</p>
                         )}
