@@ -27,6 +27,8 @@ const categories = [
     { value: 'pochampalli-silk', label: 'Pochampalli Silk' },
     { value: 'baluchari-silk', label: 'Baluchari Silk' },
     { value: 'georgette-silk', label: 'Georgette Silk' },
+    { value: 'cotton', label: 'Cotton' },
+    { value: 'silk-cotton', label: 'Silk Cotton' },
 ];
 
 const priceRanges = [
