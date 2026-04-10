@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import { Search, Plus, Edit, Trash2, Package } from 'lucide-react';
+import { Search, Plus, Edit, Trash2, Package, Printer } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import { useAdmin } from '@/lib/hooks/useAdmin';
 import { deleteProduct } from '@/lib/actions/product.actions';
+import BulkBarcodeWrapper from '@/components/admin/BulkBarcodeWrapper';
 
 interface Product {
     id: string;
@@ -32,10 +33,28 @@ export default function AdminProductsPage() {
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
     const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
     const [productToDelete, setProductToDelete] = useState<string | null>(null);
+    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+    const [isPrinting, setIsPrinting] = useState(false);
+    const [vendors, setVendors] = useState<{ id: string; name: string }[]>([]);
+    const [vendorFilter, setVendorFilter] = useState('all');
+    const [stockFilter, setStockFilter] = useState('all');
+    const [listingFilter, setListingFilter] = useState('all');
 
     useEffect(() => {
         fetchProducts();
-    }, [categoryFilter]);
+    }, [categoryFilter, vendorFilter, stockFilter, listingFilter]);
+
+    useEffect(() => {
+        async function fetchVendors() {
+            const supabase = createClient();
+            const { data } = await supabase
+                .from('vendors')
+                .select('id, name')
+                .order('name');
+            if (data) setVendors(data);
+        }
+        fetchVendors();
+    }, []);
 
     async function fetchProducts() {
         setLoading(true);
@@ -49,6 +68,15 @@ export default function AdminProductsPage() {
         if (categoryFilter !== 'all') {
             query = query.eq('category', categoryFilter);
         }
+        if (vendorFilter === 'none') {
+            query = query.is('vendor_id', null);
+        } else if (vendorFilter !== 'all') {
+            query = query.eq('vendor_id', vendorFilter);
+        }
+        if (stockFilter === 'available') query = query.gt('stock_quantity', 0);
+        if (stockFilter === 'sold_out')  query = query.eq('stock_quantity', 0);
+        if (listingFilter === 'online')   query = query.eq('is_online', true);
+        if (listingFilter === 'pos_only') query = query.eq('is_online', false);
 
         const { data, error } = await query;
 
@@ -115,6 +143,29 @@ export default function AdminProductsPage() {
         );
     });
 
+    const allSelected = filteredProducts.length > 0 && filteredProducts.every(p => selectedIds.has(p.id));
+    const someSelected = selectedIds.size > 0;
+    const selectedProducts = filteredProducts.filter(p => selectedIds.has(p.id));
+
+    const toggleOne = (id: string) => setSelectedIds(prev => {
+        const next = new Set(prev);
+        next.has(id) ? next.delete(id) : next.add(id);
+        return next;
+    });
+
+    const toggleAll = () => setSelectedIds(
+        allSelected ? new Set() : new Set(filteredProducts.map(p => p.id))
+    );
+
+    const handlePrintLabels = () => {
+        setIsPrinting(true);
+        setTimeout(() => {
+            window.print();
+            setIsPrinting(false);
+            setSelectedIds(new Set());
+        }, 300);
+    };
+
     const categories = [
         { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
         { value: 'banarasi-silk', label: 'Banarasi Silk' },
@@ -144,36 +195,107 @@ export default function AdminProductsPage() {
 
             {/* Filters */}
             <div className="bg-white rounded-lg shadow p-6 mb-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Search */}
-                    <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                            type="text"
-                            placeholder="Search products..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                        />
-                    </div>
+                {/* Search */}
+                <div className="relative mb-4">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                        type="text"
+                        placeholder="Search by name, SKU, or category..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    />
+                </div>
 
-                    {/* Category Filter */}
-                    <div>
-                        <select
-                            value={categoryFilter}
-                            onChange={(e) => setCategoryFilter(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                {/* Dropdown filters */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {/* Category */}
+                    <select
+                        value={categoryFilter}
+                        onChange={(e) => setCategoryFilter(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    >
+                        <option value="all">All Categories</option>
+                        {categories.map((cat) => (
+                            <option key={cat.value} value={cat.value}>{cat.label}</option>
+                        ))}
+                    </select>
+
+                    {/* Vendor */}
+                    <select
+                        value={vendorFilter}
+                        onChange={(e) => setVendorFilter(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    >
+                        <option value="all">All Vendors</option>
+                        <option value="none">No Vendor</option>
+                        {vendors.map((v) => (
+                            <option key={v.id} value={v.id}>{v.name}</option>
+                        ))}
+                    </select>
+
+                    {/* Stock status */}
+                    <select
+                        value={stockFilter}
+                        onChange={(e) => setStockFilter(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    >
+                        <option value="all">All Stock</option>
+                        <option value="available">Available</option>
+                        <option value="sold_out">Sold Out</option>
+                    </select>
+
+                    {/* Listing status */}
+                    <select
+                        value={listingFilter}
+                        onChange={(e) => setListingFilter(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    >
+                        <option value="all">All Listings</option>
+                        <option value="online">Online</option>
+                        <option value="pos_only">POS Only</option>
+                    </select>
+                </div>
+
+                {/* Active filter indicator */}
+                {[categoryFilter, vendorFilter, stockFilter, listingFilter].filter(f => f !== 'all').length > 0 && (
+                    <div className="mt-3 flex items-center gap-2">
+                        <span className="text-xs text-gray-500">
+                            {[categoryFilter, vendorFilter, stockFilter, listingFilter].filter(f => f !== 'all').length} filter{[categoryFilter, vendorFilter, stockFilter, listingFilter].filter(f => f !== 'all').length > 1 ? 's' : ''} active
+                        </span>
+                        <button
+                            onClick={() => { setCategoryFilter('all'); setVendorFilter('all'); setStockFilter('all'); setListingFilter('all'); }}
+                            className="text-xs text-amber-600 hover:text-amber-700 underline"
                         >
-                            <option value="all">All Categories</option>
-                            {categories.map((cat) => (
-                                <option key={cat.value} value={cat.value}>
-                                    {cat.label}
-                                </option>
-                            ))}
-                        </select>
+                            Clear all
+                        </button>
+                    </div>
+                )}
+            </div>
+
+            {/* Bulk action bar */}
+            {someSelected && (
+                <div className="sticky top-4 z-10 flex items-center justify-between bg-[#550c72] text-white px-5 py-3 rounded-xl shadow-lg mb-4">
+                    <span className="text-sm font-semibold">
+                        {selectedIds.size} product{selectedIds.size > 1 ? 's' : ''} selected
+                    </span>
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={() => setSelectedIds(new Set())}
+                            className="text-xs underline opacity-80 hover:opacity-100"
+                        >
+                            Clear
+                        </button>
+                        <button
+                            onClick={handlePrintLabels}
+                            className="flex items-center gap-2 px-4 py-1.5 bg-white text-[#550c72] rounded-lg text-sm font-bold hover:bg-gray-100 transition-colors"
+                        >
+                            <Printer className="w-4 h-4" />
+                            Print {selectedIds.size} Label{selectedIds.size > 1 ? 's' : ''}
+                        </button>
                     </div>
                 </div>
-            </div>
+            )}
 
             {/* Products Grid */}
             <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -197,6 +319,14 @@ export default function AdminProductsPage() {
                         <table className="w-full">
                             <thead className="bg-gray-50">
                                 <tr>
+                                    <th className="px-4 py-3 w-10">
+                                        <input
+                                            type="checkbox"
+                                            checked={allSelected}
+                                            onChange={toggleAll}
+                                            className="rounded border-gray-300 accent-amber-600 cursor-pointer"
+                                        />
+                                    </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Product
                                     </th>
@@ -223,6 +353,14 @@ export default function AdminProductsPage() {
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {filteredProducts.map((product) => (
                                     <tr key={product.id} className="hover:bg-gray-50">
+                                        <td className="px-4 py-4" onClick={e => e.stopPropagation()}>
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedIds.has(product.id)}
+                                                onChange={() => toggleOne(product.id)}
+                                                className="rounded border-gray-300 accent-amber-600 cursor-pointer"
+                                            />
+                                        </td>
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
                                                 <div className="relative w-12 h-12 flex-shrink-0 rounded-md overflow-hidden bg-gray-100">
@@ -337,6 +475,9 @@ export default function AdminProductsPage() {
                 cancelText="Cancel"
                 variant="danger"
             />
+
+            {/* Bulk label print wrapper — rendered off-screen, revealed by print CSS */}
+            {isPrinting && <BulkBarcodeWrapper products={selectedProducts} />}
         </div>
     );
 }
