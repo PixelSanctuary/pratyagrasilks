@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
             .from('products')
             .select('*')
             .eq('in_stock', true)
-            .ilike('name', `%${q}%`)
+            .or(`name.ilike.%${q}%,sku.ilike.%${q}%`)
             .order('name')
             .limit(10);
 

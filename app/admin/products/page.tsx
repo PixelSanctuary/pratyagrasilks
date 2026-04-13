@@ -9,7 +9,8 @@ import toast from 'react-hot-toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import { useAdmin } from '@/lib/hooks/useAdmin';
 import { deleteProduct } from '@/lib/actions/product.actions';
-import BulkBarcodeWrapper from '@/components/admin/BulkBarcodeWrapper';
+import BulkQrWrapper from '@/components/admin/BulkQrWrapper';
+import PrinterCalibration from '@/components/admin/PrinterCalibration';
 
 interface Product {
     id: string;
@@ -186,13 +187,16 @@ export default function AdminProductsPage() {
         <div>
             <div className="flex items-center justify-between mb-8">
                 <h1 className="text-3xl font-bold text-gray-900">Products</h1>
-                <Link
-                    href="/admin/products/new"
-                    className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors"
-                >
-                    <Plus className="w-5 h-5" />
-                    Add Product
-                </Link>
+                <div className="flex items-center gap-3">
+                    <PrinterCalibration />
+                    <Link
+                        href="/admin/products/new"
+                        className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition-colors"
+                    >
+                        <Plus className="w-5 h-5" />
+                        Add Product
+                    </Link>
+                </div>
             </div>
 
             {/* Filters */}
@@ -479,7 +483,7 @@ export default function AdminProductsPage() {
             />
 
             {/* Bulk label print wrapper — rendered off-screen, revealed by print CSS */}
-            {isPrinting && <BulkBarcodeWrapper products={selectedProducts} />}
+            {isPrinting && <BulkQrWrapper products={selectedProducts} />}
         </div>
     );
 }

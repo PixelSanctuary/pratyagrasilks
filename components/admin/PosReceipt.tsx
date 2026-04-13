@@ -40,7 +40,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                         top: 0 !important;
                         left: 0 !important;
                         width: 80mm !important;
-                        margin: 0 !important;
+                        margin: 10px !important;
                         padding: 0 !important;
                     }
                     @page {
@@ -72,9 +72,9 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                     <div style={{ fontSize: '10px', marginTop: '1mm' }}>
                         NO 178, 2nd Floor A Rammachnadra Road, RS Puram, Coimbatore - 641002
                     </div>
-                    <div style={{ fontSize: '10px' }}>Tel: +91-XXXXXXXXXX</div>
+                    <div style={{ fontSize: '10px' }}>Tel: +91 73588 66646</div>
                     <div style={{ fontSize: '10px', marginTop: '1mm' }}>
-                        GSTIN: 09XXXXXXXXXXXXX
+                        GSTIN: 33ABIFP4964F1Z3
                     </div>
                 </div>
 
@@ -183,7 +183,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                 <div style={{ textAlign: 'center', fontSize: '10px', marginTop: '3mm' }}>
                     <div>Thank you for shopping with us!</div>
                     <div style={{ marginTop: '1mm', fontStyle: 'italic' }}>
-                        Pratyagra Silks — Finest Silk Sarees
+                        Pratyagra Silks — Reviving Tradition with a New Touch
                     </div>
                     <div style={{ marginTop: '2mm', fontSize: '9px', color: '#555' }}>
                         *All prices are inclusive of GST*

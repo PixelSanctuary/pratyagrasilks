@@ -67,6 +67,11 @@ export async function POST(req: NextRequest) {
 
         if (existingCustomer) {
             customerId = existingCustomer.id;
+            // Keep name current in case it was entered differently before
+            await supabaseAdmin
+                .from('customers')
+                .update({ full_name: shippingAddress.fullName, phone: shippingAddress.phone })
+                .eq('id', customerId);
         } else {
             const { data: newCustomer, error: custErr } = await supabaseAdmin
                 .from('customers')

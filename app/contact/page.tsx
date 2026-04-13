@@ -91,7 +91,7 @@ export default function ContactPage() {
                                 <div>
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Phone</h3>
                                     <a
-                                        href="tel:+919876543210"
+                                        href="tel:+917358866646"
                                         className="text-primary hover:text-primary-light text-lg transition-colors"
                                     >
                                         +91 73588 66646
