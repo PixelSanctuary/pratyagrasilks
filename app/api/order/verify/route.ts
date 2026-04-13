@@ -98,13 +98,13 @@ export async function POST(req: NextRequest) {
 
                 const { data: address } = await supabaseAdmin
                     .from('addresses')
-                    .select('address_line1, address_line2, city, state, postal_code')
+                    .select('full_name, address_line1, address_line2, city, state, postal_code')
                     .eq('id', order.shipping_address_id)
                     .single();
 
                 const emailData: OrderEmailData = {
                     orderNumber: order.order_number,
-                    customerName: customer.full_name ?? 'Valued Customer',
+                    customerName: address?.full_name || customer.full_name || 'Valued Customer',
                     customerEmail: customer.email,
                     items: (items ?? []).map((i) => ({
                         name: i.product_name,

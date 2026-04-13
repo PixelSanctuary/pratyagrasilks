@@ -7,7 +7,7 @@ import { ArrowLeft, Save, Youtube, Calculator } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import OptimizedUploader from '@/components/admin/OptimizedUploader';
-import BarcodeLabel from '@/components/admin/BarcodeLabel';
+import QrLabel from '@/components/admin/QrLabel';
 import { isValidYouTubeUrl, getYouTubeThumbnailUrl } from '@/lib/utils/youtube';
 import { calculateMrp } from '@/lib/utils/pricing';
 import Image from 'next/image';
@@ -576,9 +576,9 @@ export default function EditProductPage() {
                 <div className="mt-8 bg-white rounded-lg shadow p-6 print:m-0 print:p-0 print:shadow-none bg-amber-50 border border-amber-200">
                     <h2 className="text-xl font-bold font-playfair text-gray-900 mb-2 print:hidden">Print POS Label</h2>
                     <p className="text-sm text-gray-600 mb-6 print:hidden">
-                        Since this saree is marked for <strong>Physical Store Only</strong>, you can print a thermal barcode label for it.
+                        Since this saree is marked for <strong>Physical Store Only</strong>, you can print a QR label for it.
                     </p>
-                    <BarcodeLabel
+                    <QrLabel
                         productName={formData.name}
                         sku={formData.sku}
                         price={Number(formData.price) || 0}

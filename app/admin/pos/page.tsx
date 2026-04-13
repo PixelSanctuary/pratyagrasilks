@@ -5,7 +5,7 @@ import Image from 'next/image';
 import toast from 'react-hot-toast';
 import { Search, Trash2, CreditCard, X, ShoppingCart, Banknote, Smartphone, CheckCircle2, Loader2, User } from 'lucide-react';
 import { Product } from '@/lib/types';
-import { useBarcodeScanner } from '@/hooks/useBarcodeScanner';
+import { useQrScanner } from '@/hooks/useQrScanner';
 import { processOfflineSale, PosActionItem } from '@/lib/actions/pos.actions';
 import { lookupOrCreateCustomer, getCustomerByPhone, PosCustomer } from '@/lib/actions/crm.actions';
 import PosReceipt, { PosReceiptData } from '@/components/admin/PosReceipt';
@@ -68,11 +68,16 @@ export default function PosPage() {
 
     const clearCart = useCallback(() => setCartItems([]), []);
 
-    // ── Barcode Scanner ──────────────────────────────────────────────────────
-    const handleBarcodeScan = useCallback(async (sku: string) => {
+    // ── QR Scanner ───────────────────────────────────────────────────────────
+    const handleQrScan = useCallback(async (sku: string) => {
+        // Cancel any pending debounced search and wipe the input immediately
+        if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
+        setSearchQuery('');
+        setSearchResults([]);
+        setIsSearching(false);
         try {
             const res = await fetch(`/api/admin/pos/search?sku=${encodeURIComponent(sku)}`);
-            if (!res.ok) { toast.error('Product Not Found'); return; }
+            if (!res.ok) { toast.error('Product not found'); return; }
             const { product } = await res.json();
             addToCart(product);
             toast.success(`Added: ${product.name}`);
@@ -126,7 +131,7 @@ export default function PosPage() {
         }
     };
 
-    useBarcodeScanner({ onScan: handleBarcodeScan, enabled: !showPaymentModal });
+    useQrScanner({ onScan: handleQrScan, enabled: !showPaymentModal });
 
     // ── Debounced Search ─────────────────────────────────────────────────────
     useEffect(() => {
@@ -306,7 +311,7 @@ export default function PosPage() {
                                         <ShoppingCart className="w-10 h-10 text-gray-300" />
                                     </div>
                                     <p className="text-gray-500 font-medium">Cart is empty</p>
-                                    <p className="text-sm text-gray-400 mt-1">Scan a barcode or search above</p>
+                                    <p className="text-sm text-gray-400 mt-1">Scan a QR code or search above</p>
                                 </div>
                             ) : (
                                 cartItems.map(({ product, quantity }) => (
