@@ -9,6 +9,7 @@ import { useQrScanner } from '@/hooks/useQrScanner';
 import { processOfflineSale, PosActionItem } from '@/lib/actions/pos.actions';
 import { lookupOrCreateCustomer, getCustomerByPhone, PosCustomer } from '@/lib/actions/crm.actions';
 import PosReceipt, { PosReceiptData } from '@/components/admin/PosReceipt';
+import TestBillPrint from '@/components/admin/TestBillPrint';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 interface PosCartItem {
@@ -234,9 +235,12 @@ export default function PosPage() {
                             <p className="text-sm text-gray-500">Scan or search products to add to cart</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
-                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-xs font-medium text-green-700">Scanner Ready</span>
+                    <div className="flex items-center gap-3">
+                        <TestBillPrint />
+                        <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                            <span className="text-xs font-medium text-green-700">Scanner Ready</span>
+                        </div>
                     </div>
                 </div>
 
