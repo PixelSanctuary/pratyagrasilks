@@ -46,6 +46,7 @@ export default function PosPage() {
     const [customer, setCustomer] = useState<PosCustomer | null>(null);
     const [isLookingUp, setIsLookingUp] = useState(false);
     const [showOrderConfirm, setShowOrderConfirm] = useState(false);
+    const [isScanProcessing, setIsScanProcessing] = useState(false);
     const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     // ── Cart Operations ──────────────────────────────────────────────────────
@@ -69,6 +70,17 @@ export default function PosPage() {
 
     const clearCart = useCallback(() => setCartItems([]), []);
 
+    const resetForNewSale = useCallback(() => {
+        setCartItems([]);
+        setCustomerPhone('');
+        setCustomerName('');
+        setCustomer(null);
+        setSelectedPayment('CASH');
+        setReceiptData(null);
+        setSearchQuery('');
+        setSearchResults([]);
+    }, []);
+
     // ── QR Scanner ───────────────────────────────────────────────────────────
     const handleQrScan = useCallback(async (sku: string) => {
         // Cancel any pending debounced search and wipe the input immediately
@@ -76,6 +88,7 @@ export default function PosPage() {
         setSearchQuery('');
         setSearchResults([]);
         setIsSearching(false);
+        setIsScanProcessing(true);
         try {
             const res = await fetch(`/api/admin/pos/search?sku=${encodeURIComponent(sku)}`);
             if (!res.ok) { toast.error('Product not found'); return; }
@@ -84,6 +97,8 @@ export default function PosPage() {
             toast.success(`Added: ${product.name}`);
         } catch {
             toast.error('Scan failed. Please try again.');
+        } finally {
+            setIsScanProcessing(false);
         }
     }, [addToCart]);
 
@@ -208,10 +223,13 @@ export default function PosPage() {
             toast.success(`Sale complete! Order ${result.orderNumber}`);
 
             setTimeout(() => {
+                const cleanup = () => {
+                    resetForNewSale();
+                    window.removeEventListener('afterprint', cleanup);
+                };
+                window.addEventListener('afterprint', cleanup);
                 window.print();
-                clearCart();
-                setReceiptData(null);
-            }, 500);
+            }, 400);
         } finally {
             setIsProcessing(false);
         }
@@ -237,6 +255,12 @@ export default function PosPage() {
                     </div>
                     <div className="flex items-center gap-3">
                         <TestBillPrint />
+                        {isScanProcessing && (
+                            <div className="flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-lg px-3 py-2">
+                                <Loader2 className="w-3.5 h-3.5 animate-spin text-blue-600" />
+                                <span className="text-xs font-medium text-blue-700">Adding product...</span>
+                            </div>
+                        )}
                         <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
                             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                             <span className="text-xs font-medium text-green-700">Scanner Ready</span>
@@ -498,7 +522,13 @@ export default function PosPage() {
             {/* Payment Modal */}
             {showPaymentModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
+                    <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
+                        {isProcessing && (
+                            <div className="absolute inset-0 bg-white/80 rounded-2xl flex flex-col items-center justify-center gap-3 z-10">
+                                <Loader2 className="w-10 h-10 animate-spin text-[#550c72]" />
+                                <p className="text-sm font-semibold text-gray-700">Processing sale...</p>
+                            </div>
+                        )}
                         <div className="flex items-center justify-between mb-5">
                             <h3 className="text-lg font-bold text-gray-900">Select Payment Method</h3>
                             <button
@@ -542,8 +572,11 @@ export default function PosPage() {
                             disabled={isProcessing}
                             className="w-full py-4 bg-[#550c72] hover:bg-[#8430AB] disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-colors"
                         >
-                            <CheckCircle2 className="w-5 h-5" />
-                            Confirm {selectedPayment} — {fmt(grandTotal)}
+                            {isProcessing ? (
+                                <><Loader2 className="w-5 h-5 animate-spin" />Processing...</>
+                            ) : (
+                                <><CheckCircle2 className="w-5 h-5" />Confirm {selectedPayment} — {fmt(grandTotal)}</>
+                            )}
                         </button>
                     </div>
                 </div>
