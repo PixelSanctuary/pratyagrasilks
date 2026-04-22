@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
 import { createClient } from '@supabase/supabase-js';
+import { shippingAddressSchema } from '@/lib/validations/form.schemas';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,6 +28,17 @@ export async function POST(req: NextRequest) {
         if (!shippingAddress || !items || items.length === 0) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
+
+        // ── 1b. Sanitize + validate shipping address with Zod ────────────────────
+        const sanitizedPhone = (shippingAddress.phone ?? '').replace(/[^\d+]/g, '');
+        const parsed = shippingAddressSchema.safeParse({ ...shippingAddress, phone: sanitizedPhone });
+        if (!parsed.success) {
+            return NextResponse.json(
+                { error: 'Invalid shipping details', details: parsed.error.flatten().fieldErrors },
+                { status: 422 }
+            );
+        }
+        const validatedAddress = parsed.data;
 
         // ── 2. Re-fetch prices from DB to prevent price tampering ────────────────
         const productIds: string[] = items.map((i: any) => i.productId);
@@ -62,7 +74,7 @@ export async function POST(req: NextRequest) {
         const { data: existingCustomer } = await supabaseAdmin
             .from('customers')
             .select('id')
-            .eq('email', shippingAddress.email)
+            .eq('email', validatedAddress.email)
             .single();
 
         if (existingCustomer) {
@@ -70,15 +82,15 @@ export async function POST(req: NextRequest) {
             // Keep name current in case it was entered differently before
             await supabaseAdmin
                 .from('customers')
-                .update({ full_name: shippingAddress.fullName, phone: shippingAddress.phone })
+                .update({ full_name: validatedAddress.fullName, phone: validatedAddress.phone })
                 .eq('id', customerId);
         } else {
             const { data: newCustomer, error: custErr } = await supabaseAdmin
                 .from('customers')
                 .insert({
-                    email: shippingAddress.email,
-                    full_name: shippingAddress.fullName,
-                    phone: shippingAddress.phone,
+                    email: validatedAddress.email,
+                    full_name: validatedAddress.fullName,
+                    phone: validatedAddress.phone,
                 })
                 .select()
                 .single();
@@ -94,14 +106,14 @@ export async function POST(req: NextRequest) {
             .from('addresses')
             .insert({
                 customer_id: customerId,
-                full_name: shippingAddress.fullName,
-                address_line1: shippingAddress.addressLine1,
-                address_line2: shippingAddress.addressLine2 || '',
-                city: shippingAddress.city,
-                state: shippingAddress.state || '',
-                postal_code: shippingAddress.postalCode,
-                country: shippingAddress.country || 'India',
-                phone: shippingAddress.phone,
+                full_name: validatedAddress.fullName,
+                address_line1: validatedAddress.addressLine1,
+                address_line2: validatedAddress.addressLine2 || '',
+                city: validatedAddress.city,
+                state: validatedAddress.state || '',
+                postal_code: validatedAddress.postalCode,
+                country: validatedAddress.country || 'India',
+                phone: validatedAddress.phone,
                 is_default: false,
             })
             .select()

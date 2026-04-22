@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import toast from 'react-hot-toast';
+import Input from '@/components/ui/Input';
+import { contactFormSchema } from '@/lib/validations/form.schemas';
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -12,17 +14,31 @@ export default function ContactPage() {
     });
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [fieldErrors, setFieldErrors] = useState<Partial<Record<'name' | 'email' | 'subject' | 'message', string>>>({});
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value,
-        }));
+        setFormData(prev => ({ ...prev, [name]: value }));
+        if (fieldErrors[name as keyof typeof fieldErrors]) {
+            setFieldErrors(prev => ({ ...prev, [name]: undefined }));
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const validation = contactFormSchema.safeParse(formData);
+        if (!validation.success) {
+            const errs = validation.error.flatten().fieldErrors;
+            setFieldErrors({
+                name: errs.name?.[0],
+                email: errs.email?.[0],
+                subject: errs.subject?.[0],
+                message: errs.message?.[0],
+            });
+            return;
+        }
+        setFieldErrors({});
         setLoading(true);
 
         try {
@@ -134,42 +150,32 @@ export default function ContactPage() {
                                 </div>
                             )}
 
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div>
-                                    <label htmlFor="name" className="block  font-semibold mb-2">
-                                        Full Name *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        required
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                        placeholder="Your name"
-                                        maxLength={34}
-                                    />
-                                </div>
+                            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                                <Input
+                                    id="name"
+                                    name="name"
+                                    label="Full Name *"
+                                    type="text"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    placeholder="Your name"
+                                    maxLength={34}
+                                    error={fieldErrors.name}
+                                />
+
+                                <Input
+                                    id="email"
+                                    name="email"
+                                    label="Email Address *"
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder="your@email.com"
+                                    error={fieldErrors.email}
+                                />
 
                                 <div>
-                                    <label htmlFor="email" className="block  font-semibold mb-2">
-                                        Email Address *
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        required
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                        placeholder="your@email.com"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="subject" className="block  font-semibold mb-2">
+                                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
                                         Subject *
                                     </label>
                                     <select
@@ -177,20 +183,20 @@ export default function ContactPage() {
                                         name="subject"
                                         value={formData.subject}
                                         onChange={handleChange}
-                                        required
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md outline-none transition-colors focus:ring-2 focus:ring-primary focus:border-primary bg-white"
                                     >
                                         <option value="">Select a subject</option>
                                         <option value="product-inquiry">Product Inquiry</option>
                                         <option value="order-status">Order Status</option>
                                         <option value="return-exchange">Return/Exchange</option>
-                                        <option value="shipping-delivery">Shipping & Delivery</option>
+                                        <option value="shipping-delivery">Shipping &amp; Delivery</option>
                                         <option value="general">General Inquiry</option>
                                     </select>
+                                    <p className="mt-1 text-xs min-h-[1rem] text-red-600" aria-live="polite">{fieldErrors.subject ?? ''}</p>
                                 </div>
 
                                 <div>
-                                    <label htmlFor="message" className="block  font-semibold mb-2">
+                                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                                         Message *
                                     </label>
                                     <textarea
@@ -198,11 +204,11 @@ export default function ContactPage() {
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        required
                                         rows={5}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                        className={`w-full px-4 py-2 border rounded-md outline-none transition-colors focus:ring-2 ${fieldErrors.message ? 'border-red-400 focus:ring-red-400' : 'border-gray-300 focus:ring-primary focus:border-primary'}`}
                                         placeholder="Tell us more about your inquiry..."
                                     />
+                                    <p className="mt-1 text-xs min-h-[1rem] text-red-600" aria-live="polite">{fieldErrors.message ?? ''}</p>
                                 </div>
 
                                 <button

@@ -1,0 +1,56 @@
+import { z } from 'zod';
+
+// ── Shared field definitions ──────────────────────────────────────────────────
+
+const fullNameField = z
+    .string()
+    .trim()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name is too long')
+    .regex(/^[a-zA-Z\s'-]+$/, 'Name should only contain letters and spaces');
+
+const emailField = z
+    .string()
+    .trim()
+    .email('Please enter a valid email address');
+
+// E.164 format: + followed by 8–15 digits, first digit of country code non-zero
+const phoneField = z
+    .string()
+    .trim()
+    .regex(
+        /^\+[1-9]\d{7,14}$/,
+        'Please provide a valid international phone number starting with + (e.g. +919876543210)'
+    );
+
+// ── Contact Form ──────────────────────────────────────────────────────────────
+
+export const contactFormSchema = z.object({
+    name: fullNameField,
+    email: emailField,
+    subject: z.string().trim().min(1, 'Please select a subject'),
+    message: z.string().trim().min(10, 'Message must be at least 10 characters').max(2000, 'Message is too long'),
+});
+
+export type ContactFormData = z.infer<typeof contactFormSchema>;
+
+// ── Shipping Address ──────────────────────────────────────────────────────────
+
+export const shippingAddressSchema = z.object({
+    fullName: fullNameField,
+    email: emailField,
+    phone: phoneField,
+    addressLine1: z.string().trim().min(5, 'Address must be at least 5 characters').max(200, 'Address is too long'),
+    addressLine2: z.string().trim().max(200, 'Address is too long').optional(),
+    city: z.string().trim().min(2, 'City is required').max(100, 'City name is too long'),
+    state: z.string().trim().optional(),
+    postalCode: z
+        .string()
+        .trim()
+        .min(3, 'Postal code is required')
+        .max(10, 'Postal code is too long')
+        .regex(/^[A-Z0-9\s-]+$/i, 'Invalid postal code format'),
+    country: z.string().trim().min(1, 'Please select a country'),
+});
+
+export type ShippingAddress = z.infer<typeof shippingAddressSchema>;

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { shippingAddressSchema, ShippingAddress, INDIAN_STATES } from '@/lib/validations/checkout';
 import { useState } from 'react';
+import Input from '@/components/ui/Input';
 
 interface Props {
     onSubmit: (data: ShippingAddress) => Promise<void>;
@@ -32,10 +33,8 @@ export default function ShippingForm({ onSubmit }: Props) {
         }
     };
 
-    const inputClass =
-        'w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-100 focus:border-primary transition-colors text-sm';
-    const errorClass = 'mt-1 text-xs text-red-600';
-    const labelClass = 'block text-sm font-medium text-gray-700 mb-1';
+    const selectClass =
+        'w-full px-4 py-2 border border-gray-300 rounded-md outline-none transition-colors focus:ring-2 focus:ring-primary focus:border-primary bg-white text-sm text-gray-900';
 
     return (
         <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
@@ -43,110 +42,87 @@ export default function ShippingForm({ onSubmit }: Props) {
 
             <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="space-y-5">
                 {/* Full Name */}
-                <div>
-                    <label htmlFor="fullName" className={labelClass}>Full Name *</label>
-                    <input
-                        id="fullName"
-                        type="text"
-                        placeholder="Priya Sharma"
-                        autoComplete="name"
-                        className={inputClass}
-                        {...register('fullName')}
-                    />
-                    {errors.fullName && <p className={errorClass}>{errors.fullName.message}</p>}
-                </div>
+                <Input
+                    id="fullName"
+                    label="Full Name *"
+                    type="text"
+                    placeholder="Priya Sharma"
+                    autoComplete="name"
+                    error={errors.fullName?.message}
+                    {...register('fullName')}
+                />
 
                 {/* Email + Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label htmlFor="email" className={labelClass}>Email *</label>
-                        <input
-                            id="email"
-                            type="email"
-                            placeholder="priya@example.com"
-                            autoComplete="email"
-                            className={inputClass}
-                            {...register('email')}
-                        />
-                        {errors.email && <p className={errorClass}>{errors.email.message}</p>}
-                    </div>
-                    <div>
-                        <label htmlFor="phone" className={labelClass}>Phone *</label>
-                        <input
-                            id="phone"
-                            type="tel"
-                            placeholder="+919876543210"
-                            autoComplete="tel"
-                            className={inputClass}
-                            {...register('phone')}
-                        />
-                        {errors.phone && <p className={errorClass}>{errors.phone.message}</p>}
-                    </div>
+                    <Input
+                        id="email"
+                        label="Email *"
+                        type="email"
+                        placeholder="priya@example.com"
+                        autoComplete="email"
+                        error={errors.email?.message}
+                        {...register('email')}
+                    />
+                    <Input
+                        id="phone"
+                        label="Phone *"
+                        type="tel"
+                        placeholder="+919876543210"
+                        autoComplete="tel"
+                        error={errors.phone?.message}
+                        {...register('phone')}
+                    />
                 </div>
 
                 {/* Address Line 1 */}
-                <div>
-                    <label htmlFor="addressLine1" className={labelClass}>Address Line 1 *</label>
-                    <input
-                        id="addressLine1"
-                        type="text"
-                        placeholder="House / Flat no., Street"
-                        autoComplete="address-line1"
-                        className={inputClass}
-                        {...register('addressLine1')}
-                    />
-                    {errors.addressLine1 && <p className={errorClass}>{errors.addressLine1.message}</p>}
-                </div>
+                <Input
+                    id="addressLine1"
+                    label="Address Line 1 *"
+                    type="text"
+                    placeholder="House / Flat no., Street"
+                    autoComplete="address-line1"
+                    error={errors.addressLine1?.message}
+                    {...register('addressLine1')}
+                />
 
                 {/* Address Line 2 */}
-                <div>
-                    <label htmlFor="addressLine2" className={labelClass}>
-                        Address Line 2 <span className="text-gray-400 font-normal">(optional)</span>
-                    </label>
-                    <input
-                        id="addressLine2"
-                        type="text"
-                        placeholder="Landmark, Colony"
-                        autoComplete="address-line2"
-                        className={inputClass}
-                        {...register('addressLine2')}
-                    />
-                </div>
+                <Input
+                    id="addressLine2"
+                    label="Address Line 2 (optional)"
+                    type="text"
+                    placeholder="Landmark, Colony"
+                    autoComplete="address-line2"
+                    {...register('addressLine2')}
+                />
 
                 {/* City + Postal Code */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label htmlFor="city" className={labelClass}>City *</label>
-                        <input
-                            id="city"
-                            type="text"
-                            placeholder="Chennai"
-                            autoComplete="address-level2"
-                            className={inputClass}
-                            {...register('city')}
-                        />
-                        {errors.city && <p className={errorClass}>{errors.city.message}</p>}
-                    </div>
-                    <div>
-                        <label htmlFor="postalCode" className={labelClass}>Postal Code *</label>
-                        <input
-                            id="postalCode"
-                            type="text"
-                            placeholder="600001"
-                            autoComplete="postal-code"
-                            className={inputClass}
-                            {...register('postalCode')}
-                        />
-                        {errors.postalCode && <p className={errorClass}>{errors.postalCode.message}</p>}
-                    </div>
+                    <Input
+                        id="city"
+                        label="City *"
+                        type="text"
+                        placeholder="Chennai"
+                        autoComplete="address-level2"
+                        error={errors.city?.message}
+                        {...register('city')}
+                    />
+                    <Input
+                        id="postalCode"
+                        label="Postal Code *"
+                        type="text"
+                        placeholder="600001"
+                        autoComplete="postal-code"
+                        error={errors.postalCode?.message}
+                        {...register('postalCode')}
+                    />
                 </div>
 
                 {/* Country */}
                 <div>
-                    <label htmlFor="country" className={labelClass}>Country *</label>
+                    <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">Country *</label>
                     <select
                         id="country"
-                        className={inputClass}
+                        className={selectClass}
                         {...register('country')}
                         onChange={(e) => {
                             setCountry(e.target.value);
@@ -163,20 +139,20 @@ export default function ShippingForm({ onSubmit }: Props) {
                         <option value="UAE">UAE</option>
                         <option value="Other">Other</option>
                     </select>
-                    {errors.country && <p className={errorClass}>{errors.country.message}</p>}
+                    <p className="mt-1 text-xs min-h-[1rem] text-red-600" aria-live="polite">{errors.country?.message ?? ''}</p>
                 </div>
 
                 {/* State — only shown for India */}
                 {country === 'India' && (
                     <div>
-                        <label htmlFor="state" className={labelClass}>State *</label>
-                        <select id="state" className={inputClass} {...register('state')}>
+                        <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">State *</label>
+                        <select id="state" className={selectClass} {...register('state')}>
                             <option value="">Select state</option>
                             {INDIAN_STATES.map((s) => (
                                 <option key={s} value={s}>{s}</option>
                             ))}
                         </select>
-                        {errors.state && <p className={errorClass}>{errors.state.message}</p>}
+                        <p className="mt-1 text-xs min-h-[1rem] text-red-600" aria-live="polite">{errors.state?.message ?? ''}</p>
                     </div>
                 )}
 
