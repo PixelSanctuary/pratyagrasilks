@@ -46,6 +46,9 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                         max-width: 100% !important;
                         padding: 14px !important;
                         margin: 0 auto !important;
+                        min-height: 100vh !important;
+                        display: flex !important;
+                        flex-direction: column !important;
                     }
                     @page {
                         size: A5 portrait;
@@ -86,18 +89,23 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                     fontSize: '13px',
                     color: '#000',
                     lineHeight: 1.5,
-                    width: '520px',   /* A5 usable at 96dpi ≈ 531px */
+                    width: '520px',
                     margin: '0 auto',
                     background: '#fff',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minHeight: '100vh',
                 }}
             >
                 {/* ── Header ──────────────────────────────────────────────── */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
                     {/* Left: store details */}
                     <div>
-                        <div style={{ fontSize: '22px', fontWeight: 800, letterSpacing: '0.5px', color: '#550c72', lineHeight: 1.1 }}>
-                            PRATYAGRA SILKS
-                        </div>
+                        <img
+                            src="/Pratyagra_Silks_Logo.svg"
+                            alt="Pratyagra Silks"
+                            style={{ height: '48px', width: 'auto', display: 'block', marginBottom: '4px' }}
+                        />
                         <div style={{ fontSize: '14px', color: '#444', marginTop: '4px', lineHeight: 1.5 }}>
                             NO 178, 2nd Floor A Ramachandra Road<br />
                             RS Puram, Coimbatore – 641002<br />
@@ -160,6 +168,9 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                         ))}
                     </tbody>
                 </table>
+
+                {/* Spacer — pushes tax summary + footer to the bottom of the page */}
+                <div style={{ flex: 1 }} />
 
                 {/* ── Tax Summary ──────────────────────────────────────────── */}
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '14px' }}>
