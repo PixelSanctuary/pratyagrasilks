@@ -13,6 +13,8 @@ export interface PosReceiptData {
     sgst: number;
     paymentMethod: string;
     date: string;
+    customerName?: string;
+    customerPhone?: string;
 }
 
 const fmtR = (n: number) =>
@@ -57,7 +59,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                     .receipt-table {
                         width: 100%;
                         border-collapse: collapse;
-                        font-size: 13px;
+                        font-size: 18px;
                     }
                     .receipt-table th {
                         background-color: #f5f0f8 !important;
@@ -86,7 +88,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                     left: '-9999px',
                     top: 0,
                     fontFamily: font,
-                    fontSize: '13px',
+                    fontSize: '18px',
                     color: '#000',
                     lineHeight: 1.5,
                     width: '520px',
@@ -97,8 +99,28 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                     minHeight: '100vh',
                 }}
             >
+                {/* Watermark Logo */}
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        opacity: 0.10,
+                        zIndex: 0,
+                        pointerEvents: 'none',
+                        rotate: '-30deg',
+                    }}
+                >
+                    <img
+                        src="/Pratyagra_Silks_Logo.svg"
+                        alt=""
+                        style={{ height: '340px', width: 'auto', display: 'block' }}
+                    />
+                </div>
+                
                 {/* ── Header ──────────────────────────────────────────────── */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
                     {/* Left: store details */}
                     <div>
                         <img
@@ -106,7 +128,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                             alt="Pratyagra Silks"
                             style={{ height: '48px', width: 'auto', display: 'block', marginBottom: '4px' }}
                         />
-                        <div style={{ fontSize: '14px', color: '#444', marginTop: '4px', lineHeight: 1.5 }}>
+                        <div style={{ fontSize: '18px', color: '#444', marginTop: '4px', lineHeight: 1.5 }}>
                             NO 178, 2nd Floor A Ramachandra Road<br />
                             RS Puram, Coimbatore – 641002<br />
                             Tel: +91 73588 66646<br />
@@ -119,7 +141,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                         <div style={{ fontSize: '18px', fontWeight: 700, color: '#550c72', letterSpacing: '1px' }}>
                             TAX INVOICE
                         </div>
-                        <div style={{ fontSize: '14px', color: '#444', marginTop: '6px', lineHeight: 1.6 }}>
+                        <div style={{ fontSize: '18px', color: '#444', marginTop: '6px', lineHeight: 1.6 }}>
                             <div><strong>Order #:</strong> {data.orderNumber}</div>
                             <div><strong>Date:</strong> {data.date}</div>
                             <div>
@@ -127,7 +149,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                                     display: 'inline-block',
                                     background: '#550c72',
                                     color: '#000000',
-                                    fontSize: '14px',
+                                    fontSize: '18px',
                                     fontWeight: 700,
                                     padding: '2px 8px',
                                     borderRadius: '4px',
@@ -137,33 +159,39 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                                     {data.paymentMethod}
                                 </span>
                             </div>
+                            {data.customerName && (
+                                <div style={{ marginTop: '6px' }}>
+                                    <strong>Customer:</strong> {data.customerName}
+                                    {data.customerPhone && <div style={{ fontSize: '16px' }}><strong>Phone:</strong> {data.customerPhone}</div>}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
 
-                <div style={{ borderTop: '2px solid #550c72', marginBottom: '14px' }} />
+                <div style={{ borderTop: '2px solid #550c72', marginTop: '14px', marginBottom: '14px' }} />
 
                 {/* ── Items Table ──────────────────────────────────────────── */}
-                <table className="receipt-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                <table className="receipt-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: '18px' }}>
                     <thead>
                         <tr style={{ background: '#f5f0f8' }}>
-                            <th style={{ padding: '7px 6px', textAlign: 'left', fontSize: '16px', fontWeight: 700, width: '5%', borderBottom: '1px solid #ddd' }}>#</th>
-                            <th style={{ padding: '7px 6px', textAlign: 'left', fontSize: '16px', fontWeight: 700, width: '35%', borderBottom: '1px solid #ddd' }}>Item</th>
-                            <th style={{ padding: '7px 6px', textAlign: 'left', fontSize: '16px', fontWeight: 700, width: '20%', borderBottom: '1px solid #ddd' }}>SKU</th>
-                            <th style={{ padding: '7px 6px', textAlign: 'center', fontSize: '16px', fontWeight: 700, width: '8%', borderBottom: '1px solid #ddd' }}>Qty</th>
-                            <th style={{ padding: '7px 6px', textAlign: 'right', fontSize: '16px', fontWeight: 700, width: '16%', borderBottom: '1px solid #ddd' }}>Rate (₹)</th>
-                            <th style={{ padding: '7px 6px', textAlign: 'right', fontSize: '16px', fontWeight: 700, width: '16%', borderBottom: '1px solid #ddd' }}>Amount (₹)</th>
+                            <th style={{ padding: '7px 6px', textAlign: 'left', fontSize: '18px', fontWeight: 700, width: '5%', borderBottom: '1px solid #ddd' }}>#</th>
+                            <th style={{ padding: '7px 6px', textAlign: 'left', fontSize: '18px', fontWeight: 700, width: '35%', borderBottom: '1px solid #ddd' }}>Item</th>
+                            <th style={{ padding: '7px 6px', textAlign: 'left', fontSize: '18px', fontWeight: 700, width: '20%', borderBottom: '1px solid #ddd' }}>SKU</th>
+                            <th style={{ padding: '7px 6px', textAlign: 'center', fontSize: '18px', fontWeight: 700, width: '8%', borderBottom: '1px solid #ddd' }}>Qty</th>
+                            <th style={{ padding: '7px 6px', textAlign: 'right', fontSize: '18px', fontWeight: 700, width: '16%', borderBottom: '1px solid #ddd' }}>Rate (₹)</th>
+                            <th style={{ padding: '7px 6px', textAlign: 'right', fontSize: '18px', fontWeight: 700, width: '16%', borderBottom: '1px solid #ddd' }}>Amount (₹)</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data.items.map((item, idx) => (
                             <tr key={idx} className={idx % 2 === 1 ? 'row-alt' : ''} style={{ background: idx % 2 === 1 ? '#faf9fb' : '#fff' }}>
-                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', color: '#666', fontSize: '16px' }}>{idx + 1}</td>
-                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', fontWeight: 600, fontSize: '16px' }}>{item.name}</td>
-                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', color: '#666', fontSize: '16px' }}>{item.sku}</td>
-                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '16px' }}>{item.quantity}</td>
-                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', textAlign: 'right', fontSize: '16px' }}>{fmtR(item.unitPrice)}</td>
-                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', textAlign: 'right', fontWeight: 600, fontSize: '16px' }}>{fmtR(item.unitPrice * item.quantity)}</td>
+                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', color: '#666', fontSize: '18px' }}>{idx + 1}</td>
+                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', fontWeight: 600, fontSize: '18px' }}>{item.name}</td>
+                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', color: '#666', fontSize: '18px' }}>{item.sku}</td>
+                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', textAlign: 'center', fontSize: '18px' }}>{item.quantity}</td>
+                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', textAlign: 'right', fontSize: '18px' }}>{fmtR(item.unitPrice)}</td>
+                                <td style={{ padding: '7px 6px', borderBottom: '1px solid #eee', textAlign: 'right', fontWeight: 600, fontSize: '18px' }}>{fmtR(item.unitPrice * item.quantity)}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -174,7 +202,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
 
                 {/* ── Tax Summary ──────────────────────────────────────────── */}
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '14px' }}>
-                    <div style={{ width: '260px', fontSize: '16px' }}>
+                    <div style={{ width: '360px', fontSize: '22px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0', borderBottom: '1px solid #eee' }}>
                             <span style={{ color: '#555' }}>Total MRP (Incl. GST)</span>
                             <span style={{ fontWeight: 600 }}>{fmtR(data.grandTotal)}</span>
@@ -206,7 +234,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                                 marginTop: '8px',
                             }}
                         >
-                            <span style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '0.5px' }}>GRAND TOTAL</span>
+                            <span style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '0.5px' }}>GRAND TOTAL</span>
                             <span style={{ fontSize: '22px', fontWeight: 800 }}>{fmtR(data.grandTotal)}</span>
                         </div>
                     </div>
@@ -214,13 +242,13 @@ export default function PosReceipt({ data }: PosReceiptProps) {
 
                 {/* ── Footer ───────────────────────────────────────────────── */}
                 <div style={{ borderTop: '1px solid #ddd', marginTop: '20px', paddingTop: '14px', textAlign: 'center', fontSize: '11px', color: '#666' }}>
-                    <div style={{ fontWeight: 600, color: '#550c72', fontSize: '14px' }}>
+                    <div style={{ fontWeight: 600, color: '#550c72', fontSize: '18px' }}>
                         Thank you for shopping with Pratyagra Silks!
                     </div>
-                    <div style={{ marginTop: '4px', fontStyle: 'italic', fontSize: '12px' }}>
+                    <div style={{ marginTop: '4px', fontStyle: 'italic', fontSize: '16px' }}>
                         Reviving Tradition with a New Touch
                     </div>
-                    <div style={{ marginTop: '6px', fontSize: '12px', color: '#999' }}>
+                    <div style={{ marginTop: '6px', fontSize: '16px', color: '#999' }}>
                         * All prices are inclusive of GST &nbsp;|&nbsp; Goods once sold cannot be returned
                     </div>
                 </div>

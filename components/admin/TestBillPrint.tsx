@@ -23,6 +23,8 @@ const TEST_RECEIPT: PosReceiptData = {
     sgst: SGST,
     paymentMethod: 'CASH',
     date: '',   // filled at runtime
+    customerName: 'Test Customer',
+    customerPhone: '9876543210',
 };
 
 export default function TestBillPrint() {
