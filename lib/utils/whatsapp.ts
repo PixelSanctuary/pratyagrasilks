@@ -24,7 +24,7 @@ export function generateWhatsAppReceipt({
     cgst,
     sgst,
     paymentMethod = 'Cash',
-    storeName = 'Pratyagra Silks',
+    storeName = 'Kandangi Sarees',
     storePhone = '+91-XXXXXXXXXX',
     storeGSTIN = '09XXXXXXXXXXXXX',
 }: WhatsAppReceiptParams): string {

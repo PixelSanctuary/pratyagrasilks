@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Returns & Exchanges | PratyagraSilks - Quality Guarantee",
-    description: "PratyagraSilks Returns & Exchange Policy. We accept returns for defects only within 24 hours of delivery. Learn about our quality commitment and return process.",
-    keywords: ["returns policy", "exchanges", "defects", "refunds", "handloom quality"],
+    title: "Returns & Exchanges | Kandangi Sarees",
+    description: "Kandangi Sarees Returns & Exchange Policy. We do not accept returns. Exchanges are available only for damage or missing items, raised within 7 days of delivery. Learn about our quality commitment.",
+    keywords: ["returns policy", "exchanges", "defects", "handloom quality", "Kandangi Sarees returns"],
 };
 
 export default function ReturnsPage() {
@@ -12,7 +12,7 @@ export default function ReturnsPage() {
         {
             number: 1,
             title: "Report Within 24 Hours",
-            description: "If the saree is damaged or defective, email info@pratyagrasilks.com within 24 hours of delivery with your order ID, description, and photos.",
+            description: "If the saree is damaged or defective, email hello@Kandangi Sarees.com within 7 days of delivery with your order ID, description, and photos or video of the issue.",
         },
         {
             number: 2,
@@ -54,14 +54,14 @@ export default function ReturnsPage() {
         { text: "Mind change or disliking the product after purchase" },
         { text: "Color deviations (due to monitor/device settings or neutral lighting in photos)" },
         { text: "Changing your mind about the saree" },
-        { text: "Sarees returned after 24 hours (unless approved as defective)" },
+        { text: "Sarees raised after 7 days of delivery (unless approved as defective)" },
     ];
 
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
             <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary-light text-white py-16 md:py-24 px-4">
-            <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d535e954ec6c8338563e7b0fca472dad-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
+                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d535e954ec6c8338563e7b0fca472dad-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-4xl mx-auto text-center z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Returns & Exchanges
@@ -84,7 +84,7 @@ export default function ReturnsPage() {
                             All our handmade silk sarees are carefully checked for quality and defects before shipping. We believe in delivering only the best. However, handloom products naturally have unique weaving characteristics that are not defects—they're part of the art.
                         </p>
                         <p className="text-gray-800 text-lg leading-relaxed">
-                            If you receive a genuinely damaged or defective saree, we're here to help. Report it within 24 hours, and we'll take care of the rest.
+                            If you receive a genuinely damaged or defective saree — or if items are missing — we're here to help. Raise the issue within 7 days of delivery with unboxing photos or video, and we'll take care of the rest.
                         </p>
                     </div>
 
@@ -169,9 +169,9 @@ export default function ReturnsPage() {
                                 Report Window
                             </h3>
                             <ul className="space-y-2 ">
-                                <li><strong>24 hours:</strong> Report defects after delivery</li>
-                                <li><strong>Email:</strong> info@pratyagrasilks.com</li>
-                                <li><strong>Include:</strong> Order ID, photos of defect</li>
+                                <li><strong>7 days:</strong> Raise issue after delivery</li>
+                                <li><strong>Email:</strong> hello@Kandangi Sarees.com</li>
+                                <li><strong>Include:</strong> Order ID, unboxing photos or video</li>
                             </ul>
                         </div>
 
@@ -195,7 +195,7 @@ export default function ReturnsPage() {
                             <li>• Saree must be returned in original condition and packaging</li>
                             <li>• Report defects within 24 hours of delivery</li>
                             <li>• Photos must clearly show the defect</li>
-                            <li>• Decision to accept returns rests with PratyagraSilks Team</li>
+                            <li>• Decision to accept exchanges rests with the Kandangi Sarees team</li>
                             <li>• This policy is non-negotiable for all returns</li>
                         </ul>
                     </div>
@@ -251,7 +251,7 @@ export default function ReturnsPage() {
                                 Why do I have to report within 24 hours?
                             </summary>
                             <p className=" mt-4 leading-relaxed">
-                                This helps us verify that the defect occurred during manufacturing or shipping, not from use. Reporting quickly with photos allows us to assess the issue properly and help you faster.
+                                Raise the issue within 7 days of delivery with photos or video. Reporting quickly allows us to assess the issue properly and help you faster.
                             </p>
                         </details>
 

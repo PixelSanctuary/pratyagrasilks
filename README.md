@@ -1,4 +1,4 @@
-# PratyagraSilks - Luxury Silk Saree E-commerce
+# KandangiSarees - Luxury Silk Saree E-commerce
 
 A high-performance, SEO-optimized Next.js 14 e-commerce platform for luxury silk sarees.
 
@@ -39,7 +39,7 @@ A high-performance, SEO-optimized Next.js 14 e-commerce platform for luxury silk
 ## Project Structure
 
 ```
-pratyagrasilks/
+kandangisarees./
 ├── app/                  # Next.js App Router pages
 │   ├── layout.tsx       # Root layout with SEO metadata
 │   └── page.tsx         # Home page (Server Component)
@@ -79,4 +79,4 @@ vercel
 
 ## License
 
-© 2025 PratyagraSilks. All rights reserved.
+© 2025 KandangiSarees. All rights reserved.

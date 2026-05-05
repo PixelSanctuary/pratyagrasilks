@@ -85,7 +85,7 @@ export default function RazorpayButton({
                 key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
                 amount: createData.amount,
                 currency: createData.currency,
-                name: 'Pratyagra Silks',
+                name: 'Kandangi Sarees',
                 description: `Order ${createData.orderNumber}`,
                 order_id: createData.razorpayOrderId,
                 prefill: {

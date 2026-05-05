@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { silkCategories } from '@/lib/seo-config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://pratyagrasilks.com'
+  const baseUrl = 'https://Kandangi Sarees.com'
   const now = new Date() // Updates to current build date automatically
 
   // Static pages with their priorities and change frequencies

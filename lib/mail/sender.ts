@@ -9,9 +9,9 @@ export async function sendOrderConfirmation(
 ): Promise<void> {
     const html = getOrderConfirmationHtml(data);
     await resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL ?? 'orders@pratyagrasilks.com',
+        from: process.env.RESEND_FROM_EMAIL ?? 'orders@kandangisarees.com',
         to: toEmail,
-        subject: `Order Confirmed — ${data.orderNumber} | Pratyagra Silks`,
+        subject: `Order Confirmed — ${data.orderNumber} | Kandangi Sarees`,
         html,
     });
 }

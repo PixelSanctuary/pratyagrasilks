@@ -106,13 +106,13 @@ return [...staticPages, ...productPages];
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "PratyagraSilks",
-  "url": "https://pratyagrasilks.com",
-  "logo": "https://pratyagrasilks.com/logo.png",
+  "name": "KandangiSarees",
+  "url": "https://kandangisarees.com",
+  "logo": "https://kandangisarees.com/logo.png",
   "description": "Handmade silk sarees",
   "sameAs": [
-    "https://www.facebook.com/pratyagrasilks",
-    "https://www.instagram.com/pratyagra_silks"
+    "https://www.facebook.com/kandangisarees.",
+    "https://www.instagram.com/kandangi_sarees"
   ]
 }
 ```
@@ -136,7 +136,7 @@ return [...staticPages, ...productPages];
 ## 📤 Search Engine Submission
 
 ### Google Search Console
-1. **Add Property:** `https://pratyagrasilks.com`
+1. **Add Property:** `https://kandangisarees.com`
 2. **Verify Ownership:**
    - DNS record verification
    - HTML file upload
@@ -144,7 +144,7 @@ return [...staticPages, ...productPages];
    - Google Analytics
 3. **Submit Sitemap:**
    - Go to "Sitemaps" section
-   - Add: `https://pratyagrasilks.com/sitemap.xml`
+   - Add: `https://kandangisarees.com/sitemap.xml`
    - Submit
 
 **Checklist:**
@@ -155,14 +155,14 @@ return [...staticPages, ...productPages];
 - [ ] Core Web Vitals monitored
 
 ### Bing Webmaster Tools
-1. **Add Site:** `https://pratyagrasilks.com`
+1. **Add Site:** `https://kandangisarees.com`
 2. **Verify Ownership:**
    - DNS CNAME
    - HTML file
    - Meta tag
 3. **Submit Sitemap:**
    - Go to "Sitemaps"
-   - Add: `https://pratyagrasilks.com/sitemap.xml`
+   - Add: `https://kandangisarees.com/sitemap.xml`
 
 ### Yandex (For International Reach)
 1. **Add Site**
@@ -178,7 +178,7 @@ Current configuration:
 User-agent: *
 Allow: /
 
-Sitemap: https://pratyagrasilks.com/sitemap.xml
+Sitemap: https://kandangisarees.com/sitemap.xml
 ```
 
 **Recommended Enhanced Version:**
@@ -205,8 +205,8 @@ User-agent: *
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://pratyagrasilks.com/sitemap.xml
-Sitemap: https://pratyagrasilks.com/sitemap-products.xml
+Sitemap: https://kandangisarees.com/sitemap.xml
+Sitemap: https://kandangisarees.com/sitemap-products.xml
 ```
 
 ---

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { XCircle, ArrowLeft, Home } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'Payment Failed | PratyagraSilks',
+    title: 'Payment Failed | KandangiSarees',
     description: 'Payment was not successful',
 };
 

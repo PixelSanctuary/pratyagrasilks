@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Privacy Policy | PratyagraSilks",
-    description: "Read PratyagraSilks Privacy Policy. Learn how we collect, use, and protect your personal information.",
+    title: "Privacy Policy | Kandangi Sarees",
+    description: "Read Kandangi Sarees's Privacy Policy. Learn how we collect, use, and protect your personal information.",
     keywords: ["privacy policy", "data protection", "personal information"],
 };
 
@@ -11,7 +11,7 @@ export default function PrivacyPage() {
         <div className="flex flex-col">
             {/* Hero Section */}
             <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary-light text-white py-16 md:py-24 px-4">
-            <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/696560e60a6ef7343ea63a0726c4209b-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
+                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/696560e60a6ef7343ea63a0726c4209b-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-4xl mx-auto text-center z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Privacy Policy
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
                                 1. Introduction
                             </h2>
                             <p className="leading-relaxed">
-                                PratyagraSilks ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.
+                                Kandangi Sarees ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.
                             </p>
                         </div>
 
@@ -51,7 +51,7 @@ export default function PrivacyPage() {
                                 <li>Payment information</li>
                                 <li>Order history</li>
                             </ul>
-                            
+
                             <h3 className="font-semibold text-lg text-gray-900 mt-4 mb-2">Automatically Collected Information:</h3>
                             <ul className="list-disc list-inside space-y-2  ml-4">
                                 <li>IP address</li>
@@ -146,7 +146,7 @@ export default function PrivacyPage() {
                                 <li>Right to data portability</li>
                             </ul>
                             <p className="leading-relaxed mt-4">
-                                To exercise any of these rights, please contact us at info@pratyagrasilks.com.
+                                To exercise any of these rights, please contact us at hello@Kandangi Sarees.com.
                             </p>
                         </div>
 
@@ -194,9 +194,8 @@ export default function PrivacyPage() {
                                 If you have questions about this Privacy Policy or our privacy practices, please contact us at:
                             </p>
                             <p className="mt-4 ">
-                                <strong>Email:</strong> info@pratyagrasilks.com<br />
-                                <strong>Phone:</strong> +91 73588 66646<br />
-                                <strong>Address:</strong> Pratyagra Silks NO 178, 2<sup>nd</sup> Floor A Rammachnadra Road, RS Puram, Coimbatore, Tamil Nadu 641002, India
+                                <strong>Email:</strong> hello@Kandangi Sarees.com<br />
+                                <strong>Address:</strong> Kandangi Sarees — [PENDING — client to supply]
                             </p>
                         </div>
 

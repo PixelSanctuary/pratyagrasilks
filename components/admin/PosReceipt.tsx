@@ -72,7 +72,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                         print-color-adjust: exact;
                     }
                     .total-row {
-                        background-color: #550c72 !important;
+                        background-color: #5F1300 !important;
                         color: #fff !important;
                         -webkit-print-color-adjust: exact;
                         print-color-adjust: exact;
@@ -113,7 +113,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                     }}
                 >
                     <img
-                        src="/Pratyagra_Silks_Logo.svg"
+                        src="/kandangi-logo.svg"
                         alt=""
                         style={{ height: '340px', width: 'auto', display: 'block' }}
                     />
@@ -124,8 +124,8 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                     {/* Left: store details */}
                     <div>
                         <img
-                            src="/Pratyagra_Silks_Logo.svg"
-                            alt="Pratyagra Silks"
+                            src="/kandangi-logo.svg"
+                            alt="Kandangi Sarees"
                             style={{ height: '48px', width: 'auto', display: 'block', marginBottom: '4px' }}
                         />
                         <div style={{ fontSize: '18px', color: '#444', marginTop: '4px', lineHeight: 1.5 }}>
@@ -138,7 +138,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
 
                     {/* Right: invoice label + meta */}
                     <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontSize: '18px', fontWeight: 700, color: '#550c72', letterSpacing: '1px' }}>
+                        <div style={{ fontSize: '18px', fontWeight: 700, color: '#5F1300', letterSpacing: '1px' }}>
                             TAX INVOICE
                         </div>
                         <div style={{ fontSize: '18px', color: '#444', marginTop: '6px', lineHeight: 1.6 }}>
@@ -147,7 +147,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                             <div>
                                 <span style={{
                                     display: 'inline-block',
-                                    background: '#550c72',
+                                    background: '#5F1300',
                                     color: '#000000',
                                     fontSize: '18px',
                                     fontWeight: 700,
@@ -169,7 +169,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                     </div>
                 </div>
 
-                <div style={{ borderTop: '2px solid #550c72', marginTop: '14px', marginBottom: '14px' }} />
+                <div style={{ borderTop: '2px solid #5F1300', marginTop: '14px', marginBottom: '14px' }} />
 
                 {/* ── Items Table ──────────────────────────────────────────── */}
                 <table className="receipt-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: '18px' }}>
@@ -227,7 +227,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                                background: '#550c72',
+                                background: '#5F1300',
                                 color: '#fff',
                                 padding: '10px 10px',
                                 borderRadius: '6px',
@@ -242,11 +242,11 @@ export default function PosReceipt({ data }: PosReceiptProps) {
 
                 {/* ── Footer ───────────────────────────────────────────────── */}
                 <div style={{ borderTop: '1px solid #ddd', marginTop: '20px', paddingTop: '14px', textAlign: 'center', fontSize: '11px', color: '#666' }}>
-                    <div style={{ fontWeight: 600, color: '#550c72', fontSize: '18px' }}>
-                        Thank you for shopping with Pratyagra Silks!
+                    <div style={{ fontWeight: 600, color: '#5F1300', fontSize: '18px' }}>
+                        Thank you for shopping with Kandangi Sarees!
                     </div>
                     <div style={{ marginTop: '4px', fontStyle: 'italic', fontSize: '16px' }}>
-                        Reviving Tradition with a New Touch
+                        Handpicked for You, Rooted in Tradition.
                     </div>
                     <div style={{ marginTop: '6px', fontSize: '16px', color: '#999' }}>
                         * All prices are inclusive of GST &nbsp;|&nbsp; Goods once sold cannot be returned

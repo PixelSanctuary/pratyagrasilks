@@ -47,7 +47,7 @@ export default function ProductCard({ product, showNewBadge = false }: ProductCa
 
                     {/* Category Badge */}
                     <div className="absolute top-2 left-2">
-                        <span className="inline-block px-3 py-1 border border-slate text-slate bg-black/50 text-xs font-medium rounded-lg capitalize">
+                        <span className="inline-block px-3 py-1 border border-primary-200 text-white bg-primary/60 text-xs font-medium rounded-lg capitalize">
                             {product.category?.replace(/-/g, ' ')}
                         </span>
                     </div>

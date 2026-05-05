@@ -43,7 +43,7 @@ export function getOrderConfirmationHtml(data: OrderEmailData): string {
                 <span style="font-size: 14px; color: #555;">${item.quantity}</span>
             </td>
             <td style="padding: 14px 0; border-bottom: 1px solid #f0e6d3; text-align: right; vertical-align: top;">
-                <span style="font-size: 14px; font-weight: bold; color: #720C5C;">${formatINR(item.totalPrice)}</span>
+                <span style="font-size: 14px; font-weight: bold; color: #6B1910;">${formatINR(item.totalPrice)}</span>
             </td>
         </tr>`
         )
@@ -61,7 +61,7 @@ export function getOrderConfirmationHtml(data: OrderEmailData): string {
                </tr>`;
 
     const deliveryBadge = data.estimatedDelivery
-        ? `<p style="margin: 16px 0 0; display: inline-block; background: #FEF3C7; color: #92400E; font-size: 13px; padding: 6px 14px; border-radius: 20px; font-family: Georgia, serif;">
+        ? `<p style="margin: 16px 0 0; display: inline-block; background: #FDF6E3; color: #B8860B; font-size: 13px; padding: 6px 14px; border-radius: 20px; font-family: Georgia, serif;">
                 Estimated Delivery: ${data.estimatedDelivery}
            </p>`
         : '';
@@ -75,7 +75,7 @@ export function getOrderConfirmationHtml(data: OrderEmailData): string {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Order Confirmed — Pratyagra Silks</title>
+<title>Order Confirmed — Kandangi Sarees</title>
 </head>
 <body style="margin: 0; padding: 0; background-color: #f8f5f0; font-family: Georgia, 'Times New Roman', serif;">
 
@@ -86,11 +86,11 @@ export function getOrderConfirmationHtml(data: OrderEmailData): string {
 
                 <!-- Header -->
                 <tr>
-                    <td style="background-color: #550c72; padding: 36px 40px; text-align: center;">
+                    <td style="background-color: #5F1300; padding: 36px 40px; text-align: center;">
                         <h1 style="margin: 0; font-size: 28px; font-weight: normal; letter-spacing: 3px; color: #ffffff; text-transform: uppercase; font-family: Georgia, serif;">
-                            Pratyagra Silks
+                            Kandangi Sarees
                         </h1>
-                        <p style="margin: 8px 0 0; font-size: 12px; letter-spacing: 2px; color: #D97706; text-transform: uppercase; font-family: Georgia, serif;">
+                        <p style="margin: 8px 0 0; font-size: 12px; letter-spacing: 2px; color: #E8AB16; text-transform: uppercase; font-family: Georgia, serif;">
                             Handcrafted with Love
                         </p>
                     </td>
@@ -98,7 +98,7 @@ export function getOrderConfirmationHtml(data: OrderEmailData): string {
 
                 <!-- Gold divider -->
                 <tr>
-                    <td style="background-color: #D97706; height: 2px; font-size: 0; line-height: 0;">&nbsp;</td>
+                    <td style="background-color: #E8AB16; height: 2px; font-size: 0; line-height: 0;">&nbsp;</td>
                 </tr>
 
                 <!-- Body -->
@@ -106,7 +106,7 @@ export function getOrderConfirmationHtml(data: OrderEmailData): string {
                     <td style="padding: 40px 40px 32px;">
 
                         <!-- Greeting -->
-                        <p style="margin: 0 0 8px; font-size: 22px; color: #550c72; font-family: Georgia, serif;">
+                        <p style="margin: 0 0 8px; font-size: 22px; color: #5F1300; font-family: Georgia, serif;">
                             Dear ${data.customerName},
                         </p>
                         <p style="margin: 0 0 28px; font-size: 15px; color: #555; line-height: 1.6;">
@@ -116,9 +116,9 @@ export function getOrderConfirmationHtml(data: OrderEmailData): string {
                         <!-- Order number badge -->
                         <table cellpadding="0" cellspacing="0" style="margin-bottom: 32px;">
                             <tr>
-                                <td style="background-color: #F5EEF8; border-left: 3px solid #550c72; padding: 14px 20px; border-radius: 0 4px 4px 0;">
+                                <td style="background-color: #FDF6E3; border-left: 3px solid #5F1300; padding: 14px 20px; border-radius: 0 4px 4px 0;">
                                     <p style="margin: 0; font-size: 11px; letter-spacing: 1.5px; color: #888; text-transform: uppercase;">Order Number</p>
-                                    <p style="margin: 4px 0 0; font-size: 18px; font-family: 'Courier New', monospace; letter-spacing: 2px; color: #550c72; font-weight: bold;">
+                                    <p style="margin: 4px 0 0; font-size: 18px; font-family: 'Courier New', monospace; letter-spacing: 2px; color: #5F1300; font-weight: bold;">
                                         ${data.orderNumber}
                                     </p>
                                 </td>
@@ -151,8 +151,8 @@ export function getOrderConfirmationHtml(data: OrderEmailData): string {
                                 <td colspan="3" style="padding: 4px 0;"><hr style="border: none; border-top: 1px solid #e8d5e0; margin: 4px 0;" /></td>
                             </tr>
                             <tr>
-                                <td colspan="2" style="padding: 8px 0; font-size: 17px; font-weight: bold; color: #550c72;">Total</td>
-                                <td style="padding: 8px 0; text-align: right; font-size: 17px; font-weight: bold; color: #550c72;">${formatINR(data.totalAmount)}</td>
+                                <td colspan="2" style="padding: 8px 0; font-size: 17px; font-weight: bold; color: #5F1300;">Total</td>
+                                <td style="padding: 8px 0; text-align: right; font-size: 17px; font-weight: bold; color: #5F1300;">${formatINR(data.totalAmount)}</td>
                             </tr>
                         </table>
 
@@ -180,9 +180,9 @@ export function getOrderConfirmationHtml(data: OrderEmailData): string {
 
                 <!-- Footer -->
                 <tr>
-                    <td style="background-color: #550c72; padding: 28px 40px; text-align: center;">
-                        <p style="margin: 0; font-size: 14px; color: #ffffff; letter-spacing: 1px;">Pratyagra Silks</p>
-                        <p style="margin: 6px 0 0; font-size: 12px; color: #D97706; letter-spacing: 1px;">Handcrafted with Love</p>
+                    <td style="background-color: #5F1300; padding: 28px 40px; text-align: center;">
+                        <p style="margin: 0; font-size: 14px; color: #ffffff; letter-spacing: 1px;">Kandangi Sarees</p>
+                        <p style="margin: 6px 0 0; font-size: 12px; color: #E8AB16; letter-spacing: 1px;">Handcrafted with Love</p>
                         <p style="margin: 16px 0 0; font-size: 11px; color: #c9a8d8;">
                             If you have any questions, reply to this email or contact us [ +91 73588 66646].
                         </p>

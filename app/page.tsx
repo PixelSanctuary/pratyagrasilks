@@ -3,37 +3,37 @@ import NewArrivals from "@/components/home/NewArrivals";
 
 // Server Component - Optimized for performance and SEO
 export default function Home() {
-    // Featured silk type collections
+    // Kandangi Sarees featured weave categories — links to /silk/[slug]
     const categories = [
-        { id: 1, name: "Kanjivaram Silk", image: "/images/sarees/KanjivaramSilk—Full-Frame.webp", description: "Pure mulberry silk with intricate temple designs" },
-        { id: 2, name: "Banarasi Silk", image: "/images/sarees/BanarasiSilk—Full-Frame.webp", description: "Luxurious zari work and brocade patterns" },
-        { id: 3, name: "Tussar Silk", image: "/images/sarees/TussarSilk—Full-Frame.webp", description: "Natural texture with distinctive golden hue" },
-        { id: 4, name: "Mysore Silk", image: "/images/sarees/MysoreSilk—Full-Frame.webp", description: "Finest mulberry silk with elegant designs" },
-        { id: 5, name: "Kerala Kasavu", image: "/images/sarees/KeralaKasavu—Full-Frame.webp", description: "Traditional gold zari weaving on white silk" },
-        { id: 6, name: "Muga Silk", image: "/images/sarees/MugaSilk—Full-Frame.webp", description: "Golden-hued natural silk unique to Assam" },
-        { id: 7, name: "Paithani Silk", image: "/images/sarees/PaithaniSilk—Full-Frame.webp", description: "Fine silk with brilliant colors and peacock motifs" },
-        { id: 8, name: "Pochampalli Silk", image: "/images/sarees/PochampalliSilk—Full-Frame.webp", description: "Traditional ikat technique with vibrant colors" },
+        { id: 1, slug: "kanjivaram-silk", name: "Kanjivaram Silk", description: "Pure mulberry silk with temple borders — the gold standard of South Indian weaving." },
+        { id: 2, slug: "gadwal-silk", name: "Gadwal Silk", description: "Cotton body, silk border — the perfect everyday elegance from Telangana." },
+        { id: 3, slug: "chettinad-cotton", name: "Chettinad Cotton", description: "Bold checks, vibrant colours, a durable weave that only gets better with wear." },
+        { id: 4, slug: "venkatagiri-silk", name: "Venkatagiri Silk", description: "Feather-light weave with delicate jamdani motifs from Andhra Pradesh." },
+        { id: 5, slug: "patola-silk", name: "Patola Silk", description: "Double ikat from Patan — one of India's most revered textile traditions." },
+        { id: 6, slug: "narayanapet-cotton", name: "Narayanapet Cotton", description: "Wide zari borders on sturdy cotton — from festivals to family gatherings." },
+        { id: 7, slug: "pen-kalamkari", name: "Pen Kalamkari", description: "Hand-painted with bamboo pen and natural dyes — each piece genuinely one-of-a-kind." },
+        { id: 8, slug: "mangalgiri-cotton", name: "Mangalgiri", description: "Nizam border on crisp cotton — a daily-wear saree that still looks considered." },
     ];
 
     const benefits = [
-        { title: "Authentic Craftsmanship", description: "Handwoven by skilled artisans preserving centuries-old traditions" },
-        { title: "Premium Quality", description: "100% pure silk with superior weaving techniques and durability" },
-        { title: "Sustainable Production", description: "Ethically sourced and produced with respect to artisans and environment" },
-        { title: "Timeless Design", description: "Classic patterns that transcend trends and last generations" },
+        { title: "Weaver-Direct Sourcing", description: "Every saree comes straight from the loom — no middlemen, no compromise." },
+        { title: "Curated for Real Women", description: "We handpick every piece for wearability, beauty, and true value." },
+        { title: "Rooted in Heritage", description: "Our weaves support artisan communities and preserve living traditions." },
+        { title: "Warmth in Every Thread", description: "From everyday cottons to bridal silks — we simplify the search so you find what suits you." },
     ];
 
     return (
         <div className="flex flex-col">
-            {/* Hero Section - Mobile-first, high-impact, SEO optimized */}
+            {/* Hero Section */}
             <section className="relative py-20 md:py-32 px-4 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary-light opacity-90"></div>
                 <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/ab207e7a5cbdc26b65405f930546fb35-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-7xl mx-auto text-center relative z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance leading-tight drop-shadow-lg">
-                        Reviving Tradition with a New Touch
+                        Handpicked for You, Rooted in Tradition.
                     </h1>
                     <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance opacity-95 drop-shadow">
-                        Your one-stop destination for luxury silk sarees curated from the finest weavers across India. Experience the perfect blend of timeless tradition and modern elegance in every piece.
+                        Your trusted guide to authentic handloom sarees — curated from the hands that weave them, delivered to women who value what&apos;s real.
                     </p>
                     <Link
                         href="/collection"
@@ -43,21 +43,21 @@ export default function Home() {
                     </Link>
                 </div>
 
-                {/* Decorative element - now above the pattern to blend */}
+                {/* Decorative fade */}
                 <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent z-10"></div>
             </section>
-            
-            {/* New Arrivals — "The New Heritage" */}
+
+            {/* New Arrivals — "Fresh from the Loom" */}
             <NewArrivals />
 
-            {/* Why Choose PratyagraSilks - Trust & Credibility Section */}
+            {/* Why Choose Kandangi Sarees */}
             <section className="py-16 md:py-24 px-4">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
-                        Why Choose Pratyagra Silks
+                        Why Kandangi Sarees
                     </h2>
-                    <p className="text-center  mb-12 max-w-2xl mx-auto text-lg">
-                        Experience the perfect blend of luxury and tradition. Our carefully curated collection features premium handwoven silk sarees from India's finest weavers, combining centuries-old craftsmanship with contemporary style.
+                    <p className="text-center mb-12 max-w-2xl mx-auto text-lg">
+                        We don&apos;t just sell sarees. We handpick every piece, stand behind every thread, and guide you to a weave that&apos;s genuinely right for you.
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -66,7 +66,7 @@ export default function Home() {
                                 <h3 className="font-playfair text-xl font-bold text-primary mb-3">
                                     {benefit.title}
                                 </h3>
-                                <p className=" text-sm leading-relaxed">
+                                <p className="text-sm leading-relaxed">
                                     {benefit.description}
                                 </p>
                             </div>
@@ -79,20 +79,19 @@ export default function Home() {
             <section className="p-4">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
-                        Explore Our Silk Saree Collections
+                        Explore Our Weaves
                     </h2>
-                    <p className="text-center  mb-12 max-w-2xl mx-auto text-lg">
-                        Discover our handpicked range of premium silk sarees from across India
+                    <p className="text-center mb-12 max-w-2xl mx-auto text-lg">
+                        Handpicked silks and cottons from across India — each one chosen for a reason.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                         {categories.map((category) => (
                             <Link
                                 key={category.id}
-                                href={`/collection?category=${category.name.toLowerCase().replace(/ /g, "-")}`}
+                                href={`/silk/${category.slug}`}
                                 className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                                <div className="absolute inset-0 bg-no-repeat bg-cover" style={{ backgroundImage: `url('${category.image}')` }}></div>
-                                {/* Placeholder background with gradient */}
+                                {/* Gradient background placeholder — images to be added in Phase 2 */}
                                 <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
                                     <span className="text-primary/30 font-playfair text-2xl font-bold text-center px-4">
                                         {category.name}
@@ -114,56 +113,37 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Our Heritage & Ethos - SEO Content Block */}
+            {/* Our Story */}
             <section className="py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6 text-center">
-                        Reviving Tradition with a New Touch
+                        Handpicked for You, Rooted in Tradition.
                     </h2>
-                    <div className="space-y-6  leading-relaxed text-lg">
+                    <div className="space-y-6 leading-relaxed text-lg">
                         <p>
-                            <strong>Pratyagra Silks</strong> is devoted to reviving India's timeless silk heritage by curating luxury sarees from the finest weavers across the country. Each piece in our collection is a masterpiece of luxury—meticulously handwoven by master artisans who have inherited centuries of expertise. We celebrate the artistry, tradition, and cultural pride embedded in every authentic Indian textile.
+                            <strong>Kandangi Sarees</strong> was built for women who know what they want in a saree — but don&apos;t always have the time or the right guide to find it. We handpick every weave directly from artisan communities across Tamil Nadu, Andhra Pradesh, Telangana, and Gujarat. No middlemen. No compromise.
                         </p>
                         <p>
-                            Our commitment to <strong>curated excellence, uncompromised quality, and ethical partnerships</strong> defines us. We work directly with master weavers and artisan communities across India's renowned silk regions—from Kanjivaram and Mysore in the South to Varanasi in the North. Every thread is a testament to tradition, every pattern reflects generations of artistic mastery, and every saree embodies the luxury that comes from blending timeless heritage with contemporary elegance.
+                            From the bold checks of a Chettinad cotton to the precise double-ikat of a Patola, every saree in our collection has been chosen for its <strong>authenticity, wearability, and honest craft</strong>. We believe the best sarees aren&apos;t the most expensive ones — they&apos;re the ones that feel right from the moment you wear them.
                         </p>
                         <p>
-                            We believe luxury is most meaningful when it honors tradition. When you choose a Pratyagra Silks saree, you invest in authentic heritage, support artisan dignity, and acquire a timeless treasure that will be cherished for generations.
+                            When you buy from Kandangi Sarees, you&apos;re not just buying a saree. You&apos;re supporting the weaver behind the loom, the family behind the craft, and the tradition that has survived for generations because women like you chose to keep it alive.
                         </p>
                         <div className="bg-primary/5 border-l-4 border-primary p-6 mt-8">
                             <p className="font-semibold text-primary text-xl">
-                                "Experience luxury that honors tradition. Experience PratyagraSilks."
+                                &ldquo;Handpicked Weaves. Trusted Guidance. Real Wardrobes. That&apos;s the Kandangi Sarees promise.&rdquo;
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Trust & Social Proof Section */}
+            {/* Testimonials — kept disabled per Phase 1 scope */}
             {false && <section className="py-16 md:py-24 px-4 bg-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-8">
-                        Trusted by Silk Saree Enthusiasts
+                        Trusted by Saree Lovers
                     </h2>
-
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-8">
-                        <div className="text-center">
-                            <p className="text-4xl font-bold text-primary">1000+</p>
-                            <p className=" text-sm mt-2">Satisfied Customers</p>
-                        </div>
-                        <div className="text-center">
-                            <p className="text-4xl font-bold text-primary">500+</p>
-                            <p className=" text-sm mt-2">Premium Sarees</p>
-                        </div>
-                        <div className="text-center">
-                            <p className="text-4xl font-bold text-primary">50+</p>
-                            <p className=" text-sm mt-2">Artisan Partners</p>
-                        </div>
-                    </div>
-
-                    <p className=" text-lg mb-6 max-w-2xl mx-auto">
-                        Every saree is selected with meticulous care to ensure exceptional quality, authentic craftsmanship, and timeless beauty. We're committed to bringing you genuine Indian handloom excellence.
-                    </p>
                 </div>
             </section>}
 
@@ -171,10 +151,10 @@ export default function Home() {
             <section className="py-16 md:py-24 px-4 bg-gradient-to-r from-primary to-primary-light text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-6">
-                        Begin Your Journey Into Timeless Elegance
+                        Pick Your Saree Effortlessly.
                     </h2>
                     <p className="text-lg mb-8 opacity-95 max-w-2xl mx-auto">
-                        Browse our curated collection of handwoven silk sarees. Each piece is an investment in tradition, artistry, and timeless beauty.
+                        Browse our curated collection of authentic handlooms across silk and cotton. Handpicked from weavers. Made for you.
                     </p>
                     <Link
                         href="/collection"
@@ -187,4 +167,3 @@ export default function Home() {
         </div>
     );
 }
-

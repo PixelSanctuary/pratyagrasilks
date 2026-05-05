@@ -56,9 +56,9 @@ function SingleLabel({ product }: { product: LabelProduct }) {
                 <p style={{
                     fontSize: '9px', fontWeight: 800, color: '#000000',
                     letterSpacing: '0.025em', textTransform: 'uppercase',
-                     margin: '0 0 0 10px', lineHeight: 1, 
+                     margin: '0 0 0 10px', lineHeight: 1,
                 }}>
-                    ❤︎ Pratyagra Silks
+                    ❤︎ Kandangi Sarees
                 </p>
                 <p style={{
                     fontSize: '10px',

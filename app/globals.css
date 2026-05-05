@@ -3,43 +3,48 @@
 @tailwind utilities;
 
 /* ============================================================
-   PRATYAGRA SILKS — Design Token System
-   Brand: Purple (#550c72) + Amber accent
-   Context: Luxury Silk Sarees
+   Kandangi Sarees — Design Token System
+   Brand: Coffee Brown (#4A2C1A) + Mustard Yellow (#C89B3C)
+   Context: Handpicked Handloom Sarees
    ============================================================ */
 
 :root {
   /* Page surface */
-  --background: #fbf6f0;
-  /* Original warm silk parchment */
-  --foreground: #221D10;
-  /* Deep walnut — primary text */
+  --background: #FDF6E3;
+  /* Warm off-white */
+  --foreground: #1A0A00;
+  /* Near-black warm — primary text */
 
-  /* Purple — primary brand */
-  --color-primary: #550c72;
-  --color-primary-hover: #8430AB;
-  --color-primary-active: #720C5C;
+  /* Deep Brown — primary brand */
+  --color-primary: #5F1300;
+  --color-primary-hover: #7A2B1A;
+  --color-primary-active: #3D0D00;
   --color-primary-foreground: #FFFFFF;
-  --color-primary-subtle: #F5EEF8;
+  --color-primary-subtle: #FDF6E3;
 
-  /* Amber — accent / CTA */
-  --color-accent: #D97706;
-  --color-accent-hover: #B45309;
+  /* Gold — accent / CTA */
+  --color-accent: #E8AB16;
+  --color-accent-hover: #D4961C;
   --color-accent-foreground: #FFFFFF;
-  --color-accent-subtle: #FFFBEB;
-  --color-accent-body: #92400E;
+  --color-accent-subtle: #FDF6E3;
+  --color-accent-body: #B8860B;
   /* body-size text, meets 4.5:1 on white */
 
-  /* Silk backdrop */
-  --color-secondary: #FDE3C9;
-  /* original peach cream */
+  /* Light gold — secondary surface */
+  --color-secondary: #F0BE44;
+
+  /* Brand accent colors */
+  --color-green: #104210;
+  --color-red-light: #D13120;
+  --color-red-dark: #6B1910;
+  --color-muted: #8C5A3C;
 }
 
-/* Dark mode intentionally mirrors light — brand requirement */
+/* Dark mode mirrors light — brand requirement */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #fbf6f0;
-    --foreground: #221D10;
+    --background: #FBF5E6;
+    --foreground: #2C1A0E;
   }
 }
 
@@ -59,8 +64,8 @@ body {
   display: none;
 }
 
-/* ── Silk shimmer utility ── */
-/* Applied to product card image wrappers for a luxury iridescence feel */
+/* ── Handloom shimmer utility ── */
+/* Applied to product card image wrappers for a warm iridescence feel */
 @layer utilities {
   .silk-shimmer {
     background: linear-gradient(135deg,

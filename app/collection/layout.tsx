@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Silk Saree Collection | Authentic Handwoven Sarees | PratyagraSilks',
+    title: 'Silk Saree Collection | Authentic Handwoven Sarees | KandangiSarees',
     description: 'Browse our exquisite collection of authentic handwoven silk sarees. Kanjivaram, Banarasi, Tussar, Mysore, and more. Premium quality silk sarees from India\'s finest weavers.',
     keywords: [
         'silk sarees collection',
@@ -16,20 +16,20 @@ export const metadata: Metadata = {
         'traditional sarees',
     ],
     openGraph: {
-        title: 'Silk Saree Collection | PratyagraSilks',
+        title: 'Silk Saree Collection | KandangiSarees',
         description: 'Browse our exquisite collection of authentic handwoven silk sarees from India\'s finest weavers.',
-        url: 'https://pratyagrasilks.com/collection',
-        siteName: 'PratyagraSilks',
+        url: 'https://kandangisarees.com/collection',
+        siteName: 'KandangiSarees',
         locale: 'en_IN',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Silk Saree Collection | PratyagraSilks',
+        title: 'Silk Saree Collection | KandangiSarees',
         description: 'Browse our exquisite collection of authentic handwoven silk sarees.',
     },
     alternates: {
-        canonical: 'https://pratyagrasilks.com/collection',
+        canonical: 'https://kandangisarees.com/collection',
     },
 };
 

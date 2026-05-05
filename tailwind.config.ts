@@ -9,32 +9,35 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                // ── Original brand purple scale ───────────────────────────────
-                primary: "#550c72",          // Brand purple — buttons, logo, footer bg
-                "primary-light": "#8430AB",  // Hover state (was primary2)
-                "primary-dark": "#720C5C",   // Active/pressed; price text (was primaryAnalogue)
-                "primary-50": "#F5EEF8",     // Subtlest purple tint — hover backgrounds
-                "primary-100": "#E8D5F0",    // Input focus rings, light fills
-                "primary-200": "#D0AADF",    // Disabled borders
-                "primary-300": "#B07DC9",    // Dividers, decorative stripes
-                "primary-900": "#2A0639",    // Hero overlays, near-black sections
+                // ── Kandangi Sarees brand palette ────────────────────────────────────
+                primary: "#5F1300",          // Deep Brown — nav, footer bg, headings
+                "primary-light": "#7A2B1A",  // Hover state on primary
+                "primary-dark": "#3D0D00",   // Active/pressed state
+                "primary-50": "#FDF6E3",     // Warm off-white — hover backgrounds
+                "primary-100": "#F5E8CC",    // Input focus rings, light fills
+                "primary-200": "#EBCC99",    // Disabled borders
+                "primary-300": "#D4B366",    // Dividers, decorative stripes
+                "primary-900": "#1A0A00",    // Near-black warm — hero overlays
 
-                // ── Amber accent ──────────────────────────────────────────────
-                accent: "#D97706",           // Amber-600: CTAs, price highlights, "View All"
-                "accent-hover": "#B45309",   // Amber-700: hover on accent elements
-                "accent-light": "#FFFBEB",   // Amber-50: subtle hover bg
-                "accent-300": "#FCD34D",     // Amber-300: badge borders, shimmer
-                "accent-700": "#92400E",     // Amber-800: body-size text (meets 4.5:1)
+                // ── Gold accent (primary CTA) ────────────────────────────────────────────
+                accent: "#E8AB16",           // Gold — CTAs, price highlights
+                "accent-hover": "#D4961C",   // Darker gold hover
+                "accent-light": "#FDF6E3",   // Warm off-white subtle bg
+                "accent-300": "#F0BE44",     // Light gold — badges, shimmer
+                "accent-700": "#B8860B",     // Meets 4.5:1 on white — body-size text
 
-                // ── Neutral / Silk backdrop ───────────────────────────────────
-                secondary: "#FDE3C9",        // Peach — card hover, btn text on primary (original)
+                // ── Brand accent colors ─────────────────────────────────────────────
+                secondary: "#F0BE44",        // Light gold — secondary buttons
+                green: "#104210",            // Forest Green — in stock, badges, success
+                "red-light": "#D13120",      // Light Red — sale tags, alerts
+                "red-dark": "#6B1910",       // Dark Red — borders, secondary headings
                 background: "var(--background)",
                 foreground: "var(--foreground)",
-                textPrimary: "#221D10",      // Unchanged
-                textSecondary: "#101522",    // Original cool dark
+                textPrimary: "#1A0A00",      // Near-black warm — primary body text
+                textSecondary: "#5F1300",    // Deep brown — secondary text
 
-                // ── Utility neutrals ──────────────────────────────────────────
-                slate: "#E1EDE7",            // Original cool grey-green
+                // ── Muted tone ────────────────────────────────────────────────
+                muted: "#8C5A3C",            // Muted terracotta — labels, subtitles
             },
             fontFamily: {
                 playfair: ['"Playfair Display"', 'serif'],

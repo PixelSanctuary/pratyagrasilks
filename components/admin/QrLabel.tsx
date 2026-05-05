@@ -77,13 +77,13 @@ export default function QrLabel({ productName, sku, price }: QrLabelProps) {
                             <p style={{
                                 fontSize: '6px',
                                 fontWeight: 700,
-                                color: '#550c72',
+                                color: '#5F1300',
                                 letterSpacing: '0.06em',
                                 textTransform: 'uppercase',
                                 margin: 0,
                                 lineHeight: 1,
                             }}>
-                                ✦ Pratyagra Silks ✦
+                                ✦ Kandangi Sarees ✦
                             </p>
                             <p style={{
                                 fontSize: '5.5px',
@@ -110,7 +110,7 @@ export default function QrLabel({ productName, sku, price }: QrLabelProps) {
                             <p style={{
                                 fontSize: '8px',
                                 fontWeight: 700,
-                                color: '#D97706',
+                                color: '#E8AB16',
                                 letterSpacing: '0.04em',
                                 margin: 0,
                                 lineHeight: 1,

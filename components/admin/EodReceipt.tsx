@@ -203,7 +203,7 @@ export default function EodReceipt({ data, printedAt }: EodReceiptProps) {
                 {/* ── Footer ──────────────────────────────────────────── */}
                 <div style={{ textAlign: 'center', fontSize: '9px' }}>
                     <div style={{ fontWeight: 'bold' }}>** CONFIDENTIAL — INTERNAL USE ONLY **</div>
-                    <div style={{ marginTop: '1mm' }}>Pratyagra Silks — Z-Report</div>
+                    <div style={{ marginTop: '1mm' }}>Kandangi Sarees — Z-Report</div>
                 </div>
 
                 {/* Tear margin */}

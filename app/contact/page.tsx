@@ -96,10 +96,10 @@ export default function ContactPage() {
                                 <div>
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Email</h3>
                                     <a
-                                        href="mailto:info@pratyagrasilks.com"
+                                        href="mailto:hello@kandangisarees.com"
                                         className="text-primary hover:text-primary-light text-lg transition-colors"
                                     >
-                                        info@pratyagrasilks.com
+                                        hello@kandangisarees.com
                                     </a>
                                     <p className="text-textSecondary mt-2">We'll respond within 24 hours</p>
                                 </div>
@@ -107,21 +107,20 @@ export default function ContactPage() {
                                 <div>
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Phone</h3>
                                     <a
-                                        href="tel:+917358866646"
+                                        href="tel:+917904793851"
                                         className="text-primary hover:text-primary-light text-lg transition-colors"
                                     >
-                                        +91 73588 66646
+                                        +91 79047 93851
                                     </a>
-                                    <p className="text-textSecondary mt-2">Mon-Fri: 9:00 AM - 6:00 PM IST</p>
+                                    <p className="text-textSecondary mt-2">Monday – Saturday: 10:00 AM – 6:00 PM IST</p>
                                 </div>
 
                                 <div>
                                     <h3 className="font-semibold text-lg text-gray-900 mb-2">Office Address</h3>
                                     <p className="text-lg leading-relaxed">
-                                        Pratyagra Silks<br />
-                                        NO 178, 2<sup>nd</sup> Floor A Rammachnadra Road<br />
-                                        RS Puram,
-                                        Coimbatore, Tamil Nadu 641002<br />
+                                        Kandangi Sarees<br />
+                                        15-B, Venkatachalam Road, First floor<br />
+                                        Rs.Puram, Coimbatore<br />
                                         India
                                     </p>
                                 </div>
@@ -129,8 +128,7 @@ export default function ContactPage() {
                                 <div className="bg-primary/5 rounded-lg p-6">
                                     <h3 className="font-semibold text-lg text-primary mb-2">Business Hours</h3>
                                     <ul className=" space-y-1">
-                                        <li><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM IST</li>
-                                        <li><strong>Saturday:</strong> 10:00 AM - 4:00 PM IST</li>
+                                        <li><strong>Monday - Saturday:</strong> 10:00 AM – 6:00 PM IST</li>
                                         <li><strong>Sunday:</strong> Closed</li>
                                     </ul>
                                 </div>
@@ -246,7 +244,7 @@ export default function ContactPage() {
                                 What's your return policy?
                             </summary>
                             <p className=" mt-4 leading-relaxed">
-                                We offer a 30-day return policy for unused sarees in original condition. Check our <a href="/returns" className="text-primary hover:underline">Returns & Exchanges</a> page for more details.
+                                We do not accept returns. Exchanges are available only in cases of damage or missing items, provided the issue is raised within 7 days of receiving your order. Please contact us with unboxing photos or video for a smooth resolution.
                             </p>
                         </details>
 
@@ -255,7 +253,7 @@ export default function ContactPage() {
                                 Do you offer wholesale/bulk orders?
                             </summary>
                             <p className=" mt-4 leading-relaxed">
-                                Yes! We work with boutiques, shops, and organizations. Please contact us at info@pratyagrasilks.com with your bulk requirements.
+                                Yes, we work with boutiques, shops, and organisations. Please contact us at hello@kandangisarees.com with your requirements.
                             </p>
                         </details>
 
@@ -264,7 +262,7 @@ export default function ContactPage() {
                                 Are your sarees authentic?
                             </summary>
                             <p className=" mt-4 leading-relaxed">
-                                Absolutely! Every saree is handwoven by master artisans. We source directly from traditional weaving communities across India and guarantee authenticity.
+                                Every saree at Kandangi Sarees is handpicked directly from the weaver. We source from established weaving communities across Tamil Nadu, Andhra Pradesh, Telangana, and Gujarat — and we stand behind every thread.
                             </p>
                         </details>
                     </div>

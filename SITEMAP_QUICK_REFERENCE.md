@@ -1,13 +1,13 @@
 # 🚀 SITEMAP & SEO QUICK REFERENCE
 
-**For:** PratyagraSilks Development Team
+**For:** KandangiSarees Development Team
 
 ---
 
 ## 📍 Files Created
 
 ```
-pratyagrasilks/
+kandangisarees./
 ├── public/
 │   ├── sitemap.xml              ← Static XML sitemap (submit to search engines)
 │   └── robots.txt               ← Updated with sitemap reference
@@ -46,14 +46,14 @@ npm run build
 ### 2️⃣ THIS WEEK (Mon-Wed)
 **Google Search Console Setup:**
 1. Go to https://search.google.com/search-console
-2. Add property: `https://pratyagrasilks.com`
+2. Add property: `https://kandangisarees.com`
 3. Verify ownership (choose DNS/meta tag method)
 4. Go to Sitemaps → Submit `/sitemap.xml`
 5. Wait for indexation report
 
 **Bing Webmaster Setup:**
 1. Go to https://www.bing.com/webmaster
-2. Add site: `https://pratyagrasilks.com`
+2. Add site: `https://kandangisarees.com`
 3. Verify ownership
 4. Submit `/sitemap.xml`
 
@@ -78,7 +78,7 @@ npm run build
 ```typescript
 // In app/sitemap.ts
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://pratyagrasilks.com'
+  const baseUrl = 'https://kandangisarees.com'
   
   // Fetch products from database
   const products = await fetch('YOUR_API_ENDPOINT').then(r => r.json())
@@ -144,7 +144,7 @@ Allow: /public-path/
 ### Sitemap Not Working
 ```bash
 # Check sitemap generation
-curl https://pratyagrasilks.com/sitemap.xml
+curl https://kandangisarees.com/sitemap.xml
 
 # Look for XML format errors
 # Make sure domain in sitemap matches your actual domain

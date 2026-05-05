@@ -18,7 +18,7 @@ export const STATIC_PAGES = {
     path: '/about',
     priority: 0.9,
     changefreq: 'monthly',
-    description: 'About PratyagraSilks - Company story and values',
+    description: 'About KandangiSarees - Company story and values',
   },
   collection: {
     path: '/collection',
@@ -103,7 +103,7 @@ export const DYNAMIC_PAGES = {
 
 // SEO CONFIGURATION
 export const SEO_CONFIG = {
-  domain: 'https://pratyagrasilks.com',
+  domain: 'https://kandangisarees.com',
   sitemapLocation: '/sitemap.xml',
   robotsLocation: '/robots.txt',
   lastUpdated: new Date('2025-11-29').toISOString(),
@@ -122,7 +122,7 @@ export const EXCLUDED_PAGES = [
 
 export async function generateStaticParams() {
   // Fetch all product IDs from your database
-  const products = await fetch('https://api.pratyagrasilks.com/products')
+  const products = await fetch('https://api.kandangisarees.com/products')
     .then(res => res.json());
   
   return products.map((product) => ({
@@ -136,13 +136,13 @@ import type { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://pratyagrasilks.com',
+      url: 'https://kandangisarees.com',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: 'https://pratyagrasilks.com/about',
+      url: 'https://kandangisarees.com/about',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
@@ -158,7 +158,7 @@ export const ANALYTICS_SETUP = {
     action: 'Submit sitemap via Google Search Console',
     url: 'https://search.google.com/search-console',
     steps: [
-      'Add property for https://pratyagrasilks.com',
+      'Add property for https://kandangisarees.com',
       'Go to Sitemaps section',
       'Submit /sitemap.xml',
     ],

@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import FilterSidebar, { FilterState } from '@/components/FilterSidebar';
 import { Product } from '@/lib/types';
-import { getCategoryBySlug } from '@/lib/seo-config';
 
 
 function CollectionContent() {
@@ -29,7 +28,6 @@ function CollectionContent() {
         setError(null);
 
         try {
-            // Build query parameters
             const params = new URLSearchParams();
 
             if (filters.category) params.append('category', filters.category);
@@ -61,10 +59,10 @@ function CollectionContent() {
         <div className="min-h-screen">
             {/* Header */}
             <div className="relative bg-gradient-to-r from-primary to-primary-light text-white py-12">
-                <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/05e114529e649bfbaac0385e3b61afb5-large.jpg')] bg-no-repeat bg-cover opacity-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary-light/80"></div>
                 <div className="container mx-auto px-4 relative z-10">
-                    <h1 className="text-4xl font-bold mb-2">Our Collection</h1>
-                    <p className="text-white/80">Discover our exquisite range of handcrafted silk products</p>
+                    <h1 className="text-4xl font-bold mb-2">Handloom Saree Collection</h1>
+                    <p className="text-white/80">Silks and cottons — handpicked from weavers across India</p>
                 </div>
             </div>
 
@@ -170,4 +168,3 @@ export default function CollectionPage() {
         </Suspense>
     );
 }
-

@@ -15,17 +15,15 @@ export default async function NewArrivals() {
             <div className="max-w-7xl mx-auto">
                 {/* Section Header */}
                 <div className="text-center mb-4">
-                    {/* Scarcity / curation label */}
+                    {/* Curation label */}
                     <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent border border-accent-300 bg-accent-light px-4 py-1 rounded-full mb-4">
-                        Curated for 2026
+                        Newly Handpicked
                     </span>
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-4">
-                        The New Heritage: Latest Arrivals
+                        Fresh from the Loom
                     </h2>
                     <p className="text-textSecondary max-w-2xl mx-auto text-lg leading-relaxed">
-                        Discover our newest handwoven masterpieces. From pastel Kanjivarams to
-                        contemporary Banarasi weaves, explore authentic Indian silk heritage
-                        curated for the modern connoisseur.
+                        Newly handpicked weaves — from Kanjivaram to Chettinad, each piece chosen so you don&apos;t have to search.
                     </p>
                 </div>
 

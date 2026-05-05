@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
         openGraph: {
             title: category.metaTitle,
             description: category.metaDescription,
-            url: `https://pratyagrasilks.com/silk/${category.slug}`,
-            siteName: 'PratyagraSilks',
+            url: `https://Kandangi Sarees.com/silk/${category.slug}`,
+            siteName: 'Kandangi Sarees',
             locale: 'en_IN',
             type: 'website',
         },
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
             description: category.metaDescription,
         },
         alternates: {
-            canonical: `https://pratyagrasilks.com/silk/${category.slug}`,
+            canonical: `https://Kandangi Sarees.com/silk/${category.slug}`,
         },
     };
 }
@@ -274,10 +274,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                     {/* CTA Section */}
                     <section className="mt-16 bg-gradient-to-r from-primary to-primary-dark rounded-lg p-12 text-center text-white">
                         <h2 className="text-3xl md:text-4xl font-bold font-playfair mb-4">
-                            Explore More Silk Collections
+                            Explore More Weave Collections
                         </h2>
                         <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                            Discover our curated collection of authentic handwoven silk sarees from across India
+                            Discover our curated handlooms — silks and cottons — handpicked from weavers across India
                         </p>
                         <Link
                             href="/collection"

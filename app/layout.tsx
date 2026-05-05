@@ -10,6 +10,7 @@ import CartSidebar from "@/components/Cart/CartSidebar";
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Toaster } from "react-hot-toast";
+import { BRAND_PRIMARY_HEX, BRAND_URL } from "@/lib/constants/brand";
 
 // Font configurations
 const playfair = Playfair_Display({
@@ -25,27 +26,26 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "PratyagraSilks - Luxury Silk Sarees | Authentic Indian Handloom",
-    description: "Discover exquisite handcrafted silk sarees from PratyagraSilks. Premium quality Kanjivaram, Banarasi, Tussar, and more. Traditional craftsmanship, timeless elegance for every occasion.",
+    title: "Kandangi Sarees — Handpicked Sarees, Rooted in Tradition",
+    description: "Discover authentic handloom sarees — Kanjivaram, Gadwal, Chettinad, and more — curated directly from weavers across India. Shop silks and cottons at Kandangi Sarees.",
     keywords: [
-        "silk sarees",
         "handloom sarees",
-        "luxury sarees",
-        "Indian sarees",
+        "handpicked sarees",
+        "Kandangi Sarees",
+        "Kanjivaram sarees",
+        "Gadwal sarees",
+        "Chettinad cotton sarees",
+        "buy sarees online",
+        "authentic sarees from weavers",
+        "silk sarees India",
+        "cotton sarees online",
+        "Venkatagiri sarees",
+        "Mangalgiri sarees",
+        "Patola silk",
         "traditional sarees",
-        "PratyagraSilks",
-        "buy silk sarees online",
-        "authentic silk sarees",
-        "kanjivaram silk sarees",
-        "banarasi silk sarees",
-        "tussar silk",
-        "mysore silk",
-        "handwoven sarees India",
-        "premium silk sarees",
-        "wedding sarees",
-        "designer silk sarees",
+        "weaver-direct sarees",
     ],
-    authors: [{ name: "PratyagraSilks" }],
+    authors: [{ name: "Kandangi Sarees" }],
     icons: {
         icon: [
             { url: "/logo.svg", type: "image/svg+xml" },
@@ -58,17 +58,17 @@ export const metadata: Metadata = {
         shortcut: "/favicon.svg",
     },
     openGraph: {
-        title: "PratyagraSilks - Luxury Silk Sarees",
-        description: "Exquisite handcrafted silk sarees with traditional craftsmanship. Kanjivaram, Banarasi, Tussar, and more from India's finest weavers.",
-        url: "https://pratyagrasilks.com",
-        siteName: "PratyagraSilks",
+        title: "Kandangi Sarees — Handpicked for You, Rooted in Tradition.",
+        description: "Your trusted guide to authentic handloom sarees. Curated from the loom, delivered to your wardrobe.",
+        url: BRAND_URL,
+        siteName: "Kandangi Sarees",
         locale: "en_IN",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "PratyagraSilks - Luxury Silk Sarees",
-        description: "Exquisite handcrafted silk sarees with traditional craftsmanship",
+        title: "Kandangi Sarees — Handpicked Sarees, Rooted in Tradition",
+        description: "Authentic handloom sarees — curated from weavers across India.",
     },
     robots: {
         index: true,
@@ -81,11 +81,8 @@ export const metadata: Metadata = {
             "max-snippet": -1,
         },
     },
-    verification: {
-        google: "your-google-verification-code",
-    },
     alternates: {
-        canonical: "https://pratyagrasilks.com",
+        canonical: BRAND_URL,
     },
 };
 
@@ -94,19 +91,18 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    // Organization structured data for SEO
     const organizationSchema = {
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        name: 'PratyagraSilks',
-        url: 'https://pratyagrasilks.com',
-        logo: 'https://pratyagrasilks.com/Fav_icon.png',
-        description: 'Authentic handcrafted silk sarees from India\'s finest weavers. Premium quality Kanjivaram, Banarasi, Tussar, Mysore, and traditional silk sarees.',
-        color: '#153DB3',
+        name: 'Kandangi Sarees',
+        url: BRAND_URL,
+        logo: `${BRAND_URL}/logo.png`,
+        description: 'Handpicked handloom sarees from weavers across India. Authentic silks and cottons — Kanjivaram, Gadwal, Chettinad, and more.',
+        color: BRAND_PRIMARY_HEX,
         brand: {
             '@type': 'Brand',
-            name: 'PratyagraSilks',
-            color: '#153DB3',
+            name: 'Kandangi Sarees',
+            color: BRAND_PRIMARY_HEX,
         },
         address: {
             '@type': 'PostalAddress',
@@ -140,4 +136,3 @@ export default function RootLayout({
         </html>
     );
 }
-

@@ -1,11 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-interface FilterSidebarProps {
-    onFilterChange: (filters: FilterState) => void;
-    currentFilters?: FilterState;
-}
+import { useState, useCallback } from 'react';
+import { silkCategories } from '@/lib/seo-config';
 
 export interface FilterState {
     category: string;
@@ -14,171 +10,197 @@ export interface FilterState {
     search: string;
 }
 
-const categories = [
-    { value: '', label: 'All Silk Types' },
-    { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
-    { value: 'banarasi-silk', label: 'Banarasi Silk' },
-    { value: 'tussar-silk', label: 'Tussar Silk' },
-    { value: 'mysore-silk', label: 'Mysore Silk' },
-    { value: 'kerala-kasavu', label: 'Kerala Kasavu' },
-    { value: 'muga-silk', label: 'Muga Silk' },
-    { value: 'kani-silk', label: 'Kani Silk' },
-    { value: 'paithani-silk', label: 'Paithani Silk' },
-    { value: 'pochampalli-silk', label: 'Pochampalli Silk' },
-    { value: 'baluchari-silk', label: 'Baluchari Silk' },
-    { value: 'georgette-silk', label: 'Georgette Silk' },
-    { value: 'cotton', label: 'Cotton' },
-    { value: 'silk-cotton', label: 'Silk Cotton' },
-];
+interface FilterSidebarProps {
+    onFilterChange: (filters: FilterState) => void;
+    currentFilters: FilterState;
+}
 
-const priceRanges = [
-    { min: 0, max: 0, label: 'All Prices' },
-    { min: 0, max: 10000, label: 'Under ₹10,000' },
-    { min: 10000, max: 20000, label: '₹10,000 - ₹20,000' },
-    { min: 20000, max: 30000, label: '₹20,000 - ₹30,000' },
-    { min: 30000, max: 50000, label: '₹30,000 - ₹50,000' },
-    { min: 50000, max: 0, label: 'Above ₹50,000' },
-];
+/**
+ * Categories are derived directly from silkCategories in seo-config.
+ * This prevents drift between the nav taxonomy and the filter options.
+ */
+const silkOptions = silkCategories.filter(c =>
+    !c.slug.includes('cotton') && c.slug !== 'kadhi-cotton'
+);
+const cottonOptions = silkCategories.filter(c =>
+    c.slug.includes('cotton') || c.slug === 'kadhi-cotton'
+);
+
+// Price range bounds for Kandangi Sarees's catalogue
+const MIN_PRICE_BOUND = 1000;
+const MAX_PRICE_BOUND = 40000;
 
 export default function FilterSidebar({ onFilterChange, currentFilters }: FilterSidebarProps) {
-    const [filters, setFilters] = useState<FilterState>({
-        category: '',
-        minPrice: 0,
-        maxPrice: 0,
-        search: '',
+    const [localFilters, setLocalFilters] = useState<FilterState>(currentFilters);
+    const [expandedSections, setExpandedSections] = useState({
+        search: true,
+        category: true,
+        price: true,
     });
 
-    // Sync internal state with parent's filter state (e.g., from URL parameters)
-    useEffect(() => {
-        if (currentFilters) {
-            setFilters(currentFilters);
-        }
-    }, [currentFilters]);
-
-    const handleCategoryChange = (category: string) => {
-        const newFilters = { ...filters, category };
-        setFilters(newFilters);
-        onFilterChange(newFilters);
-    };
-
-    const handlePriceRangeChange = (min: number, max: number) => {
-        const newFilters = { ...filters, minPrice: min, maxPrice: max };
-        setFilters(newFilters);
-        onFilterChange(newFilters);
-    };
-
-    const handleSearchChange = (search: string) => {
-        const newFilters = { ...filters, search };
-        setFilters(newFilters);
-        onFilterChange(newFilters);
-    };
+    const updateFilter = useCallback(
+        (key: keyof FilterState, value: string | number) => {
+            const updated = { ...localFilters, [key]: value };
+            setLocalFilters(updated);
+            onFilterChange(updated);
+        },
+        [localFilters, onFilterChange]
+    );
 
     const clearFilters = () => {
-        const newFilters = {
-            category: '',
-            minPrice: 0,
-            maxPrice: 0,
-            search: '',
-        };
-        setFilters(newFilters);
-        onFilterChange(newFilters);
+        const reset: FilterState = { category: '', minPrice: 0, maxPrice: 0, search: '' };
+        setLocalFilters(reset);
+        onFilterChange(reset);
     };
 
+    const toggleSection = (section: keyof typeof expandedSections) => {
+        setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }));
+    };
+
+    const hasActiveFilters =
+        localFilters.category || localFilters.minPrice > 0 || localFilters.maxPrice > 0 || localFilters.search;
+
     return (
-        <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
+        <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900">Filters</h2>
-                <button
-                    onClick={clearFilters}
-                    className="text-sm text-accent hover:text-accent-hover font-medium"
-                >
-                    Clear All
-                </button>
+                <h2 className="text-xl font-bold text-primary">Filter Weaves</h2>
+                {hasActiveFilters && (
+                    <button
+                        onClick={clearFilters}
+                        className="text-sm text-accent hover:text-accent-hover transition-colors"
+                    >
+                        Clear all
+                    </button>
+                )}
             </div>
 
             {/* Search */}
             <div className="mb-6">
-                <label className="block text-sm font-medium  mb-2">
-                    Search Products
-                </label>
-                <input
-                    type="text"
-                    value={filters.search}
-                    onChange={(e) => handleSearchChange(e.target.value)}
-                    placeholder="Search by name..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
-                />
+                <button
+                    onClick={() => toggleSection('search')}
+                    className="flex items-center justify-between w-full text-left mb-3"
+                >
+                    <h3 className="font-semibold text-gray-900">Search</h3>
+                    <span className="text-gray-400">{expandedSections.search ? '−' : '+'}</span>
+                </button>
+                {expandedSections.search && (
+                    <input
+                        type="text"
+                        placeholder="Search sarees..."
+                        value={localFilters.search}
+                        onChange={e => updateFilter('search', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    />
+                )}
             </div>
 
-            {/* Category Filter */}
+            {/* Category */}
             <div className="mb-6">
-                <h3 className="text-sm font-medium  mb-3">Category</h3>
-                <div className="space-y-2 grid grid-cols-2 lg:grid-cols-1">
-                    {categories.map((cat) => (
-                        <label key={cat.value} className="flex items-center cursor-pointer group">
+                <button
+                    onClick={() => toggleSection('category')}
+                    className="flex items-center justify-between w-full text-left mb-3"
+                >
+                    <h3 className="font-semibold text-gray-900">Weave Type</h3>
+                    <span className="text-gray-400">{expandedSections.category ? '−' : '+'}</span>
+                </button>
+                {expandedSections.category && (
+                    <div className="space-y-2">
+                        <label className="flex items-center cursor-pointer">
                             <input
                                 type="radio"
                                 name="category"
-                                value={cat.value}
-                                checked={filters.category === cat.value}
-                                onChange={(e) => handleCategoryChange(e.target.value)}
-                                className="w-4 h-4 text-primary focus:ring-primary-light"
+                                value=""
+                                checked={localFilters.category === ''}
+                                onChange={() => updateFilter('category', '')}
+                                className="mr-2 accent-primary"
                             />
-                            <span className="ml-3 text-sm  group-hover:text-primary-light">
-                                {cat.label}
-                            </span>
+                            <span className="text-sm">All Weaves</span>
                         </label>
-                    ))}
-                </div>
-            </div>
 
-            {/* Price Range Filter */}
-            <div className="mb-6">
-                <h3 className="text-sm font-medium  mb-3">Price Range</h3>
-                <div className="space-y-2 grid grid-cols-2 lg:grid-cols-1">
-                    {priceRanges.map((range, index) => (
-                        <label key={index} className="flex items-center cursor-pointer group">
-                            <input
-                                type="radio"
-                                name="priceRange"
-                                checked={filters.minPrice === range.min && filters.maxPrice === range.max}
-                                onChange={() => handlePriceRangeChange(range.min, range.max)}
-                                className="w-4 h-4 text-accent focus:ring-accent"
-                            />
-                            <span className="ml-3 text-sm  group-hover:text-accent-hover">
-                                {range.label}
-                            </span>
-                        </label>
-                    ))}
-                </div>
-            </div>
+                        {/* Silks group */}
+                        <p className="text-xs font-semibold uppercase tracking-wider text-slate pt-2 pb-1">
+                            Silks
+                        </p>
+                        {silkOptions.map(cat => (
+                            <label key={cat.slug} className="flex items-center cursor-pointer">
+                                <input
+                                    type="radio"
+                                    name="category"
+                                    value={cat.slug}
+                                    checked={localFilters.category === cat.slug}
+                                    onChange={() => updateFilter('category', cat.slug)}
+                                    className="mr-2 accent-primary"
+                                />
+                                <span className="text-sm">{cat.name}</span>
+                            </label>
+                        ))}
 
-            {/* Active Filters Summary */}
-            {(filters.category || filters.minPrice > 0 || filters.maxPrice > 0 || filters.search) && (
-                <div className="pt-4 border-t border-gray-200 hidden lg:block">
-                    <h3 className="text-sm font-medium  mb-2">Active Filters</h3>
-                    <div className="space-y-1">
-                        {filters.category && (
-                            <div className="text-xs text-textSecondary">
-                                Category: <span className="font-medium">{filters.category}</span>
-                            </div>
-                        )}
-                        {(filters.minPrice > 0 || filters.maxPrice > 0) && (
-                            <div className="text-xs text-textSecondary">
-                                Price: <span className="font-medium">
-                                    {filters.minPrice > 0 ? `₹${filters.minPrice.toLocaleString()}` : '₹0'} -
-                                    {filters.maxPrice > 0 ? ` ₹${filters.maxPrice.toLocaleString()}` : ' ∞'}
-                                </span>
-                            </div>
-                        )}
-                        {filters.search && (
-                            <div className="text-xs text-textSecondary">
-                                Search: <span className="font-medium">{filters.search}</span>
-                            </div>
-                        )}
+                        {/* Cottons group */}
+                        <p className="text-xs font-semibold uppercase tracking-wider text-slate pt-2 pb-1">
+                            Cottons
+                        </p>
+                        {cottonOptions.map(cat => (
+                            <label key={cat.slug} className="flex items-center cursor-pointer">
+                                <input
+                                    type="radio"
+                                    name="category"
+                                    value={cat.slug}
+                                    checked={localFilters.category === cat.slug}
+                                    onChange={() => updateFilter('category', cat.slug)}
+                                    className="mr-2 accent-primary"
+                                />
+                                <span className="text-sm">{cat.name}</span>
+                            </label>
+                        ))}
                     </div>
-                </div>
-            )}
+                )}
+            </div>
+
+            {/* Price Range */}
+            <div className="mb-6">
+                <button
+                    onClick={() => toggleSection('price')}
+                    className="flex items-center justify-between w-full text-left mb-3"
+                >
+                    <h3 className="font-semibold text-gray-900">Price Range</h3>
+                    <span className="text-gray-400">{expandedSections.price ? '−' : '+'}</span>
+                </button>
+                {expandedSections.price && (
+                    <div className="space-y-4">
+                        <div className="flex gap-3">
+                            <div className="flex-1">
+                                <label className="block text-xs text-gray-500 mb-1">Min (₹)</label>
+                                <input
+                                    type="number"
+                                    min={MIN_PRICE_BOUND}
+                                    max={MAX_PRICE_BOUND}
+                                    step={500}
+                                    placeholder="1,000"
+                                    value={localFilters.minPrice || ''}
+                                    onChange={e => updateFilter('minPrice', Number(e.target.value) || 0)}
+                                    className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <label className="block text-xs text-gray-500 mb-1">Max (₹)</label>
+                                <input
+                                    type="number"
+                                    min={MIN_PRICE_BOUND}
+                                    max={MAX_PRICE_BOUND}
+                                    step={500}
+                                    placeholder="40,000"
+                                    value={localFilters.maxPrice || ''}
+                                    onChange={e => updateFilter('maxPrice', Number(e.target.value) || 0)}
+                                    className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+                                />
+                            </div>
+                        </div>
+                        <p className="text-xs text-textSecondary">
+                            Range: ₹{MIN_PRICE_BOUND.toLocaleString('en-IN')} – ₹{MAX_PRICE_BOUND.toLocaleString('en-IN')}
+                        </p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

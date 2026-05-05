@@ -2,97 +2,73 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "About PratyagraSilks | Authentic Indian Handloom Silk Sarees",
-    description: "Learn about PratyagraSilks' mission to preserve Indian handloom craftsmanship. Discover our commitment to authentic silk sarees, artisan partnerships, and sustainable practices.",
-    keywords: ["about pratyagrasilks", "handloom sarees", "silk saree heritage", "artisan support", "Indian craftsmanship"],
+    title: "Our Story — Kandangi Sarees",
+    description: "Learn why we started Kandangi Sarees — to simplify saree shopping by handpicking the finest handlooms from weavers across India. Discover our commitment to authentic weaves and artisan communities.",
+    keywords: ["about Kandangi Sarees", "handloom sarees", "weaver-direct sarees", "artisan support", "authentic sarees"],
 };
 
 export default function AboutPage() {
     const values = [
         {
             title: "Authenticity",
-            description: "We guarantee 100% authentic handwoven silk sarees from traditional weavers across India.",
+            description: "Every piece is sourced directly from the weaver — hand-verified, real.",
         },
         {
             title: "Quality",
-            description: "Premium materials and meticulous craftsmanship ensure exceptional durability and elegance.",
+            description: "Handpicked for wearability, longevity, and the beauty that only comes from handloom.",
         },
         {
             title: "Sustainability",
-            description: "Ethical sourcing, fair compensation for artisans, and environmentally responsible practices.",
+            description: "Fair wages, weaver dignity, and practices that let tradition flourish for generations.",
         },
         {
             title: "Tradition",
-            description: "Preserving centuries-old weaving techniques and cultural heritage for future generations.",
+            description: "From Kanjivaram silks to Chettinad cottons — we carry living heritage, not just fabric.",
         },
     ];
 
     const origins = [
         {
             name: "Kanjivaram, Tamil Nadu",
-            description: "Home to the legendary Kanjivaram silk sarees, known for their pure mulberry silk and intricate temple designs.",
-            silks: ["Kanjivaram Silk", "South Indian Traditions"],
+            description: "Home to the legendary Kanjivaram silk sarees — pure mulberry silk with temple borders woven by families who have passed this craft down for centuries.",
+            silks: ["Kanjivaram Silk"],
             slug: "kanjivaram-silk"
         },
         {
-            name: "Varanasi, Uttar Pradesh",
-            description: "The weaving capital of India, famous for Banarasi sarees with their luxurious zari work and brocade patterns.",
-            silks: ["Banarasi Silk", "Zari Work"],
-            slug: "banarasi-silk"
+            name: "Gadwal, Telangana",
+            description: "The weaving town that perfected the combination of cotton body with silk border — Gadwal sarees are light, graceful, and built for everyday elegance.",
+            silks: ["Gadwal Silk"],
+            slug: "gadwal-silk"
         },
         {
-            name: "Bhagalpur, Bihar",
-            description: "The oldest silk weaving center in India, specializing in Tussar silk sarees with their distinctive natural texture.",
-            silks: ["Tussar Silk", "Natural Fibers"],
-            slug: "tussar-silk"
+            name: "Venkatagiri, Andhra Pradesh",
+            description: "Famous for its ultra-fine weave and delicate jamdani motifs — Venkatagiri produces both silk and cotton sarees that are among the lightest handlooms in India.",
+            silks: ["Venkatagiri Silk", "Venkatagiri Cotton"],
+            slug: "venkatagiri-silk"
         },
         {
-            name: "Mysore, Karnataka",
-            description: "Famous for pure Mysore silk sarees, produced from the finest mulberry silk with elegant designs.",
-            silks: ["Mysore Silk", "Pure Mulberry"],
-            slug: "mysore-silk"
+            name: "Mangalgiri, Andhra Pradesh",
+            description: "Known for the distinctive nizam border and the crisp double-warp Gachi weave — Mangalgiri sarees are a staple of the Andhra handloom tradition.",
+            silks: ["Mangalgiri Silk", "Mangalgiri"],
+            slug: "mangalgiri-silk"
         },
         {
-            name: "Kochi, Kerala",
-            description: "The cultural hub of Kerala, renowned for its exquisite Kasavu sarees featuring traditional gold weaving on white silk.",
-            silks: ["Kerala Kasavu", "Gold Borders"],
-            slug: "kerala-kasavu"
+            name: "patola, Gujarat",
+            description: "Patan produces the legendary Patola — a double-ikat saree of extraordinary technical precision that can take months to complete.",
+            silks: ["Patola Silk"],
+            slug: "patola-silk"
         },
         {
-            name: "Assam",
-            description: "Known for the luxurious Muga silk, a golden-hued natural silk unique to Assam with exceptional lustrous qualities.",
-            silks: ["Muga Silk", "Natural Gold"],
-            slug: "muga-silk"
+            name: "Chettinad, Tamil Nadu",
+            description: "The bold checks and vibrant contrasting colours of Chettinad cotton sarees are instantly recognisable — a weave with real character that gets better with every wash.",
+            silks: ["Chettinad Cotton"],
+            slug: "chettinad-cotton"
         },
         {
-            name: "Kashmir",
-            description: "The land of Kani silks, featuring intricate Kani weaving with detailed patterns and pashmina blend sarees.",
-            silks: ["Kani Silk", "Pashmina Blend"],
-            slug: "kani-silk"
-        },
-        {
-            name: "Aurangabad, Maharashtra",
-            description: "Home to the prestigious Paithani silk sarees, known for their fine silk, brilliant colors, and peacock motifs.",
-            silks: ["Paithani Silk", "Peacock Designs"],
-            slug: "paithani-silk"
-        },
-        {
-            name: "Andhra Pradesh",
-            description: "Birthplace of Pochampally silk sarees, famous for their traditional ikat technique and vibrant color combinations.",
-            silks: ["Pochampalli Silk", "Ikat Patterns"],
-            slug: "pochampalli-silk"
-        },
-        {
-            name: "West Bengal",
-            description: "Renowned for Baluchari silk sarees, featuring narrative motifs and the famous Baluchari pallu with mythological scenes.",
-            silks: ["Baluchari Silk", "Narrative Designs"],
-            slug: "baluchari-silk"
-        },
-        {
-            name: "Rajasthan",
-            description: "Known for elegant Georgette silk sarees with traditional Rajasthani patterns and vibrant cultural designs.",
-            silks: ["Georgette Silk", "Rajasthani Art"],
-            slug: "georgette-silk"
+            name: "Narayanapet, Telangana",
+            description: "Wide zari borders on a sturdy cotton body — Narayanapet sarees carry both formal polish and everyday comfort in equal measure.",
+            silks: ["Narayanapet Cotton"],
+            slug: "narayanapet-cotton"
         },
     ];
 
@@ -103,10 +79,10 @@ export default function AboutPage() {
                 <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/d7c3222457a03fa54d40c17b0f874229-large.jpg')] bg-no-repeat bg-cover opacity-15"></div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
-                        Our Story
+                        Why We Started Kandangi Sarees
                     </h1>
                     <p className="text-lg md:text-xl opacity-95 max-w-2xl mx-auto">
-                        At Pratyagra Silks, we are dedicated to breathing new life into India’s silk heritage. Our luxury silk sarees are curated from the finest weavers across the country, blending centuries-old craftsmanship with contemporary elegance. By partnering with master artisans from renowned silk regions, we ensure every saree is a testament to tradition, quality, and modern style.
+                        To simplify saree shopping by curating the finest handlooms, so every woman finds what truly suits her — effortlessly. We nurture the roots of tradition by bringing authentic, handpicked weaves to modern wardrobes.
                     </p>
                 </div>
             </section>
@@ -119,22 +95,22 @@ export default function AboutPage() {
                             <h2 className="font-playfair text-3xl font-bold text-primary mb-4">
                                 Our Mission
                             </h2>
-                            <p className=" text-lg leading-relaxed mb-4">
-                                At Pratyagra Silks, our mission is to revive India's silk heritage by curating luxury sarees from the finest weavers across the country. We believe in blending timeless tradition with contemporary elegance, creating pieces that celebrate centuries of artistry while resonating with modern sensibilities.
+                            <p className="text-lg leading-relaxed mb-4">
+                                To simplify saree shopping by curating the finest handlooms, so every woman finds what truly suits her — effortlessly. We nurture the roots of tradition by bringing authentic, handpicked weaves to modern wardrobes.
                             </p>
-                            <p className=" text-lg leading-relaxed">
-                                We are committed to bringing authentic, premium handwoven silk sarees directly to discerning customers worldwide, while ensuring fair compensation and unwavering support for the master artisans who bring these treasures to life through their exceptional craftsmanship.
+                            <p className="text-lg leading-relaxed">
+                                We work directly with weavers and artisan cooperatives across Tamil Nadu, Andhra Pradesh, Telangana, and Gujarat — ensuring every saree we carry is genuine, every artisan we work with is paid fairly, and every customer we serve gets exactly what they came for.
                             </p>
                         </div>
                         <div>
                             <h2 className="font-playfair text-3xl font-bold text-primary mb-4">
                                 Our Vision
                             </h2>
-                            <p className=" text-lg leading-relaxed mb-4">
-                                We envision Pratyagra Silks as the premier destination for luxury silk sarees—where tradition is revived, quality is uncompromised, and every piece tells the story of dedicated weavers from India's finest silk regions.
+                            <p className="text-lg leading-relaxed mb-4">
+                                We envision Kandangi Sarees as your most trusted saree companion — where every weave is handpicked, every recommendation feels personal, and every purchase honors the artisan behind the loom.
                             </p>
-                            <p className=" text-lg leading-relaxed">
-                                We are building a sustainable ecosystem where master weavers thrive, artisan communities flourish, and customers worldwide discover the perfect blend of heritage craftsmanship and modern elegance in every saree they wear.
+                            <p className="text-lg leading-relaxed">
+                                We are building a space where the handloom tradition doesn&apos;t just survive — it thrives. Where weavers are valued partners, not anonymous suppliers. And where every woman who buys a saree from us feels the warmth of that connection.
                             </p>
                         </div>
                     </div>
@@ -145,7 +121,7 @@ export default function AboutPage() {
             <section className="py-16 md:py-24 px-4">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-12">
-                        Our Core Values
+                        What We Stand For
                     </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {values.map((value, index) => (
@@ -153,7 +129,7 @@ export default function AboutPage() {
                                 <h3 className="font-playfair text-xl font-bold text-primary mb-3">
                                     {value.title}
                                 </h3>
-                                <p className=" text-sm leading-relaxed">
+                                <p className="text-sm leading-relaxed">
                                     {value.description}
                                 </p>
                             </div>
@@ -162,14 +138,14 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Silk Origins */}
+            {/* Weaving Regions */}
             <section className="py-16 md:py-24 px-4 bg-white">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary text-center mb-4">
-                        Exploring Silk Weaving Regions
+                        Where We Source From
                     </h2>
-                    <p className="text-center  mb-12 max-w-2xl mx-auto text-lg">
-                        We source directly from India's most renowned silk weaving centers, each with unique traditions and expertise
+                    <p className="text-center mb-12 max-w-2xl mx-auto text-lg">
+                        We work directly with weaving communities in these regions — not through middlemen.
                     </p>
 
                     <div className="space-y-12">
@@ -179,7 +155,7 @@ export default function AboutPage() {
                                     <h3 className="font-playfair text-2xl font-bold text-primary mb-3">
                                         {origin.name}
                                     </h3>
-                                    <p className=" text-lg leading-relaxed mb-4">
+                                    <p className="text-lg leading-relaxed mb-4">
                                         {origin.description}
                                     </p>
                                     <div className="flex flex-wrap gap-2">
@@ -191,12 +167,12 @@ export default function AboutPage() {
                                     </div>
                                 </div>
                                 <Link
-                                    href={`/collection?category=${origin.slug}`}
+                                    href={`/silk/${origin.slug}`}
                                     className="w-full md:w-1/2 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg p-8 h-64 flex flex-col items-center justify-center group hover:from-primary/30 hover:to-primary/20 transition-all duration-300 hover:shadow-xl cursor-pointer border-2 border-transparent hover:border-primary/30"
                                 >
                                     <div className="text-center">
                                         <div className="inline-flex items-center text-primary/50 group-hover:text-primary/80 font-semibold transition-all">
-                                            <span>Explore Collection from</span>
+                                            <span>Explore weaves from</span>
                                         </div>
                                         <p className="text-primary/50 font-playfair text-3xl font-bold mt-1 group-hover:text-primary/80 transition-colors">
                                             {origin.name.split(",")[0]}
@@ -213,17 +189,17 @@ export default function AboutPage() {
             <section className="py-16 md:py-24 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold text-primary mb-6">
-                        Supporting Artisan Communities
+                        Supporting Weaver Communities
                     </h2>
-                    <p className=" text-lg leading-relaxed mb-8">
-                        Every purchase of a PratyagraSilks saree directly supports the livelihoods of skilled artisans and their families. We believe in fair trade practices, ensuring that weavers receive equitable compensation for their exceptional work.
+                    <p className="text-lg leading-relaxed mb-8">
+                        Every purchase at Kandangi Sarees goes directly back to the weaver. We believe in fair wages, transparent partnerships, and practices that make it possible for artisan families to continue their craft — not just survive, but thrive.
                     </p>
-                    <p className=" text-lg leading-relaxed mb-8">
-                        By choosing PratyagraSilks, you're not just acquiring a beautiful saree—you're investing in preserving traditional crafts, supporting artisan dignity, and ensuring these remarkable skills are passed down to future generations.
+                    <p className="text-lg leading-relaxed mb-8">
+                        When you buy a saree from us, you are not just making a purchase. You are choosing to keep a living tradition alive — and that choice matters.
                     </p>
                     <div className="bg-primary/5 border-l-4 border-primary p-6 text-left">
                         <p className="text-primary font-semibold text-lg">
-                            "Craft. Community. Culture. That's the PratyagraSilks promise."
+                            &ldquo;Handpicked Weaves. Trusted Guidance. Real Wardrobes. That&apos;s the Kandangi Sarees promise.&rdquo;
                         </p>
                     </div>
                 </div>
@@ -236,7 +212,7 @@ export default function AboutPage() {
                         Explore Our Collections
                     </h2>
                     <p className="text-lg mb-8 opacity-95 max-w-2xl mx-auto">
-                        Discover authentic handwoven silk sarees from India's finest artisans.
+                        Authentic handloom sarees from weavers across India — handpicked for you.
                     </p>
                     <Link
                         href="/collection"
@@ -249,4 +225,3 @@ export default function AboutPage() {
         </div>
     );
 }
-

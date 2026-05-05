@@ -1,13 +1,13 @@
-# Google Business Profile Optimization - Pratyagra Silks
+# Google Business Profile Optimization - Kandangi Sarees
 
 ## 1. Business Description (750 Characters)
 
 ```
-Pratyagra Silks is your destination for authentic handloom sarees sourced from India's finest weaving centers—from the royal Banarasi silks of Varanasi to the vibrant Kanjivaram weaves of Tamil Nadu. Each saree in our collection is handpicked for its craftsmanship, purity, and timeless elegance.
+Kandangi Sarees is your destination for authentic handloom sarees sourced from India's finest weaving centers—from the royal Banarasi silks of Varanasi to the vibrant Kanjivaram weaves of Tamil Nadu. Each saree in our collection is handpicked for its craftsmanship, purity, and timeless elegance.
 
 We specialize in pure silk sarees, traditional handloom weaves, and heritage textiles that celebrate India's rich cultural legacy. Every piece comes with a quality guarantee, ensuring you receive only genuine, premium fabrics.
 
-With global shipping and secure online ordering, we bring India's finest silk sarees to your doorstep, wherever you are. Whether you're seeking a bridal masterpiece or an everyday classic, Pratyagra Silks offers curated collections that blend tradition with modern convenience.
+With global shipping and secure online ordering, we bring India's finest silk sarees to your doorstep, wherever you are. Whether you're seeking a bridal masterpiece or an everyday classic, Kandangi Sarees offers curated collections that blend tradition with modern convenience.
 
 Experience authentic handloom. Experience pure silk. Experience Pratyagra.
 ```
@@ -31,12 +31,12 @@ Experience authentic handloom. Experience pure silk. Experience Pratyagra.
         "offerId": "PS001",
         "title": "Pure Banarasi Silk Saree - Royal Blue with Gold Zari",
         "description": "Authentic handloom Banarasi silk saree featuring intricate gold zari work. Pure silk fabric with traditional motifs. Perfect for weddings and special occasions.",
-        "link": "https://pratyagrasilks.com/product/PS001",
-        "imageLink": "https://pratyagrasilks.com/images/products/PS001-main.jpg",
+        "link": "https://kandangisarees.com/product/PS001",
+        "imageLink": "https://kandangisarees.com/images/products/PS001-main.jpg",
         "additionalImageLinks": [
-          "https://pratyagrasilks.com/images/products/PS001-detail1.jpg",
-          "https://pratyagrasilks.com/images/products/PS001-detail2.jpg",
-          "https://pratyagrasilks.com/images/products/PS001-detail3.jpg"
+          "https://kandangisarees.com/images/products/PS001-detail1.jpg",
+          "https://kandangisarees.com/images/products/PS001-detail2.jpg",
+          "https://kandangisarees.com/images/products/PS001-detail3.jpg"
         ],
         "contentLanguage": "en",
         "targetCountry": "IN",
@@ -48,7 +48,7 @@ Experience authentic handloom. Experience pure silk. Experience Pratyagra.
           "value": "12500.00",
           "currency": "INR"
         },
-        "brand": "Pratyagra Silks",
+        "brand": "Kandangi Sarees",
         "gtin": "OPTIONAL_GTIN_IF_AVAILABLE",
         "mpn": "PS001",
         "googleProductCategory": "Apparel & Accessories > Clothing > Traditional & Ceremonial Clothing > Sarees",
@@ -141,7 +141,7 @@ export async function generateGMCFeed() {
       offerId: product.id,
       title: product.name.substring(0, 150), // Max 150 chars
       description: product.description.substring(0, 5000), // Max 5000 chars
-      link: `https://pratyagrasilks.com/product/${product.id}`,
+      link: `https://kandangisarees.com/product/${product.id}`,
       imageLink: product.images[0] || '',
       additionalImageLinks: product.images.slice(1, 11), // Max 10 additional
       contentLanguage: 'en',
@@ -153,7 +153,7 @@ export async function generateGMCFeed() {
         value: product.price.toFixed(2),
         currency: 'INR',
       },
-      brand: 'Pratyagra Silks',
+      brand: 'Kandangi Sarees',
       mpn: product.id,
       googleProductCategory: 'Apparel & Accessories > Clothing > Traditional & Ceremonial Clothing > Sarees',
       productTypes: [
@@ -223,7 +223,7 @@ export async function GET(request: Request) {
 
 **Description**:
 ```
-New to Pratyagra Silks? Enjoy 10% off your first pure silk saree purchase! 
+New to Kandangi Sarees? Enjoy 10% off your first pure silk saree purchase! 
 
 ✨ Handpicked from India's finest weaving centers
 🎁 Free shipping across India
@@ -235,7 +235,7 @@ Valid until: [DATE - 30 days from posting]
 ```
 
 **CTA Button**: Shop Now  
-**Link**: https://pratyagrasilks.com/collection?discount=FIRST10  
+**Link**: https://kandangisarees.com/collection?discount=FIRST10  
 **Image**: Hero banner with elegant saree display + "10% OFF" badge
 
 ---
@@ -256,7 +256,7 @@ Only 3 pieces available.
 ```
 
 **CTA Button**: Buy Now  
-**Link**: https://pratyagrasilks.com/product/[PRODUCT_ID]  
+**Link**: https://kandangisarees.com/product/[PRODUCT_ID]  
 **Image**: High-quality product photo showcasing zari details
 
 ---
@@ -281,7 +281,7 @@ Live styling sessions | Exclusive previews | Special launch offers
 
 **Event Date**: [Specific Date]  
 **CTA Button**: Learn More  
-**Link**: https://pratyagrasilks.com/collection/spring-2026  
+**Link**: https://kandangisarees.com/collection/spring-2026  
 **Image**: Collage of new collection highlights
 
 ---
@@ -291,7 +291,7 @@ Live styling sessions | Exclusive previews | Special launch offers
 ### Template 1: Response to 5-Star Review (Quality Praise)
 
 **Customer Review Example**:
-> "Absolutely stunning Kanjivaram saree! The silk quality is exceptional and the colors are even more vibrant in person. Fast delivery and beautiful packaging. Highly recommend Pratyagra Silks!"
+> "Absolutely stunning Kanjivaram saree! The silk quality is exceptional and the colors are even more vibrant in person. Fast delivery and beautiful packaging. Highly recommend Kandangi Sarees!"
 
 **Response Template**:
 ```
@@ -301,10 +301,10 @@ Thank you so much for your wonderful review! We're thrilled that your Kanjivaram
 
 Our artisans take immense pride in selecting only the finest pure silk, and it's heartwarming to know that the craftsmanship and vibrant colors brought you joy.
 
-We truly appreciate your trust in Pratyagra Silks and look forward to being part of your special moments again.
+We truly appreciate your trust in Kandangi Sarees and look forward to being part of your special moments again.
 
 Warm regards,
-Pratyagra Silks Team
+Kandangi Sarees Team
 ```
 
 **Key Elements**:
@@ -331,12 +331,12 @@ We're glad to hear that you're pleased with the quality of your saree—our arti
 
 We've reviewed your order and identified [brief reason: courier delay/high demand period]. To make this right, we'd like to offer you a 15% discount on your next purchase as a gesture of our commitment to better service.
 
-Please reach out to us at hello@pratyagrasilks.com, and we'll ensure your next experience with Pratyagra Silks is seamless.
+Please reach out to us at hello@kandangisarees.com, and we'll ensure your next experience with Kandangi Sarees is seamless.
 
 Thank you for your patience and understanding.
 
 Best regards,
-Pratyagra Silks Team
+Kandangi Sarees Team
 ```
 
 **Key Elements**:
@@ -420,21 +420,21 @@ If you prefer XML format over JSON for feed uploads:
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
   <channel>
-    <title>Pratyagra Silks Product Feed</title>
-    <link>https://pratyagrasilks.com</link>
+    <title>Kandangi Sarees Product Feed</title>
+    <link>https://kandangisarees.com</link>
     <description>Authentic Handloom Silk Sarees</description>
     
     <item>
       <g:id>PS001</g:id>
       <g:title>Pure Banarasi Silk Saree - Royal Blue with Gold Zari</g:title>
       <g:description>Authentic handloom Banarasi silk saree featuring intricate gold zari work. Pure silk fabric with traditional motifs.</g:description>
-      <g:link>https://pratyagrasilks.com/product/PS001</g:link>
-      <g:image_link>https://pratyagrasilks.com/images/products/PS001-main.jpg</g:image_link>
-      <g:additional_image_link>https://pratyagrasilks.com/images/products/PS001-detail1.jpg</g:additional_image_link>
+      <g:link>https://kandangisarees.com/product/PS001</g:link>
+      <g:image_link>https://kandangisarees.com/images/products/PS001-main.jpg</g:image_link>
+      <g:additional_image_link>https://kandangisarees.com/images/products/PS001-detail1.jpg</g:additional_image_link>
       <g:condition>new</g:condition>
       <g:availability>in stock</g:availability>
       <g:price>12500.00 INR</g:price>
-      <g:brand>Pratyagra Silks</g:brand>
+      <g:brand>Kandangi Sarees</g:brand>
       <g:google_product_category>Apparel &amp; Accessories &gt; Clothing &gt; Traditional &amp; Ceremonial Clothing &gt; Sarees</g:google_product_category>
       <g:product_type>Clothing &gt; Sarees &gt; Banarasi Silk Sarees</g:product_type>
       <g:color>Royal Blue</g:color>

@@ -1,21 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { useAuth } from "@/lib/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import CartBadge from "@/components/Cart/CartBadge";
 import WishlistBadge from "@/components/Wishlist/WishlistBadge";
 import { User, LogOut, Package, Heart, ChevronDown } from "lucide-react";
 import { silkCategories } from "@/lib/seo-config";
+import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/constants/brand";
 
 export default function Header() {
     const { user, signOut } = useAuth();
     const router = useRouter();
+    const pathname = usePathname();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-    const [isSilkTypesMenuOpen, setIsSilkTypesMenuOpen] = useState(false);
+    const [isWeaveMenuOpen, setIsWeaveMenuOpen] = useState(false);
 
     const handleSignOut = async () => {
         await signOut();
@@ -23,50 +24,44 @@ export default function Header() {
         router.push('/');
     };
 
+    const isActive = (href: string) =>
+        pathname === href ? "text-primary font-semibold" : "hover:text-primary transition-colors font-medium";
+
     return (
         <header className="sticky top-0 z-50 bg-white shadow-md">
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16 md:h-20">
-                    {/* Logo/Brand */}
+                    {/* Logo/Brand — text fallback until logo asset is provided */}
                     <Link href="/" className="flex items-center">
-                        {/* <span className="font-playfair text-2xl md:text-3xl font-bold text-primary">
-                            Pratyagra Silks
-                        </span> */}
-
-                        <Image
-                            src="/Pratyagra_Silks_Logo.svg"
-                            alt="Pratyagra Silks Logo"
-                            width={200}
-                            height={36}
-                            className="object-contain"
-                        />
-
+                        <span className="font-playfair text-2xl md:text-3xl font-bold text-primary tracking-tight">
+                            {BRAND_NAME}
+                        </span>
                     </Link>
 
                     {/* Desktop Navigation */}
                     <div className="hidden lg:flex items-center space-x-8">
                         <Link
                             href="/collection"
-                            className="hover:text-primary transition-colors font-medium"
+                            className={isActive("/collection")}
                         >
                             Collection
                         </Link>
 
-                        {/* Silk Types Dropdown */}
+                        {/* Shop by Weave Dropdown */}
                         <div className="relative hidden lg:block">
                             <button
-                                onClick={() => setIsSilkTypesMenuOpen(!isSilkTypesMenuOpen)}
-                                onMouseEnter={() => setIsSilkTypesMenuOpen(true)}
+                                onClick={() => setIsWeaveMenuOpen(!isWeaveMenuOpen)}
+                                onMouseEnter={() => setIsWeaveMenuOpen(true)}
                                 className="flex items-center gap-1 hover:text-primary transition-colors font-medium"
                             >
-                                Shop by Silk Type
+                                Shop by Weave
                                 <ChevronDown className="w-4 h-4" />
                             </button>
 
-                            {isSilkTypesMenuOpen && (
+                            {isWeaveMenuOpen && (
                                 <div
-                                    className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-xl py-2 border border-gray-200 z-50"
-                                    onMouseLeave={() => setIsSilkTypesMenuOpen(false)}
+                                    className="absolute left-0 mt-2 w-72 bg-white rounded-lg shadow-xl py-2 border border-gray-200 z-50"
+                                    onMouseLeave={() => setIsWeaveMenuOpen(false)}
                                 >
                                     <div className="grid grid-cols-1 max-h-96 overflow-y-auto">
                                         {silkCategories.map((category) => (
@@ -74,7 +69,7 @@ export default function Header() {
                                                 key={category.slug}
                                                 href={`/silk/${category.slug}`}
                                                 className="px-4 py-2 hover:bg-accent-light transition-colors text-sm"
-                                                onClick={() => setIsSilkTypesMenuOpen(false)}
+                                                onClick={() => setIsWeaveMenuOpen(false)}
                                             >
                                                 <div className="font-medium text-gray-900">{category.name}</div>
                                                 <div className="text-xs text-gray-500 truncate">{category.origin}</div>
@@ -87,13 +82,13 @@ export default function Header() {
 
                         <Link
                             href="/about"
-                            className="hover:text-primary transition-colors font-medium"
+                            className={isActive("/about")}
                         >
                             About
                         </Link>
                         <Link
                             href="/contact"
-                            className="hover:text-primary transition-colors font-medium"
+                            className={isActive("/contact")}
                         >
                             Contact
                         </Link>
@@ -227,11 +222,11 @@ export default function Header() {
                                 Collection
                             </Link>
 
-                            {/* Mobile Silk Types */}
+                            {/* Mobile Shop by Weave */}
                             <div className="px-2 py-2">
-                                <div className="font-medium mb-2">Shop by Silk Type</div>
+                                <div className="font-medium mb-2">Shop by Weave</div>
                                 <div className="pl-4 space-y-2 grid grid-cols-2">
-                                    {silkCategories.slice(0, 6).map((category) => (
+                                    {silkCategories.map((category) => (
                                         <Link
                                             key={category.slug}
                                             href={`/silk/${category.slug}`}
