@@ -1,6 +1,7 @@
 export interface PosReceiptData {
     orderNumber: string;
     orderId: string;
+    invoiceNumber?: string;
     items: Array<{
         name: string;
         sku: string;
@@ -27,76 +28,69 @@ const fmtR = (n: number) =>
 
 interface PosReceiptProps {
     data: PosReceiptData;
+    forBulkPrint?: boolean;
 }
 
-export default function PosReceipt({ data }: PosReceiptProps) {
+export default function PosReceipt({ data, forBulkPrint }: PosReceiptProps) {
     const font = "'Segoe UI', Arial, sans-serif";
 
     return (
         <>
-            <style>{`
-                @media print {
-                    body > * { visibility: hidden !important; }
-                    #pos-receipt-print,
-                    #pos-receipt-print * { visibility: visible !important; }
-                    /* Target: EPSON — A5 (148×210mm) — 14px margins */
-                    #pos-receipt-print {
-                        position: fixed !important;
-                        left: 0 !important;
-                        top: 0 !important;
-                        width: 100% !important;
-                        max-width: 100% !important;
-                        padding: 14px !important;
-                        margin: 0 auto !important;
-                        min-height: 100vh !important;
-                        display: flex !important;
-                        flex-direction: column !important;
+            {!forBulkPrint && (
+                <style>{`
+                    @media print {
+                        body > * { visibility: hidden !important; }
+                        #pos-receipt-print,
+                        #pos-receipt-print * { visibility: visible !important; }
+                        /* Target: EPSON — A5 (148×210mm) — 14px margins */
+                        #pos-receipt-print {
+                            position: fixed !important;
+                            left: 0 !important;
+                            top: 0 !important;
+                            width: 100% !important;
+                            max-width: 100% !important;
+                            padding: 14px !important;
+                            margin: 0 auto !important;
+                            min-height: 100vh !important;
+                            display: flex !important;
+                            flex-direction: column !important;
+                        }
+                        @page {
+                            size: A5 portrait;
+                            margin: 14px;
+                        }
+                        .receipt-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            font-size: 18px;
+                        }
+                        .receipt-table th {
+                            background-color: #f5f0f8 !important;
+                            -webkit-print-color-adjust: exact;
+                            print-color-adjust: exact;
+                        }
+                        .row-alt {
+                            background-color: #faf9fb !important;
+                            -webkit-print-color-adjust: exact;
+                            print-color-adjust: exact;
+                        }
+                        .total-row {
+                            background-color: #550c72 !important;
+                            color: #fff !important;
+                            -webkit-print-color-adjust: exact;
+                            print-color-adjust: exact;
+                        }
                     }
-                    @page {
-                        size: A5 portrait;
-                        margin: 14px;
-                    }
-                    .receipt-table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        font-size: 18px;
-                    }
-                    .receipt-table th {
-                        background-color: #f5f0f8 !important;
-                        -webkit-print-color-adjust: exact;
-                        print-color-adjust: exact;
-                    }
-                    .row-alt {
-                        background-color: #faf9fb !important;
-                        -webkit-print-color-adjust: exact;
-                        print-color-adjust: exact;
-                    }
-                    .total-row {
-                        background-color: #550c72 !important;
-                        color: #fff !important;
-                        -webkit-print-color-adjust: exact;
-                        print-color-adjust: exact;
-                    }
-                }
-            `}</style>
+                `}</style>
+            )}
 
-            {/* Off-screen on screen; positioned via print CSS above */}
             <div
-                id="pos-receipt-print"
+                id={forBulkPrint ? undefined : 'pos-receipt-print'}
                 style={{
-                    position: 'fixed',
-                    left: '-9999px',
-                    top: 0,
-                    fontFamily: font,
-                    fontSize: '18px',
-                    color: '#000',
-                    lineHeight: 1.5,
-                    width: '520px',
-                    margin: '0 auto',
-                    background: '#fff',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    minHeight: '100vh',
+                    ...(forBulkPrint
+                        ? { fontFamily: font, fontSize: '18px', color: '#000', lineHeight: 1.5, width: '100%', background: '#fff', display: 'flex', flexDirection: 'column', minHeight: '100vh' }
+                        : { position: 'fixed', left: '-9999px', top: 0, fontFamily: font, fontSize: '18px', color: '#000', lineHeight: 1.5, width: '520px', margin: '0 auto', background: '#fff', display: 'flex', flexDirection: 'column', minHeight: '100vh' }
+                    ),
                 }}
             >
                 {/* Watermark Logo */}
@@ -142,6 +136,7 @@ export default function PosReceipt({ data }: PosReceiptProps) {
                             TAX INVOICE
                         </div>
                         <div style={{ fontSize: '18px', color: '#444', marginTop: '6px', lineHeight: 1.6 }}>
+                            {data.invoiceNumber && <div><strong>Invoice #:</strong> {data.invoiceNumber}</div>}
                             <div><strong>Order #:</strong> {data.orderNumber}</div>
                             <div><strong>Date:</strong> {data.date}</div>
                             <div>

@@ -2,18 +2,24 @@
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import { Search, Filter, Eye, Package } from 'lucide-react';
+import { Search, Filter, Eye, Package, Printer, Download } from 'lucide-react';
+import * as XLSX from 'xlsx';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import BulkReceiptWrapper from '@/components/admin/BulkReceiptWrapper';
+import { type PosReceiptData } from '@/components/admin/PosReceipt';
 
 interface Order {
     id: string;
     order_number: string;
+    invoice_number: string | null;
     customer_name: string;
     customer_email: string;
+    customer_phone: string | null;
     total_amount: number;
     status: string;
     payment_status: string;
+    payment_method: string | null;
     created_at: string;
 }
 
@@ -23,10 +29,15 @@ export default function AdminOrdersPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
     const [paymentFilter, setPaymentFilter] = useState('all');
+    const [dateFrom, setDateFrom] = useState('');
+    const [dateTo, setDateTo] = useState('');
+    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+    const [isPrinting, setIsPrinting] = useState(false);
+    const [printData, setPrintData] = useState<PosReceiptData[]>([]);
 
     useEffect(() => {
         fetchOrders();
-    }, [statusFilter, paymentFilter]);
+    }, [statusFilter, paymentFilter, dateFrom, dateTo]);
 
     async function fetchOrders() {
         setLoading(true);
@@ -37,13 +48,16 @@ export default function AdminOrdersPage() {
             .select(`
         id,
         order_number,
+        invoice_number,
         total_amount,
         status,
         payment_status,
+        payment_method,
         created_at,
         customers (
           full_name,
-          email
+          email,
+          phone
         )
       `)
             .order('created_at', { ascending: false });
@@ -56,6 +70,14 @@ export default function AdminOrdersPage() {
             query = query.eq('payment_status', paymentFilter);
         }
 
+        if (dateFrom) {
+            query = query.gte('created_at', `${dateFrom}T00:00:00.000Z`);
+        }
+
+        if (dateTo) {
+            query = query.lte('created_at', `${dateTo}T23:59:59.999Z`);
+        }
+
         const { data, error } = await query;
 
         if (error) {
@@ -66,6 +88,7 @@ export default function AdminOrdersPage() {
                     ...order,
                     customer_name: order.customers?.full_name || 'Guest',
                     customer_email: order.customers?.email || '',
+                    customer_phone: order.customers?.phone || null,
                 }))
             );
         }
@@ -88,6 +111,87 @@ export default function AdminOrdersPage() {
             // Refresh orders
             fetchOrders();
         }
+    };
+
+    const toggleOne = (id: string) => setSelectedIds(prev => {
+        const next = new Set(prev);
+        next.has(id) ? next.delete(id) : next.add(id);
+        return next;
+    });
+
+    const handlePrintReceipts = async () => {
+        const supabase = createClient();
+        const selected = filteredOrders.filter(o => selectedIds.has(o.id));
+
+        const results = await Promise.all(
+            selected.map(o =>
+                supabase.from('order_items')
+                    .select('product_name, product_sku, quantity, unit_price')
+                    .eq('order_id', o.id)
+            )
+        );
+
+        const receipts: PosReceiptData[] = selected.map((o, i) => {
+            const items = results[i].data ?? [];
+            const grand = o.total_amount;
+            const taxable = Math.round((grand / 1.05) * 100) / 100;
+            const half = Math.round(((grand - taxable) / 2) * 100) / 100;
+            return {
+                orderNumber: o.order_number,
+                orderId: o.id,
+                invoiceNumber: o.invoice_number ?? undefined,
+                items: items.map((it: any) => ({
+                    name: it.product_name,
+                    sku: it.product_sku,
+                    quantity: it.quantity,
+                    unitPrice: it.unit_price,
+                })),
+                grandTotal: grand,
+                taxableValue: taxable,
+                cgst: half,
+                sgst: half,
+                paymentMethod: o.payment_method ?? 'Online',
+                date: new Date(o.created_at).toLocaleDateString('en-IN', {
+                    day: 'numeric', month: 'short', year: 'numeric',
+                }),
+                customerName: o.customer_name,
+                customerPhone: o.customer_phone ?? undefined,
+            };
+        });
+
+        setPrintData(receipts);
+        setIsPrinting(true);
+        setTimeout(() => {
+            window.print();
+            setIsPrinting(false);
+            setSelectedIds(new Set());
+        }, 300);
+    };
+
+    const handleDownloadExcel = () => {
+        const selected = filteredOrders.filter(o => selectedIds.has(o.id));
+
+        const rows = selected.map(o => ({
+            'Invoice #': o.invoice_number ?? '',
+            'Order #': o.order_number,
+            'Customer Name': o.customer_name,
+            'Customer Email': o.customer_email,
+            'Customer Phone': o.customer_phone ?? '',
+            'Date': new Date(o.created_at).toLocaleDateString('en-IN', {
+                day: 'numeric', month: 'short', year: 'numeric',
+            }),
+            'Total (₹)': o.total_amount,
+            'Payment Method': o.payment_method ?? '',
+            'Payment Status': o.payment_status,
+            'Order Status': o.status,
+        }));
+
+        const ws = XLSX.utils.json_to_sheet(rows);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Orders');
+
+        const dateStr = new Date().toISOString().slice(0, 10);
+        XLSX.writeFile(wb, `pratyagra-orders-${dateStr}.xlsx`);
     };
 
     const formatPrice = (price: number) => {
@@ -147,6 +251,10 @@ export default function AdminOrdersPage() {
         );
     });
 
+    const allSelected = filteredOrders.length > 0 && filteredOrders.every(o => selectedIds.has(o.id));
+    const toggleAll = () => setSelectedIds(allSelected ? new Set() : new Set(filteredOrders.map(o => o.id)));
+    const someSelected = selectedIds.size > 0;
+
     return (
         <div>
             <div className="flex items-center justify-between mb-8">
@@ -156,6 +264,33 @@ export default function AdminOrdersPage() {
                     <span>{filteredOrders.length} orders</span>
                 </div>
             </div>
+
+            {someSelected && (
+                <div className="sticky top-4 z-10 flex items-center justify-between bg-[#550c72] text-white px-5 py-3 rounded-xl shadow-lg mb-4">
+                    <span className="text-sm font-semibold">
+                        {selectedIds.size} order{selectedIds.size > 1 ? 's' : ''} selected
+                    </span>
+                    <div className="flex items-center gap-3">
+                        <button onClick={() => setSelectedIds(new Set())} className="text-xs underline opacity-80 hover:opacity-100">
+                            Clear
+                        </button>
+                        <button
+                            onClick={handleDownloadExcel}
+                            className="flex items-center gap-2 px-4 py-1.5 bg-white text-[#550c72] rounded-lg text-sm font-bold hover:bg-gray-100 transition-colors"
+                        >
+                            <Download className="w-4 h-4" />
+                            Export Excel
+                        </button>
+                        <button
+                            onClick={handlePrintReceipts}
+                            className="flex items-center gap-2 px-4 py-1.5 bg-white text-[#550c72] rounded-lg text-sm font-bold hover:bg-gray-100 transition-colors"
+                        >
+                            <Printer className="w-4 h-4" />
+                            Print {selectedIds.size} Receipt{selectedIds.size > 1 ? 's' : ''}
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* Filters */}
             <div className="bg-white rounded-lg shadow p-6 mb-6">
@@ -202,6 +337,39 @@ export default function AdminOrdersPage() {
                         </select>
                     </div>
                 </div>
+
+                {/* Date Range Row */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-100">
+                    <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1">From Date</label>
+                        <input
+                            type="date"
+                            value={dateFrom}
+                            onChange={(e) => setDateFrom(e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1">To Date</label>
+                        <input
+                            type="date"
+                            value={dateTo}
+                            onChange={(e) => setDateTo(e.target.value)}
+                            min={dateFrom || undefined}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm"
+                        />
+                    </div>
+                    {(dateFrom || dateTo) && (
+                        <div className="flex items-end">
+                            <button
+                                onClick={() => { setDateFrom(''); setDateTo(''); }}
+                                className="px-4 py-2 text-sm text-gray-500 hover:text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                            >
+                                Clear Dates
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
 
             {/* Orders Table */}
@@ -220,6 +388,9 @@ export default function AdminOrdersPage() {
                         <table className="w-full">
                             <thead className="bg-gray-50">
                                 <tr>
+                                    <th className="px-6 py-3">
+                                        <input type="checkbox" checked={allSelected} onChange={toggleAll} className="rounded" />
+                                    </th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Order
                                     </th>
@@ -246,8 +417,19 @@ export default function AdminOrdersPage() {
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {filteredOrders.map((order) => (
                                     <tr key={order.id} className="hover:bg-gray-50">
+                                        <td className="px-6 py-4">
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedIds.has(order.id)}
+                                                onChange={() => toggleOne(order.id)}
+                                                className="rounded"
+                                            />
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="font-medium text-gray-900">#{order.order_number}</div>
+                                            {order.invoice_number && (
+                                                <div className="text-xs text-purple-700 font-medium">{order.invoice_number}</div>
+                                            )}
                                         </td>
                                         <td className="px-6 py-4">
                                             <div className="text-gray-900">{order.customer_name}</div>
@@ -293,6 +475,7 @@ export default function AdminOrdersPage() {
                     </div>
                 )}
             </div>
+            {isPrinting && <BulkReceiptWrapper receipts={printData} />}
         </div>
     );
 }

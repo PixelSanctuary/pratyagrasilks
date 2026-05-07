@@ -206,6 +206,7 @@ export default function PosPage() {
             const receipt: PosReceiptData = {
                 orderNumber: result.orderNumber,
                 orderId: result.orderId!,
+                invoiceNumber: result.invoiceNumber,
                 items: actionItems,
                 grandTotal,
                 taxableValue,

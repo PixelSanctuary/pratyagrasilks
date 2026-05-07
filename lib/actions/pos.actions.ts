@@ -14,6 +14,7 @@ export interface PosOrderResult {
     success: boolean;
     orderId?: string;
     orderNumber?: string;
+    invoiceNumber?: string;
     customerId?: string;
     grandTotal?: number;
     error?: string;
@@ -68,9 +69,9 @@ async function resolveWalkInCustomer(
                 customer_id: customerId,
                 full_name: 'POS In-Store',
                 address_line1: 'In-Store Purchase',
-                city: 'Varanasi',
-                state: 'Uttar Pradesh',
-                postal_code: '221001',
+                city: 'Coimbatore',
+                state: 'Tamil Nadu',
+                postal_code: '641002',
                 country: 'India',
                 phone: '0000000000',
                 is_default: false,
@@ -122,9 +123,9 @@ export async function processOfflineSale(
                         customer_id: finalCustomerId,
                         full_name: 'POS In-Store',
                         address_line1: 'In-Store Purchase',
-                        city: 'Varanasi',
-                        state: 'Uttar Pradesh',
-                        postal_code: '221001',
+                        city: 'Coimbatore',
+                        state: 'Tamil Nadu',
+                        postal_code: '641002',
                         country: 'India',
                         phone: '0000000000',
                         is_default: false,
@@ -149,7 +150,7 @@ export async function processOfflineSale(
                 payment_method: paymentMethod,
                 payment_status: 'completed',
             })
-            .select('id, order_number')
+            .select('id, order_number, invoice_number')
             .single();
 
         if (orderError || !order) {
@@ -186,6 +187,7 @@ export async function processOfflineSale(
             success: true,
             orderId: order.id,
             orderNumber: order.order_number,
+            invoiceNumber: order.invoice_number ?? undefined,
             customerId: finalCustomerId,
             grandTotal,
         };
