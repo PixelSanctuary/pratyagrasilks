@@ -25,7 +25,7 @@ import { useAdmin } from '@/lib/hooks/useAdmin';
 const TYPE_STYLES: Record<VendorType, string> = {
     Artisan:    'bg-amber-100 text-amber-800',
     City:       'bg-blue-100 text-blue-800',
-    Wholesaler: 'bg-purple-100 text-purple-800',
+    Wholesaler: 'bg-amber-50 text-amber-700',
 };
 
 const formatPrice = (price: number) =>

@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 const TYPE_STYLES: Record<VendorType, string> = {
     Artisan:    'bg-amber-100 text-amber-800',
     City:       'bg-blue-100 text-blue-800',
-    Wholesaler: 'bg-purple-100 text-purple-800',
+    Wholesaler: 'bg-amber-50 text-amber-700',
 };
 
 export default function VendorsPage() {
@@ -262,7 +262,7 @@ export default function VendorsPage() {
                                 <p className={`text-2xl font-bold ${
                                     type === 'Artisan' ? 'text-amber-700' :
                                     type === 'City' ? 'text-blue-700' :
-                                    'text-purple-700'
+                                    'text-amber-700'
                                 }`}>
                                     {count}
                                 </p>

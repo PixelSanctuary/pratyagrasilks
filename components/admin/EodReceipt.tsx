@@ -94,7 +94,7 @@ export default function EodReceipt({ data, printedAt }: EodReceiptProps) {
                         *** END OF DAY REPORT ***
                     </div>
                     <div style={{ fontSize: '14px', fontWeight: 'bold', marginTop: '1.5mm' }}>
-                        PRATYAGRA SILKS
+                        KANDANGI SAREES
                     </div>
                     <div style={{ fontSize: '9px', marginTop: '1mm' }}>
                         NO 178, 2nd Floor A Rammachnadra Road, RS Puram, Coimbatore - 641002

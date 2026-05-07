@@ -96,7 +96,7 @@ export default function RootLayout({
         '@type': 'Organization',
         name: 'Kandangi Sarees',
         url: BRAND_URL,
-        logo: `${BRAND_URL}/logo.png`,
+        logo: `${BRAND_URL}/kandangi-logo.svg`,
         description: 'Handpicked handloom sarees from weavers across India. Authentic silks and cottons — Kanjivaram, Gadwal, Chettinad, and more.',
         color: BRAND_PRIMARY_HEX,
         brand: {

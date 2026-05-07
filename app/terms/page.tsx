@@ -147,7 +147,7 @@ export default function TermsPage() {
                                 If you have any questions about these Terms of Service, please contact us at:
                             </p>
                             <p className="mt-4 ">
-                                <strong>Email:</strong> hello@Kandangi Sarees.com<br />
+                                <strong>Email:</strong> hello@kandangisarees.com<br />
                                 <strong>Address:</strong> Kandangi Sarees — [PENDING — client to supply]
                             </p>
                         </div>

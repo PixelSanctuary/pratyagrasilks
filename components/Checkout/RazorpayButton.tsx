@@ -94,7 +94,7 @@ export default function RazorpayButton({
                     contact: shippingAddress.phone,
                 },
                 notes: { order_number: createData.orderNumber },
-                theme: { color: '#550c72' },
+                theme: { color: '#5F1300' },
                 modal: {
                     ondismiss: () => {
                         setLoading(false);

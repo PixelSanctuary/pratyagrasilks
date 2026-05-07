@@ -34,7 +34,7 @@ const fmtTime = (iso: string) =>
 const PAYMENT_BADGE: Record<string, string> = {
     CASH: 'bg-green-100 text-green-800',
     UPI: 'bg-blue-100 text-blue-800',
-    CARD: 'bg-purple-100 text-purple-800',
+    CARD: 'bg-amber-50 text-amber-700',
 };
 
 interface MetricCardProps {
@@ -126,7 +126,7 @@ export default function SettlementPage() {
                         >
                             <ArrowLeft className="w-4 h-4" />
                         </Link>
-                        <div className="w-10 h-10 rounded-xl bg-[#550c72] flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-xl bg-[#5F1300] flex items-center justify-center">
                             <ReceiptText className="w-5 h-5 text-white" />
                         </div>
                         <div>
@@ -149,7 +149,7 @@ export default function SettlementPage() {
                         <button
                             onClick={handlePrint}
                             disabled={!data || loading}
-                            className="flex items-center gap-2 px-5 py-2 bg-[#550c72] hover:bg-[#8430AB] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl text-sm font-bold transition-colors shadow-md shadow-purple-200"
+                            className="flex items-center gap-2 px-5 py-2 bg-[#5F1300] hover:bg-[#7A2B1A] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl text-sm font-bold transition-colors shadow-md shadow-amber-200"
                         >
                             <Printer className="w-4 h-4" />
                             Print Z-Report
@@ -175,7 +175,7 @@ export default function SettlementPage() {
                     ) : data ? (
                         <>
                             <MetricCard
-                                icon={<TrendingUp className="w-5 h-5 text-[#550c72]" />}
+                                icon={<TrendingUp className="w-5 h-5 text-[#5F1300]" />}
                                 label="Total Revenue"
                                 value={fmt(data.totalRevenue)}
                                 sub={`${data.totalOrders} transaction${data.totalOrders !== 1 ? 's' : ''} · Avg ${fmt(avgTicket)}`}
@@ -193,7 +193,7 @@ export default function SettlementPage() {
                                 sub="Check UPI app"
                             />
                             <MetricCard
-                                icon={<CreditCard className="w-5 h-5 text-purple-600" />}
+                                icon={<CreditCard className="w-5 h-5 text-amber-700" />}
                                 label="Card Total"
                                 value={fmt(data.breakdown.CARD)}
                                 sub="Check card terminal"
@@ -283,7 +283,7 @@ export default function SettlementPage() {
                                         <td colSpan={3} className="px-6 py-4 text-sm font-bold text-gray-900">
                                             Total
                                         </td>
-                                        <td className="px-6 py-4 text-lg font-bold text-[#550c72] text-right">
+                                        <td className="px-6 py-4 text-lg font-bold text-[#5F1300] text-right">
                                             {fmt(data.totalRevenue)}
                                         </td>
                                     </tr>

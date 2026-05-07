@@ -159,8 +159,8 @@ export default function AdminDashboard() {
                             <p className="text-sm text-textSecondary">Total Customers</p>
                             <p className="text-3xl font-bold text-gray-900 mt-1">{stats.totalCustomers}</p>
                         </div>
-                        <div className="p-3 bg-purple-100 rounded-lg">
-                            <Users className="w-6 h-6 text-purple-600" />
+                        <div className="p-3 bg-amber-50 rounded-lg">
+                            <Users className="w-6 h-6 text-amber-700" />
                         </div>
                     </div>
                 </div>

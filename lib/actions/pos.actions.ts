@@ -30,7 +30,7 @@ function getServiceClient() {
 async function resolveWalkInCustomer(
     supabase: ReturnType<typeof getServiceClient>
 ): Promise<{ customerId: string; addressId: string } | { error: string }> {
-    const walkInEmail = 'pos-walkin@pratyagrasilks.internal';
+    const walkInEmail = 'pos-walkin@kandangisarees.com';
 
     let customerId: string;
     const { data: existing } = await supabase

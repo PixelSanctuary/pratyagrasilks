@@ -247,7 +247,7 @@ export default function PosPage() {
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-[#550c72] flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-xl bg-[#5F1300] flex items-center justify-center">
                             <ShoppingCart className="w-5 h-5 text-white" />
                         </div>
                         <div>
@@ -278,7 +278,7 @@ export default function PosPage() {
 
                         {/* Search bar */}
                         <div className="relative">
-                            <div className="flex items-center gap-2 bg-white border-2 border-gray-200 rounded-xl px-4 py-3 focus-within:border-[#550c72] transition-colors">
+                            <div className="flex items-center gap-2 bg-white border-2 border-gray-200 rounded-xl px-4 py-3 focus-within:border-[#5F1300] transition-colors">
                                 <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
                                 <input
                                     type="text"
@@ -288,7 +288,7 @@ export default function PosPage() {
                                     className="flex-1 outline-none text-gray-900 placeholder-gray-400 bg-transparent text-sm"
                                 />
                                 {isSearching && (
-                                    <div className="w-4 h-4 border-2 border-[#550c72] border-t-transparent rounded-full animate-spin flex-shrink-0" />
+                                    <div className="w-4 h-4 border-2 border-[#5F1300] border-t-transparent rounded-full animate-spin flex-shrink-0" />
                                 )}
                                 {searchQuery && !isSearching && (
                                     <button
@@ -311,7 +311,7 @@ export default function PosPage() {
                                                 setSearchQuery('');
                                                 setSearchResults([]);
                                             }}
-                                            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-purple-50 transition-colors text-left border-b border-gray-100 last:border-0"
+                                            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-amber-50 transition-colors text-left border-b border-gray-100 last:border-0"
                                         >
                                             {product.images[0] ? (
                                                 <img
@@ -326,7 +326,7 @@ export default function PosPage() {
                                                 <p className="text-sm font-semibold text-gray-900 truncate">{product.name}</p>
                                                 <p className="text-xs text-gray-500">SKU: {product.sku}</p>
                                             </div>
-                                            <span className="text-sm font-bold text-[#550c72] flex-shrink-0">{fmt(product.price)}</span>
+                                            <span className="text-sm font-bold text-[#5F1300] flex-shrink-0">{fmt(product.price)}</span>
                                         </button>
                                     ))}
                                 </div>
@@ -367,10 +367,10 @@ export default function PosPage() {
                                         <div className="flex-1 min-w-0">
                                             <p className="font-semibold text-gray-900 truncate">{product.name}</p>
                                             <p className="text-xs text-gray-500 mt-0.5">SKU: {product.sku}</p>
-                                            <p className="text-sm font-bold text-[#550c72] mt-1">{fmt(product.price)}</p>
+                                            <p className="text-sm font-bold text-[#5F1300] mt-1">{fmt(product.price)}</p>
                                         </div>
                                         <div className="flex items-center gap-3 flex-shrink-0">
-                                            <span className="bg-[#550c72] text-white text-sm font-bold rounded-full w-8 h-8 flex items-center justify-center">
+                                            <span className="bg-[#5F1300] text-white text-sm font-bold rounded-full w-8 h-8 flex items-center justify-center">
                                                 {quantity}
                                             </span>
                                             <span className="text-sm font-semibold text-gray-700 w-20 text-right">
@@ -396,7 +396,7 @@ export default function PosPage() {
                         {/* Customer Details Card */}
                         <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-5">
                             <div className="flex items-center gap-2 mb-4">
-                                <User className="w-5 h-5 text-[#550c72]" />
+                                <User className="w-5 h-5 text-[#5F1300]" />
                                 <h3 className="text-base font-bold text-gray-900">Customer Details</h3>
                             </div>
                             <div className="2xl:grid grid-cols-2 gap-3">
@@ -408,11 +408,11 @@ export default function PosPage() {
                                             placeholder="10-digit phone"
                                             value={customerPhone}
                                             onChange={e => setCustomerPhone(e.target.value)}
-                                            className="flex-1 px-3 py-2 border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#550c72] transition-colors"
+                                            className="flex-1 px-3 py-2 border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#5F1300] transition-colors"
                                             maxLength={10}
                                         />
                                         {isLookingUp && (
-                                            <Loader2 className="absolute right-3 w-4 h-4 text-[#550c72] animate-spin" />
+                                            <Loader2 className="absolute right-3 w-4 h-4 text-[#5F1300] animate-spin" />
                                         )}
                                     </div>
                                 </div>
@@ -424,7 +424,7 @@ export default function PosPage() {
                                         value={customerName}
                                         onChange={e => setCustomerName(e.target.value)}
                                         onBlur={handleNameBlur}
-                                        className="w-full mt-1.5 px-3 py-2 border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#550c72] transition-colors"
+                                        className="w-full mt-1.5 px-3 py-2 border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#5F1300] transition-colors"
                                         disabled={isLookingUp}
                                     />
                                 </div>
@@ -463,22 +463,22 @@ export default function PosPage() {
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-gray-500 flex items-center gap-1">
                                         CGST
-                                        <span className="text-xs bg-amber-100 text-[#D97706] font-medium px-1.5 py-0.5 rounded">2.5%</span>
+                                        <span className="text-xs bg-amber-100 text-[#E8AB16] font-medium px-1.5 py-0.5 rounded">2.5%</span>
                                     </span>
-                                    <span className="text-[#D97706] font-medium">{fmt(cgst)}</span>
+                                    <span className="text-[#E8AB16] font-medium">{fmt(cgst)}</span>
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-gray-500 flex items-center gap-1">
                                         SGST
-                                        <span className="text-xs bg-amber-100 text-[#D97706] font-medium px-1.5 py-0.5 rounded">2.5%</span>
+                                        <span className="text-xs bg-amber-100 text-[#E8AB16] font-medium px-1.5 py-0.5 rounded">2.5%</span>
                                     </span>
-                                    <span className="text-[#D97706] font-medium">{fmt(sgst)}</span>
+                                    <span className="text-[#E8AB16] font-medium">{fmt(sgst)}</span>
                                 </div>
                             </div>
 
                             <div className="flex justify-between items-center mb-5">
                                 <span className="text-lg font-bold text-gray-900">Grand Total</span>
-                                <span className="text-2xl font-bold text-[#550c72]">{fmt(grandTotal)}</span>
+                                <span className="text-2xl font-bold text-[#5F1300]">{fmt(grandTotal)}</span>
                             </div>
 
                             {cartItems.length > 0 && (
@@ -498,7 +498,7 @@ export default function PosPage() {
                             <button
                                 onClick={() => setShowPaymentModal(true)}
                                 disabled={cartItems.length === 0 || customerPhone.replace(/\D/g, '').length < 10}
-                                className="xl:col-span-2 w-full py-4 bg-[#550c72] hover:bg-[#8430AB] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg shadow-purple-200"
+                                className="xl:col-span-2 w-full py-4 bg-[#5F1300] hover:bg-[#7A2B1A] disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg shadow-amber-200"
                             >
                                 <CreditCard className="w-5 h-5" />
                                 Proceed to Payment
@@ -527,7 +527,7 @@ export default function PosPage() {
                     <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6">
                         {isProcessing && (
                             <div className="absolute inset-0 bg-white/80 rounded-2xl flex flex-col items-center justify-center gap-3 z-10">
-                                <Loader2 className="w-10 h-10 animate-spin text-[#550c72]" />
+                                <Loader2 className="w-10 h-10 animate-spin text-[#5F1300]" />
                                 <p className="text-sm font-semibold text-gray-700">Processing sale...</p>
                             </div>
                         )}
@@ -545,7 +545,7 @@ export default function PosPage() {
                         {/* Total summary */}
                         <div className="bg-gray-50 rounded-xl p-4 mb-5 flex justify-between items-center">
                             <span className="text-gray-600 font-medium">Amount to Collect</span>
-                            <span className="text-2xl font-bold text-[#550c72]">{fmt(grandTotal)}</span>
+                            <span className="text-2xl font-bold text-[#5F1300]">{fmt(grandTotal)}</span>
                         </div>
 
                         {/* Payment options */}
@@ -556,14 +556,14 @@ export default function PosPage() {
                                     onClick={() => setSelectedPayment(method)}
                                     className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all font-semibold text-sm ${
                                         selectedPayment === method
-                                            ? 'border-[#550c72] bg-purple-50 text-[#550c72]'
+                                            ? 'border-[#5F1300] bg-amber-50 text-[#5F1300]'
                                             : 'border-gray-200 text-gray-600 hover:border-gray-300'
                                     }`}
                                 >
                                     {icon}
                                     {label}
                                     {selectedPayment === method && (
-                                        <CheckCircle2 className="w-4 h-4 text-[#550c72]" />
+                                        <CheckCircle2 className="w-4 h-4 text-[#5F1300]" />
                                     )}
                                 </button>
                             ))}
@@ -572,7 +572,7 @@ export default function PosPage() {
                         <button
                             onClick={() => setShowOrderConfirm(true)}
                             disabled={isProcessing}
-                            className="w-full py-4 bg-[#550c72] hover:bg-[#8430AB] disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-colors"
+                            className="w-full py-4 bg-[#5F1300] hover:bg-[#7A2B1A] disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-xl font-bold text-base flex items-center justify-center gap-2 transition-colors"
                         >
                             {isProcessing ? (
                                 <><Loader2 className="w-5 h-5 animate-spin" />Processing...</>

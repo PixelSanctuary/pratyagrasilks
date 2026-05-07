@@ -395,6 +395,23 @@ export function getCategoryBySlug(slug: string): SilkCategory | undefined {
 }
 
 /**
+ * Valid top-level filter/category types for the collection page.
+ * Used by collection page filter UI and any dynamic routing that needs to
+ * distinguish between broad fabric groups.
+ */
+export const CATEGORY_TYPES = ['silk', 'cotton', 'silk-cotton'] as const;
+export type CategoryType = typeof CATEGORY_TYPES[number];
+
+/**
+ * Maps a category slug to its broad fabric type.
+ */
+export function getCategoryType(slug: string): CategoryType {
+    if (slug.includes('cotton') || slug === 'kadhi-cotton') return 'cotton';
+    if (slug === 'pen-kalamkari') return 'silk-cotton';
+    return 'silk';
+}
+
+/**
  * Generate structured data for Organization (for homepage)
  */
 export function generateOrganizationSchema() {
@@ -402,8 +419,9 @@ export function generateOrganizationSchema() {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'Kandangi Sarees',
-        url: 'https://Kandangi Sarees.com',
-        logo: 'https://Kandangi Sarees.com/logo.png',
+        legalName: 'Adakkami',
+        url: BRAND_URL,
+        logo: `${BRAND_URL}/kandangi-logo.svg`,
         description: 'Handpicked handloom sarees from weavers across India. Authentic silks and cottons — Kanjivaram, Gadwal, Chettinad, and more.',
         address: {
             '@type': 'PostalAddress',

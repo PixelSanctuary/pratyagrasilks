@@ -12,7 +12,7 @@ export default function ReturnsPage() {
         {
             number: 1,
             title: "Report Within 24 Hours",
-            description: "If the saree is damaged or defective, email hello@Kandangi Sarees.com within 7 days of delivery with your order ID, description, and photos or video of the issue.",
+            description: "If the saree is damaged or defective, email hello@kandangisarees.com within 7 days of delivery with your order ID, description, and photos or video of the issue.",
         },
         {
             number: 2,
@@ -170,7 +170,7 @@ export default function ReturnsPage() {
                             </h3>
                             <ul className="space-y-2 ">
                                 <li><strong>7 days:</strong> Raise issue after delivery</li>
-                                <li><strong>Email:</strong> hello@Kandangi Sarees.com</li>
+                                <li><strong>Email:</strong> hello@adakkami.com</li>
                                 <li><strong>Include:</strong> Order ID, unboxing photos or video</li>
                             </ul>
                         </div>

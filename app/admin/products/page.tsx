@@ -281,7 +281,7 @@ export default function AdminProductsPage() {
 
             {/* Bulk action bar */}
             {someSelected && (
-                <div className="sticky top-4 z-10 flex items-center justify-between bg-[#550c72] text-white px-5 py-3 rounded-xl shadow-lg mb-4">
+                <div className="sticky top-4 z-10 flex items-center justify-between bg-[#5F1300] text-white px-5 py-3 rounded-xl shadow-lg mb-4">
                     <span className="text-sm font-semibold">
                         {selectedIds.size} product{selectedIds.size > 1 ? 's' : ''} selected
                     </span>
@@ -294,7 +294,7 @@ export default function AdminProductsPage() {
                         </button>
                         <button
                             onClick={handlePrintLabels}
-                            className="flex items-center gap-2 px-4 py-1.5 bg-white text-[#550c72] rounded-lg text-sm font-bold hover:bg-gray-100 transition-colors"
+                            className="flex items-center gap-2 px-4 py-1.5 bg-white text-[#5F1300] rounded-lg text-sm font-bold hover:bg-gray-100 transition-colors"
                         >
                             <Printer className="w-4 h-4" />
                             Print {selectedIds.size} Label{selectedIds.size > 1 ? 's' : ''}

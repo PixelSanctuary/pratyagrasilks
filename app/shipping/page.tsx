@@ -74,7 +74,7 @@ export default function ShippingPage() {
         },
         {
             question: "Can I change my delivery address?",
-            answer: "Yes, you can change your address within 24 hours of placing your order. Contact us at hello@Kandangi Sarees.com immediately.",
+            answer: "Yes, you can change your address within 24 hours of placing your order. Contact us at hello@kandangisarees.com immediately.",
         },
         {
             question: "What if my order is delayed?",
@@ -409,7 +409,7 @@ export default function ShippingPage() {
                             </div>
                         </div>
                         <p className="text-gray-800 mt-4 font-semibold italic">
-                            Contact us at hello@Kandangi Sarees.com for any shipping concerns.
+                            Contact us at hello@adakkami.com for any shipping concerns.
                         </p>
                     </div>
                 </div>

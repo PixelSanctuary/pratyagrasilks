@@ -4,7 +4,7 @@
 
 /* ============================================================
    Kandangi Sarees — Design Token System
-   Brand: Coffee Brown (#4A2C1A) + Mustard Yellow (#C89B3C)
+   Brand: Deep Brown (#5F1300) + Gold (#E8AB16)
    Context: Handpicked Handloom Sarees
    ============================================================ */
 
@@ -43,7 +43,7 @@
 /* Dark mode mirrors light — brand requirement */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #FBF5E6;
+    --background: #FDF6E3;
     --foreground: #2C1A0E;
   }
 }
