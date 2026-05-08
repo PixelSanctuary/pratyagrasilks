@@ -7,20 +7,9 @@ import { ArrowLeft, Save } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import OptimizedUploader from '@/components/admin/OptimizedUploader';
+import { silkCategories } from '@/lib/seo-config';
 
-const categories = [
-    { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
-    { value: 'banarasi-silk', label: 'Banarasi Silk' },
-    { value: 'tussar-silk', label: 'Tussar Silk' },
-    { value: 'mysore-silk', label: 'Mysore Silk' },
-    { value: 'kerala-kasavu', label: 'Kerala Kasavu' },
-    { value: 'muga-silk', label: 'Muga Silk' },
-    { value: 'kani-silk', label: 'Kani Silk' },
-    { value: 'paithani-silk', label: 'Paithani Silk' },
-    { value: 'pochampalli-silk', label: 'Pochampalli Silk' },
-    { value: 'baluchari-silk', label: 'Baluchari Silk' },
-    { value: 'georgette-silk', label: 'Georgette Silk' },
-];
+const categories = silkCategories.map(c => ({ value: c.slug, label: c.name }));
 
 export default function AddProductPage() {
     const router = useRouter();

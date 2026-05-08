@@ -105,3 +105,21 @@ export function generateWhatsAppMessage(
         body: receiptText,
     };
 }
+
+/**
+ * Returns a wa.me URL with a pre-filled message for customer-facing CTAs.
+ * Falls back to '#' and emits a console warning if the env var is not set.
+ */
+export function getWhatsAppUrl(message: string): string {
+    const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+    if (!number) {
+        if (process.env.NODE_ENV !== 'production') {
+            console.warn(
+                '[Kandangi Sarees] WhatsApp number not configured. ' +
+                'Add NEXT_PUBLIC_WHATSAPP_NUMBER to .env.local'
+            );
+        }
+        return '#';
+    }
+    return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+}

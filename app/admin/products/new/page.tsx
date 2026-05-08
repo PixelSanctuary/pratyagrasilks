@@ -13,22 +13,9 @@ import { calculateMrp } from '@/lib/utils/pricing';
 import Image from 'next/image';
 import { getVendors } from '@/lib/actions/vendor.actions';
 import { Vendor } from '@/lib/types';
+import { silkCategories } from '@/lib/seo-config';
 
-const categories = [
-    { value: 'kanjivaram-silk', label: 'Kanjivaram Silk' },
-    { value: 'banarasi-silk', label: 'Banarasi Silk' },
-    { value: 'tussar-silk', label: 'Tussar Silk' },
-    { value: 'mysore-silk', label: 'Mysore Silk' },
-    { value: 'kerala-kasavu', label: 'Kerala Kasavu' },
-    { value: 'muga-silk', label: 'Muga Silk' },
-    { value: 'kani-silk', label: 'Kani Silk' },
-    { value: 'paithani-silk', label: 'Paithani Silk' },
-    { value: 'pochampalli-silk', label: 'Pochampalli Silk' },
-    { value: 'baluchari-silk', label: 'Baluchari Silk' },
-    { value: 'georgette-silk', label: 'Georgette Silk' },
-    { value: 'cotton', label: 'Cotton' },
-    { value: 'silk-cotton', label: 'Silk Cotton' },
-];
+const categories = silkCategories.map(c => ({ value: c.slug, label: c.name }));
 
 function NewProductForm() {
     const router = useRouter();

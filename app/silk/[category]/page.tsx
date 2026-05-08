@@ -90,7 +90,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <div className="min-h-screen">
                 {/* Hero Section */}
                 <div className="relative bg-gradient-to-r from-primary to-primary-dark text-white py-16 md:py-24">
-                    <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/05e114529e649bfbaac0385e3b61afb5-large.jpg')] bg-no-repeat bg-cover opacity-20"></div>
+                    {/* <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/05e114529e649bfbaac0385e3b61afb5-large.jpg')] bg-no-repeat bg-cover opacity-20"></div> */}
                     <div className="container mx-auto px-4 relative z-10">
                         {/* Breadcrumb */}
                         <nav className="mb-6 text-sm">

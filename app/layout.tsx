@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Toaster } from "react-hot-toast";
 import { BRAND_PRIMARY_HEX, BRAND_URL } from "@/lib/constants/brand";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 // Font configurations
 const playfair = Playfair_Display({
@@ -132,6 +133,7 @@ export default function RootLayout({
                 <GoogleAnalytics />
                 <Analytics />
                 <Toaster position="top-right" />
+                <WhatsAppButton />
             </body>
         </html>
     );

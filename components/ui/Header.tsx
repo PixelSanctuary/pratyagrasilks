@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/lib/context/AuthContext";
 import { useRouter, usePathname } from "next/navigation";
 import CartBadge from "@/components/Cart/CartBadge";
 import WishlistBadge from "@/components/Wishlist/WishlistBadge";
-import { User, LogOut, Package, Heart, ChevronDown } from "lucide-react";
+import { User, LogOut, Package, Heart, ChevronDown, X } from "lucide-react";
 import { silkCategories } from "@/lib/seo-config";
 import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/constants/brand";
 
@@ -17,6 +17,16 @@ export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const [isWeaveMenuOpen, setIsWeaveMenuOpen] = useState(false);
+
+    // Lock body scroll when mobile drawer is open
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.classList.add('drawer-open');
+        } else {
+            document.body.classList.remove('drawer-open');
+        }
+        return () => document.body.classList.remove('drawer-open');
+    }, [isMobileMenuOpen]);
 
     const handleSignOut = async () => {
         await signOut();
@@ -210,27 +220,53 @@ export default function Header() {
                     </div>
                 </div>
 
-                {/* Mobile Menu Drawer */}
-                {isMobileMenuOpen && (
-                    <div className="lg:hidden py-4 border-t border-gray-200">
-                        <div className="flex flex-col space-y-4">
-                            <Link
-                                href="/collection"
-                                className="hover:text-primary transition-colors font-medium px-2 py-2"
+            </nav>
+
+            {/* ── Mobile slide-in drawer ──────────────────────────────── */}
+            {isMobileMenuOpen && (
+                <>
+                    {/* Backdrop */}
+                    <div
+                        className="lg:hidden fixed inset-0 bg-black/40 z-40"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        aria-hidden="true"
+                    />
+
+                    {/* Drawer */}
+                    <div
+                        className="lg:hidden fixed top-0 left-0 h-full w-72 bg-white z-50 animate-slide-in-left overflow-y-auto flex flex-col shadow-2xl"
+                    >
+                        {/* Drawer header */}
+                        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100" style={{ backgroundColor: '#5F1300' }}>
+                            <span className="font-playfair text-xl font-bold text-white">
+                                {BRAND_NAME}
+                            </span>
+                            <button
                                 onClick={() => setIsMobileMenuOpen(false)}
+                                className="p-2 rounded-md text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+                                aria-label="Close menu"
                             >
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        {/* Nav links */}
+                        <nav className="flex flex-col flex-1 px-4 py-4 space-y-1">
+                            <Link href="/collection" className="px-3 py-3 rounded-lg font-medium text-[#1A0A00] hover:bg-primary/5 hover:text-primary transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                                 Collection
                             </Link>
 
-                            {/* Mobile Shop by Weave */}
-                            <div className="px-2 py-2">
-                                <div className="font-medium mb-2">Shop by Weave</div>
-                                <div className="pl-4 space-y-2 grid grid-cols-2">
+                            {/* Shop by Weave */}
+                            <div className="pt-2">
+                                <p className="px-3 py-1 text-xs font-bold uppercase tracking-widest" style={{ color: '#8C5A3C' }}>
+                                    Shop by Weave
+                                </p>
+                                <div className="grid grid-cols-2 gap-x-2 mt-1">
                                     {silkCategories.map((category) => (
                                         <Link
                                             key={category.slug}
                                             href={`/silk/${category.slug}`}
-                                            className="block text-sm text-textSecondary hover:text-primary transition-colors py-1 !m-0"
+                                            className="px-3 py-2.5 rounded-lg text-sm text-[#1A0A00] hover:bg-primary/5 hover:text-primary transition-colors"
                                             onClick={() => setIsMobileMenuOpen(false)}
                                         >
                                             {category.name}
@@ -238,81 +274,56 @@ export default function Header() {
                                     ))}
                                     <Link
                                         href="/collection"
-                                        className="block text-sm text-accent hover:text-accent-hover transition-colors py-1 font-medium"
+                                        className="col-span-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                                        style={{ color: '#E8AB16' }}
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
-                                        View All →
+                                        View All Weaves →
                                     </Link>
                                 </div>
                             </div>
 
-                            <Link
-                                href="/about"
-                                className="hover:text-primary transition-colors font-medium px-2 py-2"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                About
-                            </Link>
-                            <Link
-                                href="/contact"
-                                className="hover:text-primary transition-colors font-medium px-2 py-2"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                Contact
-                            </Link>
+                            <div className="border-t border-gray-100 pt-2 mt-2 space-y-1">
+                                <Link href="/about" className="block px-3 py-3 rounded-lg font-medium text-[#1A0A00] hover:bg-primary/5 hover:text-primary transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    About
+                                </Link>
+                                <Link href="/contact" className="block px-3 py-3 rounded-lg font-medium text-[#1A0A00] hover:bg-primary/5 hover:text-primary transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                    Contact
+                                </Link>
+                            </div>
 
-                            {user ? (
-                                <>
-                                    <Link
-                                        href="/profile"
-                                        className="hover:text-primary transition-colors font-medium px-2 py-2"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        Profile
-                                    </Link>
-                                    <Link
-                                        href="/orders"
-                                        className="hover:text-primary transition-colors font-medium px-2 py-2"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        Orders
-                                    </Link>
-                                    <Link
-                                        href="/wishlist"
-                                        className="hover:text-primary transition-colors font-medium px-2 py-2"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        Wishlist
-                                    </Link>
-                                    <button
-                                        onClick={handleSignOut}
-                                        className="text-left text-red-600 hover:text-red-700 transition-colors font-medium px-2 py-2"
-                                    >
-                                        Sign Out
-                                    </button>
-                                </>
-                            ) : (
-                                <>
-                                    <Link
-                                        href="/auth/login"
-                                        className="hover:text-primary transition-colors font-medium px-2 py-2"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        Login
-                                    </Link>
-                                    <Link
-                                        href="/auth/signup"
-                                        className="bg-primary text-white text-center py-2 rounded-lg font-medium hover:bg-primary-light transition-colors"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        Sign Up
-                                    </Link>
-                                </>
-                            )}
-                        </div>
+                            {/* Auth links */}
+                            <div className="border-t border-gray-100 pt-2 mt-2 space-y-1">
+                                {user ? (
+                                    <>
+                                        <Link href="/profile" className="flex items-center gap-2 px-3 py-3 rounded-lg font-medium text-[#1A0A00] hover:bg-primary/5 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                            <User className="w-4 h-4" /> Profile
+                                        </Link>
+                                        <Link href="/orders" className="flex items-center gap-2 px-3 py-3 rounded-lg font-medium text-[#1A0A00] hover:bg-primary/5 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                            <Package className="w-4 h-4" /> Orders
+                                        </Link>
+                                        <Link href="/wishlist" className="flex items-center gap-2 px-3 py-3 rounded-lg font-medium text-[#1A0A00] hover:bg-primary/5 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                            <Heart className="w-4 h-4" /> Wishlist
+                                        </Link>
+                                        <button onClick={handleSignOut} className="w-full flex items-center gap-2 px-3 py-3 rounded-lg font-medium text-red-600 hover:bg-red-50 transition-colors">
+                                            <LogOut className="w-4 h-4" /> Sign Out
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Link href="/auth/login" className="block px-3 py-3 rounded-lg font-medium text-[#1A0A00] hover:bg-primary/5 hover:text-primary transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                                            Login
+                                        </Link>
+                                        <Link href="/auth/signup" className="block px-3 py-3 rounded-lg text-center font-semibold text-white transition-colors" style={{ backgroundColor: '#5F1300' }} onClick={() => setIsMobileMenuOpen(false)}>
+                                            Sign Up
+                                        </Link>
+                                    </>
+                                )}
+                            </div>
+                        </nav>
                     </div>
-                )}
-            </nav>
+                </>
+            )}
         </header>
     );
 }
