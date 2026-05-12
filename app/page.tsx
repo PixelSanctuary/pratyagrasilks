@@ -37,7 +37,7 @@ export default function Home() {
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                     style={{
                         backgroundImage:
-                            "url('/images/sarees/backgrounds/Hero_bg.png')",
+                            "url('/images/sarees/backgrounds/Hero_bg.webp')",
                     }}
                 />
 
@@ -198,7 +198,7 @@ export default function Home() {
             </section>}
 
             {/* ── CTA Section ──────────────────────────────────────────── */}
-            <section className="py-16 md:py-24 px-4 text-white" style={{ backgroundColor: "#5F1300" }}>
+            <section className="py-16 md:py-24 px-4 text-white bg-gradient-to-r from-primary to-primary-light">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-4">
                         Pick Your Saree Effortlessly.

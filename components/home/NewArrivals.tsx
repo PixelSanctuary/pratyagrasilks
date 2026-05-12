@@ -23,7 +23,7 @@ export default async function NewArrivals() {
                         Fresh from the Loom
                     </h2>
                     <p className="text-textSecondary max-w-2xl mx-auto text-lg leading-relaxed">
-                        Newly handpicked weaves — from Kanjivaram to Chettinad, each piece chosen so you don&apos;t have to search.
+                        Newly handpicked weaves — from Chettinad to Kanjivaram, each piece chosen so you don&apos;t have to search.
                     </p>
                 </div>
 

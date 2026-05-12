@@ -71,7 +71,10 @@ export default function ContactPage() {
         <div className="flex flex-col">
             {/* Hero Section */}
             <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary-light text-white py-16 md:py-24 px-4">
-                {/* <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/81a0497a2dc07dd574c5b5ed8423ae49-large.jpg')] bg-no-repeat bg-cover opacity-15"></div> */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: "url('/images/sarees/backgrounds/contact_bg.webp')", opacity: 0.12 }}
+                />
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
                         Get in Touch

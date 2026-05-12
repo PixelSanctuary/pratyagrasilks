@@ -31,10 +31,10 @@ export default function AboutPage() {
 
             {/* ── Hero ─────────────────────────────────────────────────── */}
             <section className="relative text-white py-20 md:py-28 px-4" style={{ backgroundColor: '#5F1300' }}>
-                {/* <div
+                <div
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: "url('https://images.pixieset.com/859010601/d7c3222457a03fa54d40c17b0f874229-large.jpg')", opacity: 0.12 }}
-                /> */}
+                    style={{ backgroundImage: "url('/images/sarees/backgrounds/about_bg.webp')", opacity: 0.12 }}
+                />
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-6 animate-slide-up">
                         Why We Started Kandangi Sarees
@@ -156,7 +156,7 @@ export default function AboutPage() {
             </section>
 
             {/* ── The Promise — full-width dark band ───────────────────── */}
-            <section className="py-16 md:py-24 px-6 text-center text-white" style={{ backgroundColor: '#5F1300' }}>
+            <section className="py-16 md:py-24 px-6 text-center text-white bg-gradient-to-r from-primary to-primary-light">
                 <div className="max-w-3xl mx-auto">
                     <p className="font-playfair text-2xl md:text-4xl font-bold leading-snug mb-4">
                         Handpicked Weaves. Trusted Guidance. Real Wardrobes.

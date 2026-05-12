@@ -102,6 +102,10 @@ function CollectionContent() {
         <div className="min-h-screen">
             {/* Page header */}
             <div className="relative text-white py-12" style={{ background: 'linear-gradient(135deg, #5F1300 0%, #7A2B1A 100%)' }}>
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: "url('/images/sarees/backgrounds/collection_bg.webp')", opacity: 0.12 }}
+                />
                 <div className="container mx-auto px-4 relative z-10">
                     <h1 className="font-playfair text-3xl md:text-4xl font-bold mb-2">
                         Handloom Saree Collection
