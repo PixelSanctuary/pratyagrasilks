@@ -1,9 +1,14 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCategoryBySlug, generateCollectionSchema, silkCategories } from '@/lib/seo-config';
+import {
+    getCategoryBySlug,
+    generateCollectionSchema,
+    generateFAQSchema,
+    silkCategories,
+} from '@/lib/seo-config';
 import ProductCard from '@/components/ProductCard';
-import { Product } from '@/lib/types';
+import { queryProductsByCategory } from '@/lib/utils/product-queries';
 
 interface CategoryPageProps {
     params: {
@@ -11,7 +16,6 @@ interface CategoryPageProps {
     };
 }
 
-// Generate metadata for SEO
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
     const category = getCategoryBySlug(params.category);
 
@@ -28,7 +32,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
         openGraph: {
             title: category.metaTitle,
             description: category.metaDescription,
-            url: `https://Kandangi Sarees.com/silk/${category.slug}`,
+            url: `https://kandangisarees.com/collection/${category.slug}`,
             siteName: 'Kandangi Sarees',
             locale: 'en_IN',
             type: 'website',
@@ -39,35 +43,17 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
             description: category.metaDescription,
         },
         alternates: {
-            canonical: `https://Kandangi Sarees.com/silk/${category.slug}`,
+            canonical: `https://kandangisarees.com/collection/${category.slug}`,
         },
     };
 }
 
-// Generate static params for all categories
 export async function generateStaticParams() {
     return silkCategories.map((category) => ({
         category: category.slug,
     }));
 }
 
-// Fetch products for this category
-async function getCategoryProducts(categorySlug: string): Promise<Product[]> {
-    try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/products?category=${categorySlug}`,
-            { next: { revalidate: 86400 } } // Revalidate once per day (86400 seconds)
-        );
-
-        if (!res.ok) return [];
-
-        const data = await res.json();
-        return data.products || [];
-    } catch (error) {
-        console.error('Error fetching category products:', error);
-        return [];
-    }
-}
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
     const category = getCategoryBySlug(params.category);
@@ -76,21 +62,47 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         notFound();
     }
 
-    const products = await getCategoryProducts(params.category);
+    const products = await queryProductsByCategory(params.category);
     const schema = generateCollectionSchema(category);
+
+    const faqData = category.faqs ?? [
+        {
+            question: `What makes ${category.name} special?`,
+            answer: `${category.characteristics[0]}${category.characteristics[1] ? ` and ${category.characteristics[1].toLowerCase()}` : ''}. Handwoven in ${category.origin}, each saree represents centuries of weaving tradition.`,
+        },
+        {
+            question: `How do I care for my ${category.name} saree?`,
+            answer: `Dry cleaning is recommended for ${category.name} sarees. Store wrapped in muslin cloth in a cool, dry place away from direct sunlight.`,
+        },
+        {
+            question: `What occasions are ${category.name} sarees suitable for?`,
+            answer: `${category.name} sarees are perfect for weddings, festivals, formal events, and special celebrations. Their timeless craftsmanship makes them ideal for any occasion.`,
+        },
+        {
+            question: `Do you offer customisation?`,
+            answer: `We handpick from weavers and can help you find specific colours or designs. Contact us with your preferences on WhatsApp.`,
+        },
+    ];
+    const faqSchema = generateFAQSchema(faqData);
+
+    const relatedCategories = (category.relatedSlugs ?? [])
+        .map((slug) => getCategoryBySlug(slug))
+        .filter(Boolean) as typeof silkCategories;
 
     return (
         <>
-            {/* Structured Data */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
 
             <div className="min-h-screen">
                 {/* Hero Section */}
                 <div className="relative bg-gradient-to-r from-primary to-primary-dark text-white py-16 md:py-24">
-                    {/* <div className="absolute inset-0 bg-[url('https://images.pixieset.com/859010601/05e114529e649bfbaac0385e3b61afb5-large.jpg')] bg-no-repeat bg-cover opacity-20"></div> */}
                     <div className="container mx-auto px-4 relative z-10">
                         {/* Breadcrumb */}
                         <nav className="mb-6 text-sm">
@@ -112,10 +124,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         </nav>
 
                         <h1 className="text-4xl font-bold font-playfair mb-4">
-                            {category.name}
+                            {category.h1 ?? category.name}
                         </h1>
                         <p className="text-xl md:text-2xl text-white/80 max-w-3xl">
-                            {category.description}
+                            {category.bodyOpener ?? category.description}
                         </p>
                     </div>
                 </div>
@@ -174,7 +186,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         )}
                     </section>
 
-                    {/* About This Silk */}
+                    {/* About This Weave */}
                     <section className="bg-white rounded-lg shadow-md p-8 mb-12">
                         <h2 className="text-3xl font-bold font-playfair text-primary mb-6">
                             About {category.name}
@@ -184,20 +196,17 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         </p>
 
                         <div className="grid md:grid-cols-2 gap-8 mt-8">
-                            {/* Origin */}
                             <div className="bg-accent-light rounded-lg p-6">
                                 <h3 className="text-xl font-semibold text-primary mb-3">Origin</h3>
                                 <p className="text-gray-700">{category.origin}</p>
                             </div>
 
-                            {/* Price Range */}
                             <div className="bg-accent-light rounded-lg p-6">
                                 <h3 className="text-xl font-semibold text-primary mb-3">Price Range</h3>
                                 <p className="text-gray-700 text-2xl font-bold">{category.priceRange}</p>
                             </div>
                         </div>
 
-                        {/* Characteristics */}
                         <div className="mt-8">
                             <h3 className="text-xl font-semibold text-primary mb-4">Key Characteristics</h3>
                             <ul className="grid md:grid-cols-2 gap-3">
@@ -224,55 +233,50 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                     </section>
 
                     {/* FAQ Section */}
-                    <section className="mt-16 bg-white rounded-lg shadow-md p-8">
+                    <section className="mt-12 bg-white rounded-lg shadow-md p-8">
                         <h2 className="text-3xl font-bold font-playfair text-primary mb-8">
                             Frequently Asked Questions
                         </h2>
                         <div className="space-y-6">
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                    What makes {category.name} special?
-                                </h3>
-                                <p className="text-gray-700">
-                                    {category.name} sarees are renowned for their {category.characteristics[0].toLowerCase()} and {category.characteristics[1].toLowerCase()}.
-                                    Handwoven by master artisans in {category.origin}, each saree represents centuries of weaving tradition and exceptional craftsmanship.
-                                </p>
-                            </div>
-
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                    How do I care for my {category.name} saree?
-                                </h3>
-                                <p className="text-gray-700">
-                                    We recommend dry cleaning for {category.name} sarees to preserve their quality and luster.
-                                    Store in a cool, dry place wrapped in muslin cloth. Avoid direct sunlight and moisture.
-                                </p>
-                            </div>
-
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                    What occasions are {category.name} sarees suitable for?
-                                </h3>
-                                <p className="text-gray-700">
-                                    {category.name} sarees are perfect for weddings, festivals, formal events, and special celebrations.
-                                    Their timeless elegance and rich craftsmanship make them ideal for any occasion where you want to make a lasting impression.
-                                </p>
-                            </div>
-
-                            <div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                    Do you offer customization?
-                                </h3>
-                                <p className="text-gray-700">
-                                    While our {category.name} sarees are handpicked from master weavers, we can help you find specific colors or designs.
-                                    Contact us for special requests and we'll do our best to accommodate your preferences.
-                                </p>
-                            </div>
+                            {faqData.map((faq, index) => (
+                                <div key={index}>
+                                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                                        {faq.question}
+                                    </h3>
+                                    <p className="text-gray-700">{faq.answer}</p>
+                                </div>
+                            ))}
                         </div>
                     </section>
 
+                    {/* Related Collections */}
+                    {relatedCategories.length > 0 && (
+                        <section className="mt-12 bg-accent-light rounded-lg p-8">
+                            <h2 className="text-2xl font-semibold font-playfair text-primary mb-4">
+                                Related Collections
+                            </h2>
+                            <div className="flex flex-wrap gap-3">
+                                {relatedCategories.map((rel) => (
+                                    <Link
+                                        key={rel.slug}
+                                        href={`/collection/${rel.slug}`}
+                                        className="inline-block px-5 py-2 bg-white border border-accent text-accent rounded-full font-medium hover:bg-accent hover:text-white transition-colors"
+                                    >
+                                        {rel.name}
+                                    </Link>
+                                ))}
+                                <Link
+                                    href="/weave-guide"
+                                    className="inline-block px-5 py-2 bg-primary text-white rounded-full font-medium hover:bg-primary-dark transition-colors"
+                                >
+                                    Complete Weave Guide →
+                                </Link>
+                            </div>
+                        </section>
+                    )}
+
                     {/* CTA Section */}
-                    <section className="mt-16 bg-gradient-to-r from-primary to-primary-dark rounded-lg p-12 text-center text-white">
+                    <section className="mt-12 bg-gradient-to-r from-primary to-primary-dark rounded-lg p-12 text-center text-white">
                         <h2 className="text-3xl md:text-4xl font-bold font-playfair mb-4">
                             Explore More Weave Collections
                         </h2>

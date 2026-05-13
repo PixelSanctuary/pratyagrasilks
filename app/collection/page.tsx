@@ -231,10 +231,10 @@ function CollectionContent() {
 function filterByGroup(products: Product[], category: string): Product[] {
     if (!category || category === 'silks' || category === 'cottons') {
         if (category === 'silks') {
-            return products.filter((p) => !p.category?.includes('cotton') && p.category !== 'kadhi-cotton');
+            return products.filter((p) => !p.category?.includes('cotton'));
         }
         if (category === 'cottons') {
-            return products.filter((p) => p.category?.includes('cotton') || p.category === 'kadhi-cotton');
+            return products.filter((p) => p.category?.includes('cotton'));
         }
         return products;
     }

@@ -77,7 +77,7 @@ export default function Header() {
                                         {silkCategories.map((category) => (
                                             <Link
                                                 key={category.slug}
-                                                href={`/silk/${category.slug}`}
+                                                href={`/collection/${category.slug}`}
                                                 className="px-4 py-2 hover:bg-accent-light transition-colors text-sm"
                                                 onClick={() => setIsWeaveMenuOpen(false)}
                                             >
@@ -265,7 +265,7 @@ export default function Header() {
                                     {silkCategories.map((category) => (
                                         <Link
                                             key={category.slug}
-                                            href={`/silk/${category.slug}`}
+                                            href={`/collection/${category.slug}`}
                                             className="px-3 py-2.5 rounded-lg text-sm text-[#1A0A00] hover:bg-primary/5 hover:text-primary transition-colors"
                                             onClick={() => setIsMobileMenuOpen(false)}
                                         >

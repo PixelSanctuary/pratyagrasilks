@@ -10,7 +10,8 @@ import CartSidebar from "@/components/Cart/CartSidebar";
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Toaster } from "react-hot-toast";
-import { BRAND_PRIMARY_HEX, BRAND_URL } from "@/lib/constants/brand";
+import { BRAND_URL } from "@/lib/constants/brand";
+import { generateOrganizationSchema, generateWebSiteSchema } from "@/lib/seo-config";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 // Font configurations
@@ -92,32 +93,16 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const organizationSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'Kandangi Sarees',
-        url: BRAND_URL,
-        logo: `${BRAND_URL}/kandangi-logo.svg`,
-        description: 'Handpicked handloom sarees from weavers across India. Authentic silks and cottons — Kanjivaram, Gadwal, Chettinad, and more.',
-        color: BRAND_PRIMARY_HEX,
-        brand: {
-            '@type': 'Brand',
-            name: 'Kandangi Sarees',
-            color: BRAND_PRIMARY_HEX,
-        },
-        address: {
-            '@type': 'PostalAddress',
-            addressCountry: 'IN',
-        },
-    };
-
     return (
         <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
             <body className="antialiased hide-scrollbar">
-                {/* Organization Structured Data */}
                 <script
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(generateOrganizationSchema()) }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(generateWebSiteSchema()) }}
                 />
 
                 <AuthProvider>

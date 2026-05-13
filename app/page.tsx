@@ -110,7 +110,7 @@ export default function Home() {
                         {silkCategories.map((category, index) => (
                             <Link
                                 key={category.slug}
-                                href={`/silk/${category.slug}`}
+                                href={`/collection/${category.slug}`}
                                 className="stagger-child flex-shrink-0 group flex flex-col items-start px-4 py-3 rounded-xl border border-[#5F1300]/20 bg-white shadow-sm transition-all duration-200 hover:bg-[#5F1300] hover:border-[#5F1300] hover:shadow-md min-w-[140px] md:min-w-0"
                                 style={{ animationDelay: `${index * 60}ms` }}
                             >

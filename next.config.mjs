@@ -1,5 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    async redirects() {
+        return [
+            {
+                source: '/silk/:category',
+                destination: '/collection/:category',
+                permanent: true,
+            },
+            {
+                source: '/collection/kadhi-cotton',
+                destination: '/collection/khadi-cotton',
+                permanent: true,
+            },
+        ];
+    },
     images: {
         remotePatterns: [
             {

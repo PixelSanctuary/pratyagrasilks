@@ -123,7 +123,7 @@ export default function AboutPage() {
                                     </div>
                                 </div>
                                 <Link
-                                    href={`/silk/${origin.slug}`}
+                                    href={`/collection/${origin.slug}`}
                                     className="w-full md:w-1/2 rounded-xl p-8 h-52 flex flex-col items-center justify-center group transition-all duration-300 hover:shadow-xl border-2"
                                     style={{ background: 'linear-gradient(135deg, rgba(95,19,0,0.08), rgba(95,19,0,0.04))', borderColor: 'rgba(95,19,0,0.12)' }}
                                 >

@@ -19,12 +19,8 @@ interface FilterSidebarProps {
  * Categories are derived directly from silkCategories in seo-config.
  * This prevents drift between the nav taxonomy and the filter options.
  */
-const silkOptions = silkCategories.filter(c =>
-    !c.slug.includes('cotton') && c.slug !== 'kadhi-cotton'
-);
-const cottonOptions = silkCategories.filter(c =>
-    c.slug.includes('cotton') || c.slug === 'kadhi-cotton'
-);
+const silkOptions = silkCategories.filter(c => !c.slug.includes('cotton'));
+const cottonOptions = silkCategories.filter(c => c.slug.includes('cotton'));
 
 // Price range bounds for Kandangi Sarees's catalogue
 const MIN_PRICE_BOUND = 1000;

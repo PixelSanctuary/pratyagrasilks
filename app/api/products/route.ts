@@ -1,15 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-// Ensure this route is always treated as dynamic (uses cookies / auth)
-export const dynamic = 'force-dynamic';
 import { createClient } from '@/lib/supabase/server';
+import { SLUG_ALIASES, transformProduct } from '@/lib/utils/product-queries';
+
+export const dynamic = 'force-dynamic';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function applyFilters(q: any, { category, minPrice, maxPrice, search }: {
+    category: string | null;
+    minPrice: string | null;
+    maxPrice: string | null;
+    search: string | null;
+}) {
+    if (category) {
+        const legacy = SLUG_ALIASES[category];
+        q = legacy ? q.in('category', [category, legacy]) : q.eq('category', category);
+    }
+    if (minPrice) q = q.gte('price', parseFloat(minPrice));
+    if (maxPrice) q = q.lte('price', parseFloat(maxPrice));
+    if (search)   q = q.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
+    return q;
+}
 
 export async function GET(request: NextRequest) {
     try {
         const supabase = createClient();
         const { searchParams } = new URL(request.url);
 
-        // Extract query parameters
         const category = searchParams.get('category');
         const minPrice = searchParams.get('minPrice');
         const maxPrice = searchParams.get('maxPrice');
@@ -17,40 +33,25 @@ export async function GET(request: NextRequest) {
         const limit = parseInt(searchParams.get('limit') || '50');
         const offset = parseInt(searchParams.get('offset') || '0');
 
-        // Helper to apply shared filters to a query builder
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        function applyFilters(q: any) {
-            if (category)  q = q.eq('category', category);
-            if (minPrice)  q = q.gte('price', parseFloat(minPrice));
-            if (maxPrice)  q = q.lte('price', parseFloat(maxPrice));
-            if (search)    q = q.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
-            return q;
-        }
-
-        // Query 1: all available products (paginated)
-        const availableQuery = applyFilters(
-            supabase
-                .from('products')
-                .select('*')
-                .eq('is_online', true)
-                .eq('in_stock', true)
-                .order('created_at', { ascending: false })
-                .range(offset, offset + limit - 1)
-        );
-
-        // Query 2: up to 9 most recently sold products (ordered by updated_at — when in_stock was set false)
-        const soldQuery = applyFilters(
-            supabase
-                .from('products')
-                .select('*')
-                .eq('is_online', true)
-                .eq('in_stock', false)
-                .order('updated_at', { ascending: false })
-                .limit(9)
-        );
+        const filters = { category, minPrice, maxPrice, search };
 
         const [{ data: available, error: availError }, { data: sold, error: soldError }] =
-            await Promise.all([availableQuery, soldQuery]);
+            await Promise.all([
+                applyFilters(
+                    supabase.from('products').select('*')
+                        .eq('is_online', true).eq('in_stock', true)
+                        .order('created_at', { ascending: false })
+                        .range(offset, offset + limit - 1),
+                    filters
+                ),
+                applyFilters(
+                    supabase.from('products').select('*')
+                        .eq('is_online', true).eq('in_stock', false)
+                        .order('updated_at', { ascending: false })
+                        .limit(9),
+                    filters
+                ),
+            ]);
 
         if (availError || soldError) {
             const err = availError || soldError;
@@ -61,39 +62,11 @@ export async function GET(request: NextRequest) {
             );
         }
 
-        // Combine: available first, then recently sold (capped at 6)
-        const products = [...(available ?? []), ...(sold ?? [])];
+        const products = [...(available ?? []), ...(sold ?? [])].map(transformProduct);
 
-        // Transform snake_case to camelCase for frontend
-        const transformedProducts = products?.map(product => ({
-            id: product.id,
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            category: product.category,
-            images: product.images || [],
-            inStock: product.in_stock,
-            isOnline: product.is_online ?? true,
-            sku: product.sku,
-            material: product.material,
-            dimensions: product.dimensions,
-            weight: product.weight,
-            yt_link: product.yt_link,
-            createdAt: product.created_at,
-            updatedAt: product.updated_at,
-        })) || [];
-
-        return NextResponse.json({
-            products: transformedProducts,
-            count: transformedProducts.length,
-            offset,
-            limit,
-        });
+        return NextResponse.json({ products, count: products.length, offset, limit });
     } catch (error) {
         console.error('Unexpected error:', error);
-        return NextResponse.json(
-            { error: 'Internal server error' },
-            { status: 500 }
-        );
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }

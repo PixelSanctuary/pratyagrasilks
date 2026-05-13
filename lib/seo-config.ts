@@ -17,6 +17,11 @@ export interface SilkCategory {
     origin: string;
     characteristics: string[];
     priceRange: string;
+    h1?: string;
+    bodyOpener?: string;
+    h2s?: string[];
+    faqs?: { question: string; answer: string }[];
+    relatedSlugs?: string[];
 }
 
 /**
@@ -30,6 +35,7 @@ export const silkCategories: SilkCategory[] = [
         description: 'Handwoven Kanjivaram silk sarees from Tamil Nadu — pure mulberry silk with temple borders and zari work, picked straight from the loom.',
         longDescription: 'Kanjivaram silk sarees are the crown of South Indian weaving. Handwoven in Kanchipuram, Tamil Nadu, by weavers who have carried this craft through generations, each saree is made from pure mulberry silk with contrasting borders and intricate zari motifs. At Kandangi Sarees, every Kanjivaram we carry has been handpicked by us — chosen for the quality of its weave, the richness of its colour, and its wearability for real occasions.',
         keywords: [
+            'authentic kanjivaram under 20000',
             'kanjivaram silk sarees',
             'kanchipuram sarees',
             'buy kanjivaram sarees online',
@@ -39,8 +45,8 @@ export const silkCategories: SilkCategory[] = [
             'Kandangi Sarees kanjivaram',
             'kanjivaram from weavers',
         ],
-        metaTitle: 'Kanjivaram Silk Sarees | Handpicked from Weavers | Kandangi Sarees',
-        metaDescription: 'Handpicked Kanjivaram silk sarees from Kanchipuram weavers. Pure mulberry silk, temple borders, rich zari — chosen for wearability and authenticity. Shop at Kandangi Sarees.',
+        metaTitle: 'Authentic Kanjivaram Silk Sarees Under ₹20,000 | Kandangi Sarees',
+        metaDescription: 'Shop authentic Kanjivaram silk sarees under ₹20,000 — handpicked from Kanjivaram weavers. Pure mulberry silk, genuine zari. Explore now.',
         origin: 'Kanchipuram, Tamil Nadu',
         characteristics: [
             'Pure mulberry silk with heavy body',
@@ -50,6 +56,8 @@ export const silkCategories: SilkCategory[] = [
             'Durable — lasts generations with care',
         ],
         priceRange: '₹8,000 – ₹40,000',
+        bodyOpener: 'Authentic Kanjivaram silk sarees are defined by three things: pure mulberry silk, genuine silver or gold zari, and the interlocked weaving technique that gives the border its signature strength. At Kandangi Sarees, every Kanjivaram is verified at source — because authenticity is not a label, it is a guarantee.',
+        relatedSlugs: ['gadwal-silk', 'venkatagiri-silk', 'patola-silk'],
     },
     {
         slug: 'gadwal-silk',
@@ -57,6 +65,7 @@ export const silkCategories: SilkCategory[] = [
         description: 'Gadwal silk sarees from Telangana — known for their distinctive cotton body with pure silk borders, a weave that suits everyday elegance.',
         longDescription: 'Gadwal sarees from Gadwal, Telangana are woven with a unique technique: a cotton body paired with pure silk borders and pallu. This makes them lighter than full-silk sarees while retaining the lustre and grace of silk where it matters most. At Kandangi Sarees, we pick Gadwal sarees that honour the weave\'s heritage — intricate zari motifs, fine craftsmanship, and comfortable drape for women who wear sarees every day.',
         keywords: [
+            'buy gadwal saree online',
             'gadwal silk sarees',
             'gadwal sarees online',
             'buy gadwal sarees',
@@ -65,8 +74,8 @@ export const silkCategories: SilkCategory[] = [
             'gadwal handloom',
             'Kandangi Sarees gadwal',
         ],
-        metaTitle: 'Gadwal Silk Sarees | Cotton Body, Silk Border | Kandangi Sarees',
-        metaDescription: 'Authentic Gadwal silk sarees from Telangana — cotton body with pure silk borders for light, everyday elegance. Handpicked from weavers. Shop at Kandangi Sarees.',
+        metaTitle: 'Buy Gadwal Silk Sarees Online | Kandangi Sarees',
+        metaDescription: 'Buy authentic Gadwal silk sarees sourced directly from Telangana weavers. Pure zari borders, cotton body. Handpicked from ₹3,000. Shop now.',
         origin: 'Gadwal, Telangana',
         characteristics: [
             'Cotton body with pure silk borders and pallu',
@@ -76,6 +85,8 @@ export const silkCategories: SilkCategory[] = [
             'Vibrant colour contrasts',
         ],
         priceRange: '₹4,000 – ₹18,000',
+        bodyOpener: 'Gadwal silk sarees are celebrated for their unique construction — a cotton body with a pure silk border — making them lighter than most silks while retaining the richness of traditional handloom. Our Gadwal collection is sourced directly from master weavers in Gadwal, Telangana.',
+        relatedSlugs: ['kanjivaram-silk', 'kuppadam-silk', 'mangalgiri-silk'],
     },
     {
         slug: 'venkatagiri-silk',
@@ -109,6 +120,7 @@ export const silkCategories: SilkCategory[] = [
         description: 'Mangalgiri silk sarees from Andhra Pradesh — distinctive nizam border with a crisp drape, a hallmark of Andhra weaving heritage.',
         longDescription: 'Mangalgiri, a small weaving town near Vijayawada, Andhra Pradesh, produces sarees with a distinctive nizam border — a gold or silver zari stripe woven at the edge. Mangalgiri silk sarees combine this signature border with a smooth, slightly textured body that holds a crisp pleat. At Kandangi Sarees, we pick Mangalgiri silks for their versatility: formal enough for occasions, comfortable enough for everyday wear.',
         keywords: [
+            'mangalgiri silk saree buy',
             'mangalgiri silk sarees',
             'mangalgiri sarees online',
             'nizam border sarees',
@@ -127,6 +139,7 @@ export const silkCategories: SilkCategory[] = [
             'Pure silk or cotton-silk blend options',
         ],
         priceRange: '₹3,500 – ₹16,000',
+        relatedSlugs: ['gadwal-silk', 'venkatagiri-silk', 'mangalgiri-cotton'],
     },
     {
         slug: 'kuppadam-silk',
@@ -185,6 +198,7 @@ export const silkCategories: SilkCategory[] = [
         description: 'Patola silk sarees from Patan, Gujarat — double ikat weave with geometric precision, one of India\'s most revered textile traditions.',
         longDescription: 'Patola sarees from Patan, Gujarat are woven using the double ikat technique — where both warp and weft threads are resist-dyed before weaving to create perfectly aligned geometric patterns. This is one of the most technically demanding weaves in India; a single saree can take months to complete. At Kandangi Sarees, we carefully source Patola sarees for collectors and saree connoisseurs who understand the rarity of what they\'re holding.',
         keywords: [
+            'patola silk saree price',
             'patola silk sarees',
             'patan patola sarees',
             'double ikat sarees',
@@ -204,6 +218,7 @@ export const silkCategories: SilkCategory[] = [
             'Among the rarest sarees in India',
         ],
         priceRange: '₹15,000 – ₹80,000',
+        relatedSlugs: ['kanjivaram-silk', 'venkatagiri-silk', 'gadwal-silk'],
     },
     {
         slug: 'raw-silk',
@@ -264,6 +279,7 @@ export const silkCategories: SilkCategory[] = [
         description: 'Chettinad cotton sarees from Tamil Nadu — bold checks, vibrant colours, and a thick, durable weave that only gets better with wear.',
         longDescription: 'Chettinad cotton sarees are woven in the Karaikudi region of Tamil Nadu, traditionally associated with the Chettiar community. They are known for their bold checks, stripes, and bright contrasting colour combinations — a visual identity that is immediately recognisable. The fabric is thick, sturdy, and develops a beautiful softness with every wash. At Kandangi Sarees, we pick Chettinad cottons that are authentic to the tradition — colourful, characterful, and built to last.',
         keywords: [
+            'chettinad cotton saree online',
             'chettinad cotton sarees',
             'chettinad sarees online',
             'karaikudi sarees',
@@ -272,8 +288,8 @@ export const silkCategories: SilkCategory[] = [
             'Kandangi Sarees chettinad',
             'handloom cotton sarees',
         ],
-        metaTitle: 'Chettinad Cotton Sarees | Bold Checks from Tamil Nadu | Kandangi Sarees',
-        metaDescription: 'Authentic Chettinad cotton sarees from Karaikudi — bold checks, vibrant colours, and a durable weave that only gets better with wear. Handpicked at Kandangi Sarees.',
+        metaTitle: 'Chettinad Cotton Sarees Online | Kandangi Sarees',
+        metaDescription: 'Shop authentic Chettinad cotton sarees handpicked from Tamil Nadu weavers. Lightweight, breathable & perfect for daily wear. Explore the collection.',
         origin: 'Karaikudi, Tamil Nadu',
         characteristics: [
             'Bold checks, stripes, and contrasting colour combinations',
@@ -283,6 +299,8 @@ export const silkCategories: SilkCategory[] = [
             'Rich, vibrant colour palette',
         ],
         priceRange: '₹1,200 – ₹6,000',
+        bodyOpener: 'Chettinad cotton sarees are among the most sought-after handloom weaves in India — known for their distinctive checks, deep colours, and exceptional breathability. At Kandangi Sarees, every Chettinad cotton is handpicked directly from weavers in the Chettinad region of Tamil Nadu.',
+        relatedSlugs: ['narayanapet-cotton', 'khadi-cotton', 'venkatagiri-cotton'],
     },
     {
         slug: 'narayanapet-cotton',
@@ -315,6 +333,7 @@ export const silkCategories: SilkCategory[] = [
         description: 'Venkatagiri cotton sarees from Andhra Pradesh — ultra-fine weave with jamdani motifs, the lighter cousin of the silk version.',
         longDescription: 'The cotton variant of Venkatagiri sarees shares the same fine weaving heritage as its silk counterpart but offers a lighter, airier fabric ideal for daily wear. Woven with delicate jamdani-style motifs, Venkatagiri cotton sarees are among the finest handloom cottons in India. At Kandangi Sarees, we pick these for women who want the elegance of a handloom saree on a regular day — without any compromise on craft.',
         keywords: [
+            'venkatagiri cotton saree',
             'venkatagiri cotton sarees',
             'venkatagiri cotton sarees online',
             'andhra cotton sarees',
@@ -333,6 +352,7 @@ export const silkCategories: SilkCategory[] = [
             'Subtle, refined colour palette',
         ],
         priceRange: '₹1,000 – ₹5,000',
+        relatedSlugs: ['chettinad-cotton', 'mangalgiri-cotton', 'venkatagiri-silk'],
     },
     {
         slug: 'mangalgiri-cotton',
@@ -360,11 +380,12 @@ export const silkCategories: SilkCategory[] = [
         priceRange: '₹1,000 – ₹5,000',
     },
     {
-        slug: 'kadhi-cotton',
+        slug: 'khadi-cotton',
         name: 'Khadi Cotton',
         description: 'Khadi cotton sarees — hand-spun and hand-woven across India, with a texture and warmth that no machine can replicate.',
         longDescription: 'Khadi sarees are woven from hand-spun yarn — each thread drawn out by hand before being woven on a handloom. The result is a fabric with a distinctive irregular texture, natural warmth, and an honest quality that is completely its own. Khadi sarees span a wide range of styles, from plain and earthy to intricately bordered, and they are produced by weaving cooperatives across India. At Kandangi Sarees, we pick Khadi sarees that are genuinely hand-spun — not machine-spun fabric passed off as Khadi.',
         keywords: [
+            'khadi cotton saree online',
             'khadi cotton sarees',
             'khadi sarees online',
             'hand-spun sarees',
@@ -384,6 +405,7 @@ export const silkCategories: SilkCategory[] = [
             'Woven by cooperative artisan communities',
         ],
         priceRange: '₹1,000 – ₹6,000',
+        relatedSlugs: ['chettinad-cotton', 'mangalgiri-cotton', 'venkatagiri-cotton'],
     },
 ];
 
@@ -406,7 +428,7 @@ export type CategoryType = typeof CATEGORY_TYPES[number];
  * Maps a category slug to its broad fabric type.
  */
 export function getCategoryType(slug: string): CategoryType {
-    if (slug.includes('cotton') || slug === 'kadhi-cotton') return 'cotton';
+    if (slug.includes('cotton')) return 'cotton';
     if (slug === 'pen-kalamkari') return 'silk-cotton';
     return 'silk';
 }
@@ -419,15 +441,14 @@ export function generateOrganizationSchema() {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'Kandangi Sarees',
-        legalName: 'Adakkami',
+        alternateName: 'Adakkami',
         url: BRAND_URL,
-        logo: `${BRAND_URL}/kandangi-logo.svg`,
-        description: 'Handpicked handloom sarees from weavers across India. Authentic silks and cottons — Kanjivaram, Gadwal, Chettinad, and more.',
-        address: {
-            '@type': 'PostalAddress',
-            addressCountry: 'IN',
+        logo: `${BRAND_URL}/logo.png`,
+        contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'customer service',
+            availableLanguage: ['English', 'Tamil', 'Telugu'],
         },
-        sameAs: [],
     };
 }
 
@@ -476,7 +497,7 @@ export function generateCollectionSchema(category: SilkCategory) {
         '@type': 'CollectionPage',
         name: category.name,
         description: category.description,
-        url: `${BRAND_URL}/silk/${category.slug}`,
+        url: `${BRAND_URL}/collection/${category.slug}`,
         breadcrumb: {
             '@type': 'BreadcrumbList',
             itemListElement: [
@@ -496,9 +517,41 @@ export function generateCollectionSchema(category: SilkCategory) {
                     '@type': 'ListItem',
                     position: 3,
                     name: category.name,
-                    item: `${BRAND_URL}/silk/${category.slug}`,
+                    item: `${BRAND_URL}/collection/${category.slug}`,
                 },
             ],
         },
+    };
+}
+
+export function generateWebSiteSchema() {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Kandangi Sarees',
+        url: BRAND_URL,
+        potentialAction: {
+            '@type': 'SearchAction',
+            target: {
+                '@type': 'EntryPoint',
+                urlTemplate: `${BRAND_URL}/collection?search={search_term_string}`,
+            },
+            'query-input': 'required name=search_term_string',
+        },
+    };
+}
+
+export function generateFAQSchema(faqs: { question: string; answer: string }[]) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map(faq => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+            },
+        })),
     };
 }

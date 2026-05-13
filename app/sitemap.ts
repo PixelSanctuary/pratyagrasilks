@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { silkCategories } from '@/lib/seo-config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://Kandangi Sarees.com'
+  const baseUrl = 'https://kandangisarees.com'
   const now = new Date() // Updates to current build date automatically
 
   // Static pages with their priorities and change frequencies
@@ -73,12 +73,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/sarees-under-5000`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/sarees-under-10000`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/weave-guide`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/weaver-direct-sarees`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/handloom-sarees-daily-wear`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 
   // Category pages - permanent SEO-optimized pages for each silk type
   // These are the primary SEO drivers instead of temporary product pages
   const categoryPages: MetadataRoute.Sitemap = silkCategories.map(category => ({
-    url: `${baseUrl}/silk/${category.slug}`,
+    url: `${baseUrl}/collection/${category.slug}`,
     lastModified: now,
     changeFrequency: 'weekly' as const,
     priority: 0.9, // High priority for category pages
