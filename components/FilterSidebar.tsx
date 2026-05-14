@@ -123,7 +123,11 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
             {/* Color Family Filter */}
             <div className="mb-6">
                 <h3 className="text-sm font-medium mb-3">Color Family</h3>
-                <ColorFamilyPicker value={filters.colorFamily} onChange={handleColorChange} size="sm" />
+                <ColorFamilyPicker
+                    value={filters.colorFamily ? [filters.colorFamily] : []}
+                    onChange={(ids) => handleColorChange(ids[ids.length - 1] ?? '')}
+                    size="sm"
+                />
             </div>
 
             {/* Category Filter */}

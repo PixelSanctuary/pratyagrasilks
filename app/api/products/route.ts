@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         function applyFilters(q: any) {
             if (category)     q = q.eq('category', category);
-            if (colorFamily)  q = q.eq('color_family', colorFamily);
+            if (colorFamily)  q = q.contains('color_families', [colorFamily]);
             if (minPrice)     q = q.gte('price', parseFloat(minPrice));
             if (maxPrice)     q = q.lte('price', parseFloat(maxPrice));
             if (search)       q = q.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
@@ -81,7 +81,7 @@ export async function GET(request: NextRequest) {
             dimensions: product.dimensions,
             weight: product.weight,
             yt_link: product.yt_link,
-            colorFamily: product.color_family ?? null,
+            colorFamilies: product.color_families ?? [],
             createdAt: product.created_at,
             updatedAt: product.updated_at,
         })) || [];

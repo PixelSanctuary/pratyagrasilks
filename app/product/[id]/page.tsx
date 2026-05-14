@@ -29,6 +29,7 @@ async function getProduct(id: string): Promise<Product | null> {
         dimensions: data.dimensions ?? undefined,
         weight: data.weight ?? undefined,
         yt_link: data.yt_link ?? null,
+        colorFamilies: data.color_families ?? [],
         createdAt: new Date(data.created_at),
         updatedAt: new Date(data.updated_at),
     };
@@ -84,6 +85,9 @@ function ProductSchema({ product }: { product: Product }) {
         description: product.description,
         image: product.images,
         sku: product.sku,
+        ...(product.colorFamilies?.length
+            ? { color: product.colorFamilies.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ') }
+            : {}),
         brand: {
             '@type': 'Brand',
             name: 'Pratyagra Silks',

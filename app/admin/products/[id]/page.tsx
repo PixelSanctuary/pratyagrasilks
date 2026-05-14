@@ -56,7 +56,7 @@ export default function EditProductPage() {
         weight: '',
         yt_link: '',
         is_online: true,
-        color_family: '',
+        color_families: [] as string[],
         vendorId: '',
         purchase_price: '',
         purchase_tax_percent: '5',
@@ -108,7 +108,7 @@ export default function EditProductPage() {
                 weight: data.weight || '',
                 yt_link: data.yt_link || '',
                 is_online: data.is_online ?? true,
-                color_family: data.color_family || '',
+                color_families: data.color_families ?? [],
                 vendorId: data.vendor_id || '',
                 purchase_price: data.purchase_price?.toString() || '',
                 purchase_tax_percent: data.purchase_tax_percent?.toString() ?? '5',
@@ -166,7 +166,7 @@ export default function EditProductPage() {
                 images: productImages,
                 yt_link: formData.yt_link || null,
                 is_online: formData.is_online,
-                color_family: formData.color_family || null,
+                color_families: formData.color_families,
                 vendor_id: formData.vendorId || null,
                 purchase_price: parseFloat(formData.purchase_price) || 0,
                 purchase_tax_percent: parseFloat(formData.purchase_tax_percent) || 0,
@@ -391,8 +391,8 @@ export default function EditProductPage() {
                             Color Family
                         </label>
                         <ColorFamilyPicker
-                            value={formData.color_family}
-                            onChange={(id) => setFormData(prev => ({ ...prev, color_family: id }))}
+                            value={formData.color_families}
+                            onChange={(ids) => setFormData(prev => ({ ...prev, color_families: ids }))}
                         />
                     </div>
 

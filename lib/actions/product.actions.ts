@@ -95,7 +95,7 @@ export interface ProductUpdateInput {
     yt_link?: string | null;
     is_online?: boolean;
     vendor_id?: string | null;
-    color_family?: string | null;
+    color_families?: string[];
     // Procurement / pricing
     purchase_price?: number;
     purchase_tax_percent?: number;
@@ -128,7 +128,7 @@ export async function updateProduct(id: string, data: ProductUpdateInput): Promi
         category: data.category,
         material: data.material ?? null,
         description: data.description ?? null,
-        color_family: data.color_family ?? null,
+        color_families: data.color_families ?? [],
         dimensions: data.dimensions ?? null,
         weight: data.weight ?? null,
         images: data.images ?? [],

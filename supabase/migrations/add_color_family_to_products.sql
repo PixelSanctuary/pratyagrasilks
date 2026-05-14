@@ -1,8 +1,9 @@
--- Add color_family column to products table
-ALTER TABLE products ADD COLUMN IF NOT EXISTS color_family TEXT DEFAULT NULL;
+-- Upgrade color taxonomy: replace scalar color_family with color_families TEXT[] array
+-- Supports sarees with any number of color shades
+ALTER TABLE products DROP COLUMN IF EXISTS color_family;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS color_families TEXT[] DEFAULT '{}';
 
--- Add comment for documentation
-COMMENT ON COLUMN products.color_family IS 'Base color family for filtering (e.g. red, pink, orange, yellow, green, blue, purple, brown, white, black, gold, silver)';
+-- GIN index for high-performance array containment queries (.contains / @>)
+CREATE INDEX IF NOT EXISTS idx_products_color_families ON products USING GIN (color_families);
 
--- Index for efficient filtering on the collection page
-CREATE INDEX IF NOT EXISTS idx_products_color_family ON products (color_family);
+COMMENT ON COLUMN products.color_families IS 'Array of color families. Values: red, pink, orange, yellow, green, blue, purple, brown, white, black, gold, silver';

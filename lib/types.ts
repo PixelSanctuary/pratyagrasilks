@@ -29,7 +29,7 @@ export interface Product {
     dimensions?: string;
     weight?: number;
     yt_link?: string | null;
-    colorFamily?: string | null;
+    colorFamilies?: string[];
     vendorId?: string | null;
     vendor?: Vendor; // populated when joined
     createdAt: Date;
