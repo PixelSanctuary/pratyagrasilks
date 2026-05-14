@@ -11,6 +11,8 @@ export const COLOR_FAMILIES = [
     { id: 'black',  name: 'Black',  hex: '#111827' },
     { id: 'gold',   name: 'Gold',   hex: '#d97706' },
     { id: 'silver', name: 'Silver', hex: '#9ca3af' },
+    { id: 'gray',   name: 'Gray',   hex: '#6b7280' },
+    { id: 'beige',  name: 'Beige',  hex: '#f5f5f5' },
 ] as const;
 
 export type ColorFamilyId = typeof COLOR_FAMILIES[number]['id'];

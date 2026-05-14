@@ -295,16 +295,14 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
             {/* ── Sticky mobile bottom CTA bar ────────────────────────── */}
             {product.inStock && (
                 <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t shadow-lg px-4 py-3" style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}>
-                    <a
-                        href={waUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2.5 w-full py-3.5 rounded-xl font-semibold text-base transition-all active:scale-95"
-                        style={{ backgroundColor: '#E8AB16', color: '#1A0A00' }}
+                    <button
+                        onClick={handleAddToCart}
+                        disabled={isInCart(product.id)}
+                        className="w-full py-4 rounded-lg font-semibold text-base transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                        style={{ backgroundColor: '#5F1300', color: '#FDF6E3' }}
                     >
-                        <WhatsAppIcon />
-                        Enquire on WhatsApp
-                    </a>
+                        {isInCart(product.id) ? <><Check className="w-5 h-5" /> Already in Cart</> : <><ShoppingCart className="w-5 h-5" /> Add to Cart</>}
+                    </button>
                 </div>
             )}
         </div>
