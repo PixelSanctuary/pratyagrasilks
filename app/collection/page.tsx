@@ -15,6 +15,7 @@ function CollectionContent() {
     const [error, setError] = useState<string | null>(null);
     const [filters, setFilters] = useState<FilterState>({
         category: searchParams.get('category') || '',
+        colorFamily: searchParams.get('color') || '',
         minPrice: 0,
         maxPrice: 0,
         search: '',
@@ -33,6 +34,7 @@ function CollectionContent() {
             const params = new URLSearchParams();
 
             if (filters.category) params.append('category', filters.category);
+            if (filters.colorFamily) params.append('color', filters.colorFamily);
             if (filters.minPrice > 0) params.append('minPrice', filters.minPrice.toString());
             if (filters.maxPrice > 0) params.append('maxPrice', filters.maxPrice.toString());
             if (filters.search) params.append('search', filters.search);
@@ -149,7 +151,7 @@ function CollectionContent() {
                                     Try adjusting your filters or search terms
                                 </p>
                                 <button
-                                    onClick={() => setFilters({ category: '', minPrice: 0, maxPrice: 0, search: '' })}
+                                    onClick={() => setFilters({ category: '', colorFamily: '', minPrice: 0, maxPrice: 0, search: '' })}
                                     className="px-6 py-2 bg-accent text-white rounded-md hover:bg-accent-hover transition-colors"
                                 >
                                     Clear Filters
