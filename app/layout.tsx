@@ -10,6 +10,8 @@ import CartSidebar from "@/components/Cart/CartSidebar";
 import { Analytics } from "@vercel/analytics/react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Toaster } from "react-hot-toast";
+import OrganizationSchema from "@/components/seo/OrganizationSchema";
+import { siteMetadata } from "@/lib/seo/config";
 
 // Font configurations
 const playfair = Playfair_Display({
@@ -25,8 +27,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "PratyagraSilks - Luxury Silk Sarees | Authentic Indian Handloom",
-    description: "Discover exquisite handcrafted silk sarees from PratyagraSilks. Premium quality Kanjivaram, Banarasi, Tussar, and more. Traditional craftsmanship, timeless elegance for every occasion.",
+    title: siteMetadata.title,
+    description: siteMetadata.description,
     keywords: [
         "silk sarees",
         "handloom sarees",
@@ -58,17 +60,17 @@ export const metadata: Metadata = {
         shortcut: "/favicon.svg",
     },
     openGraph: {
-        title: "PratyagraSilks - Luxury Silk Sarees",
-        description: "Exquisite handcrafted silk sarees with traditional craftsmanship. Kanjivaram, Banarasi, Tussar, and more from India's finest weavers.",
-        url: "https://pratyagrasilks.com",
-        siteName: "PratyagraSilks",
+        title: siteMetadata.title,
+        description: siteMetadata.description,
+        url: siteMetadata.baseUrl,
+        siteName: siteMetadata.siteName,
         locale: "en_IN",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "PratyagraSilks - Luxury Silk Sarees",
-        description: "Exquisite handcrafted silk sarees with traditional craftsmanship",
+        title: siteMetadata.title,
+        description: siteMetadata.description,
     },
     robots: {
         index: true,
@@ -85,7 +87,7 @@ export const metadata: Metadata = {
         google: "your-google-verification-code",
     },
     alternates: {
-        canonical: "https://pratyagrasilks.com",
+        canonical: siteMetadata.baseUrl,
     },
 };
 
@@ -94,34 +96,10 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    // Organization structured data for SEO
-    const organizationSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'PratyagraSilks',
-        url: 'https://pratyagrasilks.com',
-        logo: 'https://pratyagrasilks.com/Fav_icon.png',
-        description: 'Authentic handcrafted silk sarees from India\'s finest weavers. Premium quality Kanjivaram, Banarasi, Tussar, Mysore, and traditional silk sarees.',
-        color: '#153DB3',
-        brand: {
-            '@type': 'Brand',
-            name: 'PratyagraSilks',
-            color: '#153DB3',
-        },
-        address: {
-            '@type': 'PostalAddress',
-            addressCountry: 'IN',
-        },
-    };
-
     return (
         <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
             <body className="antialiased hide-scrollbar">
-                {/* Organization Structured Data */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-                />
+                <OrganizationSchema />
 
                 <AuthProvider>
                     <WishlistProvider>

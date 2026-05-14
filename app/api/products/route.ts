@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
 
         // Extract query parameters
         const category = searchParams.get('category');
+        const colorFamily = searchParams.get('color');
         const minPrice = searchParams.get('minPrice');
         const maxPrice = searchParams.get('maxPrice');
         const search = searchParams.get('search');
@@ -20,10 +21,11 @@ export async function GET(request: NextRequest) {
         // Helper to apply shared filters to a query builder
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         function applyFilters(q: any) {
-            if (category)  q = q.eq('category', category);
-            if (minPrice)  q = q.gte('price', parseFloat(minPrice));
-            if (maxPrice)  q = q.lte('price', parseFloat(maxPrice));
-            if (search)    q = q.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
+            if (category)     q = q.eq('category', category);
+            if (colorFamily)  q = q.contains('color_families', [colorFamily]);
+            if (minPrice)     q = q.gte('price', parseFloat(minPrice));
+            if (maxPrice)     q = q.lte('price', parseFloat(maxPrice));
+            if (search)       q = q.or(`name.ilike.%${search}%,description.ilike.%${search}%`);
             return q;
         }
 
@@ -79,6 +81,7 @@ export async function GET(request: NextRequest) {
             dimensions: product.dimensions,
             weight: product.weight,
             yt_link: product.yt_link,
+            colorFamilies: product.color_families ?? [],
             createdAt: product.created_at,
             updatedAt: product.updated_at,
         })) || [];

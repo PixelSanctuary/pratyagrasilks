@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import ColorFamilyPicker from '@/components/ui/ColorFamilyPicker';
 
 interface FilterSidebarProps {
     onFilterChange: (filters: FilterState) => void;
@@ -9,6 +10,7 @@ interface FilterSidebarProps {
 
 export interface FilterState {
     category: string;
+    colorFamily: string;
     minPrice: number;
     maxPrice: number;
     search: string;
@@ -43,6 +45,7 @@ const priceRanges = [
 export default function FilterSidebar({ onFilterChange, currentFilters }: FilterSidebarProps) {
     const [filters, setFilters] = useState<FilterState>({
         category: '',
+        colorFamily: '',
         minPrice: 0,
         maxPrice: 0,
         search: '',
@@ -67,6 +70,12 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
         onFilterChange(newFilters);
     };
 
+    const handleColorChange = (colorFamily: string) => {
+        const newFilters = { ...filters, colorFamily };
+        setFilters(newFilters);
+        onFilterChange(newFilters);
+    };
+
     const handleSearchChange = (search: string) => {
         const newFilters = { ...filters, search };
         setFilters(newFilters);
@@ -76,6 +85,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
     const clearFilters = () => {
         const newFilters = {
             category: '',
+            colorFamily: '',
             minPrice: 0,
             maxPrice: 0,
             search: '',
@@ -107,6 +117,16 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                     onChange={(e) => handleSearchChange(e.target.value)}
                     placeholder="Search by name..."
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+            </div>
+
+            {/* Color Family Filter */}
+            <div className="mb-6">
+                <h3 className="text-sm font-medium mb-3">Color Family</h3>
+                <ColorFamilyPicker
+                    value={filters.colorFamily ? [filters.colorFamily] : []}
+                    onChange={(ids) => handleColorChange(ids[ids.length - 1] ?? '')}
+                    size="sm"
                 />
             </div>
 
@@ -154,13 +174,18 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
             </div>
 
             {/* Active Filters Summary */}
-            {(filters.category || filters.minPrice > 0 || filters.maxPrice > 0 || filters.search) && (
+            {(filters.category || filters.colorFamily || filters.minPrice > 0 || filters.maxPrice > 0 || filters.search) && (
                 <div className="pt-4 border-t border-gray-200 hidden lg:block">
                     <h3 className="text-sm font-medium  mb-2">Active Filters</h3>
                     <div className="space-y-1">
                         {filters.category && (
                             <div className="text-xs text-textSecondary">
                                 Category: <span className="font-medium">{filters.category}</span>
+                            </div>
+                        )}
+                        {filters.colorFamily && (
+                            <div className="text-xs text-textSecondary">
+                                Color: <span className="font-medium capitalize">{filters.colorFamily}</span>
                             </div>
                         )}
                         {(filters.minPrice > 0 || filters.maxPrice > 0) && (
