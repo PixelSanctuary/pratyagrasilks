@@ -29,7 +29,7 @@ const MIN_PRICE_BOUND = 1000;
 const MAX_PRICE_BOUND = 40000;
 
 export default function FilterSidebar({ onFilterChange, currentFilters }: FilterSidebarProps) {
-    const [localFilters, setLocalFilters] = useState<FilterState>({ colorFamily: '', ...currentFilters });
+    const [localFilters, setLocalFilters] = useState<FilterState>(currentFilters);
     const [expandedSections, setExpandedSections] = useState({
         search: true,
         category: true,
@@ -98,7 +98,6 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                 <ColorFamilyPicker
                     value={localFilters.colorFamily ? [localFilters.colorFamily] : []}
                     onChange={(ids) => updateFilter('colorFamily', ids[ids.length - 1] ?? '')}
-                    maxSelection={1}
                     size="sm"
                 />
             </div>

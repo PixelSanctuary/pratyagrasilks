@@ -5,29 +5,17 @@ import { COLOR_FAMILIES, LIGHT_COLOR_IDS } from '@/lib/constants/colors';
 interface ColorFamilyPickerProps {
     value: string[];
     onChange: (ids: string[]) => void;
-    maxSelection?: number;
     size?: 'sm' | 'md';
 }
 
-export default function ColorFamilyPicker({
-    value,
-    onChange,
-    maxSelection = 2,
-    size = 'md',
-}: ColorFamilyPickerProps) {
+export default function ColorFamilyPicker({ value, onChange, size = 'md' }: ColorFamilyPickerProps) {
     const dim = size === 'sm' ? 'w-7 h-7' : 'w-9 h-9';
     const showBadges = size === 'md';
 
     const toggle = (id: string) => {
         const idx = value.indexOf(id);
-        if (idx !== -1) {
-            onChange(value.filter((v) => v !== id));
-        } else if (value.length < maxSelection) {
-            onChange([...value, id]);
-        } else {
-            // At max — drop oldest, append new
-            onChange([...value.slice(1), id]);
-        }
+        if (idx !== -1) onChange(value.filter((v) => v !== id));
+        else onChange([...value, id]);
     };
 
     return (
@@ -37,16 +25,14 @@ export default function ColorFamilyPicker({
                 const isSelected = selIdx !== -1;
                 const isLight = LIGHT_COLOR_IDS.has(id);
                 const badge = showBadges && isSelected
-                    ? (selIdx === 0 ? 'P' : 'B')
+                    ? String(selIdx + 1)
                     : null;
 
                 return (
                     <button
                         key={id}
                         type="button"
-                        title={isSelected
-                            ? `${name} — ${selIdx === 0 ? 'Primary' : 'Border'}`
-                            : name}
+                        title={isSelected ? `${name} (#${selIdx + 1})` : name}
                         aria-label={name}
                         aria-pressed={isSelected}
                         onClick={() => toggle(id)}
