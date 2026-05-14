@@ -8,6 +8,7 @@ import { ArrowLeft, Save, Youtube, Calculator } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import OptimizedUploader from '@/components/admin/OptimizedUploader';
+import ColorFamilyPicker from '@/components/ui/ColorFamilyPicker';
 import { isValidYouTubeUrl, getYouTubeThumbnailUrl } from '@/lib/utils/youtube';
 import { calculateMrp } from '@/lib/utils/pricing';
 import Image from 'next/image';
@@ -38,6 +39,7 @@ function NewProductForm() {
         weight: '',
         yt_link: '',
         is_online: true,
+        color_families: [] as string[],
         vendorId: prefillVendorId,
         purchase_price: '',
         purchase_tax_percent: '5',
@@ -113,6 +115,7 @@ function NewProductForm() {
                     images: productImages,
                     yt_link: formData.yt_link || null,
                     is_online: formData.is_online,
+                    color_families: formData.color_families,
                     vendor_id: formData.vendorId || null,
                     purchase_price: parseFloat(formData.purchase_price) || 0,
                     purchase_tax_percent: parseFloat(formData.purchase_tax_percent) || 0,
@@ -322,6 +325,17 @@ function NewProductForm() {
                                 </option>
                             ))}
                         </select>
+                    </div>
+
+                    {/* Color Family */}
+                    <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Color Family
+                        </label>
+                        <ColorFamilyPicker
+                            value={formData.color_families}
+                            onChange={(ids) => setFormData(prev => ({ ...prev, color_families: ids }))}
+                        />
                     </div>
 
                     {/* Vendor */}

@@ -463,7 +463,14 @@ export function generateProductSchema(product: {
     category: string;
     images: string[];
     inStock: boolean;
+    colorFamilies?: string[];
 }) {
+    const colorLabel = product.colorFamilies?.length
+        ? product.colorFamilies.length > 1
+            ? product.colorFamilies.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(' and ') + ' Dual Tone'
+            : product.colorFamilies[0].charAt(0).toUpperCase() + product.colorFamilies[0].slice(1)
+        : undefined;
+
     return {
         '@context': 'https://schema.org',
         '@type': 'Product',
@@ -471,6 +478,7 @@ export function generateProductSchema(product: {
         description: product.description,
         sku: product.sku,
         image: product.images,
+        ...(colorLabel ? { color: colorLabel } : {}),
         offers: {
             '@type': 'Offer',
             price: product.price,

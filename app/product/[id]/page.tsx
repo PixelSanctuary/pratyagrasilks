@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react';
 import { ShoppingCart, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { trackViewItem, trackAddToCart } from '@/lib/analytics/gtag';
+import { generateProductSchema } from '@/lib/seo-config';
 import { getCategoryBySlug } from '@/lib/seo-config';
 import { getWhatsAppUrl } from '@/lib/utils/whatsapp';
 
@@ -90,6 +91,21 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
     return (
         // pb-24 on mobile prevents the sticky bar from covering content
         <div className="min-h-screen pb-24 lg:pb-0" style={{ backgroundColor: '#FDF6E3' }}>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(generateProductSchema({
+                        name: product.name,
+                        description: product.description,
+                        price: product.price,
+                        sku: product.sku,
+                        category: product.category,
+                        images: product.images,
+                        inStock: product.inStock,
+                        colorFamilies: product.colorFamilies,
+                    })),
+                }}
+            />
 
             {/* Breadcrumb */}
             <div className="bg-white border-b">

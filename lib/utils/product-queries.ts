@@ -23,6 +23,7 @@ export function transformProduct(p: any): Product {
         dimensions: p.dimensions,
         weight: p.weight,
         yt_link: p.yt_link,
+        colorFamilies: p.color_families ?? [],
         createdAt: p.created_at,
         updatedAt: p.updated_at,
     };

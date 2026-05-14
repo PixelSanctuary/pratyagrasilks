@@ -2,9 +2,11 @@
 
 import { useState, useCallback } from 'react';
 import { silkCategories } from '@/lib/seo-config';
+import ColorFamilyPicker from '@/components/ui/ColorFamilyPicker';
 
 export interface FilterState {
     category: string;
+    colorFamily: string;
     minPrice: number;
     maxPrice: number;
     search: string;
@@ -27,7 +29,7 @@ const MIN_PRICE_BOUND = 1000;
 const MAX_PRICE_BOUND = 40000;
 
 export default function FilterSidebar({ onFilterChange, currentFilters }: FilterSidebarProps) {
-    const [localFilters, setLocalFilters] = useState<FilterState>(currentFilters);
+    const [localFilters, setLocalFilters] = useState<FilterState>({ colorFamily: '', ...currentFilters });
     const [expandedSections, setExpandedSections] = useState({
         search: true,
         category: true,
@@ -44,7 +46,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
     );
 
     const clearFilters = () => {
-        const reset: FilterState = { category: '', minPrice: 0, maxPrice: 0, search: '' };
+        const reset: FilterState = { category: '', colorFamily: '', minPrice: 0, maxPrice: 0, search: '' };
         setLocalFilters(reset);
         onFilterChange(reset);
     };
@@ -54,7 +56,7 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
     };
 
     const hasActiveFilters =
-        localFilters.category || localFilters.minPrice > 0 || localFilters.maxPrice > 0 || localFilters.search;
+        localFilters.category || localFilters.colorFamily || localFilters.minPrice > 0 || localFilters.maxPrice > 0 || localFilters.search;
 
     return (
         <div className="bg-white rounded-lg shadow-md p-6">
@@ -88,6 +90,17 @@ export default function FilterSidebar({ onFilterChange, currentFilters }: Filter
                         className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                     />
                 )}
+            </div>
+
+            {/* Color Family */}
+            <div className="mb-6">
+                <h3 className="font-semibold text-gray-900 mb-3">Color</h3>
+                <ColorFamilyPicker
+                    value={localFilters.colorFamily ? [localFilters.colorFamily] : []}
+                    onChange={(ids) => updateFilter('colorFamily', ids[ids.length - 1] ?? '')}
+                    maxSelection={1}
+                    size="sm"
+                />
             </div>
 
             {/* Category */}
